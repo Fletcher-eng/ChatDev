@@ -1,0 +1,742 @@
+<title>Specpoint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F4F5F2;
+  --surface:#FFFFFF;
+  --ink:#16191D;
+  --ink2:#4C545C;
+  --ink3:#6B737B;
+  --rule:#D9DEE1;
+  --accent:#1C7A4A;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#E2F0E7;
+  --hl:#FFE17A;
+  --red:#B42318;
+  --red-soft:#FCEBE9;
+  --focus:#1C5FD4;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101315; --surface:#171B1E; --ink:#E8EBED; --ink2:#AEB5BB; --ink3:#8C949B; --rule:#2B3136;
+    --accent:#5CC68D; --accent-ink:#0C1A12; --accent-soft:#15301F; --hl:rgba(255,213,79,.32);
+    --red:#FF8B7E; --red-soft:#3A1B18; --focus:#7FB0FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101315; --surface:#171B1E; --ink:#E8EBED; --ink2:#AEB5BB; --ink3:#8C949B; --rule:#2B3136;
+  --accent:#5CC68D; --accent-ink:#0C1A12; --accent-soft:#15301F; --hl:rgba(255,213,79,.32);
+  --red:#FF8B7E; --red-soft:#3A1B18; --focus:#7FB0FF;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+a{color:var(--accent)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--rule)}
+.bar-in{max-width:1080px;margin:0 auto;padding:0 16px;min-height:56px;display:flex;align-items:center;gap:16px}
+.mark{border:0;background:none;padding:8px 0;min-height:44px;font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.mark svg{flex:none}
+.crumbs{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--ink3);min-width:0;overflow:hidden;white-space:nowrap}
+.crumbs button{border:0;background:none;padding:10px 2px;min-height:44px;color:var(--ink2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rule)}
+.crumbs span{overflow:hidden;text-overflow:ellipsis}
+
+.page{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+
+/* home */
+.intro{max-width:62ch;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.intro h1{font-family:var(--serif);font-weight:700;font-size:clamp(28px,5vw,40px);line-height:1.12;margin:0;letter-spacing:-.015em;text-wrap:balance}
+.intro p{margin:0;color:var(--ink2);font-size:17px}
+.resume{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--accent-soft);border-radius:10px;padding:16px 18px;margin-bottom:28px}
+.resume small{display:block;color:var(--ink2);font-size:14px}
+.resume b{font-family:var(--serif);font-size:18px}
+.h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:0 0 12px}
+.shelf{border-top:1px solid var(--rule);margin:0;padding:0;list-style:none}
+.shelf li{border-bottom:1px solid var(--rule)}
+.shelf button{width:100%;background:none;border:0;text-align:left;display:grid;grid-template-columns:4.2em 1fr auto;gap:14px;align-items:center;padding:14px 4px;min-height:60px}
+.shelf button:not(:disabled):hover .sname{text-decoration:underline;text-underline-offset:4px}
+.shelf button:disabled{cursor:default}
+.code{font-family:var(--mono);font-size:13px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.sname{font-family:var(--serif);font-size:19px;font-weight:600}
+.shelf button:disabled .sname{color:var(--ink3);font-weight:400}
+.status{font-size:14px;color:var(--ink3);text-align:right}
+.status.live{color:var(--accent);font-weight:600}
+.fine{font-size:14px;color:var(--ink3);margin-top:14px;max-width:62ch}
+
+/* subject */
+.subhead{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;max-width:62ch}
+.subhead h1{font-family:var(--serif);font-size:clamp(28px,5vw,38px);margin:0;line-height:1.15}
+.subhead p{margin:0;color:var(--ink2)}
+.toc{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc button{width:100%;border:0;background:none;text-align:left;display:grid;grid-template-columns:2.4em 1fr auto;gap:12px;align-items:baseline;padding:14px 4px;min-height:56px}
+.toc .n{font-family:var(--mono);font-size:14px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.toc .t{font-family:var(--serif);font-size:18px;font-weight:600}
+.toc .subs{display:block;font-family:var(--sans);font-size:14px;color:var(--ink2);font-weight:400;margin-top:2px}
+.toc button:disabled{cursor:default}
+.toc button:disabled .t{color:var(--ink3);font-weight:400}
+.toc button:not(:disabled):hover .t{text-decoration:underline;text-underline-offset:4px}
+.meter{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3);white-space:nowrap;font-variant-numeric:tabular-nums}
+.meter i{display:block;width:56px;height:6px;border-radius:3px;background:var(--rule);overflow:hidden}
+.meter i b{display:block;height:100%;background:var(--accent)}
+
+/* topic */
+.topic-head{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.topic-head .code{font-size:14px}
+.topic-head h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,36px);margin:0;line-height:1.15;text-wrap:balance}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--rule);margin-bottom:28px;overflow-x:auto;scrollbar-width:none}
+.tabs button{border:0;background:none;padding:12px 14px;min-height:48px;font-weight:600;color:var(--ink2);border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs .count{font-weight:400;color:var(--ink3);font-size:14px;margin-left:4px}
+
+.notes-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:900px){.notes-grid{grid-template-columns:200px minmax(0,1fr)}}
+.side{font-size:15px}
+@media (min-width:900px){.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);align-self:start}}
+.side h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin:0 0 8px;font-weight:600}
+.side ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.side a{display:flex;gap:10px;padding:10px 0;min-height:44px;align-items:center;color:var(--ink);text-decoration:none}
+.side a:hover{text-decoration:underline}
+.side .tick{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--rule);flex:none;display:grid;place-items:center}
+.side .tick.on{background:var(--accent);border-color:var(--accent)}
+.side .tick.on::after{content:"";width:5px;height:9px;border:solid var(--accent-ink);border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+
+.notes{min-width:0;max-width:68ch;font-family:var(--serif);font-size:18px;line-height:1.7}
+.notes section{padding-bottom:36px;margin-bottom:36px;border-bottom:1px solid var(--rule);scroll-margin-top:84px}
+.notes section:last-child{border-bottom:0}
+.notes h2{font-family:var(--serif);font-size:26px;line-height:1.2;margin:0 0 16px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.notes h2 .ref{font-family:var(--mono);font-size:15px;color:var(--accent);font-weight:500}
+.notes h3{font-family:var(--sans);font-size:17px;font-weight:700;margin:28px 0 8px}
+.notes p{margin:0 0 14px}
+.notes ul,.notes ol{margin:0 0 14px;padding-left:1.3em}
+.notes li{margin-bottom:6px}
+.kt{background:linear-gradient(transparent 58%, var(--hl) 58%);font-weight:600;padding:0 1px}
+.sup{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid currentColor;color:var(--ink2);border-radius:4px;padding:1px 6px;vertical-align:2px;white-space:nowrap}
+.box{font-family:var(--sans);font-size:16px;line-height:1.55;border:1px solid var(--rule);background:var(--surface);border-radius:8px;padding:14px 16px;margin:18px 0}
+.box > b:first-child{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.box.tip > b:first-child{color:var(--accent)}
+.box.trap{background:var(--red-soft);border-color:transparent}
+.box.trap > b:first-child{color:var(--red)}
+.formula{font-family:var(--mono);font-size:17px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:16px;margin:16px 0;display:flex;flex-direction:column;gap:6px;overflow-x:auto}
+.work{font-family:var(--sans);font-size:16px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:16px;margin:16px 0}
+.work .q{font-weight:700;margin-bottom:8px}
+.work ol{margin:0;padding-left:1.3em}
+.flow{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-family:var(--sans);font-size:15px;margin:10px 0 16px}
+.flow span{border:1px solid var(--rule);background:var(--surface);border-radius:6px;padding:6px 10px}
+.flow i{font-style:normal;color:var(--ink3)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--surface)}
+.tbl table{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:15px;line-height:1.45}
+.tbl th,.tbl td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3);font-weight:600;white-space:nowrap}
+.tbl td.c{text-align:center;white-space:nowrap}
+.yes{color:var(--accent);font-weight:700}
+.no{color:var(--ink3)}
+.done-row{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-size:16px;margin-top:8px}
+.check{display:inline-flex;align-items:center;gap:10px;min-height:44px;cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--accent)}
+
+/* buttons */
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:10px 18px;min-height:44px;font-weight:700}
+.btn.quiet{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+
+/* flashcards */
+.deck{max-width:620px;display:flex;flex-direction:column;gap:14px}
+.deck-meta{display:flex;justify-content:space-between;gap:10px;font-size:15px;color:var(--ink2);font-variant-numeric:tabular-nums;flex-wrap:wrap}
+.card{min-height:230px;border:1px solid var(--rule);background:var(--surface);border-radius:12px;padding:24px;display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:left;width:100%}
+.card .side-lbl{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.card .face{font-family:var(--serif);font-size:22px;line-height:1.4}
+.card.back{border-color:var(--accent)}
+.card .hint{font-size:14px;color:var(--ink3)}
+.deck .row .btn{flex:1 1 160px}
+
+/* exam questions */
+.eq-list{display:flex;flex-direction:column;gap:18px;max-width:720px}
+.eq{border:1px solid var(--rule);background:var(--surface);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.eq-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.eq-top .code{font-size:13px}
+.eq .qt{font-family:var(--serif);font-size:19px;line-height:1.5}
+.marks{font-family:var(--mono);font-size:14px;color:var(--ink2);white-space:nowrap}
+.eq textarea{width:100%;min-height:92px;border:1px solid var(--rule);border-radius:8px;padding:12px;background:var(--bg);resize:vertical;font-size:16px}
+.ms{border-top:1px dashed var(--rule);padding-top:12px;display:flex;flex-direction:column;gap:4px}
+.ms > b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.ms label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;min-height:44px;cursor:pointer}
+.ms input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--accent)}
+.ms .note{font-size:14px;color:var(--ink3)}
+.score{font-weight:700;font-variant-numeric:tabular-nums}
+.eq-total{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;border-radius:12px;background:var(--accent-soft);max-width:720px;margin-bottom:18px}
+
+/* boss fight */
+.fight{max-width:620px;display:flex;flex-direction:column;gap:16px}
+.fight-intro{font-size:16px;color:var(--ink2);margin:0;max-width:60ch}
+.arena{border:1px solid var(--rule);background:var(--surface);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.hp-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:14px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.hp-row b{font-family:var(--serif);font-size:19px;color:var(--ink)}
+.hp{height:10px;border-radius:5px;background:var(--rule);overflow:hidden}
+.hp i{display:block;height:100%;background:var(--red);transition:width .45s ease}
+.stage{height:130px;display:grid;place-items:center;position:relative}
+.stage svg{width:120px;height:120px}
+.boss.hit{animation:hit .4s ease}
+.boss.lunge{animation:lunge .45s ease}
+@keyframes hit{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px) rotate(-4deg)}50%{transform:translateX(8px) rotate(3deg)}75%{transform:translateX(-4px)}}
+@keyframes lunge{0%,100%{transform:scale(1)}40%{transform:scale(1.15)}}
+.dmg{position:absolute;font-weight:700;font-size:24px;color:var(--ink);background:var(--hl);padding:0 8px;border-radius:4px;animation:rise 1s ease forwards;pointer-events:none}
+@keyframes rise{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-50px)}}
+.you{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--ink2)}
+.hearts{display:flex;gap:4px}
+.fq{display:flex;flex-direction:column;gap:12px}
+.fq .qt{font-family:var(--serif);font-size:20px;line-height:1.4;margin:0}
+.opts{display:grid;grid-template-columns:1fr;gap:8px}
+@media (min-width:560px){.opts{grid-template-columns:1fr 1fr}}
+.opt{border:1px solid var(--rule);background:var(--surface);border-radius:8px;padding:12px 14px;min-height:52px;text-align:left;font-size:16px}
+.opt:hover:not(:disabled){border-color:var(--ink2)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--accent);background:var(--accent-soft)}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt.gone{visibility:hidden}
+.num{display:flex;gap:8px;align-items:center}
+.num input{flex:1;min-width:0;border:1px solid var(--rule);border-radius:8px;padding:12px;background:var(--surface);font-family:var(--mono);font-size:17px;min-height:48px}
+.num .unit{font-family:var(--mono);color:var(--ink2)}
+.fb{border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:var(--accent-soft)}
+.fb.bad{background:var(--red-soft)}
+.fb .verdict{font-weight:700}
+.fb.bad .verdict{color:var(--red)}
+.link-btn{border:0;background:none;padding:10px 0;min-height:44px;color:var(--ink2);text-decoration:underline;text-underline-offset:3px;font-size:15px;text-align:left}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{border:1px solid var(--rule);border-radius:8px;padding:10px;text-align:center;background:var(--surface)}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--ink3)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="bar"><div class="bar-in">
+  <button class="mark" id="home-link" aria-label="Specpoint home">
+    <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="11" r="3.5" fill="currentColor"/></svg>
+    Specpoint
+  </button>
+  <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+</div></header>
+<main class="page" id="app"></main>
+
+<script>
+/* ================= CONTENT ================= */
+const SUBJECTS = [
+  {id:"bio",  name:"Biology", code:"0610", live:true},
+  {id:"chem", name:"Chemistry", code:"0620"},
+  {id:"phys", name:"Physics", code:"0625"},
+  {id:"math", name:"Mathematics", code:"0580"},
+  {id:"eng",  name:"English First Language", code:"0500"},
+  {id:"lit",  name:"Literature in English", code:"0475"},
+  {id:"dt",   name:"Design and Technology", code:"0445"},
+  {id:"econ", name:"Economics", code:"0455"},
+  {id:"gp",   name:"Global Perspectives", code:"0457"},
+  {id:"spa",  name:"Spanish", code:"0530"}
+];
+
+const BIO_TOPICS = [
+  "Characteristics and classification of living organisms","Organisation of the organism","Movement into and out of cells",
+  "Biological molecules","Enzymes","Plant nutrition","Human nutrition","Transport in plants","Transport in animals",
+  "Diseases and immunity","Gas exchange in humans","Respiration","Excretion in humans","Coordination and response",
+  "Drugs","Reproduction","Inheritance","Variation and selection","Organisms and their environment",
+  "Human influences on ecosystems","Biotechnology and genetic engineering"
+];
+
+const Y = '<span class="yes" aria-label="yes">Yes</span>', N = '<span class="no" aria-label="no">No</span>';
+const SUP = '<span class="sup" title="Supplement content, needed for Extended papers">Supplement</span>';
+
+const TOPICS = {
+  2: {
+    subs: [
+      {ref:"2.1", title:"Cell structure", html:`
+<p>All living organisms are made of cells. <span class="kt">New cells are produced by division of existing cells.</span> Animal, plant and bacterial cells share some structures and differ in others, and the exam asks you to compare them.</p>
+
+<h3>Structures and what they do</h3>
+<div class="tbl"><table>
+<thead><tr><th>Structure</th><th>Function</th><th>Animal</th><th>Plant</th><th>Bacterium</th></tr></thead>
+<tbody>
+<tr><td>Cell membrane</td><td>Controls what enters and leaves the cell. It is partially permeable.</td><td class="c">${Y}</td><td class="c">${Y}</td><td class="c">${Y}</td></tr>
+<tr><td>Cytoplasm</td><td>Where most chemical reactions in the cell take place.</td><td class="c">${Y}</td><td class="c">${Y}</td><td class="c">${Y}</td></tr>
+<tr><td>Ribosomes</td><td>Protein synthesis.</td><td class="c">${Y}</td><td class="c">${Y}</td><td class="c">${Y}</td></tr>
+<tr><td>Nucleus</td><td>Contains the genetic material (chromosomes) that controls the cell.</td><td class="c">${Y}</td><td class="c">${Y}</td><td class="c">${N}</td></tr>
+<tr><td>Mitochondria</td><td>Aerobic respiration, which releases energy.</td><td class="c">${Y}</td><td class="c">${Y}</td><td class="c">${N}</td></tr>
+<tr><td>Cell wall</td><td>Strengthens the cell and keeps its shape. Made of cellulose in plants.</td><td class="c">${N}</td><td class="c">${Y}</td><td class="c">${Y}</td></tr>
+<tr><td>Chloroplasts</td><td>Absorb light energy for photosynthesis.</td><td class="c">${N}</td><td class="c">${Y}</td><td class="c">${N}</td></tr>
+<tr><td>Large permanent vacuole</td><td>Contains cell sap. Helps keep the cell firm.</td><td class="c">${N}</td><td class="c">${Y}</td><td class="c">${N}</td></tr>
+<tr><td>Circular DNA and plasmids</td><td>Genetic material of a bacterium.</td><td class="c">${N}</td><td class="c">${N}</td><td class="c">${Y}</td></tr>
+</tbody></table></div>
+
+<div class="box tip"><b>Examiner tip</b>Plant cells have three structures that animal cells lack: a <strong>cell wall</strong>, <strong>chloroplasts</strong> and a <strong>large permanent vacuole</strong>. When a question asks you to compare them, name all three. Bacteria have a cell wall too, but it is not made of cellulose.</div>
+<div class="box trap"><b>Common mistake</b>Saying the cell wall controls what enters the cell. The cell wall is fully permeable. Only the <strong>cell membrane</strong> controls entry and exit.</div>
+
+<h3>Specialised cells</h3>
+<p>Cells become <span class="kt">specialised</span> so they can carry out one job well. Learn the function of each cell below and one way its structure helps.</p>
+<div class="tbl"><table>
+<thead><tr><th>Cell</th><th>Function</th><th>How it is adapted</th></tr></thead>
+<tbody>
+<tr><td>Ciliated cell</td><td>Moves mucus in the trachea and bronchi</td><td>Cilia beat to sweep mucus, with trapped dust and pathogens, away from the lungs</td></tr>
+<tr><td>Root hair cell</td><td>Absorbs water and mineral ions</td><td>Long extension gives a large surface area</td></tr>
+<tr><td>Palisade mesophyll cell</td><td>Photosynthesis</td><td>Packed with chloroplasts</td></tr>
+<tr><td>Neurone</td><td>Conducts electrical impulses</td><td>Long fibre carries impulses over long distances</td></tr>
+<tr><td>Red blood cell</td><td>Transports oxygen</td><td>Contains haemoglobin and has no nucleus, leaving more room for it</td></tr>
+<tr><td>Sperm and egg cells</td><td>Reproduction</td><td>Sperm have a flagellum to swim. Egg cells have a large food store in the cytoplasm</td></tr>
+</tbody></table></div>
+
+<h3>Levels of organisation</h3>
+<div class="flow" aria-label="Cell, then tissue, then organ, then organ system, then organism"><span>Cell</span><i>→</i><span>Tissue</span><i>→</i><span>Organ</span><i>→</i><span>Organ system</span><i>→</i><span>Organism</span></div>
+<ul>
+<li><span class="kt">Tissue</span>: a group of cells with similar structures, working together to perform a shared function. Example: muscle tissue.</li>
+<li><span class="kt">Organ</span>: a structure made of a group of tissues, working together to perform specific functions. Example: the heart.</li>
+<li><span class="kt">Organ system</span>: a group of organs with related functions, working together to perform body functions. Example: the circulatory system.</li>
+</ul>`},
+      {ref:"2.2", title:"Size of specimens", html:`
+<p>Microscopes make cells look bigger. To work out how much bigger, you use the magnification formula. This is one of the most reliable calculation marks on Paper 4.</p>
+<div class="formula" aria-label="Magnification formula">
+<span>magnification = image size ÷ actual size</span>
+<span>actual size = image size ÷ magnification</span>
+<span>image size = actual size × magnification</span>
+</div>
+<p>Magnification has <span class="kt">no units</span>. Write it with a times sign, for example <strong>×400</strong>.</p>
+
+<h3>Millimetres and micrometres ${SUP}</h3>
+<p>Cells are tiny, so their actual size is often given in micrometres (µm).</p>
+<div class="formula"><span>1 mm = 1000 µm</span><span>mm to µm: multiply by 1000</span><span>µm to mm: divide by 1000</span></div>
+<p>Before you divide, <span class="kt">both sizes must be in the same unit</span>.</p>
+
+<div class="work">
+<div class="q">Worked example 1</div>
+<p style="margin:0 0 8px">A drawing of a cheek cell is 45 mm wide. The real cell is 60 µm wide. Calculate the magnification.</p>
+<ol><li>Convert to the same unit: 60 µm ÷ 1000 = 0.06 mm</li><li>Image size ÷ actual size: 45 ÷ 0.06 = 750</li><li>Answer: <strong>×750</strong></li></ol>
+</div>
+<div class="work">
+<div class="q">Worked example 2</div>
+<p style="margin:0 0 8px">An image of a cell is 30 mm long at ×400. Find its actual length in µm.</p>
+<ol><li>Actual size = 30 ÷ 400 = 0.075 mm</li><li>Convert: 0.075 × 1000 = <strong>75 µm</strong></li></ol>
+</div>
+<div class="box tip"><b>Examiner tip</b>Measure image sizes with a ruler in millimetres, and check what unit the question wants your answer in.</div>
+<div class="box trap"><b>Common mistake</b>Dividing actual size by image size. The image is the big number, so it goes on top. If your magnification is less than 1, you have it upside down.</div>`}
+    ],
+    cards:[
+      ["What is the function of mitochondria?","Aerobic respiration, which releases energy."],
+      ["What is the function of ribosomes?","Protein synthesis."],
+      ["Name three structures found in plant cells but not animal cells.","Cell wall, chloroplasts and a large permanent vacuole."],
+      ["What do bacteria have instead of a nucleus?","A single circular chromosome (circular DNA) and small rings of DNA called plasmids."],
+      ["What does the cell membrane do?","Controls what enters and leaves the cell."],
+      ["Give the magnification formula.","magnification = image size ÷ actual size"],
+      ["How many µm are in 1 mm?","1000 µm"],
+      ["Define tissue.","A group of cells with similar structures, working together to perform a shared function."],
+      ["Define organ.","A structure made of a group of tissues, working together to perform specific functions."],
+      ["What is the function of ciliated cells?","Moving mucus in the trachea and bronchi."],
+      ["What is the function of palisade mesophyll cells?","Photosynthesis."]
+    ],
+    exam:[
+      {id:"t2q1",ref:"2.1",marks:3,q:"State three structures found in a palisade mesophyll cell that are not found in a human cheek cell.",ms:["Cell wall","Chloroplast(s)","Large permanent vacuole"]},
+      {id:"t2q2",ref:"2.1",marks:2,q:"Describe the function of the cell membrane and the function of ribosomes.",ms:["Cell membrane controls what enters and leaves the cell","Ribosomes are the site of protein synthesis"]},
+      {id:"t2q3",ref:"2.1",marks:2,q:"Explain how a root hair cell is adapted for its function.",ms:["Long extension (root hair)","Gives a large surface area","For absorption of water and mineral ions"],note:"Maximum 2 marks"},
+      {id:"t2q4",ref:"2.1",marks:1,q:"Define the term tissue.",ms:["A group of cells with similar structures, working together to perform a shared function"]},
+      {id:"t2q5",ref:"2.2",marks:2,q:"A student draws a cell. The drawing is 36 mm long. The actual cell is 0.09 mm long. Calculate the magnification of the drawing. Show your working.",ms:["36 ÷ 0.09","×400"]},
+      {id:"t2q6",ref:"2.2",marks:3,sup:true,q:"An image of a mitochondrion is 12 mm long at a magnification of ×8000. Calculate its actual length in µm. Show your working.",ms:["12 ÷ 8000 = 0.0015 mm","Multiplies by 1000 to convert to µm","1.5 µm"]}
+    ],
+    boss:{name:"Membrano", color:"#3FA66E", dark:"#1D5E3B", shape:"cell", qs:[
+      {q:"Which structure is found in plant cells but NOT in animal cells?",a:"Cell wall",w:["Cell membrane","Ribosome","Nucleus"],t:"Cell wall, chloroplasts and a large permanent vacuole are the plant only structures here."},
+      {q:"Where in the cell does aerobic respiration take place?",a:"Mitochondria",w:["Ribosomes","Nucleus","Chloroplasts"],t:"Mitochondria release energy by aerobic respiration."},
+      {q:"Which part controls what enters and leaves the cell?",a:"Cell membrane",w:["Cell wall","Cytoplasm","Vacuole"],t:"The cell wall is fully permeable. Only the membrane controls entry."},
+      {q:"Which of these is found in a bacterial cell?",a:"Plasmids",w:["A nucleus","Mitochondria","Chloroplasts"],t:"Bacteria have plasmids and circular DNA but no nucleus."},
+      {q:"What is a plant cell wall made of?",a:"Cellulose",w:["Starch","Protein","Glycogen"],t:"Plant cell walls are made of cellulose."},
+      {q:"Ciliated cells in the airways are specialised to…",a:"Move mucus",w:["Absorb oxygen","Carry oxygen","Make antibodies"],t:"Cilia beat to move mucus away from the lungs."},
+      {q:"Which order of organisation is correct?",a:"Cell, tissue, organ, organ system",w:["Tissue, cell, organ, organ system","Cell, organ, tissue, organ system","Organ, tissue, cell, organ system"],t:"Small to big: cell, tissue, organ, organ system, organism."},
+      {q:"A drawing is 40 mm long. The real cell is 0.1 mm long. What is the magnification?",num:400,unit:"×",t:"40 ÷ 0.1 = ×400."},
+      {q:"Convert 2.5 mm into µm.",num:2500,unit:"µm",t:"Multiply by 1000: 2500 µm."},
+      {q:"An image is 15 mm long at ×300. What is the actual size in µm?",num:50,unit:"µm",t:"15 ÷ 300 = 0.05 mm, then × 1000 = 50 µm."},
+      {q:"A cell drawing is 60 mm wide. The real cell is 20 µm wide. What is the magnification?",num:3000,unit:"×",t:"20 µm = 0.02 mm. 60 ÷ 0.02 = ×3000."}
+    ]}
+  },
+  3: {
+    subs: [
+      {ref:"3.1", title:"Diffusion", html:`
+<p><span class="kt">Diffusion</span> is the net movement of particles from a region of higher concentration to a region of lower concentration, down a concentration gradient, as a result of their random movement.</p>
+<p>The energy for diffusion comes from the <span class="kt">kinetic energy of random movement</span> of molecules and ions. The cell does not use energy from respiration, so diffusion is a passive process.</p>
+<p>Substances move into and out of cells by diffusion through the cell membrane. Examples include oxygen and carbon dioxide during gas exchange, and dissolved substances (solutes) moving between cells and the fluid around them.</p>
+
+<h3>What changes the rate of diffusion</h3>
+<div class="tbl"><table>
+<thead><tr><th>Factor</th><th>Faster diffusion when…</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Surface area</td><td>Larger</td><td>More space for particles to cross at once</td></tr>
+<tr><td>Temperature</td><td>Higher</td><td>Particles have more kinetic energy and move faster</td></tr>
+<tr><td>Concentration gradient</td><td>Steeper</td><td>Bigger difference means more net movement</td></tr>
+<tr><td>Distance</td><td>Shorter</td><td>Particles have less far to travel</td></tr>
+</tbody></table></div>
+<div class="box tip"><b>Examiner tip</b>Always write <strong>net movement</strong> in your definition. Particles move both ways, but more move from high to low concentration.</div>`},
+      {ref:"3.2", title:"Osmosis", html:`
+<p>Water diffuses through partially permeable membranes by <span class="kt">osmosis</span>. Water moves into and out of cells by osmosis through the cell membrane.</p>
+<p>${SUP} The full definition: osmosis is the net movement of water molecules from a region of <span class="kt">higher water potential</span> (a dilute solution) to a region of <span class="kt">lower water potential</span> (a concentrated solution), through a partially permeable membrane.</p>
+
+<h3>Plant cells ${SUP}</h3>
+<ul>
+<li>In a dilute solution, water enters by osmosis. The cell becomes <span class="kt">turgid</span>. Water pushing outwards on the cell wall creates <span class="kt">turgor pressure</span>, which supports the plant.</li>
+<li>In a concentrated solution, water leaves by osmosis. The cell becomes <span class="kt">flaccid</span>. If it loses a lot of water, the membrane pulls away from the cell wall. This is <span class="kt">plasmolysis</span>.</li>
+<li>A plant wilts when its cells become flaccid and lose turgor pressure.</li>
+</ul>
+<h3>Animal cells ${SUP}</h3>
+<p>Animal cells have no cell wall. In a dilute solution they gain water and can <span class="kt">burst</span>. In a concentrated solution they lose water and <span class="kt">shrink</span>. This is why the water potential of blood plasma must be kept steady.</p>
+
+<h3>The potato practical</h3>
+<p>Cylinders of potato are weighed, left in sucrose solutions of different concentrations, then blotted dry and weighed again.</p>
+<div class="formula"><span>percentage change = (change in mass ÷ starting mass) × 100</span></div>
+<p>A gain in mass means water entered. A loss means water left. Where the mass does not change, the water potential of the potato equals that of the solution.</p>
+<div class="box trap"><b>Common mistake</b>Saying "water moves from high concentration to low concentration". That describes the solute, not water. Talk about <strong>water potential</strong>, or about moving from a dilute to a concentrated solution.</div>`},
+      {ref:"3.3", title:"Active transport", html:`
+<p><span class="kt">Active transport</span> is the movement of particles through a cell membrane from a region of lower concentration to a region of higher concentration, using energy from respiration. It moves substances <strong>against</strong> a concentration gradient.</p>
+<p>Example: root hair cells take in mineral ions from the soil by active transport, because the soil has a lower concentration of ions than the cell.</p>
+<p>${SUP} <span class="kt">Protein carriers</span> in the membrane move the molecules or ions across during active transport.</p>
+
+<h3>Comparing the three processes</h3>
+<div class="tbl"><table>
+<thead><tr><th></th><th>Diffusion</th><th>Osmosis</th><th>Active transport</th></tr></thead>
+<tbody>
+<tr><td>What moves</td><td>Any particles</td><td>Water only</td><td>Molecules or ions</td></tr>
+<tr><td>Direction</td><td>Down the gradient</td><td>Higher to lower water potential</td><td>Against the gradient</td></tr>
+<tr><td>Energy from respiration</td><td>${N}</td><td>${N}</td><td>${Y}</td></tr>
+<tr><td>Needs a membrane</td><td>${N}</td><td>${Y}, partially permeable</td><td>${Y}, with protein carriers</td></tr>
+</tbody></table></div>
+<div class="box tip"><b>Examiner tip</b>If a question mentions a cell with lots of mitochondria, think active transport. More mitochondria means more respiration to supply the energy.</div>`}
+    ],
+    cards:[
+      ["Define diffusion.","The net movement of particles from a region of higher concentration to a region of lower concentration, down a concentration gradient, as a result of random movement."],
+      ["Where does the energy for diffusion come from?","The kinetic energy of random movement of molecules and ions."],
+      ["Define osmosis (Supplement).","The net movement of water molecules from a region of higher water potential to a region of lower water potential, through a partially permeable membrane."],
+      ["Define active transport.","Movement of particles through a cell membrane from lower to higher concentration, using energy from respiration."],
+      ["What is turgor pressure?","The pressure of water inside a plant cell pushing outwards on the cell wall."],
+      ["What is plasmolysis?","When a plant cell loses so much water that the membrane pulls away from the cell wall."],
+      ["Name four factors that increase the rate of diffusion.","Larger surface area, higher temperature, steeper concentration gradient, shorter distance."],
+      ["Give an example of active transport in plants.","Root hair cells absorbing mineral ions from the soil."],
+      ["What happens to a red blood cell in pure water?","It gains water by osmosis and bursts, because it has no cell wall."]
+    ],
+    exam:[
+      {id:"t3q1",ref:"3.1",marks:2,q:"Define the term diffusion.",ms:["Net movement of particles from a region of higher concentration to a region of lower concentration","Down a concentration gradient, as a result of random movement"]},
+      {id:"t3q2",ref:"3.1",marks:2,q:"State two changes that would increase the rate of diffusion of oxygen into a cell.",ms:["Larger surface area","Higher temperature","Steeper concentration gradient","Shorter diffusion distance"],note:"Any two, maximum 2 marks"},
+      {id:"t3q3",ref:"3.2",marks:3,sup:true,q:"A plant cell is placed in a concentrated salt solution. Describe and explain what happens to the cell.",ms:["Water leaves the cell by osmosis","From higher water potential inside the cell to lower water potential outside","Through the partially permeable membrane","Cell becomes flaccid","Membrane pulls away from the cell wall (plasmolysis)"],note:"Maximum 3 marks"},
+      {id:"t3q4",ref:"3.2",marks:2,q:"A potato cylinder has a mass of 2.50 g. After 30 minutes in a sucrose solution its mass is 2.20 g. Calculate the percentage change in mass.",ms:["0.30 ÷ 2.50 × 100","12% decrease (or a change of minus 12%)"]},
+      {id:"t3q5",ref:"3.3",marks:2,q:"Explain why root hair cells must use active transport to absorb mineral ions from the soil.",ms:["Concentration of ions in the soil is lower than in the cell, so ions move against the concentration gradient","Needs energy from respiration"]},
+      {id:"t3q6",ref:"3.3",marks:1,sup:true,q:"State the role of protein carriers in active transport.",ms:["They move molecules or ions across the membrane"]}
+    ],
+    boss:{name:"The Osmosis Hydra", color:"#D8527F", dark:"#7A2244", shape:"hydra", qs:[
+      {q:"Diffusion is the net movement of particles…",a:"From higher to lower concentration, down a gradient",w:["From lower to higher concentration, using energy","Only of water, across a membrane","Against a gradient, using carrier proteins"],t:"Net movement, higher to lower concentration, down a gradient, random movement."},
+      {q:"Where does the energy for diffusion come from?",a:"Kinetic energy of moving particles",w:["Respiration in mitochondria","Ribosomes","Light energy"],t:"Diffusion is passive. The energy is the kinetic energy of the particles."},
+      {q:"Osmosis is the net movement of…",a:"Water through a partially permeable membrane",w:["Glucose through a partially permeable membrane","Any particles down a gradient","Ions against a gradient"],t:"Osmosis is water only, through a partially permeable membrane."},
+      {q:"A plant cell is put in a concentrated sugar solution. What happens?",a:"It loses water and becomes flaccid",w:["It gains water and bursts","It gains water and becomes turgid","Nothing, the cell wall stops it"],t:"Water leaves by osmosis. The cell becomes flaccid, then plasmolysed."},
+      {q:"A red blood cell is placed in pure water. What happens?",a:"It gains water and bursts",w:["It loses water and shrinks","It becomes plasmolysed","It stays the same"],t:"Water enters by osmosis and there is no cell wall, so it bursts."},
+      {q:"Which process moves substances AGAINST a concentration gradient?",a:"Active transport",w:["Diffusion","Osmosis","Evaporation"],t:"Active transport uses energy from respiration."},
+      {q:"Which is an example of active transport?",a:"Root hair cells taking in mineral ions",w:["Oxygen entering the blood in the lungs","Water entering a root hair cell","Carbon dioxide entering a leaf"],t:"The soil has fewer ions than the cell, so energy is needed."},
+      {q:"Which change INCREASES the rate of diffusion?",a:"Higher temperature",w:["Longer diffusion distance","Smaller surface area","Lower concentration gradient"],t:"Higher temperature gives particles more kinetic energy."},
+      {q:"A potato cylinder goes from 4.00 g to 3.60 g. What is the percentage decrease in mass?",num:10,unit:"%",t:"0.40 ÷ 4.00 × 100 = 10%."},
+      {q:"Why does a plant wilt when short of water?",a:"Its cells lose turgor pressure and become flaccid",w:["Its cell walls dissolve","Its cells burst","It stops respiring"],t:"Turgid cells support the plant. Flaccid cells cannot."}
+    ]}
+  }
+};
+
+/* ================= STORAGE ================= */
+let S = {revised:{}, cards:{}, exam:{}, boss:{}, last:null};
+try{ const s = JSON.parse(localStorage.getItem("specpoint")||"null"); if(s) S = Object.assign(S, s); }catch(e){}
+function save(){ try{ localStorage.setItem("specpoint", JSON.stringify(S)); }catch(e){} }
+
+/* ================= HELPERS ================= */
+const app = document.getElementById("app");
+const crumbs = document.getElementById("crumbs");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+function topicProgress(n){
+  const t = TOPICS[n]; if(!t) return 0;
+  const parts = t.subs.length + t.cards.length + t.exam.reduce((s,q)=>s+q.marks,0);
+  let got = t.subs.filter(s=>S.revised[s.ref]).length;
+  got += t.cards.filter((c,i)=>S.cards[`${n}-${i}`]).length;
+  got += t.exam.reduce((s,q)=>s+Math.min(q.marks, S.exam[q.id]||0),0);
+  return Math.round(100*got/parts);
+}
+
+/* ================= ROUTER ================= */
+let route = {view:"home"};
+function go(r, push=true){
+  route = r;
+  if(push){ try{ const h = toHash(r); if(location.hash.slice(1)!==h) history.pushState(null,"","#"+h); }catch(e){} }
+  render(); window.scrollTo(0,0);
+}
+function toHash(r){ return r.view==="home" ? "home" : r.view==="subject" ? "bio" : `bio-${r.topic}-${r.tab||"notes"}`; }
+function fromHash(){
+  const h = (location.hash||"").slice(1);
+  let m = h.match(/^bio-(\d+)-(notes|cards|exam|fight)$/);
+  if(m && TOPICS[+m[1]]) return {view:"topic", topic:+m[1], tab:m[2]};
+  if(h==="bio") return {view:"subject"};
+  return {view:"home"};
+}
+window.addEventListener("popstate", ()=>go(fromHash(), false));
+document.getElementById("home-link").onclick = ()=>go({view:"home"});
+
+function setCrumbs(items){
+  crumbs.innerHTML = items.map((it,i)=> i<items.length-1
+    ? `<button data-c="${i}">${esc(it.label)}</button><span aria-hidden="true">/</span>`
+    : `<span aria-current="page">${esc(it.label)}</span>`).join("");
+  crumbs.querySelectorAll("button").forEach(b=>b.onclick=()=>go(items[+b.dataset.c].r));
+}
+
+function render(){
+  if(route.view==="home") renderHome();
+  else if(route.view==="subject") renderSubject();
+  else renderTopic();
+}
+
+/* ================= HOME ================= */
+function renderHome(){
+  setCrumbs([]);
+  const last = S.last && TOPICS[S.last];
+  app.innerHTML = `
+  <div class="intro">
+    <h1>Revision notes for Cambridge IGCSE, free for every student.</h1>
+    <p>Notes written to the syllabus, with flashcards, exam style questions and mark schemes for every topic. When you want a break from reading, fight the topic boss.</p>
+  </div>
+  ${last ? `<div class="resume"><div><small>Pick up where you left off</small><b>Biology, Topic ${S.last}: ${esc(BIO_TOPICS[S.last-1])}</b></div><button class="btn" id="resume">Continue</button></div>` : ""}
+  <h2 class="h2">Subjects</h2>
+  <ul class="shelf">${SUBJECTS.map(s=>`<li><button data-s="${s.id}" ${s.live?"":"disabled"}>
+    <span class="code">${s.code}</span><span class="sname">${esc(s.name)}</span>
+    <span class="status ${s.live?"live":""}">${s.live?"2 of 21 topics":"Being written"}</span></button></li>`).join("")}</ul>
+  <p class="fine">Syllabus codes are for the A* to G versions. If your school sits the 9 to 1 versions the code is different, but the content is the same.</p>`;
+  app.querySelector('[data-s="bio"]').onclick = ()=>go({view:"subject"});
+  const r = document.getElementById("resume"); if(r) r.onclick = ()=>go({view:"topic", topic:S.last, tab:"notes"});
+}
+
+/* ================= SUBJECT ================= */
+function renderSubject(){
+  setCrumbs([{label:"Subjects", r:{view:"home"}},{label:"Biology 0610"}]);
+  app.innerHTML = `
+  <div class="subhead"><span class="code">Cambridge IGCSE · 0610</span><h1>Biology</h1>
+  <p>21 syllabus topics. Topics 2 and 3 are written so far. Each one has notes, flashcards, exam questions and a boss fight.</p></div>
+  <ol class="toc">${BIO_TOPICS.map((t,i)=>{
+    const n=i+1, T=TOPICS[n];
+    const subs = T ? `<span class="subs">${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</span>` : "";
+    const p = T ? topicProgress(n) : 0;
+    const right = T ? `<span class="meter"><i><b style="width:${p}%"></b></i>${p}%</span>` : `<span class="meter">Not written yet</span>`;
+    return `<li><button data-t="${n}" ${T?"":"disabled"}><span class="n">${n}</span><span class="t">${esc(t)}${subs}</span>${right}</button></li>`;
+  }).join("")}</ol>`;
+  app.querySelectorAll(".toc button:not(:disabled)").forEach(b=>b.onclick=()=>go({view:"topic", topic:+b.dataset.t, tab:"notes"}));
+}
+
+/* ================= TOPIC ================= */
+function renderTopic(){
+  const n = route.topic, T = TOPICS[n], tab = route.tab||"notes";
+  S.last = n; save();
+  setCrumbs([{label:"Subjects", r:{view:"home"}},{label:"Biology", r:{view:"subject"}},{label:`Topic ${n}`}]);
+  const tabs = [["notes","Notes",""],["cards","Flashcards",T.cards.length],["exam","Exam questions",T.exam.length],["fight","Boss fight",""]];
+  app.innerHTML = `
+  <div class="topic-head"><span class="code">Biology 0610 · Topic ${n}</span><h1>${esc(BIO_TOPICS[n-1])}</h1></div>
+  <div class="tabs" role="tablist">${tabs.map(([k,l,c])=>`<button role="tab" data-tab="${k}" aria-selected="${k===tab}">${l}${c!==""?`<span class="count">${c}</span>`:""}</button>`).join("")}</div>
+  <div id="panel" role="tabpanel"></div>`;
+  app.querySelectorAll('[role="tab"]').forEach(b=>b.onclick=()=>go({view:"topic", topic:n, tab:b.dataset.tab}));
+  const panel = document.getElementById("panel");
+  ({notes:renderNotes, cards:renderCards, exam:renderExam, fight:renderFight})[tab](panel, n, T);
+}
+
+function renderNotes(panel, n, T){
+  panel.innerHTML = `<div class="notes-grid">
+    <aside class="side"><h2>In this topic</h2><ol>${T.subs.map(s=>`<li><a href="#s${s.ref.replace(".","_")}" data-jump="${s.ref}"><span class="tick ${S.revised[s.ref]?"on":""}" aria-hidden="true"></span>${s.ref} ${esc(s.title)}</a></li>`).join("")}</ol></aside>
+    <article class="notes">${T.subs.map(s=>`<section id="s${s.ref.replace(".","_")}">
+      <h2><span class="ref">${s.ref}</span>${esc(s.title)}</h2>${s.html}
+      <div class="done-row"><label class="check"><input type="checkbox" id="rev-${s.ref}" data-rev="${s.ref}" ${S.revised[s.ref]?"checked":""}> I have revised ${s.ref}</label></div>
+    </section>`).join("")}
+    <div class="row"><button class="btn" id="to-cards">Test yourself with flashcards</button><button class="btn quiet" id="to-exam">Try exam questions</button></div>
+    </article></div>`;
+  panel.querySelectorAll("[data-jump]").forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById("s"+a.dataset.jump.replace(".","_")).scrollIntoView({behavior:"smooth"}); });
+  panel.querySelectorAll("[data-rev]").forEach(c=>c.onchange=()=>{
+    S.revised[c.dataset.rev] = c.checked; save();
+    const tick = panel.querySelector(`[data-jump="${c.dataset.rev}"] .tick`); tick.classList.toggle("on", c.checked);
+  });
+  document.getElementById("to-cards").onclick = ()=>go({view:"topic", topic:n, tab:"cards"});
+  document.getElementById("to-exam").onclick = ()=>go({view:"topic", topic:n, tab:"exam"});
+}
+
+/* ---------- flashcards ---------- */
+function renderCards(panel, n, T){
+  let queue = shuffle(T.cards.map((c,i)=>i).filter(i=>!S.cards[`${n}-${i}`]));
+  let flipped = false;
+  function draw(){
+    const known = T.cards.filter((c,i)=>S.cards[`${n}-${i}`]).length;
+    if(!queue.length){
+      panel.innerHTML = `<div class="deck"><div class="card back"><span class="side-lbl">Deck complete</span><div class="face">You know all ${T.cards.length} cards in Topic ${n}.</div><div class="hint">Come back in a few days and reset the deck. Spacing out your practice is what makes it stick.</div></div>
+      <div class="row"><button class="btn" id="reset">Reset deck</button><button class="btn quiet" id="exam">Try exam questions</button></div></div>`;
+      document.getElementById("reset").onclick = ()=>{ T.cards.forEach((c,i)=>delete S.cards[`${n}-${i}`]); save(); queue = shuffle(T.cards.map((c,i)=>i)); draw(); };
+      document.getElementById("exam").onclick = ()=>go({view:"topic", topic:n, tab:"exam"});
+      return;
+    }
+    const i = queue[0], [front, back] = T.cards[i];
+    panel.innerHTML = `<div class="deck">
+      <div class="deck-meta"><span>${known} of ${T.cards.length} known</span><span>${queue.length} left in this round</span></div>
+      <button class="card ${flipped?"back":""}" id="card" aria-live="polite">
+        <span class="side-lbl">${flipped?"Answer":"Question"}</span>
+        <span class="face">${esc(flipped?back:front)}</span>
+        ${flipped?"":`<span class="hint">Say the answer out loud, then tap to check.</span>`}
+      </button>
+      <div class="row">${flipped
+        ? `<button class="btn quiet" id="again">Not yet</button><button class="btn" id="got">I knew it</button>`
+        : `<button class="btn" id="flip">Show answer</button>`}</div></div>`;
+    const flip = ()=>{ if(!flipped){ flipped = true; draw(); } };
+    document.getElementById("card").onclick = flip;
+    const f = document.getElementById("flip"); if(f) f.onclick = flip;
+    const g = document.getElementById("got"); if(g) g.onclick = ()=>{ S.cards[`${n}-${i}`]=1; save(); queue.shift(); flipped=false; draw(); };
+    const a = document.getElementById("again"); if(a) a.onclick = ()=>{ queue.push(queue.shift()); flipped=false; draw(); };
+  }
+  draw();
+}
+
+/* ---------- exam questions ---------- */
+function renderExam(panel, n, T){
+  const total = T.exam.reduce((s,q)=>s+q.marks,0);
+  const best = () => T.exam.reduce((s,q)=>s+Math.min(q.marks,S.exam[q.id]||0),0);
+  panel.innerHTML = `
+  <div class="eq-total"><span>Write your answer, open the mark scheme, then tick the points you made.</span><span class="score" id="tot">${best()} / ${total} marks</span></div>
+  <div class="eq-list">${T.exam.map((q,k)=>`
+    <div class="eq" data-q="${q.id}">
+      <div class="eq-top"><span class="code">Question ${k+1} · ${q.ref}${q.sup?" · Supplement":""}</span><span class="marks">[${q.marks} mark${q.marks>1?"s":""}]</span></div>
+      <div class="qt">${esc(q.q)}</div>
+      <label for="ans-${q.id}" class="code" style="font-size:13px">Your answer</label>
+      <textarea id="ans-${q.id}" placeholder="Write it like you would in the exam"></textarea>
+      <div class="row"><button class="btn quiet" data-show="${q.id}">Show mark scheme</button></div>
+      <div class="ms" id="ms-${q.id}" hidden>
+        <b>Mark scheme</b>
+        ${q.ms.map((m,j)=>`<label><input type="checkbox" id="ms-${q.id}-${j}" data-ms="${q.id}"> <span>${esc(m)}</span></label>`).join("")}
+        ${q.note?`<span class="note">${esc(q.note)}</span>`:""}
+        <span>You scored <span class="score" id="sc-${q.id}">0 / ${q.marks}</span></span>
+      </div>
+    </div>`).join("")}</div>`;
+  panel.querySelectorAll("[data-show]").forEach(b=>b.onclick=()=>{ document.getElementById("ms-"+b.dataset.show).hidden=false; b.parentElement.hidden=true; });
+  panel.querySelectorAll("[data-ms]").forEach(c=>c.onchange=()=>{
+    const q = T.exam.find(x=>x.id===c.dataset.ms);
+    const ticked = panel.querySelectorAll(`[data-ms="${q.id}"]:checked`).length;
+    const sc = Math.min(q.marks, ticked);
+    document.getElementById("sc-"+q.id).textContent = `${sc} / ${q.marks}`;
+    S.exam[q.id] = Math.max(S.exam[q.id]||0, sc); save();
+    document.getElementById("tot").textContent = `${best()} / ${total} marks`;
+  });
+}
+
+/* ---------- boss fight ---------- */
+function bossArt(b){
+  const face = `<circle cx="50" cy="56" r="8" fill="#fff"/><circle cx="80" cy="56" r="8" fill="#fff"/><circle cx="52" cy="58" r="4" fill="#16191D"/><circle cx="78" cy="58" r="4" fill="#16191D"/><path d="M40 42 L58 48 M90 42 L72 48" stroke="#16191D" stroke-width="4" stroke-linecap="round"/><path d="M52 82 Q65 72 78 82" stroke="#16191D" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  if(b.shape==="cell") return `<svg viewBox="0 0 130 130" aria-hidden="true"><rect x="10" y="14" width="110" height="102" rx="18" fill="${b.dark}"/><rect x="18" y="22" width="94" height="86" rx="13" fill="${b.color}"/><ellipse cx="32" cy="34" rx="7" ry="4" fill="${b.dark}"/><ellipse cx="98" cy="98" rx="7" ry="4" fill="${b.dark}"/>${face}</svg>`;
+  return `<svg viewBox="0 0 130 130" aria-hidden="true"><path d="M28 58 Q8 30 20 12" stroke="${b.dark}" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M102 58 Q122 30 110 12" stroke="${b.dark}" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="20" cy="13" r="9" fill="${b.color}"/><circle cx="110" cy="13" r="9" fill="${b.color}"/><path d="M16 76 Q18 24 65 24 Q112 24 114 76 Q114 122 65 122 Q16 122 16 76Z" fill="${b.color}"/>${face}</svg>`;
+}
+const heart = on => `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.2 0 3.6 1.2 5.2 3 1.6-1.8 3-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z" fill="${on?"var(--red)":"none"}" stroke="${on?"var(--red)":"var(--rule)"}" stroke-width="2"/></svg>`;
+
+function renderFight(panel, n, T){
+  const b = T.boss;
+  panel.innerHTML = `<div class="fight">
+    <p class="fight-intro">Every question comes from the Topic ${n} notes. Right answers deal damage, and a streak of right answers hits harder. Wrong answers cost a heart and show you the fix.</p>
+    <div class="arena"><div class="hp-row"><b>${esc(b.name)}</b><span>${S.boss[n]?"Beaten before":"Not beaten yet"}</span></div>
+      <div class="stage"><div class="boss">${bossArt(b)}</div></div></div>
+    <div class="row"><button class="btn" id="start">Start fight</button><button class="btn quiet" id="notes">Read the notes first</button></div></div>`;
+  document.getElementById("start").onclick = ()=>fight(panel, n, T);
+  document.getElementById("notes").onclick = ()=>go({view:"topic", topic:n, tab:"notes"});
+}
+
+function fight(panel, n, T){
+  const b = T.boss;
+  const F = {hp:100, hearts:3, streak:0, best:0, asked:0, right:0, queue:shuffle(b.qs), missed:[], fifty:true};
+  panel.innerHTML = `<div class="fight">
+    <div class="arena">
+      <div class="hp-row"><b>${esc(b.name)}</b><span id="hpn">100 / 100</span></div>
+      <div class="hp" role="progressbar" aria-label="Boss health" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="hpb" style="width:100%"></i></div>
+      <div class="stage" id="stage"><div class="boss" id="boss">${bossArt(b)}</div></div>
+      <div class="you"><div class="hearts" id="hearts"></div><span id="streak"></span></div>
+    </div>
+    <div class="fq" id="fq"></div></div>`;
+  const $ = id => document.getElementById(id);
+  function status(){
+    $("hearts").innerHTML = [0,1,2].map(k=>heart(k<F.hearts)).join("");
+    $("hearts").setAttribute("aria-label", `${F.hearts} hearts left`);
+    $("streak").textContent = F.streak>1 ? `Streak ${F.streak}` : "";
+    const hp = Math.max(0,F.hp);
+    $("hpb").style.width = hp+"%"; $("hpn").textContent = `${hp} / 100`;
+    $("hpb").parentElement.setAttribute("aria-valuenow", hp);
+  }
+  function ask(){
+    if(!F.queue.length) F.queue = shuffle(b.qs);
+    const q = F.cur = F.queue.shift(); F.asked++;
+    let body;
+    if(q.num!==undefined){
+      body = `<form class="num" id="nf"><input id="nin" inputmode="decimal" autocomplete="off" placeholder="Your answer" aria-label="Your answer"><span class="unit">${q.unit}</span><button class="btn">Attack</button></form>`;
+    } else {
+      F.opts = shuffle([q.a, ...q.w]);
+      body = `<div class="opts">${F.opts.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>`;
+    }
+    $("fq").innerHTML = `<p class="qt">${esc(q.q)}</p>${body}
+      ${q.num===undefined ? `<button class="link-btn" id="fifty" ${F.fifty?"":"disabled"}>${F.fifty?"Use 50/50 (once per fight)":"50/50 used"}</button>` : ""}`;
+    if(q.num!==undefined){
+      $("nf").onsubmit = e=>{ e.preventDefault(); const v = $("nin").value.replace(/[,\s×x%]/g,""); if(v==="") return; answer(Math.abs(parseFloat(v)-q.num) < 1e-9 + 1e-6*q.num); };
+      $("nin").focus({preventScroll:true});
+    } else {
+      $("fq").querySelectorAll(".opt").forEach(btn=>btn.onclick=()=>{
+        const pick = F.opts[+btn.dataset.k];
+        $("fq").querySelectorAll(".opt").forEach((o,k)=>{ o.disabled=true; if(F.opts[k]===q.a) o.classList.add("right"); });
+        if(pick!==q.a) btn.classList.add("wrong");
+        answer(pick===q.a);
+      });
+      const f = $("fifty"); if(f && F.fifty) f.onclick = ()=>{
+        F.fifty=false; f.disabled=true; f.textContent="50/50 used";
+        shuffle(F.opts.map((o,k)=>o===q.a?-1:k).filter(k=>k>=0)).slice(0,2).forEach(k=>$("fq").querySelector(`[data-k="${k}"]`).classList.add("gone"));
+      };
+    }
+  }
+  function answer(ok){
+    const q = F.cur, boss = $("boss");
+    boss.classList.remove("hit","lunge"); void boss.offsetWidth;
+    let verdict;
+    if(ok){
+      F.streak++; F.best=Math.max(F.best,F.streak); F.right++;
+      const dmg = Math.min(32, 14 + (F.streak-1)*6);
+      F.hp -= dmg; boss.classList.add("hit");
+      const d = document.createElement("div"); d.className="dmg"; d.textContent = `${dmg} damage`; $("stage").appendChild(d); setTimeout(()=>d.remove(),1000);
+      verdict = F.streak>1 ? `Right. Streak of ${F.streak}, ${dmg} damage.` : `Right. ${dmg} damage.`;
+    } else {
+      F.streak=0; F.hearts--; F.missed.push(q); F.queue.push(q); boss.classList.add("lunge");
+      verdict = `Not quite. ${b.name} hits back.`;
+    }
+    status();
+    $("fq").querySelectorAll("#nf input, #nf button, #fifty").forEach(e=>e.disabled=true);
+    const end = F.hp<=0 || F.hearts<=0;
+    const fb = document.createElement("div"); fb.className = "fb"+(ok?"":" bad");
+    fb.innerHTML = `<span class="verdict">${verdict}</span>${ok?"":`<span>Answer: <strong>${esc(q.num!==undefined? q.num+" "+q.unit : q.a)}</strong></span>`}<span>${esc(q.t)}</span>
+      <div class="row"><button class="btn" id="next">${end?"See results":"Next question"}</button></div>`;
+    $("fq").appendChild(fb);
+    $("next").focus({preventScroll:true}); fb.scrollIntoView({behavior:"smooth", block:"nearest"});
+    $("next").onclick = ()=> end ? result(F.hp<=0) : ask();
+  }
+  function result(won){
+    if(won){ S.boss[n]=true; save(); }
+    const acc = Math.round(100*F.right/Math.max(1,F.asked));
+    const missed = [...new Set(F.missed)];
+    panel.innerHTML = `<div class="fight">
+      <div class="arena"><div class="hp-row"><b>${won?`${esc(b.name)} is beaten`:`${esc(b.name)} won this time`}</b></div>
+      <div class="stats"><div class="stat"><b>${acc}%</b><span>Accuracy</span></div><div class="stat"><b>${F.best}</b><span>Best streak</span></div><div class="stat"><b>${F.right}</b><span>Correct</span></div></div></div>
+      ${missed.length ? `<h2 class="h2" style="margin:8px 0 0">Go back over these</h2><ul class="eq-list" style="list-style:none;padding:0;margin:0">${missed.map(q=>`<li class="eq"><span class="qt" style="font-size:17px">${esc(q.q)}</span><span>${esc(q.t)}</span></li>`).join("")}</ul>` : `<p style="margin:0">No mistakes. Try the exam questions next to practise writing full answers.</p>`}
+      <div class="row"><button class="btn" id="again">Fight again</button><button class="btn quiet" id="notes">Back to notes</button></div></div>`;
+    document.getElementById("again").onclick = ()=>fight(panel, n, T);
+    document.getElementById("notes").onclick = ()=>go({view:"topic", topic:n, tab:"notes"});
+  }
+  status(); ask();
+}
+
+route = fromHash();
+render();
+</script>
