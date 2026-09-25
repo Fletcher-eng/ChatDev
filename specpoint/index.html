@@ -397,7 +397,9 @@ button{cursor:pointer}
 .pick[aria-pressed="true"] i::after{content:"";width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
 .tiers{display:flex;flex-direction:column;border-top:1.5px solid var(--rule)}
 .tier-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-weight:800;padding:8px 0;border-bottom:1.5px solid var(--rule)}
-.tier-row .seg{flex:0 1 300px}
+.tier-ctl{display:flex;gap:8px;flex-wrap:wrap;flex:0 1 460px;justify-content:flex-end}
+.tier-ctl .seg{flex:1 1 200px}
+.tier-row .code{font-size:14px;color:var(--ink3);font-weight:600}
 .quiz-subs{display:flex;flex-wrap:wrap;gap:8px}
 .quiz-subs span,.quiz-tag{background:var(--c);color:#1A2360;border:2px solid #1A2360;padding:3px 10px;font-weight:800;font-size:15px}
 .quiz-bar{height:14px;border:2.5px solid var(--ink);overflow:hidden}
@@ -786,6 +788,9 @@ const CATALOG = [
 ];
 Object.assign(COVERS, {amath:"#FF8A5B", esl:"#9FE6C3", hist:"#E3BE92", geog:"#B7E36A", bus:"#FFB3C8", cs:"#6FB8FF", fre:"#A6D8FF"});
 const BOARDS = {cie:{name:"Cambridge", full:"Cambridge IGCSE (CAIE)", tiers:["Core","Extended"]}, edx:{name:"Edexcel", full:"Pearson Edexcel International GCSE", tiers:["Foundation","Higher"]}};
+const EXAM_FOR_YEAR = {"9":2029, "10":2028, "11":2027};
+const boardOfProfile = (P, id) => (P.boards && P.boards[id]) || (P.board==="edx" ? "edx" : "cie");
+const boardsLabel = P => P.board==="mix" ? "Cambridge and Edexcel" : BOARDS[P.board].full;
 const subInfo = (id, board) => { const c = CATALOG.find(x=>x.id===id); return {...c, code: c[board], label: board==="edx" && c.edxName ? c.edxName : c.name}; };
 
 /* two starter questions per subject */
@@ -815,31 +820,43 @@ function renderSetup(){
   setCrumbs([]);
   if(!OB){
     const p = S.profile;
-    OB = p ? {step:2, name:p.name, year:p.year, board:p.board, subs:{...p.subs}, tiers:{...p.tiers}, examYear:p.examYear, goal:p.goal, editing:true}
-           : {step:0, name:"", year:"10", board:"cie", subs:{}, tiers:{}, examYear:2028, goal:30};
+    OB = p ? {step:2, name:p.name, year:p.year, board:p.board, boards:{...(p.boards||{})}, subs:{...p.subs}, tiers:{...p.tiers}, examYear:p.examYear, goal:p.goal, editing:true}
+           : {step:0, name:"", year:"10", board:"cie", boards:{}, subs:{}, tiers:{}, examYear:2028, goal:30};
   }
   const steps = ["You","Exam board","Subjects","Goals","Quiz"];
   const stepIdx = Math.min(OB.step, 4);
-  const chosen = CATALOG.filter(c=>OB.subs[c.id] && c[OB.board]);
+  const avail = c => OB.board==="mix" ? true : !!c[OB.board];
+  const bOf = id => { const c = CATALOG.find(x=>x.id===id); if(OB.board!=="mix") return OB.board; return OB.boards[id] || (c.cie ? "cie" : "edx"); };
+  OB.bOf = bOf;
+  const chosen = CATALOG.filter(c=>OB.subs[c.id] && avail(c));
   const seg = (name, opts, val) => `<div class="seg" role="group" aria-label="${name}">${opts.map(([v,l])=>`<button data-seg="${name}" data-v="${v}" aria-pressed="${String(v)===String(val)}">${l}</button>`).join("")}</div>`;
   let body = "", canNext = true, nextLbl = "Next";
   if(OB.step===0){
     body = `<h1 class="ob-h">${OB.editing?"Your account":"Create your free account"}</h1>
       <p class="ob-p">Tell us what you study and we will build your revision around it. It takes about two minutes and finishes with a quick quiz on your subjects.</p>
       <label class="ob-field" for="ob-name">First name<input id="ob-name" autocomplete="given-name" value="${esc(OB.name)}" placeholder="What should we call you?"></label>
-      <div class="ob-field"><span>Year group</span>${seg("year",[["9","Year 9"],["10","Year 10"],["11","Year 11"]],OB.year)}</div>`;
+      <div class="ob-field"><span>Year group</span>${seg("year",[["9","Year 9"],["10","Year 10"],["11","Year 11"]],OB.year)}</div>
+      ${OB.year==="9"?`<p class="ob-p">Lots of schools start IGCSE courses in Year 9 and spread them over three years. If yours starts later, the notes are still a great way to get ahead.</p>`:""}`;
     canNext = OB.name.trim().length>0;
   } else if(OB.step===1){
-    body = `<h1 class="ob-h">Which exam board?</h1><p class="ob-p">Check the front of a past paper or ask your teacher if you are not sure.</p>
-      <div class="boards">${Object.entries(BOARDS).map(([k,b])=>`<button class="board" data-board="${k}" aria-pressed="${OB.board===k}"><b>${b.name}</b><span>${b.full}</span></button>`).join("")}</div>`;
+    body = `<h1 class="ob-h">Which exam boards?</h1><p class="ob-p">Lots of schools use different boards for different subjects. Check the front of a past paper or ask your teacher if you are not sure.</p>
+      <div class="boards">${Object.entries(BOARDS).map(([k,b])=>`<button class="board" data-board="${k}" aria-pressed="${OB.board===k}"><b>${b.name}</b><span>${b.full} for every subject</span></button>`).join("")}
+      <button class="board" data-board="mix" aria-pressed="${OB.board==="mix"}"><b>Both</b><span>A mix. You will choose the board for each subject.</span></button></div>`;
   } else if(OB.step===2){
-    body = `<h1 class="ob-h">Pick your subjects</h1><p class="ob-p">Tap every ${BOARDS[OB.board].name} subject you take. <b>${chosen.length} chosen</b></p>
-      <div class="picks">${CATALOG.filter(c=>c[OB.board]).map(c=>{const s=subInfo(c.id,OB.board);return `<button class="pick" data-sub="${c.id}" aria-pressed="${!!OB.subs[c.id]}" style="--c:${COVERS[c.id]}"><i aria-hidden="true"></i><span>${esc(s.label)}</span><small>${s.code}</small></button>`;}).join("")}</div>
-      ${chosen.some(c=>c.tier)?`<h2 class="ob-h2">Which tier are you taking?</h2><div class="tiers">${chosen.filter(c=>c.tier).map(c=>`<div class="tier-row"><span>${esc(subInfo(c.id,OB.board).label)}</span>${seg("tier-"+c.id, BOARDS[OB.board].tiers.map(t=>[t,t]), OB.tiers[c.id]||BOARDS[OB.board].tiers[1])}</div>`).join("")}</div>`:""}`;
+    const needsSetup = c => c.tier || (OB.board==="mix" && c.cie && c.edx);
+    const codes = c => OB.board==="mix" ? [c.cie, c.edx].filter(Boolean).join(" or ") : c[OB.board];
+    body = `<h1 class="ob-h">Pick your subjects</h1><p class="ob-p">Tap every subject you take. <b>${chosen.length} chosen</b></p>
+      <div class="picks">${CATALOG.filter(avail).map(c=>{const s=subInfo(c.id,bOf(c.id));return `<button class="pick" data-sub="${c.id}" aria-pressed="${!!OB.subs[c.id]}" style="--c:${COVERS[c.id]}"><i aria-hidden="true"></i><span>${esc(s.label)}</span><small>${codes(c)}</small></button>`;}).join("")}</div>
+      ${chosen.some(needsSetup)?`<h2 class="ob-h2">${OB.board==="mix"?"Board and tier for each subject":"Which tier are you taking?"}</h2><div class="tiers">${chosen.filter(needsSetup).map(c=>{
+        const b = bOf(c.id);
+        const boardSeg = OB.board==="mix" && c.cie && c.edx ? seg("brd-"+c.id, [["cie","Cambridge"],["edx","Edexcel"]], b) : "";
+        const tierSeg = c.tier ? seg("tier-"+c.id, BOARDS[b].tiers.map(t=>[t,t]), OB.tiers[c.id]||BOARDS[b].tiers[1]) : "";
+        return `<div class="tier-row"><span>${esc(subInfo(c.id,b).label)} <small class="code">${subInfo(c.id,b).code}</small></span><div class="tier-ctl">${boardSeg}${tierSeg}</div></div>`;}).join("")}</div>`:""}
+      ${OB.board==="mix" && chosen.some(c=>!(c.cie && c.edx)) ? `<p class="ob-p">${chosen.filter(c=>!(c.cie && c.edx)).map(c=>esc(c.name)).join(", ")} ${chosen.filter(c=>!(c.cie && c.edx)).length===1?"is":"are"} only offered by Cambridge, so we have set ${chosen.filter(c=>!(c.cie && c.edx)).length===1?"it":"them"} to Cambridge.</p>` : ""}`;
     canNext = chosen.length>0;
   } else if(OB.step===3){
     body = `<h1 class="ob-h">Set your goals</h1>
-      <div class="ob-field"><span>When are your exams?</span>${seg("exam",[["2027","May 2027"],["2028","May 2028"]],OB.examYear)}</div>
+      <div class="ob-field"><span>When are your main exams?</span>${seg("exam",[["2027","May 2027"],["2028","May 2028"],["2029","May 2029"]],OB.examYear)}</div>
       <div class="ob-field"><span>Daily goal</span>${seg("goal",[["20","Chill · 20 XP"],["30","Steady · 30 XP"],["50","Serious · 50 XP"]],OB.goal)}</div>
       <p class="ob-p">About 10 XP is one section of notes read and ticked off.</p>`;
     nextLbl = OB.editing ? "Save" : "Next";
@@ -847,7 +864,7 @@ function renderSetup(){
     const n = chosen.length*2;
     body = `<h1 class="ob-h">Quick quiz on your subjects</h1>
       <p class="ob-p">${n} questions, two for each of your ${chosen.length} subjects. There is no pass mark. It just shows us where you are strongest and where to start.</p>
-      <div class="quiz-subs">${chosen.map(c=>`<span style="--c:${COVERS[c.id]}">${esc(subInfo(c.id,OB.board).label)}</span>`).join("")}</div>`;
+      <div class="quiz-subs">${chosen.map(c=>`<span style="--c:${COVERS[c.id]}">${esc(subInfo(c.id,bOf(c.id)).label)}</span>`).join("")}</div>`;
     nextLbl = "Start the quiz";
   }
   const enter = OB.shown!==OB.step; OB.shown = OB.step;
@@ -864,7 +881,7 @@ function renderSetup(){
   if(nameIn){ nameIn.oninput = ()=>{ OB.name = nameIn.value; document.getElementById("ob-next").disabled = !OB.name.trim(); }; nameIn.onkeydown = e=>{ if(e.key==="Enter" && OB.name.trim()){ OB.step++; renderSetup(); } }; }
   app.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{
     const k = b.dataset.seg, v = b.dataset.v;
-    if(k==="year") OB.year = v; else if(k==="exam") OB.examYear = +v; else if(k==="goal") OB.goal = +v; else if(k.startsWith("tier-")) OB.tiers[k.slice(5)] = v;
+    if(k==="year"){ OB.year = v; if(!OB.examTouched) OB.examYear = EXAM_FOR_YEAR[v]; } else if(k.startsWith("brd-")){ OB.boards[k.slice(4)] = v; delete OB.tiers[k.slice(4)]; } else if(k==="exam"){ OB.examYear = +v; OB.examTouched = true; } else if(k==="goal") OB.goal = +v; else if(k.startsWith("tier-")) OB.tiers[k.slice(5)] = v;
     renderSetup();
   });
   app.querySelectorAll("[data-board]").forEach(b=>b.onclick=()=>{ OB.board = b.dataset.board; OB.tiers = {}; renderSetup(); });
@@ -880,10 +897,11 @@ function renderSetup(){
 }
 
 function finishSetup(baseline){
-  const subs = {}; CATALOG.forEach(c=>{ if(OB.subs[c.id] && c[OB.board]) subs[c.id] = true; });
-  const tiers = {}; Object.keys(subs).forEach(id=>{ if(CATALOG.find(c=>c.id===id).tier) tiers[id] = OB.tiers[id] || BOARDS[OB.board].tiers[1]; });
+  const bOf = OB.bOf;
+  const subs = {}, boards = {}; CATALOG.forEach(c=>{ if(OB.subs[c.id] && (OB.board==="mix" || c[OB.board])){ subs[c.id] = true; boards[c.id] = bOf(c.id); } });
+  const tiers = {}; Object.keys(subs).forEach(id=>{ if(CATALOG.find(c=>c.id===id).tier) tiers[id] = OB.tiers[id] || BOARDS[boards[id]].tiers[1]; });
   const first = !S.profile;
-  S.profile = {name:OB.name.trim(), year:OB.year, board:OB.board, subs, tiers, examYear:OB.examYear, goal:OB.goal, baseline};
+  S.profile = {name:OB.name.trim(), year:OB.year, board:OB.board, boards, subs, tiers, examYear:OB.examYear, goal:OB.goal, baseline};
   S.examYear = OB.examYear; save(); OB = null;
   go({view:"home"});
   if(first){ confetti(innerWidth/2, innerHeight*0.3); earn("signup", 20, "welcome bonus"); }
@@ -894,7 +912,7 @@ function runQuiz(chosen){
   const score = {}; chosen.forEach(c=>score[c.id]=0);
   let i = 0;
   const ask = ()=>{
-    const q = qs[i], s = subInfo(q.sub, OB.board), opts = shuffle([q.a, ...q.w]);
+    const q = qs[i], s = subInfo(q.sub, OB.bOf(q.sub)), opts = shuffle([q.a, ...q.w]);
     app.innerHTML = `<div class="ob">
       <div class="quiz-bar" aria-label="Question ${i+1} of ${qs.length}"><i style="width:${100*i/qs.length}%"></i></div>
       <div class="ob-card enter">
@@ -926,8 +944,8 @@ function runQuiz(chosen){
     app.innerHTML = `<div class="ob"><div class="ob-card enter">
       <h1 class="ob-h">Your starting point</h1>
       <p class="ob-p">You got <b>${total} out of ${rows.length*2}</b>. Here is how each subject looks right now.</p>
-      <ul class="base">${rows.map(r=>`<li style="--c:${COVERS[r.c.id]}"><span class="bn">${esc(subInfo(r.c.id,OB.board).label)}</span><span class="pips" aria-label="${r.s} of 2">${[0,1].map(k=>`<i class="${k<r.s?"on":""}"></i>`).join("")}</span><span class="bl ${lbl(r.s)[1]}">${lbl(r.s)[0]}</span></li>`).join("")}</ul>
-      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,OB.board).label)}</b>. ${weakest.c.id==="bio" ? "Its notes are ready now." : "Its notes are still being written, so we will let you know when they are ready. Biology is ready now."}` : "Great start across the board. Jump into Biology, the first subject with full notes."}</div>
+      <ul class="base">${rows.map(r=>`<li style="--c:${COVERS[r.c.id]}"><span class="bn">${esc(subInfo(r.c.id,OB.bOf(r.c.id)).label)}</span><span class="pips" aria-label="${r.s} of 2">${[0,1].map(k=>`<i class="${k<r.s?"on":""}"></i>`).join("")}</span><span class="bl ${lbl(r.s)[1]}">${lbl(r.s)[0]}</span></li>`).join("")}</ul>
+      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,OB.bOf(weakest.c.id)).label)}</b>. ${weakest.c.id==="bio" ? "Its notes are ready now." : "Its notes are still being written, so we will let you know when they are ready. Biology is ready now."}` : "Great start across the board. Jump into Biology, the first subject with full notes."}</div>
       <div class="row ob-nav"><button class="btn" id="ob-done">Go to my dashboard</button></div>
     </div></div>`;
     const bl = {}; chosen.forEach(c=>bl[c.id]=score[c.id]);
@@ -950,7 +968,7 @@ function renderHome(){
   const baseTag = id => { const b = P.baseline && P.baseline[id]; return b===undefined||b===null ? "" : `<span class="qz">Quiz ${b}/2</span>`; };
   app.innerHTML = `
   <div class="hello">
-    <div><h1>${hi}</h1><p>Year ${esc(P.year)} · ${BOARDS[P.board].full} · ${mine.length} subject${mine.length===1?"":"s"}</p></div>
+    <div><h1>${hi}</h1><p>Year ${esc(P.year)} · ${boardsLabel(P)} · ${mine.length} subject${mine.length===1?"":"s"}</p></div>
     <div class="today">
       <div><span class="lbl">Streak</span><span class="big" style="color:var(--flame)">${FLAME.replace('width="18" height="18"','width="26" height="26"')}${st}</span><small style="font-size:13px;color:var(--ink3)">${st===1?"day":"days"} in a row</small></div>
       <div><span class="lbl">Today</span><span class="big">${ring(tx/G)}<span>${Math.min(tx,G)}<small>/${G}</small></span></span><small style="font-size:13px;color:var(--ink3)">${tx>=G?"Goal done":"XP goal"}</small></div>
@@ -960,10 +978,10 @@ function renderHome(){
   ${P.subs.bio ? `<div class="next"><div><small>Up next · ${esc(nx.sub)}</small><b>${esc(nx.lbl)}</b></div><button class="btn" id="go-next">Start</button></div>` : ""}
   <div class="h2row"><h2 class="h2">Your subjects</h2><button class="link-btn" id="edit-subs">Edit subjects</button></div>
   <ul class="shelf">${mine.map(c=>{
-    const s = subInfo(c.id, P.board), live = c.id==="bio", p = live ? subjectProgress() : 0;
+    const bd = boardOfProfile(P, c.id), s = subInfo(c.id, bd), live = c.id==="bio", p = live ? subjectProgress() : 0;
     const tier = P.tiers[c.id] ? `<span class="qz">${P.tiers[c.id]}</span> ` : "";
     return `<li><button class="book" data-s="${c.id}" style="--c:${COVERS[c.id]}" ${live?"":"disabled"} aria-label="${esc(s.label)} ${s.code}${live?"":", being written"}">
-      <span class="label"><small>Subject</small><span lang="en-GB">${esc(s.label)}</span></span>
+      <span class="label"><small>${BOARDS[bd].name}</small><span lang="en-GB">${esc(s.label)}</span></span>
       <span>${tier}${baseTag(c.id)}<span class="foot"><span class="code">${s.code}</span>${live?`<span>${p}%</span>`:`<span class="sticker">Soon</span>`}</span>
       ${live?`<span class="bar-p" style="display:block"><i style="width:${Math.max(3,p)}%"></i></span>`:""}</span>
     </button></li>`;}).join("")}</ul>
