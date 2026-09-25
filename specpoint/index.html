@@ -111,6 +111,27 @@ button{cursor:pointer}
 .next{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 0;margin-bottom:34px;border-bottom:3px solid var(--rule)}
 .next small{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)}
 .next b{font-size:24px;font-weight:800;background:linear-gradient(transparent 55%,var(--kt) 55%);color:var(--ink)}
+.dash{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;margin-bottom:40px}
+@media (min-width:860px){.dash{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.panel{border-top:3px solid var(--rule);padding-top:12px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel h3{margin:0;font-stretch:68%;font-weight:900;text-transform:uppercase;font-size:30px;line-height:1}
+.panel-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.panel p{margin:0;max-width:52ch}
+.quiz-cta{background:var(--hl);color:#1A2360;border-top-color:#1A2360;padding:16px;align-items:flex-start}
+.quiz-cta .btn{background:#1A2360;border-color:#1A2360;color:#fff}
+.quiz-cta .btn:hover{background:#fff;color:#1A2360}
+.wk-sum{font-size:15px;font-weight:700;color:var(--ink2)}
+.week{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;height:170px;align-items:end;border-bottom:2px solid var(--rule)}
+.day{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;padding-bottom:4px}
+.day i{display:block;width:100%;max-width:44px;background:var(--hair);transition:height .5s ease}
+.day.hit i{background:var(--btn)}
+.day.now i{outline:2.5px solid var(--ink);outline-offset:-2.5px}
+.day .v{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;min-height:1.2em}
+.day b{font-size:13px;font-weight:800;text-transform:uppercase;color:var(--ink3)}
+.day.now b{color:var(--ink)}
+.wk-empty{position:absolute;left:0;right:0;top:34%;text-align:center;font-family:var(--hand);font-weight:700;font-size:19px;color:var(--pen);padding:0 12px}
+.goal-line{position:absolute;left:0;right:0;border-top:2px dashed var(--flame);pointer-events:none}
+.goal-line em{position:absolute;right:0;top:-22px;font-style:normal;font-family:var(--hand);font-weight:700;font-size:16px;color:var(--flame)}
 .h2row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .h2{font-size:40px;line-height:1;margin:0 0 16px}
 .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:22px 16px;margin:0;padding:0;list-style:none}
@@ -823,8 +844,8 @@ function renderSetup(){
     OB = p ? {step:2, name:p.name, year:p.year, board:p.board, boards:{...(p.boards||{})}, subs:{...p.subs}, tiers:{...p.tiers}, examYear:p.examYear, goal:p.goal, editing:true}
            : {step:0, name:"", year:"10", board:"cie", boards:{}, subs:{}, tiers:{}, examYear:2028, goal:30};
   }
-  const steps = ["You","Exam board","Subjects","Goals","Quiz"];
-  const stepIdx = Math.min(OB.step, 4);
+  const steps = ["You","Exam boards","Subjects","Goals"];
+  const stepIdx = Math.min(OB.step, 3);
   const avail = c => OB.board==="mix" ? true : !!c[OB.board];
   const bOf = id => { const c = CATALOG.find(x=>x.id===id); if(OB.board!=="mix") return OB.board; return OB.boards[id] || (c.cie ? "cie" : "edx"); };
   OB.bOf = bOf;
@@ -833,7 +854,7 @@ function renderSetup(){
   let body = "", canNext = true, nextLbl = "Next";
   if(OB.step===0){
     body = `<h1 class="ob-h">${OB.editing?"Your account":"Create your free account"}</h1>
-      <p class="ob-p">Tell us what you study and we will build your revision around it. It takes about two minutes and finishes with a quick quiz on your subjects.</p>
+      <p class="ob-p">Tell us what you study and we will build your revision around it. It takes about a minute.</p>
       <label class="ob-field" for="ob-name">First name<input id="ob-name" autocomplete="given-name" value="${esc(OB.name)}" placeholder="What should we call you?"></label>
       <div class="ob-field"><span>Year group</span>${seg("year",[["9","Year 9"],["10","Year 10"],["11","Year 11"]],OB.year)}</div>
       ${OB.year==="9"?`<p class="ob-p">Lots of schools start IGCSE courses in Year 9 and spread them over three years. If yours starts later, the notes are still a great way to get ahead.</p>`:""}`;
@@ -859,20 +880,13 @@ function renderSetup(){
       <div class="ob-field"><span>When are your main exams?</span>${seg("exam",[["2027","May 2027"],["2028","May 2028"],["2029","May 2029"]],OB.examYear)}</div>
       <div class="ob-field"><span>Daily goal</span>${seg("goal",[["20","Chill · 20 XP"],["30","Steady · 30 XP"],["50","Serious · 50 XP"]],OB.goal)}</div>
       <p class="ob-p">About 10 XP is one section of notes read and ticked off.</p>`;
-    nextLbl = OB.editing ? "Save" : "Next";
-  } else if(OB.step===4){
-    const n = chosen.length*2;
-    body = `<h1 class="ob-h">Quick quiz on your subjects</h1>
-      <p class="ob-p">${n} questions, two for each of your ${chosen.length} subjects. There is no pass mark. It just shows us where you are strongest and where to start.</p>
-      <div class="quiz-subs">${chosen.map(c=>`<span style="--c:${COVERS[c.id]}">${esc(subInfo(c.id,bOf(c.id)).label)}</span>`).join("")}</div>`;
-    nextLbl = "Start the quiz";
+    nextLbl = OB.editing ? "Save" : "Go to my dashboard";
   }
   const enter = OB.shown!==OB.step; OB.shown = OB.step;
   app.innerHTML = `<div class="ob">
     <ol class="ob-steps" aria-label="Sign up progress">${steps.map((s,i)=>`<li class="${i<stepIdx?"done":i===stepIdx?"now":""}"><span>${s}</span></li>`).join("")}</ol>
     <div class="ob-card ${enter?"enter":""}">${body}
       <div class="row ob-nav">${OB.step>0?`<button class="btn quiet" id="ob-back">Back</button>`:""}
-      ${OB.step===4?`<button class="btn quiet" id="ob-skip">Skip for now</button>`:""}
       <button class="btn" id="ob-next" ${canNext?"":"disabled"}>${nextLbl}</button></div>
     </div>
     ${OB.editing?`<button class="link-btn" id="ob-cancel">Cancel and go back</button>`:`<p class="fine">Your account is saved on this device for now.</p>`}</div>`;
@@ -888,10 +902,8 @@ function renderSetup(){
   app.querySelectorAll("[data-sub]").forEach(b=>b.onclick=()=>{ OB.subs[b.dataset.sub] = !OB.subs[b.dataset.sub]; renderSetup(); });
   const back = document.getElementById("ob-back"); if(back) back.onclick = ()=>{ OB.step--; renderSetup(); };
   const cancel = document.getElementById("ob-cancel"); if(cancel) cancel.onclick = ()=>{ OB = null; go({view:"home"}); };
-  const skip = document.getElementById("ob-skip"); if(skip) skip.onclick = ()=>finishSetup(null);
   document.getElementById("ob-next").onclick = ()=>{
-    if(OB.step===3 && OB.editing) return finishSetup(S.profile.baseline||null);
-    if(OB.step===4) return runQuiz(chosen);
+    if(OB.step===3) return finishSetup(OB.editing ? (S.profile.baseline||null) : null);
     OB.step++; renderSetup(); window.scrollTo(0,0);
   };
 }
@@ -907,12 +919,13 @@ function finishSetup(baseline){
   if(first){ confetti(innerWidth/2, innerHeight*0.3); earn("signup", 20, "welcome bonus"); }
 }
 
-function runQuiz(chosen){
+function runQuiz(chosen, bOf, onDone){
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Starter quiz"}]); window.scrollTo(0,0);
   const qs = []; chosen.forEach(c=>QUIZ[c.id].forEach(q=>qs.push({...q, sub:c.id})));
   const score = {}; chosen.forEach(c=>score[c.id]=0);
   let i = 0;
   const ask = ()=>{
-    const q = qs[i], s = subInfo(q.sub, OB.bOf(q.sub)), opts = shuffle([q.a, ...q.w]);
+    const q = qs[i], s = subInfo(q.sub, bOf(q.sub)), opts = shuffle([q.a, ...q.w]);
     app.innerHTML = `<div class="ob">
       <div class="quiz-bar" aria-label="Question ${i+1} of ${qs.length}"><i style="width:${100*i/qs.length}%"></i></div>
       <div class="ob-card enter">
@@ -944,12 +957,12 @@ function runQuiz(chosen){
     app.innerHTML = `<div class="ob"><div class="ob-card enter">
       <h1 class="ob-h">Your starting point</h1>
       <p class="ob-p">You got <b>${total} out of ${rows.length*2}</b>. Here is how each subject looks right now.</p>
-      <ul class="base">${rows.map(r=>`<li style="--c:${COVERS[r.c.id]}"><span class="bn">${esc(subInfo(r.c.id,OB.bOf(r.c.id)).label)}</span><span class="pips" aria-label="${r.s} of 2">${[0,1].map(k=>`<i class="${k<r.s?"on":""}"></i>`).join("")}</span><span class="bl ${lbl(r.s)[1]}">${lbl(r.s)[0]}</span></li>`).join("")}</ul>
-      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,OB.bOf(weakest.c.id)).label)}</b>. ${weakest.c.id==="bio" ? "Its notes are ready now." : "Its notes are still being written, so we will let you know when they are ready. Biology is ready now."}` : "Great start across the board. Jump into Biology, the first subject with full notes."}</div>
-      <div class="row ob-nav"><button class="btn" id="ob-done">Go to my dashboard</button></div>
+      <ul class="base">${rows.map(r=>`<li style="--c:${COVERS[r.c.id]}"><span class="bn">${esc(subInfo(r.c.id,bOf(r.c.id)).label)}</span><span class="pips" aria-label="${r.s} of 2">${[0,1].map(k=>`<i class="${k<r.s?"on":""}"></i>`).join("")}</span><span class="bl ${lbl(r.s)[1]}">${lbl(r.s)[0]}</span></li>`).join("")}</ul>
+      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,bOf(weakest.c.id)).label)}</b>. ${weakest.c.id==="bio" ? "Its notes are ready now." : "Its notes are still being written, so we will let you know when they are ready. Biology is ready now."}` : "Great start across the board. Jump into Biology, the first subject with full notes."}</div>
+      <div class="row ob-nav"><button class="btn" id="ob-done">Back to my dashboard</button></div>
     </div></div>`;
     const bl = {}; chosen.forEach(c=>bl[c.id]=score[c.id]);
-    document.getElementById("ob-done").onclick = ()=>finishSetup(bl);
+    document.getElementById("ob-done").onclick = ()=>onDone(bl);
     if(total/(rows.length*2) >= 0.75) confetti(innerWidth/2, innerHeight*0.3);
   };
   ask();
@@ -965,6 +978,21 @@ function renderHome(){
   const days = Math.max(0, Math.ceil((exam - new Date())/864e5));
   const nx = upNext(), st = streak(), tx = todayXP(), G = P.goal;
   const mine = CATALOG.filter(c=>P.subs[c.id]);
+  const bOfP = id => boardOfProfile(P, id);
+  const quizDone = P.baseline && Object.keys(P.baseline).length;
+  const lblOf = n => n===2 ? ["Strong","good"] : n===1 ? ["Getting there","mid"] : ["Start here","low"];
+  const quizPanel = quizDone ? `<section class="panel"><div class="panel-h"><h3>Your starting point</h3><button class="link-btn" id="retake">Retake quiz</button></div>
+      <ul class="base">${mine.filter(c=>P.baseline[c.id]!==undefined).sort((a,b)=>P.baseline[a.id]-P.baseline[b.id]).slice(0,5).map(c=>{const n=P.baseline[c.id];return `<li style="--c:${COVERS[c.id]}"><span class="bn">${esc(subInfo(c.id,bOfP(c.id)).label)}</span><span class="pips" aria-label="${n} of 2">${[0,1].map(k=>`<i class="${k<n?"on":""}"></i>`).join("")}</span><span class="bl ${lblOf(n)[1]}">${lblOf(n)[0]}</span></li>`;}).join("")}</ul></section>`
+    : `<section class="panel quiz-cta"><h3>Find your starting point</h3><p>Two quick questions on each of your ${mine.length} subjects. About ${Math.max(1,Math.round(mine.length*2*15/60))} minutes, no pass mark. We use it to show you where to start.</p><button class="btn" id="take-quiz">Take the quiz</button></section>`;
+  const week = []; for(let k=6;k>=0;k--){ const d = new Date(); d.setDate(d.getDate()-k); week.push({d, xp:S.days[dayKey(d)]||0, today:k===0}); }
+  const top = Math.max(G, ...week.map(w=>w.xp));
+  const weekTotal = week.reduce((t,w)=>t+w.xp,0), goalDays = week.filter(w=>w.xp>=G).length;
+  const weekPanel = `<section class="panel"><div class="panel-h"><h3>This week</h3><span class="wk-sum">${weekTotal} XP · goal hit ${goalDays} of 7 days</span></div>
+      <div class="week" role="img" aria-label="XP earned each day this week">
+        ${weekTotal===0?`<span class="wk-empty">Nothing yet this week. Read one section of notes to get your first bar.</span>`:""}
+        <span class="goal-line" style="bottom:calc(${100*G/top}% * .78 + 26px)"><em>Goal ${G}</em></span>
+        ${week.map(w=>`<div class="day ${w.today?"now":""} ${w.xp>=G?"hit":""}"><span class="v">${w.xp||""}</span><i style="height:${w.xp?Math.max(4,78*w.xp/top):0}%"></i><b>${w.d.toLocaleDateString("en-GB",{weekday:"short"}).slice(0,2)}</b></div>`).join("")}
+      </div></section>`;
   const baseTag = id => { const b = P.baseline && P.baseline[id]; return b===undefined||b===null ? "" : `<span class="qz">Quiz ${b}/2</span>`; };
   app.innerHTML = `
   <div class="hello">
@@ -976,6 +1004,7 @@ function renderHome(){
     </div>
   </div>
   ${P.subs.bio ? `<div class="next"><div><small>Up next · ${esc(nx.sub)}</small><b>${esc(nx.lbl)}</b></div><button class="btn" id="go-next">Start</button></div>` : ""}
+  <div class="dash">${quizPanel}${weekPanel}</div>
   <div class="h2row"><h2 class="h2">Your subjects</h2><button class="link-btn" id="edit-subs">Edit subjects</button></div>
   <ul class="shelf">${mine.map(c=>{
     const bd = boardOfProfile(P, c.id), s = subInfo(c.id, bd), live = c.id==="bio", p = live ? subjectProgress() : 0;
@@ -989,12 +1018,15 @@ function renderHome(){
   const bio = app.querySelector('[data-s="bio"]'); if(bio) bio.onclick = ()=>go({view:"subject"});
   const gn = document.getElementById("go-next"); if(gn) gn.onclick = ()=>go(nx.r);
   document.getElementById("edit-subs").onclick = ()=>{ OB = null; go({view:"setup"}); };
+  const startQuiz = ()=>runQuiz(mine, bOfP, bl=>{ const first = !quizDone; P.baseline = bl; save(); go({view:"home"}); if(first) earn("starter-quiz", 15, "for the starter quiz"); });
+  const tq = document.getElementById("take-quiz"); if(tq) tq.onclick = startQuiz;
+  const rt = document.getElementById("retake"); if(rt) rt.onclick = startQuiz;
 }
 
 
 /* ================= SUBJECT ================= */
 function renderSubject(){
-  setCrumbs([{label:"Subjects", r:{view:"home"}},{label:"Biology 0610"}]);
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Biology 0610"}]);
   app.innerHTML = `
   <div class="band" style="--c:${COVERS.bio}"><span class="code">Cambridge IGCSE · 0610</span><h1>Biology</h1>
   <p>21 syllabus topics. Topics 2 and 3 are written so far, each with notes, flashcards, exam questions and a boss fight.</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${subjectProgress()}%</span></div>
@@ -1012,7 +1044,7 @@ function renderSubject(){
 function renderTopic(){
   const n = route.topic, T = TOPICS[n], tab = route.tab||"notes";
   S.last = n; save();
-  setCrumbs([{label:"Subjects", r:{view:"home"}},{label:"Biology", r:{view:"subject"}},{label:`Topic ${n}`}]);
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Biology", r:{view:"subject"}},{label:`Topic ${n}`}]);
   const tabs = [["notes","Notes",""],["cards","Flashcards",T.cards.length],["exam","Exam questions",T.exam.length],["fight","Boss fight",""]];
   app.innerHTML = `
   <div class="band" style="--c:${COVERS.bio}"><span class="code">Biology 0610 · Topic ${n}</span><h1>${esc(BIO_TOPICS[n-1])}</h1><p>${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${n}</span></div>
