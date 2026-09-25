@@ -187,7 +187,7 @@ button{cursor:pointer}
 .widget .wt{font-family:var(--display);font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px}
 .widget .wt::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--hl);box-shadow:0 0 0 3px var(--accent-soft)}
 .seg{display:flex;gap:4px;background:var(--bg);border-radius:999px;padding:4px;flex-wrap:wrap}
-.seg button{flex:1;border:0;background:none;border-radius:999px;min-height:44px;padding:8px 12px;font-weight:700;color:var(--ink2)}
+.seg button{flex:1;border:0;background:none;border-radius:999px;min-height:46px;padding:8px 12px;font-weight:700;color:var(--ink2)}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .cellsvg{width:100%;max-width:440px;height:auto;align-self:center;display:block}
 .cellsvg [data-part]{cursor:pointer;transition:opacity .2s ease, filter .2s ease}
@@ -313,6 +313,61 @@ button{cursor:pointer}
 @keyframes toast{0%{opacity:0;transform:translate(-50%,16px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
 .confetti{position:fixed;width:9px;height:14px;border-radius:2px;z-index:49;pointer-events:none;animation:conf 1.1s cubic-bezier(.2,.7,.4,1) forwards}
 @keyframes conf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+
+/* sign up */
+.ob{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.ob-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.ob-steps li{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--ink3);min-width:0}
+.ob-steps li::before{content:"";height:6px;border-radius:3px;background:var(--rule);transition:background .3s ease}
+.ob-steps li.done::before{background:var(--accent)}
+.ob-steps li.now::before{background:var(--hl)}
+.ob-steps li.now{color:var(--ink)}
+.ob-steps span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ob-card{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:24px 20px;display:flex;flex-direction:column;gap:16px}
+.ob-card.enter{animation:rise-in .3s ease}
+@keyframes rise-in{from{opacity:.55;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ob-h{font-family:var(--display);font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1.05;letter-spacing:-.03em;margin:0;text-wrap:balance}
+.ob-h2{font-family:var(--display);font-weight:800;font-size:20px;margin:8px 0 0}
+.ob-p{margin:0;color:var(--ink2);font-size:17px;max-width:56ch}
+.ob-p b{color:var(--ink)}
+.ob-field{display:flex;flex-direction:column;gap:8px;font-weight:700}
+.ob-field input{border:2px solid var(--rule);border-radius:12px;padding:12px 14px;min-height:52px;background:var(--bg);font-size:18px;font-weight:600}
+.ob-field input:focus{border-color:var(--accent);outline:none}
+.ob-nav{justify-content:flex-end}
+.boards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.board{border:2px solid var(--rule);background:var(--bg);border-radius:16px;padding:18px;text-align:left;display:flex;flex-direction:column;gap:4px;min-height:96px;transition:border-color .15s ease, transform .15s ease}
+.board b{font-family:var(--display);font-size:24px;font-weight:800}
+.board span{color:var(--ink2);font-size:15px}
+.board[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-2px)}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.pick{border:2px solid var(--rule);background:var(--bg);border-radius:12px;padding:10px 12px;min-height:56px;text-align:left;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-items:center;transition:transform .12s ease, border-color .12s ease}
+.pick i{grid-row:span 2;width:22px;height:22px;border-radius:6px;border:2px solid var(--c);display:grid;place-items:center}
+.pick span{font-weight:700;line-height:1.25}
+.pick small{font-family:var(--mono);font-size:13px;color:var(--ink3)}
+.pick[aria-pressed="true"]{border-color:var(--c);background:var(--surface);transform:scale(1.02)}
+.pick[aria-pressed="true"] i{background:var(--c)}
+.pick[aria-pressed="true"] i::after{content:"";width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.tiers{display:flex;flex-direction:column;gap:8px}
+.tier-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-weight:700}
+.tier-row .seg{flex:0 1 280px}
+.quiz-subs{display:flex;flex-wrap:wrap;gap:8px}
+.quiz-subs span,.quiz-tag{background:var(--c);color:#fff;border-radius:999px;padding:5px 12px;font-weight:700;font-size:14px}
+.quiz-bar{height:10px;border-radius:5px;background:var(--rule);overflow:hidden}
+.quiz-bar i{display:block;height:100%;background:var(--accent);transition:width .4s ease}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.quiz-top .code{font-family:var(--mono);font-size:14px;color:var(--ink3)}
+.ob-q{font-family:var(--display);font-weight:600;font-size:clamp(22px,4.5vw,28px);line-height:1.25;margin:0;letter-spacing:-.01em}
+.base{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.base li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:2px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--bg);border-left:6px solid var(--c)}
+.bn{font-weight:700}
+.pips{display:flex;gap:4px}
+.pips i{width:18px;height:18px;border-radius:50%;border:2px solid var(--rule)}
+.pips i.on{background:var(--c);border-color:var(--c)}
+.pips{grid-column:2;grid-row:1 / span 2}
+.bl{font-size:14px;font-weight:800;grid-column:1}
+.bl.good{color:var(--accent)} .bl.mid{color:var(--flame)} .bl.low{color:var(--red)}
+.h2row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.qz{display:inline-block;background:rgba(255,255,255,.22);border-radius:6px;padding:1px 7px;font-size:13px;font-weight:700;margin-bottom:6px}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.confetti{display:none}}
 </style>
@@ -556,7 +611,7 @@ let S = {revised:{}, cards:{}, exam:{}, boss:{}, last:null, xp:0, days:{}, earne
 try{ const s = JSON.parse(localStorage.getItem("specpoint")||"null"); if(s) S = Object.assign(S, s); }catch(e){}
 function save(){ try{ localStorage.setItem("specpoint", JSON.stringify(S)); }catch(e){} }
 
-const GOAL = 30;
+const goalXP = () => (S.profile && S.profile.goal) || 30;
 const dayKey = d => d.toLocaleDateString("en-CA");
 const todayXP = () => S.days[dayKey(new Date())] || 0;
 function streak(){
@@ -573,7 +628,7 @@ function earn(key, n, label){
   S.xp += n; S.days[dayKey(new Date())] = before + n; save();
   toast(`<b>+${n} XP</b> ${label||""}`);
   drawPill(true);
-  if(before < GOAL && before + n >= GOAL){ setTimeout(()=>{ toast(`Daily goal done. <b>Streak ${streak()}</b>`); confetti(innerWidth/2, innerHeight*0.4); }, 900); }
+  if(before < goalXP() && before + n >= goalXP()){ setTimeout(()=>{ toast(`Daily goal done. <b>Streak ${streak()}</b>`); confetti(innerWidth/2, innerHeight*0.4); }, 900); }
 }
 function toast(html){
   document.querySelectorAll(".toast").forEach(t=>t.remove());
@@ -637,12 +692,13 @@ function go(r, push=true){
   if(push){ try{ const h = toHash(r); if(location.hash.slice(1)!==h) history.pushState(null,"","#"+h); }catch(e){} }
   render(); window.scrollTo(0,0);
 }
-function toHash(r){ return r.view==="home" ? "home" : r.view==="subject" ? "bio" : `bio-${r.topic}-${r.tab||"notes"}`; }
+function toHash(r){ return r.view==="setup" ? "setup" : r.view==="home" ? "home" : r.view==="subject" ? "bio" : `bio-${r.topic}-${r.tab||"notes"}`; }
 function fromHash(){
   const h = (location.hash||"").slice(1);
   const m = h.match(/^bio-(\d+)-(notes|cards|exam|fight)$/);
   if(m && TOPICS[+m[1]]) return {view:"topic", topic:+m[1], tab:m[2]};
   if(h==="bio") return {view:"subject"};
+  if(h==="setup") return {view:"setup"};
   return {view:"home"};
 }
 window.addEventListener("popstate", ()=>go(fromHash(), false));
@@ -657,43 +713,221 @@ function setCrumbs(items){
 }
 function render(){
   drawPill(false);
+  if(!S.profile || route.view==="setup") return renderSetup();
   if(route.view==="home") renderHome();
   else if(route.view==="subject") renderSubject();
   else renderTopic();
 }
 
+/* ================= SUBJECT CATALOGUE ================= */
+const CATALOG = [
+  {id:"bio",  name:"Biology", cie:"0610", edx:"4BI1", tier:true},
+  {id:"chem", name:"Chemistry", cie:"0620", edx:"4CH1", tier:true},
+  {id:"phys", name:"Physics", cie:"0625", edx:"4PH1", tier:true},
+  {id:"math", name:"Mathematics", cie:"0580", edx:"4MA1", tier:true},
+  {id:"amath",name:"Additional Mathematics", cie:"0606", edx:null},
+  {id:"eng",  name:"English First Language", cie:"0500", edx:"4EA1", edxName:"English Language A"},
+  {id:"esl",  name:"English as a Second Language", cie:"0510", edx:null},
+  {id:"lit",  name:"Literature in English", cie:"0475", edx:"4ET1", edxName:"English Literature"},
+  {id:"hist", name:"History", cie:"0470", edx:"4HI1"},
+  {id:"geog", name:"Geography", cie:"0460", edx:"4GE1"},
+  {id:"econ", name:"Economics", cie:"0455", edx:"4EC1"},
+  {id:"bus",  name:"Business Studies", cie:"0450", edx:"4BS1", edxName:"Business"},
+  {id:"cs",   name:"Computer Science", cie:"0478", edx:"4CP0"},
+  {id:"dt",   name:"Design and Technology", cie:"0445", edx:null},
+  {id:"gp",   name:"Global Perspectives", cie:"0457", edx:null},
+  {id:"spa",  name:"Spanish", cie:"0530", edx:"4SP1"},
+  {id:"fre",  name:"French", cie:"0520", edx:"4FR1"}
+];
+Object.assign(COVERS, {amath:"#8E2B2B", esl:"#4E5BB8", hist:"#7A5230", geog:"#3F8A3A", bus:"#B5475E", cs:"#1F5F8B", fre:"#355CA8"});
+const BOARDS = {cie:{name:"Cambridge", full:"Cambridge IGCSE (CAIE)", tiers:["Core","Extended"]}, edx:{name:"Edexcel", full:"Pearson Edexcel International GCSE", tiers:["Foundation","Higher"]}};
+const subInfo = (id, board) => { const c = CATALOG.find(x=>x.id===id); return {...c, code: c[board], label: board==="edx" && c.edxName ? c.edxName : c.name}; };
+
+/* two starter questions per subject */
+const QUIZ = {
+  bio:[{q:"Which part of a cell is the site of aerobic respiration?",a:"Mitochondria",w:["Nucleus","Ribosomes","Cell wall"]},{q:"Osmosis is the movement of which substance?",a:"Water",w:["Glucose","Oxygen","Salt ions"]}],
+  chem:[{q:"What is the charge on a proton?",a:"Positive",w:["Negative","No charge","It depends on the element"]},{q:"Which gas relights a glowing splint?",a:"Oxygen",w:["Hydrogen","Carbon dioxide","Nitrogen"]}],
+  phys:[{q:"What is the unit of force?",a:"Newton",w:["Joule","Watt","Pascal"]},{q:"A car travels 100 m in 5 s. What is its average speed?",a:"20 m/s",w:["500 m/s","0.05 m/s","95 m/s"]}],
+  math:[{q:"Solve 3x + 5 = 20",a:"x = 5",w:["x = 25/3","x = 15","x = 8"]},{q:"What is 15% of 80?",a:"12",w:["15","8","1.2"]}],
+  amath:[{q:"Differentiate x³ with respect to x.",a:"3x²",w:["x²","3x³","x⁴ ÷ 4"]},{q:"What is log₁₀ 1000?",a:"3",w:["10","100","30"]}],
+  eng:[{q:"\"The wind whispered through the trees\" is an example of…",a:"Personification",w:["Alliteration","Onomatopoeia","Hyperbole"]},{q:"Which of these is a simile?",a:"Her smile was like sunshine",w:["Her smile was sunshine","The sun smiled down","Sunny, smiling Sam"]}],
+  esl:[{q:"Choose the correct sentence.",a:"She has lived here since 2019.",w:["She is living here since 2019.","She lives here since 2019.","She has live here since 2019."]},{q:"What is the opposite of \"generous\"?",a:"Selfish",w:["Kind","Wealthy","Grateful"]}],
+  lit:[{q:"A poem with fourteen lines and a set rhyme scheme is a…",a:"Sonnet",w:["Haiku","Ballad","Limerick"]},{q:"When the audience knows something a character does not, it is called…",a:"Dramatic irony",w:["Foreshadowing","Soliloquy","Pathetic fallacy"]}],
+  hist:[{q:"In which year did the First World War begin?",a:"1914",w:["1918","1939","1905"]},{q:"Which treaty ended the First World War with Germany?",a:"The Treaty of Versailles",w:["The Treaty of Paris","The Munich Agreement","The Treaty of Rome"]}],
+  geog:[{q:"Which line of latitude is at 0°?",a:"The Equator",w:["The Tropic of Cancer","The Prime Meridian","The Arctic Circle"]},{q:"What does a population pyramid show?",a:"The age and sex structure of a population",w:["How fast a city is growing","Where people migrate to","The density of housing"]}],
+  econ:[{q:"The basic economic problem is…",a:"Scarcity",w:["Inflation","Unemployment","Taxation"]},{q:"When the price of a normal good rises, the quantity demanded usually…",a:"Falls",w:["Rises","Stays the same","Doubles"]}],
+  bus:[{q:"Profit is revenue take away…",a:"Costs",w:["Sales","Assets","Wages only"]},{q:"A business owned and run by one person is a…",a:"Sole trader",w:["Partnership","Private limited company","Franchise"]}],
+  cs:[{q:"How many bits are in a byte?",a:"8",w:["4","16","1024"]},{q:"What is the binary number 1010 in denary?",a:"10",w:["5","12","1010"]}],
+  dt:[{q:"Which of these is a thermoplastic?",a:"Acrylic",w:["Oak","Steel","MDF"]},{q:"What does CAD stand for?",a:"Computer aided design",w:["Computer and drawing","Controlled automatic drilling","Central assembly design"]}],
+  gp:[{q:"Which source is most likely to be reliable?",a:"A report by an expert that gives evidence",w:["An anonymous social media post","An advert for a product","A blog with no sources"]},{q:"In Global Perspectives, a \"perspective\" is…",a:"A point of view on an issue, supported by reasoning",w:["A summary of the news","A type of graph","A list of facts with no opinion"]}],
+  spa:[{q:"\"Tengo hambre\" means…",a:"I am hungry",w:["I am tired","I have a brother","I am thirsty"]},{q:"\"Ayer fui al cine\" is in which tense?",a:"Past (preterite)",w:["Present","Future","Conditional"]}],
+  fre:[{q:"\"J'ai faim\" means…",a:"I am hungry",w:["I am cold","I have a cat","I am late"]},{q:"\"Nous allons\" comes from which verb?",a:"Aller",w:["Avoir","Être","Faire"]}]
+};
+
+/* ================= SETUP / SIGN UP ================= */
+let OB = null;
+function renderSetup(){
+  setCrumbs([]);
+  if(!OB){
+    const p = S.profile;
+    OB = p ? {step:2, name:p.name, year:p.year, board:p.board, subs:{...p.subs}, tiers:{...p.tiers}, examYear:p.examYear, goal:p.goal, editing:true}
+           : {step:0, name:"", year:"10", board:"cie", subs:{}, tiers:{}, examYear:2028, goal:30};
+  }
+  const steps = ["You","Exam board","Subjects","Goals","Quiz"];
+  const stepIdx = Math.min(OB.step, 4);
+  const chosen = CATALOG.filter(c=>OB.subs[c.id] && c[OB.board]);
+  const seg = (name, opts, val) => `<div class="seg" role="group" aria-label="${name}">${opts.map(([v,l])=>`<button data-seg="${name}" data-v="${v}" aria-pressed="${String(v)===String(val)}">${l}</button>`).join("")}</div>`;
+  let body = "", canNext = true, nextLbl = "Next";
+  if(OB.step===0){
+    body = `<h1 class="ob-h">${OB.editing?"Your account":"Create your free account"}</h1>
+      <p class="ob-p">Tell us what you study and we will build your revision around it. It takes about two minutes and finishes with a quick quiz on your subjects.</p>
+      <label class="ob-field" for="ob-name">First name<input id="ob-name" autocomplete="given-name" value="${esc(OB.name)}" placeholder="What should we call you?"></label>
+      <div class="ob-field"><span>Year group</span>${seg("year",[["9","Year 9"],["10","Year 10"],["11","Year 11"]],OB.year)}</div>`;
+    canNext = OB.name.trim().length>0;
+  } else if(OB.step===1){
+    body = `<h1 class="ob-h">Which exam board?</h1><p class="ob-p">Check the front of a past paper or ask your teacher if you are not sure.</p>
+      <div class="boards">${Object.entries(BOARDS).map(([k,b])=>`<button class="board" data-board="${k}" aria-pressed="${OB.board===k}"><b>${b.name}</b><span>${b.full}</span></button>`).join("")}</div>`;
+  } else if(OB.step===2){
+    body = `<h1 class="ob-h">Pick your subjects</h1><p class="ob-p">Tap every ${BOARDS[OB.board].name} subject you take. <b>${chosen.length} chosen</b></p>
+      <div class="picks">${CATALOG.filter(c=>c[OB.board]).map(c=>{const s=subInfo(c.id,OB.board);return `<button class="pick" data-sub="${c.id}" aria-pressed="${!!OB.subs[c.id]}" style="--c:${COVERS[c.id]}"><i aria-hidden="true"></i><span>${esc(s.label)}</span><small>${s.code}</small></button>`;}).join("")}</div>
+      ${chosen.some(c=>c.tier)?`<h2 class="ob-h2">Which tier are you taking?</h2><div class="tiers">${chosen.filter(c=>c.tier).map(c=>`<div class="tier-row"><span>${esc(subInfo(c.id,OB.board).label)}</span>${seg("tier-"+c.id, BOARDS[OB.board].tiers.map(t=>[t,t]), OB.tiers[c.id]||BOARDS[OB.board].tiers[1])}</div>`).join("")}</div>`:""}`;
+    canNext = chosen.length>0;
+  } else if(OB.step===3){
+    body = `<h1 class="ob-h">Set your goals</h1>
+      <div class="ob-field"><span>When are your exams?</span>${seg("exam",[["2027","May 2027"],["2028","May 2028"]],OB.examYear)}</div>
+      <div class="ob-field"><span>Daily goal</span>${seg("goal",[["20","Chill · 20 XP"],["30","Steady · 30 XP"],["50","Serious · 50 XP"]],OB.goal)}</div>
+      <p class="ob-p">About 10 XP is one section of notes read and ticked off.</p>`;
+    nextLbl = OB.editing ? "Save" : "Next";
+  } else if(OB.step===4){
+    const n = chosen.length*2;
+    body = `<h1 class="ob-h">Quick quiz on your subjects</h1>
+      <p class="ob-p">${n} questions, two for each of your ${chosen.length} subjects. There is no pass mark. It just shows us where you are strongest and where to start.</p>
+      <div class="quiz-subs">${chosen.map(c=>`<span style="--c:${COVERS[c.id]}">${esc(subInfo(c.id,OB.board).label)}</span>`).join("")}</div>`;
+    nextLbl = "Start the quiz";
+  }
+  const enter = OB.shown!==OB.step; OB.shown = OB.step;
+  app.innerHTML = `<div class="ob">
+    <ol class="ob-steps" aria-label="Sign up progress">${steps.map((s,i)=>`<li class="${i<stepIdx?"done":i===stepIdx?"now":""}"><span>${s}</span></li>`).join("")}</ol>
+    <div class="ob-card ${enter?"enter":""}">${body}
+      <div class="row ob-nav">${OB.step>0?`<button class="btn quiet" id="ob-back">Back</button>`:""}
+      ${OB.step===4?`<button class="btn quiet" id="ob-skip">Skip for now</button>`:""}
+      <button class="btn" id="ob-next" ${canNext?"":"disabled"}>${nextLbl}</button></div>
+    </div>
+    ${OB.editing?`<button class="link-btn" id="ob-cancel">Cancel and go back</button>`:`<p class="fine">Your account is saved on this device for now.</p>`}</div>`;
+
+  const nameIn = document.getElementById("ob-name");
+  if(nameIn){ nameIn.oninput = ()=>{ OB.name = nameIn.value; document.getElementById("ob-next").disabled = !OB.name.trim(); }; nameIn.onkeydown = e=>{ if(e.key==="Enter" && OB.name.trim()){ OB.step++; renderSetup(); } }; }
+  app.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{
+    const k = b.dataset.seg, v = b.dataset.v;
+    if(k==="year") OB.year = v; else if(k==="exam") OB.examYear = +v; else if(k==="goal") OB.goal = +v; else if(k.startsWith("tier-")) OB.tiers[k.slice(5)] = v;
+    renderSetup();
+  });
+  app.querySelectorAll("[data-board]").forEach(b=>b.onclick=()=>{ OB.board = b.dataset.board; OB.tiers = {}; renderSetup(); });
+  app.querySelectorAll("[data-sub]").forEach(b=>b.onclick=()=>{ OB.subs[b.dataset.sub] = !OB.subs[b.dataset.sub]; renderSetup(); });
+  const back = document.getElementById("ob-back"); if(back) back.onclick = ()=>{ OB.step--; renderSetup(); };
+  const cancel = document.getElementById("ob-cancel"); if(cancel) cancel.onclick = ()=>{ OB = null; go({view:"home"}); };
+  const skip = document.getElementById("ob-skip"); if(skip) skip.onclick = ()=>finishSetup(null);
+  document.getElementById("ob-next").onclick = ()=>{
+    if(OB.step===3 && OB.editing) return finishSetup(S.profile.baseline||null);
+    if(OB.step===4) return runQuiz(chosen);
+    OB.step++; renderSetup(); window.scrollTo(0,0);
+  };
+}
+
+function finishSetup(baseline){
+  const subs = {}; CATALOG.forEach(c=>{ if(OB.subs[c.id] && c[OB.board]) subs[c.id] = true; });
+  const tiers = {}; Object.keys(subs).forEach(id=>{ if(CATALOG.find(c=>c.id===id).tier) tiers[id] = OB.tiers[id] || BOARDS[OB.board].tiers[1]; });
+  const first = !S.profile;
+  S.profile = {name:OB.name.trim(), year:OB.year, board:OB.board, subs, tiers, examYear:OB.examYear, goal:OB.goal, baseline};
+  S.examYear = OB.examYear; save(); OB = null;
+  go({view:"home"});
+  if(first){ confetti(innerWidth/2, innerHeight*0.3); earn("signup", 20, "welcome bonus"); }
+}
+
+function runQuiz(chosen){
+  const qs = []; chosen.forEach(c=>QUIZ[c.id].forEach(q=>qs.push({...q, sub:c.id})));
+  const score = {}; chosen.forEach(c=>score[c.id]=0);
+  let i = 0;
+  const ask = ()=>{
+    const q = qs[i], s = subInfo(q.sub, OB.board), opts = shuffle([q.a, ...q.w]);
+    app.innerHTML = `<div class="ob">
+      <div class="quiz-bar" aria-label="Question ${i+1} of ${qs.length}"><i style="width:${100*i/qs.length}%"></i></div>
+      <div class="ob-card enter">
+        <div class="quiz-top"><span class="quiz-tag" style="--c:${COVERS[q.sub]}">${esc(s.label)}</span><span class="code">${i+1} / ${qs.length}</span></div>
+        <p class="ob-q">${esc(q.q)}</p>
+        <div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>
+        <button class="link-btn" id="idk">I don't know yet</button>
+        <div id="qfb"></div>
+      </div></div>`;
+    const pickAns = (pick, btn)=>{
+      const ok = pick===q.a;
+      app.querySelectorAll(".opt").forEach((o,k)=>{ o.disabled = true; if(opts[k]===q.a) o.classList.add("right"); });
+      document.getElementById("idk").disabled = true;
+      if(btn && !ok) btn.classList.add("wrong");
+      if(ok) score[q.sub]++;
+      const last = i===qs.length-1;
+      document.getElementById("qfb").innerHTML = `<div class="fb ${ok?"":"bad"}"><span class="verdict">${ok?"Correct":pick===null?"No problem. The answer is "+esc(q.a)+".":"The answer is "+esc(q.a)+"."}</span><div class="row"><button class="btn" id="qnext">${last?"See my results":"Next question"}</button></div></div>`;
+      const nb = document.getElementById("qnext"); nb.focus({preventScroll:true});
+      nb.onclick = ()=>{ if(last) results(); else { i++; ask(); } };
+    };
+    app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickAns(opts[+b.dataset.k], b));
+    document.getElementById("idk").onclick = ()=>pickAns(null, null);
+  };
+  const results = ()=>{
+    const rows = chosen.map(c=>({c, s:score[c.id]})).sort((a,b)=>a.s-b.s);
+    const weakest = rows[0];
+    const lbl = s => s===2 ? ["Strong","good"] : s===1 ? ["Getting there","mid"] : ["Start here","low"];
+    const total = rows.reduce((t,r)=>t+r.s,0);
+    app.innerHTML = `<div class="ob"><div class="ob-card enter">
+      <h1 class="ob-h">Your starting point</h1>
+      <p class="ob-p">You got <b>${total} out of ${rows.length*2}</b>. Here is how each subject looks right now.</p>
+      <ul class="base">${rows.map(r=>`<li style="--c:${COVERS[r.c.id]}"><span class="bn">${esc(subInfo(r.c.id,OB.board).label)}</span><span class="pips" aria-label="${r.s} of 2">${[0,1].map(k=>`<i class="${k<r.s?"on":""}"></i>`).join("")}</span><span class="bl ${lbl(r.s)[1]}">${lbl(r.s)[0]}</span></li>`).join("")}</ul>
+      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,OB.board).label)}</b>. ${weakest.c.id==="bio" ? "Its notes are ready now." : "Its notes are still being written, so we will let you know when they are ready. Biology is ready now."}` : "Great start across the board. Jump into Biology, the first subject with full notes."}</div>
+      <div class="row ob-nav"><button class="btn" id="ob-done">Go to my dashboard</button></div>
+    </div></div>`;
+    const bl = {}; chosen.forEach(c=>bl[c.id]=score[c.id]);
+    document.getElementById("ob-done").onclick = ()=>finishSetup(bl);
+    if(total/(rows.length*2) >= 0.75) confetti(innerWidth/2, innerHeight*0.3);
+  };
+  ask();
+}
+
 /* ================= HOME ================= */
 function renderHome(){
   setCrumbs([]);
+  const P = S.profile;
   const h = new Date().getHours();
-  const hi = h<12 ? "Good morning." : h<18 ? "Good afternoon." : "Good evening.";
-  const exam = new Date(S.examYear, 4, 1);
+  const hi = (h<12 ? "Good morning" : h<18 ? "Good afternoon" : "Good evening") + ", " + esc(P.name) + ".";
+  const exam = new Date(P.examYear, 4, 1);
   const days = Math.max(0, Math.ceil((exam - new Date())/864e5));
-  const nx = upNext(), st = streak(), tx = todayXP();
+  const nx = upNext(), st = streak(), tx = todayXP(), G = P.goal;
+  const mine = CATALOG.filter(c=>P.subs[c.id]);
+  const baseTag = id => { const b = P.baseline && P.baseline[id]; return b===undefined||b===null ? "" : `<span class="qz">Quiz ${b}/2</span>`; };
   app.innerHTML = `
   <div class="hello">
-    <div><h1>${hi}</h1><p>Free Cambridge IGCSE revision. Notes written to the syllabus, flashcards, exam questions with mark schemes, and a boss to beat at the end of every topic.</p></div>
+    <div><h1>${hi}</h1><p>Year ${esc(P.year)} · ${BOARDS[P.board].full} · ${mine.length} subject${mine.length===1?"":"s"}</p></div>
     <div class="today">
       <div><span class="lbl">Streak</span><span class="big" style="color:var(--flame)">${FLAME.replace('width="18" height="18"','width="26" height="26"')}${st}</span><small style="font-size:13px;color:var(--ink3)">${st===1?"day":"days"} in a row</small></div>
-      <div><span class="lbl">Today</span><span class="big">${ring(tx/GOAL)}<span>${Math.min(tx,GOAL)}<small>/${GOAL}</small></span></span><small style="font-size:13px;color:var(--ink3)">${tx>=GOAL?"Goal done":"XP goal"}</small></div>
-      <div><span class="lbl">Exams in</span><span class="big">${days}<small>days</small></span>
-        <select id="exam-year" aria-label="When are your exams?"><option value="2027" ${S.examYear==2027?"selected":""}>May 2027</option><option value="2028" ${S.examYear==2028?"selected":""}>May 2028</option></select></div>
+      <div><span class="lbl">Today</span><span class="big">${ring(tx/G)}<span>${Math.min(tx,G)}<small>/${G}</small></span></span><small style="font-size:13px;color:var(--ink3)">${tx>=G?"Goal done":"XP goal"}</small></div>
+      <div><span class="lbl">Exams in</span><span class="big">${days}<small>days</small></span><small style="font-size:13px;color:var(--ink3)">May ${P.examYear}</small></div>
     </div>
   </div>
-  <div class="next"><div><small>Up next · ${esc(nx.sub)}</small><b>${esc(nx.lbl)}</b></div><button class="btn" id="go-next">Start</button></div>
-  <h2 class="h2">Your subjects</h2>
-  <ul class="shelf">${SUBJECTS.map(s=>{
-    const p = s.live ? subjectProgress() : 0;
-    return `<li><button class="book" data-s="${s.id}" style="--c:${COVERS[s.id]}" ${s.live?"":"disabled"} aria-label="${esc(s.name)} ${s.code}${s.live?"":", being written"}">
-      <span class="label"><small>Subject</small><span>${esc(s.name)}</span></span>
-      <span><span class="foot"><span class="code">${s.code}</span>${s.live?`<span>${p}%</span>`:`<span class="sticker">Soon</span>`}</span>
-      ${s.live?`<span class="bar-p" style="display:block"><i style="width:${Math.max(3,p)}%"></i></span>`:""}</span>
+  ${P.subs.bio ? `<div class="next"><div><small>Up next · ${esc(nx.sub)}</small><b>${esc(nx.lbl)}</b></div><button class="btn" id="go-next">Start</button></div>` : ""}
+  <div class="h2row"><h2 class="h2">Your subjects</h2><button class="link-btn" id="edit-subs">Edit subjects</button></div>
+  <ul class="shelf">${mine.map(c=>{
+    const s = subInfo(c.id, P.board), live = c.id==="bio", p = live ? subjectProgress() : 0;
+    const tier = P.tiers[c.id] ? ` · ${P.tiers[c.id]}` : "";
+    return `<li><button class="book" data-s="${c.id}" style="--c:${COVERS[c.id]}" ${live?"":"disabled"} aria-label="${esc(s.label)} ${s.code}${live?"":", being written"}">
+      <span class="label"><small>Subject</small><span>${esc(s.label)}</span></span>
+      <span>${baseTag(c.id)}<span class="foot"><span class="code">${s.code}${tier}</span>${live?`<span>${p}%</span>`:`<span class="sticker">Soon</span>`}</span>
+      ${live?`<span class="bar-p" style="display:block"><i style="width:${Math.max(3,p)}%"></i></span>`:""}</span>
     </button></li>`;}).join("")}</ul>
-  <p class="fine">Syllabus codes are for the A* to G versions. If your school sits the 9 to 1 versions the code is different, but the content is the same.</p>`;
-  app.querySelector('[data-s="bio"]').onclick = ()=>go({view:"subject"});
-  document.getElementById("go-next").onclick = ()=>go(nx.r);
-  document.getElementById("exam-year").onchange = e=>{ S.examYear = +e.target.value; save(); renderHome(); };
+  <p class="fine">Biology has full notes so far. Your other subjects are being written, starting with the ones students score lowest on.</p>`;
+  const bio = app.querySelector('[data-s="bio"]'); if(bio) bio.onclick = ()=>go({view:"subject"});
+  const gn = document.getElementById("go-next"); if(gn) gn.onclick = ()=>go(nx.r);
+  document.getElementById("edit-subs").onclick = ()=>{ OB = null; go({view:"setup"}); };
 }
+
 
 /* ================= SUBJECT ================= */
 function renderSubject(){
