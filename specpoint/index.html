@@ -439,6 +439,133 @@ button{cursor:pointer}
 .bl{font-family:var(--hand);font-size:19px;font-weight:700;grid-column:1}
 .bl.good{color:var(--good)} .bl.mid{color:var(--flame)} .bl.low{color:var(--red)}
 
+/* main menu */
+.mainnav{border-top:1.5px solid var(--hair);background:var(--paper)}
+.mainnav-in{max-width:1080px;margin:0 auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.mainnav button{border:0;background:none;padding:10px 12px;min-height:46px;font-weight:800;font-size:15px;color:var(--ink3);white-space:nowrap;border-bottom:4px solid transparent;display:flex;align-items:center;gap:6px}
+.mainnav button:first-child{padding-left:0}
+.mainnav button:hover{color:var(--ink)}
+.mainnav button[aria-current="page"]{color:var(--ink);border-bottom-color:var(--btn)}
+@media (max-width:480px){.mainnav-in{gap:0}.mainnav button{padding:10px 5px;font-size:14px}.mainnav button:first-child{padding-left:0}}
+.nav-count{background:var(--red);color:#fff;font-size:13px;padding:0 6px;min-width:20px;text-align:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* shared page head */
+.pagehead{display:flex;flex-direction:column;gap:10px;margin-bottom:26px;max-width:66ch}
+.ph{font-stretch:68%;font-weight:900;text-transform:uppercase;font-size:clamp(48px,10vw,96px);line-height:.88;margin:0}
+.pagehead p{margin:0;font-size:18px;color:var(--ink2)}
+.pagehead p b{background:var(--kt);color:var(--ink);padding:0 3px}
+.empty{border-top:3px solid var(--rule);padding:16px 0}
+.empty p{margin:0 0 6px;max-width:56ch}
+.hand-note{font-family:var(--hand);font-weight:700;font-size:24px;color:var(--pen)}
+.count-s{font-size:.6em;color:var(--ink3);margin-left:4px}
+.danger{color:var(--red)!important;border-color:var(--red)!important}
+.danger:hover{background:var(--red)!important;color:#fff!important}
+
+/* byline and report */
+.byline{font-family:var(--sans);font-size:15px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;margin:0 0 20px;padding-bottom:12px;border-bottom:1.5px solid var(--hair)}
+.byline b{color:var(--ink)}
+.byline .link-btn{padding:6px 0;font-size:15px}
+.report{display:flex;flex-direction:column;gap:10px;margin:-8px 0 22px;padding:14px;border:2px dashed var(--ink3);font-family:var(--sans)}
+.report textarea{width:100%;border:2px solid var(--ink);padding:10px;background:var(--paper);font-size:16px}
+
+/* decks */
+.decks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.deck-tile{background:#FFFEF7;color:#1A2360;padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;border:2px solid #1A2360;border-top:10px solid var(--c);
+  box-shadow:5px 5px 0 -1px #FFFEF7,5px 5px 0 1px #1A2360,10px 10px 0 -1px #FFFEF7,10px 10px 0 1px #1A2360;margin:0 10px 10px 0}
+.dt-name{font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:26px;line-height:1;overflow-wrap:anywhere}
+.dt-meta{font-size:15px;font-weight:600;color:#3E4670;margin-bottom:6px}
+.deck-tile .btn.quiet{color:#1A2360;border-color:#1A2360}
+.deck-edit{display:flex;flex-direction:column;gap:18px;max-width:760px}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:44px;height:44px;border:2.5px solid var(--ink);background:var(--c)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--paper),0 0 0 6px var(--ink)}
+.ce-list{list-style:none;margin:0;padding:0;border-top:3px solid var(--rule)}
+.ce{display:grid;grid-template-columns:2em minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px 0;border-bottom:1.5px solid var(--rule)}
+.ce-n{font-stretch:68%;font-weight:900;font-size:24px;line-height:1.2}
+.ce label,.ce-new label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3)}
+.ce textarea,.ce-new textarea{border:2px solid var(--ink);padding:8px 10px;background:var(--paper);font-size:16px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--ink);resize:vertical;width:100%}
+.ce-del{border:2px solid var(--red);background:none;color:var(--red);font-weight:800;padding:8px 10px;min-height:44px;margin-top:20px}
+.ce-del:hover{background:var(--red);color:#fff}
+@media (max-width:640px){.ce{grid-template-columns:2em minmax(0,1fr)}.ce label,.ce-del{grid-column:2}.ce-del{margin-top:0;justify-self:start}}
+.ce-new{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;background:var(--hl);color:#1A2360;padding:14px;border:2.5px solid #1A2360}
+.ce-new .tag,.ce-new .row{grid-column:1 / -1}
+.ce-new .tag{font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:22px}
+.ce-new label{color:#1A2360}
+.ce-new .btn{background:#1A2360;border-color:#1A2360;color:#fff}
+@media (max-width:560px){.ce-new{grid-template-columns:minmax(0,1fr)}}
+.ce-import select{border:2.5px solid var(--ink);background:var(--paper);min-height:48px;padding:8px 10px;font-weight:700;max-width:100%;flex:1 1 240px}
+.deck .card[style*="--c"]{border-top:10px solid var(--c)}
+
+/* papers */
+.papers{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.paper-tile{background:var(--paper);border:2.5px solid var(--rule);padding:18px;display:flex;flex-direction:column;gap:6px}
+.pt-code{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)}
+.pt-title{font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:40px;line-height:.9}
+.pt-sub{font-weight:600;color:var(--ink2)}
+.pt-facts{display:flex;flex-wrap:wrap;gap:0;border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);margin:6px 0}
+.pt-facts span{padding:6px 10px 6px 0;margin-right:10px;border-right:1.5px solid var(--rule);font-weight:700;font-size:15px}
+.pt-facts span:last-child{border-right:0}
+.pt-hist{font-family:var(--hand);font-size:19px;font-weight:700;color:var(--pen);margin-bottom:6px}
+.cover{background:var(--paper);border:3px solid var(--rule);max-width:760px;padding:22px 20px;display:flex;flex-direction:column;gap:20px}
+.cv-top{display:flex;justify-content:space-between;font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:22px;border-bottom:3px solid var(--rule);padding-bottom:8px}
+.cv-title .code{font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:14px;color:var(--ink3)}
+.cv-title h1{font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:clamp(52px,11vw,96px);line-height:.88;margin:6px 0}
+.cv-title p{margin:0;font-weight:600}
+.cv-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:2px solid var(--rule)}
+.cv-fields div{padding:8px 10px;display:flex;flex-direction:column;min-width:0}
+.cv-fields div + div{border-left:2px solid var(--rule)}
+.cv-fields small{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.cv-fields span{font-weight:800;font-size:18px;overflow-wrap:anywhere}
+.cv-fields .hand{font-family:var(--hand);color:var(--pen);font-size:22px}
+.cv-ins ul{margin:6px 0 0;padding-left:1.2em}
+.cv-ins li{margin-bottom:4px}
+.timerbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 108px);z-index:10;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--paper);border:2.5px solid var(--rule);padding:8px 12px;margin-bottom:20px}
+.tb-title{font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:22px;flex:1}
+@media (max-width:560px){.timerbar{flex-wrap:nowrap}.tb-title{display:none}.tb-time{flex:1}}
+.tb-time{font-weight:900;font-size:22px;font-variant-numeric:tabular-nums;font-stretch:68%}
+.tb-time.low{color:var(--flame)}
+.tb-time.over{color:var(--red)}
+.paper-qs{list-style:none;margin:0;padding:0;max-width:820px;border-top:3px solid var(--rule)}
+.pq{padding:18px 0;border-bottom:1.5px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+.pq-top{display:flex;justify-content:space-between;align-items:center}
+.pq-n{font-weight:900;font-stretch:68%;font-size:34px;line-height:1}
+.pq .qt{margin:0;font-size:19px;font-weight:700;line-height:1.4}
+.pq .opt.picked{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+.pq .opt.picked::before{border-color:var(--btn-ink)}
+.pq-ans{width:100%;min-height:120px;border:0;padding:4px 2px;background:transparent;resize:vertical;font-family:var(--hand);font-size:20px;line-height:35px;color:var(--pen);
+  background-image:radial-gradient(circle,var(--ink3) 1px,transparent 1.4px);background-size:7px 35px;background-position:0 30px}
+.pq-ans:focus{outline:none;background-color:var(--accent-soft)}
+.pq-ok .marks{color:var(--good)} .pq-bad .marks{color:var(--red)}
+.pq p{margin:0}
+.pq-tip{border-left:5px solid var(--hl);padding-left:10px}
+.your{border-left:5px solid var(--pen);padding-left:10px;display:flex;flex-direction:column}
+.your small{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.your .hand{font-family:var(--hand);font-size:20px;color:var(--pen);white-space:pre-wrap}
+
+/* mistakes */
+.mlist{list-style:none;margin:0;padding:0;max-width:820px;border-top:3px solid var(--rule)}
+.mitem{padding:16px 0;border-bottom:1.5px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+.m-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.m-src{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:var(--ink);color:var(--paper);padding:2px 8px}
+.m-times{font-family:var(--hand);font-weight:700;font-size:18px;color:var(--red)}
+.mitem .qt{margin:0;font-size:19px;font-weight:700}
+.m-body{display:flex;flex-direction:column;gap:10px}
+
+/* search */
+.search-box{display:block;max-width:760px;margin-bottom:24px}
+.search-box input{width:100%;border:0;border-bottom:4px solid var(--ink);background:transparent;font-size:clamp(22px,4vw,30px);font-weight:700;padding:10px 2px;min-height:60px}
+.search-box input:focus{outline:none;border-bottom-color:var(--btn)}
+.res{list-style:none;margin:0 0 28px;padding:0;max-width:820px;border-top:3px solid var(--rule)}
+.res li{border-bottom:1.5px solid var(--rule)}
+.res button{width:100%;text-align:left;border:0;background:none;padding:12px 4px;min-height:56px;display:flex;flex-direction:column;gap:2px}
+.res button:hover{background:var(--hl);color:#1A2360}
+.r-src{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.res button:hover .r-src,.res button:hover .r-snip{color:#3E4670}
+.res b{font-size:18px}
+.r-snip{color:var(--ink2);font-size:15px}
+mark{background:var(--kt);color:inherit;padding:0 1px}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.confetti{display:none}}
 </style>
 
@@ -446,7 +573,7 @@ button{cursor:pointer}
   <button class="mark" id="home-link" aria-label="Specpoint home"><span class="dot" aria-hidden="true"><i></i></span>Specpoint</button>
   <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
   <div class="pill" id="pill"></div>
-</div></header>
+</div><nav class="mainnav" id="mainnav" aria-label="Main" hidden></nav></header>
 <main class="page" id="app"></main>
 
 <script>
@@ -677,7 +804,7 @@ const TOPICS = {
 const COVERS = {bio:"#0ACF83", chem:"#FF7262", phys:"#1ABCFE", math:"#F24E1E", eng:"#FFC700", lit:"#FF9EC4", dt:"#C9C5BA", econ:"#3DD6C4", gp:"#8FD3FF", spa:"#FFB443"};
 
 /* ================= STORAGE ================= */
-let S = {revised:{}, cards:{}, exam:{}, boss:{}, last:null, xp:0, days:{}, earned:{}, examYear:2028};
+let S = {revised:{}, cards:{}, exam:{}, boss:{}, last:null, xp:0, days:{}, earned:{}, examYear:2028, decks:[], mistakes:{}, papers:{}, attempt:{}};
 try{ const s = JSON.parse(localStorage.getItem("specpoint")||"null"); if(s) S = Object.assign(S, s); }catch(e){}
 function save(){ try{ localStorage.setItem("specpoint", JSON.stringify(S)); }catch(e){} }
 
@@ -762,13 +889,18 @@ function go(r, push=true){
   if(push){ try{ const h = toHash(r); if(location.hash.slice(1)!==h) history.pushState(null,"","#"+h); }catch(e){} }
   render(); window.scrollTo(0,0);
 }
-function toHash(r){ return r.view==="setup" ? "setup" : r.view==="home" ? "home" : r.view==="subject" ? "bio" : `bio-${r.topic}-${r.tab||"notes"}`; }
+function toHash(r){
+  if(["setup","home","decks","papers","mistakes","search"].includes(r.view)) return r.view;
+  if(["deck","study","paper"].includes(r.view)) return `${r.view}-${r.id}`;
+  return r.view==="subject" ? "bio" : `bio-${r.topic}-${r.tab||"notes"}`;
+}
 function fromHash(){
   const h = (location.hash||"").slice(1);
   const m = h.match(/^bio-(\d+)-(notes|cards|exam|fight)$/);
   if(m && TOPICS[+m[1]]) return {view:"topic", topic:+m[1], tab:m[2]};
   if(h==="bio") return {view:"subject"};
-  if(h==="setup") return {view:"setup"};
+  if(["setup","decks","papers","mistakes","search"].includes(h)) return {view:h};
+  const m2 = h.match(/^(deck|study|paper)-([a-z0-9-]+)$/); if(m2) return {view:m2[1], id:m2[2]};
   return {view:"home"};
 }
 window.addEventListener("popstate", ()=>go(fromHash(), false));
@@ -782,11 +914,10 @@ function setCrumbs(items){
   const bs = crumbs.querySelectorAll("button"); if(bs.length) bs[bs.length-1].classList.add("parent");
 }
 function render(){
-  drawPill(false);
+  drawPill(false); clearInterval(PAPER_TIMER); drawNav();
   if(!S.profile || route.view==="setup") return renderSetup();
-  if(route.view==="home") renderHome();
-  else if(route.view==="subject") renderSubject();
-  else renderTopic();
+  const V = {home:renderHome, subject:renderSubject, topic:renderTopic, decks:renderDecks, deck:renderDeckEdit, study:renderStudy, papers:renderPapers, paper:renderPaper, mistakes:renderMistakes, search:renderSearch};
+  (V[route.view] || renderHome)();
 }
 
 /* ================= SUBJECT CATALOGUE ================= */
@@ -942,7 +1073,7 @@ function runQuiz(chosen, bOf, onDone){
       app.querySelectorAll(".opt").forEach((o,k)=>{ o.disabled = true; if(opts[k]===q.a) o.classList.add("right"); });
       document.getElementById("idk").disabled = true;
       if(btn && !ok) btn.classList.add("wrong");
-      if(ok) score[q.sub]++;
+      if(ok) score[q.sub]++; else logMistake({q:q.q, a:q.a, w:q.w, t:""}, `${s.label} · Starter quiz`, null);
       const last = i===qs.length-1;
       document.getElementById("qfb").innerHTML = `<div class="fb ${ok?"":"bad"}"><span class="verdict">${ok?"Correct":pick===null?"No problem. The answer is "+esc(q.a)+".":"The answer is "+esc(q.a)+"."}</span><div class="row"><button class="btn" id="qnext">${last?"See my results":"Next question"}</button></div></div>`;
       const nb = document.getElementById("qnext"); nb.focus({preventScroll:true});
@@ -1064,7 +1195,7 @@ function quickCheck(el, q, key){
   el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
     const pick = opts[+b.dataset.k], ok = pick===q.a;
     el.querySelectorAll(".opt").forEach((o,k)=>{ o.disabled = true; if(opts[k]===q.a) o.classList.add("right"); });
-    if(!ok) b.classList.add("wrong");
+    if(!ok){ b.classList.add("wrong"); const ref = key.slice(3); logMistake(q, `Biology ${ref} · Quick check`, {view:"topic", topic:parseInt(ref), tab:"notes"}); drawNav(); }
     el.querySelector(".qc-fb").innerHTML = `<div class="fb ${ok?"":"bad"}"><span class="verdict">${ok?"Nice.":"Not quite."}</span><span>${esc(q.t)}</span>${ok?"":`<button class="link-btn" data-retry>Try again</button>`}</div>`;
     const r = el.querySelector("[data-retry]"); if(r) r.onclick = ()=>quickCheck(el, q, key);
     if(ok){ const rc = b.getBoundingClientRect(); confetti(rc.left+rc.width/2, rc.top); earn(key, 5, "quick check"); }
@@ -1075,13 +1206,14 @@ function quickCheck(el, q, key){
 function renderNotes(panel, n, T){
   panel.innerHTML = `<div class="notes-grid">
     <aside class="side"><h2>In this topic</h2><ol>${T.subs.map(s=>`<li><a href="#s${s.ref.replace(".","_")}" data-jump="${s.ref}"><span class="tick ${S.revised[s.ref]?"on":""}" aria-hidden="true"></span>${s.ref} ${esc(s.title)}</a></li>`).join("")}</ol></aside>
-    <article class="notes">${T.subs.map(s=>`<section id="s${s.ref.replace(".","_")}">
+    <article class="notes"><p class="byline"><span>Written by <b>the Specpoint team</b></span><span>Checked against the Cambridge 0610 syllabus</span><span>Teacher review coming soon</span><button class="link-btn" id="report">Report a mistake</button></p>${T.subs.map(s=>`<section id="s${s.ref.replace(".","_")}">
       <h2><span class="ref">${s.ref}</span>${esc(s.title)}</h2>${s.html}
       ${s.check?`<div class="qc" data-qc="${s.ref}"></div>`:""}
       <div class="done-row"><label class="check"><input type="checkbox" id="rev-${s.ref}" data-rev="${s.ref}" ${S.revised[s.ref]?"checked":""}> I have revised ${s.ref}</label></div>
     </section>`).join("")}
     <div class="row"><button class="btn" id="to-cards">Test yourself with flashcards</button><button class="btn quiet" id="to-exam">Try exam questions</button></div>
     </article></div>`;
+  mountByline(panel, n);
   panel.querySelectorAll("[data-jump]").forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById("s"+a.dataset.jump.replace(".","_")).scrollIntoView({behavior:REDUCED?"auto":"smooth"}); });
   panel.querySelectorAll("[data-rev]").forEach(c=>c.onchange=()=>{
     S.revised[c.dataset.rev] = c.checked; save();
@@ -1368,7 +1500,7 @@ function fight(panel, n, T){
       const d = document.createElement("div"); d.className="dmg"; d.textContent = `${dmg} damage`; $("stage").appendChild(d); setTimeout(()=>d.remove(),1000);
       verdict = F.streak>1 ? `Streak of ${F.streak}! ${dmg} damage.` : `Hit! ${dmg} damage.`;
     } else {
-      F.streak=0; F.hearts--; F.missed.push(q); F.queue.push(q); boss.classList.add("lunge");
+      F.streak=0; F.hearts--; F.missed.push(q); logMistake(q, `Biology topic ${n} · Boss fight`, {view:"topic", topic:n, tab:"notes"}); F.queue.push(q); boss.classList.add("lunge");
       verdict = `Not quite. ${b.name} hits back.`;
     }
     status();
@@ -1395,6 +1527,364 @@ function fight(panel, n, T){
     if(won){ confetti(innerWidth/2, innerHeight*0.35); earn(`boss-${n}-${dayKey(new Date())}`, 25, `for beating ${b.name}`); }
   }
   status(); ask();
+}
+
+/* ================= MAIN MENU ================= */
+const NAV = [["home","Dashboard"],["decks","Flashcards"],["papers","Papers"],["mistakes","Mistakes"],["search","Search"]];
+function drawNav(){
+  const nav = document.getElementById("mainnav");
+  if(!S.profile || route.view==="setup"){ nav.hidden = true; return; }
+  nav.hidden = false;
+  const active = ({home:"home",subject:"home",topic:"home",decks:"decks",deck:"decks",study:"decks",papers:"papers",paper:"papers",mistakes:"mistakes",search:"search"})[route.view] || "home";
+  const mc = Object.keys(S.mistakes||{}).length;
+  nav.innerHTML = `<div class="mainnav-in">${NAV.map(([v,l])=>`<button data-nav="${v}" ${v===active?'aria-current="page"':""}>${l}${v==="mistakes"&&mc?`<span class="nav-count">${mc}</span>`:""}</button>`).join("")}</div>`;
+  nav.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>go({view:b.dataset.nav}));
+}
+let PAPER_TIMER = null;
+
+/* ================= MISTAKE BOOK ================= */
+function mistakeKey(q){ let h = 0; for(const ch of q.q) h = (h*31 + ch.charCodeAt(0))|0; return "m"+(h>>>0).toString(36); }
+function logMistake(q, src, where){
+  S.mistakes = S.mistakes || {};
+  const k = mistakeKey(q), prev = S.mistakes[k];
+  S.mistakes[k] = {q:q.q, a:q.a, w:q.w||[], t:q.t||"", num:q.num, unit:q.unit, src, where:where||null, date:Date.now(), count:(prev?prev.count:0)+1};
+  save();
+}
+function renderMistakes(){
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Mistake book"}]);
+  const list = Object.entries(S.mistakes||{}).sort((a,b)=>b[1].date-a[1].date);
+  app.innerHTML = `<div class="pagehead"><h1 class="ph">Mistake book</h1>
+    <p>Every question you get wrong on Specpoint lands here automatically. Get it right once and it is cleared. ${list.length?`<b>${list.length} to fix</b>`:""}</p></div>
+    ${list.length ? `<ol class="mlist">${list.map(([k,m])=>`<li class="mitem" data-m="${k}">
+      <div class="m-top"><span class="m-src">${esc(m.src)}</span><span class="m-times">${m.count>1?`Missed ${m.count} times`:"Missed once"}</span></div>
+      <p class="qt">${esc(m.q)}</p>
+      <div class="m-body"><div class="row"><button class="btn" data-redo="${k}">Try it again</button>${m.where?`<button class="btn quiet" data-where="${k}">Go to the notes</button>`:""}</div></div>
+    </li>`).join("")}</ol>`
+    : `<div class="empty"><p class="hand-note">Nothing here yet. That is a good thing.</p><p>When you get a quick check, boss fight, starter quiz or multiple choice paper question wrong, it will appear here so you can fix it.</p></div>`}`;
+  app.querySelectorAll("[data-where]").forEach(b=>b.onclick=()=>go(S.mistakes[b.dataset.where].where));
+  app.querySelectorAll("[data-redo]").forEach(b=>b.onclick=()=>{
+    const k = b.dataset.redo, m = S.mistakes[k], body = app.querySelector(`[data-m="${k}"] .m-body`);
+    const done = ok=>{
+      if(ok){ const rc = body.getBoundingClientRect(); confetti(rc.left+rc.width/2, rc.top); delete S.mistakes[k]; save(); earn(null, 3, "mistake fixed"); drawNav(); }
+      else { m.count++; m.date = Date.now(); save(); }
+      body.insertAdjacentHTML("beforeend", `<div class="fb ${ok?"":"bad"}"><span class="verdict">${ok?"Fixed. It has left your mistake book.":"Not yet. The answer is "+esc(m.num!==undefined? m.num+" "+m.unit : m.a)+"."}</span>${m.t?`<span>${esc(m.t)}</span>`:""}${ok?"":`<button class="link-btn" data-again>Try again later</button>`}</div>`);
+      const ag = body.querySelector("[data-again]"); if(ag) ag.onclick = renderMistakes;
+    };
+    if(m.num!==undefined){
+      body.innerHTML = `<form class="num"><input aria-label="Your answer" inputmode="decimal" autocomplete="off" placeholder="Your answer"><span class="unit">${esc(m.unit)}</span><button class="btn">Check</button></form>`;
+      const f = body.querySelector("form"); f.querySelector("input").focus({preventScroll:true});
+      f.onsubmit = e=>{ e.preventDefault(); const v = f.querySelector("input").value.replace(/[,\s×x%]/g,""); if(v==="") return; f.querySelectorAll("input,button").forEach(x=>x.disabled=true); done(Math.abs(parseFloat(v)-m.num) < 1e-9 + 1e-6*m.num); };
+    } else {
+      const opts = shuffle([m.a, ...m.w]);
+      body.innerHTML = `<div class="opts">${opts.map((o,j)=>`<button class="opt" data-k="${j}">${esc(o)}</button>`).join("")}</div>`;
+      body.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{
+        const pick = opts[+o.dataset.k];
+        body.querySelectorAll(".opt").forEach((x,j)=>{ x.disabled = true; if(opts[j]===m.a) x.classList.add("right"); });
+        if(pick!==m.a) o.classList.add("wrong");
+        done(pick===m.a);
+      });
+    }
+  });
+}
+
+/* ================= CUSTOM FLASHCARDS ================= */
+const DECK_COLOURS = ["#FFE14D","#0ACF83","#1ABCFE","#FF7262","#FF9EC4","#FFB443"];
+const BOX_DAYS = [0, 0, 1, 3, 7, 14, 30];
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+const findDeck = id => (S.decks||[]).find(d=>d.id===id);
+const dueCards = d => d.cards.filter(c=>(c.due||0) <= Date.now() && c.f.trim() && c.b.trim());
+
+function renderDecks(){
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Flashcards"}]);
+  S.decks = S.decks || [];
+  app.innerHTML = `<div class="pagehead"><h1 class="ph">Flashcards</h1>
+    <p>Make your own decks, or copy cards from any topic and edit them. Cards you find hard come back sooner.</p>
+    <div class="row"><button class="btn" id="new-deck">New deck</button></div></div>
+    <h2 class="h2">My decks</h2>
+    ${S.decks.length ? `<ul class="decks">${S.decks.map(d=>{ const due = dueCards(d).length; return `<li class="deck-tile" style="--c:${d.color}">
+      <div class="dt-name">${esc(d.name)}</div>
+      <div class="dt-meta">${d.cards.length} card${d.cards.length===1?"":"s"} · <b>${due} due</b></div>
+      <div class="row"><button class="btn" data-study="${d.id}" ${d.cards.length?"":"disabled"}>Study</button><button class="btn quiet" data-edit="${d.id}">Edit</button></div></li>`; }).join("")}</ul>`
+      : `<div class="empty"><p class="hand-note">No decks yet.</p><p>Start a new deck, or copy one of the topic decks below and make it your own.</p></div>`}
+    <h2 class="h2" style="margin-top:36px">Topic decks</h2>
+    <ul class="decks">${Object.entries(TOPICS).map(([n,T])=>`<li class="deck-tile" style="--c:${COVERS.bio}">
+      <div class="dt-name">Biology topic ${n}: ${esc(BIO_TOPICS[n-1])}</div>
+      <div class="dt-meta">${T.cards.length} cards · by the Specpoint team</div>
+      <div class="row"><button class="btn" data-topic="${n}">Study</button><button class="btn quiet" data-copy="${n}">Copy to my decks</button></div></li>`).join("")}</ul>`;
+  document.getElementById("new-deck").onclick = ()=>{ const d = {id:newId(), name:"My new deck", color:DECK_COLOURS[S.decks.length % DECK_COLOURS.length], front:"q", cards:[]}; S.decks.unshift(d); save(); go({view:"deck", id:d.id}); };
+  app.querySelectorAll("[data-study]").forEach(b=>b.onclick=()=>go({view:"study", id:b.dataset.study}));
+  app.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>go({view:"deck", id:b.dataset.edit}));
+  app.querySelectorAll("[data-topic]").forEach(b=>b.onclick=()=>go({view:"topic", topic:+b.dataset.topic, tab:"cards"}));
+  app.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{
+    const n = +b.dataset.copy, T = TOPICS[n];
+    const d = {id:newId(), name:`Biology topic ${n} (my copy)`, color:DECK_COLOURS[S.decks.length % DECK_COLOURS.length], front:"q", cards:T.cards.map(([f,bk])=>({id:newId(), f, b:bk, box:1, due:0}))};
+    S.decks.unshift(d); save(); toast("Copied. <b>Edit it however you like.</b>"); go({view:"deck", id:d.id});
+  });
+}
+
+function renderDeckEdit(){
+  const d = findDeck(route.id); if(!d) return go({view:"decks"});
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Flashcards", r:{view:"decks"}},{label:d.name}]);
+  let confirmDel = false;
+  const draw = ()=>{
+    app.innerHTML = `<div class="pagehead"><h1 class="ph">Edit deck</h1></div>
+    <div class="deck-edit">
+      <label class="ob-field" for="dk-name">Deck name<input id="dk-name" value="${esc(d.name)}" maxlength="60"></label>
+      <div class="ob-field"><span>Colour</span><div class="swatches">${DECK_COLOURS.map(c=>`<button class="sw" data-col="${c}" style="--c:${c}" aria-label="Colour ${c}" aria-pressed="${d.color===c}"></button>`).join("")}</div></div>
+      <div class="ob-field"><span>When you study, show first</span><div class="seg" role="group" aria-label="Study direction"><button data-dir="q" aria-pressed="${d.front!=="a"}">Front</button><button data-dir="a" aria-pressed="${d.front==="a"}">Back</button></div></div>
+      <h2 class="h2" style="margin:10px 0 0">Cards <span class="count-s">${d.cards.length}</span></h2>
+      <ol class="ce-list">${d.cards.map((c,i)=>`<li class="ce" data-c="${c.id}">
+        <span class="ce-n">${i+1}</span>
+        <label>Front<textarea data-f="${c.id}" rows="2">${esc(c.f)}</textarea></label>
+        <label>Back<textarea data-b="${c.id}" rows="2">${esc(c.b)}</textarea></label>
+        <button class="ce-del" data-del="${c.id}" aria-label="Delete card ${i+1}">Delete</button></li>`).join("")}</ol>
+      <div class="ce-new"><span class="tag">New card</span>
+        <label>Front<textarea id="nf" rows="2" placeholder="A question, word or term"></textarea></label>
+        <label>Back<textarea id="nb" rows="2" placeholder="The answer or definition"></textarea></label>
+        <div class="row"><button class="btn" id="add-card">Add card</button></div></div>
+      <div class="ce-import"><label for="imp" class="ob-field"><span>Add cards from a topic</span></label>
+        <div class="row"><select id="imp">${Object.keys(TOPICS).map(n=>`<option value="${n}">Biology topic ${n}: ${esc(BIO_TOPICS[n-1])}</option>`).join("")}</select><button class="btn quiet" id="imp-go">Add them</button></div></div>
+      <div class="row ob-nav"><button class="btn quiet danger" id="del-deck">${confirmDel?"Tap again to delete for good":"Delete deck"}</button><button class="btn" id="dk-study" ${d.cards.length?"":"disabled"}>Study this deck</button></div>
+    </div>`;
+    const nm = document.getElementById("dk-name");
+    nm.oninput = ()=>{ d.name = nm.value.trim() || "Untitled deck"; save(); };
+    app.querySelectorAll("[data-col]").forEach(b=>b.onclick=()=>{ d.color = b.dataset.col; save(); draw(); });
+    app.querySelectorAll("[data-dir]").forEach(b=>b.onclick=()=>{ d.front = b.dataset.dir; save(); draw(); });
+    app.querySelectorAll("[data-f]").forEach(t=>t.oninput=()=>{ d.cards.find(c=>c.id===t.dataset.f).f = t.value; save(); });
+    app.querySelectorAll("[data-b]").forEach(t=>t.oninput=()=>{ d.cards.find(c=>c.id===t.dataset.b).b = t.value; save(); });
+    app.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{ d.cards = d.cards.filter(c=>c.id!==b.dataset.del); save(); draw(); });
+    document.getElementById("add-card").onclick = ()=>{
+      const f = document.getElementById("nf").value.trim(), bk = document.getElementById("nb").value.trim();
+      if(!f || !bk){ toast("Fill in both sides first"); return; }
+      d.cards.push({id:newId(), f, b:bk, box:1, due:0}); save(); earn(null, 1, "card added"); draw();
+      document.getElementById("nf").focus();
+    };
+    document.getElementById("imp-go").onclick = ()=>{
+      const n = +document.getElementById("imp").value, have = new Set(d.cards.map(c=>c.f));
+      const add = TOPICS[n].cards.filter(([f])=>!have.has(f)).map(([f,bk])=>({id:newId(), f, b:bk, box:1, due:0}));
+      d.cards.push(...add); save(); toast(add.length ? `<b>${add.length} cards</b> added` : "Those cards are already in this deck"); draw();
+    };
+    document.getElementById("del-deck").onclick = ()=>{
+      if(!confirmDel){ confirmDel = true; draw(); return; }
+      S.decks = S.decks.filter(x=>x.id!==d.id); save(); go({view:"decks"});
+    };
+    document.getElementById("dk-study").onclick = ()=>go({view:"study", id:d.id});
+  };
+  draw();
+}
+
+function renderStudy(){
+  const d = findDeck(route.id); if(!d) return go({view:"decks"});
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Flashcards", r:{view:"decks"}},{label:d.name}]);
+  let queue = shuffle(dueCards(d)), flipped = false, anim = "", reviewed = 0, all = false;
+  const draw = ()=>{
+    if(!queue.length){
+      const next = d.cards.filter(c=>c.f.trim()&&c.b.trim()).map(c=>c.due||0).sort((a,b)=>a-b)[0];
+      const when = next ? Math.max(0, Math.ceil((next - Date.now())/864e5)) : 0;
+      if(reviewed){ earn(null, reviewed*2, `for ${reviewed} card${reviewed===1?"":"s"}`); const rc = app.getBoundingClientRect(); confetti(innerWidth/2, Math.max(120, rc.top+200)); }
+      reviewed = 0;
+      app.innerHTML = `<div class="deck"><div class="card back"><span class="side-lbl">All done</span><div class="face">Nothing else is due in ${esc(d.name)} right now.</div><div class="hint">${next?`The next card comes back ${when<=0?"later today":when===1?"tomorrow":"in "+when+" days"}.`:""} Coming back later is what makes it stick.</div></div>
+        <div class="row"><button class="btn" id="all">Study every card anyway</button><button class="btn quiet" id="back">Back to my decks</button></div></div>`;
+      document.getElementById("all").onclick = ()=>{ all = true; queue = shuffle(d.cards.filter(c=>c.f.trim()&&c.b.trim())); draw(); };
+      document.getElementById("back").onclick = ()=>go({view:"decks"});
+      return;
+    }
+    const c = queue[0], showA = d.front==="a";
+    const front = showA ? c.b : c.f, back = showA ? c.f : c.b;
+    app.innerHTML = `<div class="deck">
+      <div class="deck-meta"><span>${esc(d.name)}</span><span>${queue.length} left${all?" · practice round":""}</span></div>
+      <button class="card ${flipped?"back":""} ${anim}" id="card" aria-live="polite" style="--c:${d.color}">
+        <span class="side-lbl">${flipped?"Answer":"Question"}</span>
+        <span class="face">${esc(flipped?back:front)}</span>
+        ${flipped?"":`<span class="hint">Say it out loud, then tap to check.</span>`}
+      </button>
+      <div class="row">${flipped
+        ? `<button class="btn quiet" data-r="again">Again</button><button class="btn quiet" data-r="good">Got it</button><button class="btn" data-r="easy">Easy</button>`
+        : `<button class="btn" id="flip">Show answer</button>`}</div>
+      ${flipped?`<p class="fine" style="margin:0">Again: see it again now. Got it: see it in a few days. Easy: see it much later.</p>`:""}</div>`;
+    const flip = ()=>{ if(!flipped){ flipped = true; anim = "flip"; draw(); } };
+    document.getElementById("card").onclick = flip;
+    const f = document.getElementById("flip"); if(f) f.onclick = flip;
+    app.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{
+      const r = b.dataset.r; reviewed++;
+      if(r==="again"){ c.box = 1; c.due = 0; queue.push(queue.shift()); }
+      else { c.box = Math.min(6, (c.box||1) + (r==="easy"?2:1)); c.due = Date.now() + BOX_DAYS[c.box]*864e5; queue.shift(); }
+      save(); flipped = false; anim = "slide"; draw();
+    });
+  };
+  draw();
+}
+
+/* ================= PRACTICE PAPERS ================= */
+function buildPapers(){
+  const mc = [];
+  Object.entries(TOPICS).forEach(([n,T])=>{
+    T.subs.forEach(s=>{ if(s.check) mc.push({...s.check, ref:s.ref}); });
+    T.boss.qs.forEach(q=>{ if(q.num===undefined) mc.push({...q, ref:`Topic ${n}`}); });
+  });
+  const theory = [].concat(...Object.values(TOPICS).map(T=>T.exam));
+  return [
+    {id:"bio-mcq-1", kind:"mcq", code:"Paper 2 style", title:"Multiple choice", sub:"Biology 0610 · Topics 2 and 3", minutes:20, qs:mc.slice(0,20), total:Math.min(20,mc.length)},
+    {id:"bio-thy-1", kind:"theory", code:"Paper 4 style", title:"Theory", sub:"Biology 0610 · Topics 2 and 3 · Extended", minutes:30, qs:theory, total:theory.reduce((t,q)=>t+q.marks,0)}
+  ];
+}
+let PAPERS = null;
+const getPapers = ()=> PAPERS || (PAPERS = buildPapers());
+const fmtTime = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
+
+function renderPapers(){
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Practice papers"}]);
+  const hist = S.papers || {};
+  app.innerHTML = `<div class="pagehead"><h1 class="ph">Practice papers</h1>
+    <p>Timed papers laid out like the real thing. Multiple choice papers mark themselves. For theory papers you mark your own answers with the mark scheme. These are original Specpoint questions, not official Cambridge papers.</p></div>
+    <ul class="papers">${getPapers().map(p=>{ const h = hist[p.id]||[], best = h.length ? Math.max(...h.map(a=>Math.round(100*a.score/a.total))) : null, live = S.attempt && S.attempt[p.id];
+      return `<li class="paper-tile">
+        <div class="pt-code">${p.code}</div>
+        <div class="pt-title">${p.title}</div>
+        <div class="pt-sub">${p.sub}</div>
+        <div class="pt-facts"><span>${p.minutes} minutes</span><span>${p.qs.length} questions</span><span>${p.total} marks</span></div>
+        <div class="pt-hist">${h.length?`Best score <b>${best}%</b> · ${h.length} attempt${h.length===1?"":"s"}`:"Not attempted yet"}</div>
+        <div class="row"><button class="btn" data-paper="${p.id}">${live?"Carry on":"Open paper"}</button></div></li>`; }).join("")}</ul>
+    <p class="fine">Official past papers are published by Cambridge and Pearson. Ask your teacher for them or use the exam boards' own websites.</p>`;
+  app.querySelectorAll("[data-paper]").forEach(b=>b.onclick=()=>go({view:"paper", id:b.dataset.paper}));
+}
+
+function renderPaper(){
+  const p = getPapers().find(x=>x.id===route.id); if(!p) return go({view:"papers"});
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Papers", r:{view:"papers"}},{label:p.title}]);
+  S.attempt = S.attempt || {};
+  const A = S.attempt[p.id];
+  if(!A){
+    app.innerHTML = `<div class="cover">
+      <div class="cv-top"><span>Specpoint</span><span>${p.code}</span></div>
+      <div class="cv-title"><span class="code">Biology 0610</span><h1>${p.title}</h1><p>${p.sub}</p></div>
+      <div class="cv-fields"><div><small>Candidate name</small><span class="hand">${esc(S.profile.name)}</span></div><div><small>Time</small><span>${p.minutes} minutes</span></div><div><small>Total</small><span>${p.total} marks</span></div></div>
+      <div class="cv-ins"><b>Instructions</b><ul>
+        <li>Answer all questions.</li>
+        ${p.kind==="mcq"?"<li>For each question, choose the one answer you think is correct.</li>":"<li>Write your answer in the space provided under each question.</li>"}
+        <li>The number of marks is shown in brackets [ ] after each question.</li>
+        <li>The timer starts when you press Start. You can finish early.</li></ul></div>
+      <div class="row"><button class="btn" id="start-paper">Start paper</button><button class="btn quiet" id="back-papers">Not now</button></div></div>`;
+    document.getElementById("start-paper").onclick = ()=>{ S.attempt[p.id] = {start:Date.now(), ans:{}, order:p.kind==="mcq" ? p.qs.map(q=>shuffle([q.a,...q.w])) : null}; save(); renderPaper(); };
+    document.getElementById("back-papers").onclick = ()=>go({view:"papers"});
+    return;
+  }
+  if(A.marking) return markPaper(p, A);
+  const limit = p.minutes*60;
+  app.innerHTML = `<div class="timerbar" id="tbar"><span class="tb-title">${p.title}</span><span class="tb-time" id="ttime"></span><button class="btn" id="finish">Finish paper</button></div>
+    <ol class="paper-qs">${p.qs.map((q,i)=>`<li class="pq">
+      <div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">[${p.kind==="mcq"?1:q.marks}]</span></div>
+      <p class="qt">${esc(q.q)}</p>
+      ${p.kind==="mcq"
+        ? `<div class="opts">${A.order[i].map((o,j)=>`<button class="opt ${A.ans[i]===o?"picked":""}" data-q="${i}" data-o="${j}" aria-pressed="${A.ans[i]===o}">${esc(o)}</button>`).join("")}</div>`
+        : `<textarea class="pq-ans" data-q="${i}" aria-label="Answer to question ${i+1}" placeholder="Write your answer here">${esc(A.ans[i]||"")}</textarea>`}
+    </li>`).join("")}</ol>
+    <div class="row" style="margin-top:20px"><button class="btn" id="finish2">Finish paper</button></div>`;
+  const tick = ()=>{
+    const el = document.getElementById("ttime"); if(!el){ clearInterval(PAPER_TIMER); return; }
+    const left = limit - (Date.now()-A.start)/1000;
+    el.textContent = left > 0 ? `${fmtTime(left)} left` : `Time is up · ${fmtTime(-left)} over`;
+    el.classList.toggle("over", left <= 0); el.classList.toggle("low", left > 0 && left < 120);
+  };
+  clearInterval(PAPER_TIMER); PAPER_TIMER = setInterval(tick, 1000); tick();
+  app.querySelectorAll(".opt[data-o]").forEach(b=>b.onclick=()=>{
+    const i = +b.dataset.q; A.ans[i] = A.order[i][+b.dataset.o]; save();
+    app.querySelectorAll(`.opt[data-q="${i}"]`).forEach(x=>{ const on = x===b; x.classList.toggle("picked", on); x.setAttribute("aria-pressed", on); });
+  });
+  app.querySelectorAll("textarea.pq-ans").forEach(t=>t.oninput=()=>{ A.ans[+t.dataset.q] = t.value; save(); });
+  const finish = ()=>{
+    clearInterval(PAPER_TIMER);
+    A.secs = Math.round((Date.now()-A.start)/1000); A.marking = true; A.ticks = {}; save(); window.scrollTo(0,0);
+    renderPaper();
+  };
+  document.getElementById("finish").onclick = finish; document.getElementById("finish2").onclick = finish;
+}
+
+function markPaper(p, A){
+  let score = 0;
+  if(p.kind==="mcq"){
+    p.qs.forEach((q,i)=>{ if(A.ans[i]===q.a) score++; else if(!A.logged) logMistake(q, `Biology ${q.ref} · ${p.title} paper`, null); });
+    A.logged = true; save();
+  }
+  const theoryScore = ()=> p.qs.reduce((t,q,i)=>t+Math.min(q.marks, Object.keys(A.ticks[i]||{}).filter(k=>A.ticks[i][k]).length),0);
+  if(p.kind==="theory") score = theoryScore();
+  const pct = s => Math.round(100*s/p.total);
+  app.innerHTML = `<div class="pagehead"><h1 class="ph">${p.kind==="mcq"?"Your results":"Mark your paper"}</h1>
+    <p>${p.kind==="mcq"?`Finished in ${fmtTime(A.secs)}.`:"Compare each answer with the mark scheme and tick every point you made. Be strict, like an examiner."}</p></div>
+    <div class="eq-total"><span>${p.title} · ${p.sub}</span><span class="score" id="pscore">${score} / ${p.total} · ${pct(score)}%</span></div>
+    <ol class="paper-qs">${p.qs.map((q,i)=>{
+      if(p.kind==="mcq"){ const ok = A.ans[i]===q.a; return `<li class="pq ${ok?"pq-ok":"pq-bad"}"><div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">${ok?"✓":"✗"}</span></div><p class="qt">${esc(q.q)}</p>
+        <p>${A.ans[i]?`You chose <b>${esc(A.ans[i])}</b>.`:"You left this blank."} ${ok?"":`The answer is <b>${esc(q.a)}</b>.`}</p>${ok?"":`<p class="pq-tip">${esc(q.t||"")}</p>`}</li>`; }
+      return `<li class="pq"><div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">[${q.marks}]</span></div><p class="qt">${esc(q.q)}</p>
+        <div class="your"><small>Your answer</small><span class="hand">${A.ans[i]?esc(A.ans[i]):"Left blank"}</span></div>
+        <div class="ms"><b>Mark scheme</b>${q.ms.map((m,j)=>`<label><input type="checkbox" id="pm-${i}-${j}" data-i="${i}" data-j="${j}" ${(A.ticks[i]||{})[j]?"checked":""}> <span>${esc(m)}</span></label>`).join("")}${q.note?`<span class="note">${esc(q.note)}</span>`:""}</div></li>`;
+    }).join("")}</ol>
+    <div class="row" style="margin-top:20px"><button class="btn" id="save-paper">${p.kind==="mcq"?"Save and finish":"Save my mark"}</button>${p.kind==="mcq"&&score<p.total?`<button class="btn quiet" id="to-mistakes">See my mistake book</button>`:""}</div>`;
+  app.querySelectorAll("[data-i]").forEach(c=>c.onchange=()=>{
+    const i = c.dataset.i; A.ticks[i] = A.ticks[i] || {}; A.ticks[i][c.dataset.j] = c.checked; save();
+    const s = theoryScore(); document.getElementById("pscore").textContent = `${s} / ${p.total} · ${pct(s)}%`;
+  });
+  const tm = document.getElementById("to-mistakes"); if(tm) tm.onclick = ()=>{ record(); go({view:"mistakes"}); };
+  const record = ()=>{
+    const final = p.kind==="mcq" ? score : theoryScore();
+    S.papers = S.papers || {}; (S.papers[p.id] = S.papers[p.id] || []).push({date:Date.now(), score:final, total:p.total, secs:A.secs});
+    delete S.attempt[p.id]; save();
+    earn(null, 20, "for finishing a paper");
+    if(final/p.total >= 0.7) confetti(innerWidth/2, innerHeight*0.35);
+  };
+  document.getElementById("save-paper").onclick = ()=>{ record(); go({view:"papers"}); };
+}
+
+/* ================= SEARCH ================= */
+const strip = h => h.replace(/<[^>]+>/g," ").replace(/&[a-z]+;/g," ").replace(/\s+/g," ").trim();
+function renderSearch(){
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Search"}]);
+  app.innerHTML = `<div class="pagehead"><h1 class="ph">Search</h1></div>
+    <label class="search-box" for="sq"><span class="sr">Search notes, flashcards and questions</span><input id="sq" type="search" autocomplete="off" placeholder="Try osmosis, ribosomes or magnification" value="${esc(route.q||"")}"></label>
+    <div id="results"></div>`;
+  const inp = document.getElementById("sq"), out = document.getElementById("results");
+  const run = ()=>{
+    const q = inp.value.trim().toLowerCase(); route.q = inp.value;
+    if(q.length < 2){ out.innerHTML = `<p class="fine">Type at least two letters.</p>`; return; }
+    const hit = t => t.toLowerCase().includes(q);
+    const snip = t => { const i = t.toLowerCase().indexOf(q), a = Math.max(0,i-60); const s = (a?"…":"")+t.slice(a, i+q.length+90)+"…"; return esc(s).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"ig"), m=>`<mark>${m}</mark>`); };
+    const notes = [], cards = [], qs = [];
+    Object.entries(TOPICS).forEach(([n,T])=>{
+      T.subs.forEach(s=>{ const t = strip(s.html); if(hit(s.title)||hit(t)) notes.push({n, s, t}); });
+      T.cards.forEach(([f,b])=>{ if(hit(f)||hit(b)) cards.push({src:`Biology topic ${n}`, f, b, r:{view:"topic", topic:+n, tab:"cards"}}); });
+      T.exam.forEach(e=>{ if(hit(e.q)) qs.push({n, e}); });
+    });
+    (S.decks||[]).forEach(d=>d.cards.forEach(c=>{ if(hit(c.f)||hit(c.b)) cards.push({src:d.name, f:c.f, b:c.b, r:{view:"deck", id:d.id}}); }));
+    const total = notes.length + cards.length + qs.length;
+    out.innerHTML = !total ? `<div class="empty"><p class="hand-note">Nothing found for "${esc(inp.value)}".</p><p>Only Biology topics 2 and 3 are written so far, so try a word from those.</p></div>` : `
+      ${notes.length?`<h2 class="h2">Notes <span class="count-s">${notes.length}</span></h2><ul class="res">${notes.map((x,i)=>`<li><button data-res="n${i}"><span class="r-src">Biology ${x.s.ref}</span><b>${esc(x.s.title)}</b><span class="r-snip">${snip(hit(x.t)?x.t:x.s.title)}</span></button></li>`).join("")}</ul>`:""}
+      ${cards.length?`<h2 class="h2">Flashcards <span class="count-s">${cards.length}</span></h2><ul class="res">${cards.map((x,i)=>`<li><button data-res="c${i}"><span class="r-src">${esc(x.src)}</span><b>${esc(x.f)}</b><span class="r-snip">${esc(x.b)}</span></button></li>`).join("")}</ul>`:""}
+      ${qs.length?`<h2 class="h2">Exam questions <span class="count-s">${qs.length}</span></h2><ul class="res">${qs.map((x,i)=>`<li><button data-res="q${i}"><span class="r-src">Biology ${x.e.ref} · ${x.e.marks} mark${x.e.marks>1?"s":""}</span><b>${snip(x.e.q)}</b></button></li>`).join("")}</ul>`:""}`;
+    out.querySelectorAll("[data-res]").forEach(b=>b.onclick=()=>{
+      const k = b.dataset.res, i = +k.slice(1);
+      if(k[0]==="n"){ const x = notes[i]; go({view:"topic", topic:+x.n, tab:"notes"}); setTimeout(()=>{ const el = document.getElementById("s"+x.s.ref.replace(".","_")); if(el) el.scrollIntoView(); }, 60); }
+      else if(k[0]==="c") go(cards[i].r);
+      else go({view:"topic", topic:+qs[i].n, tab:"exam"});
+    });
+  };
+  inp.oninput = run; run(); inp.focus({preventScroll:true});
+}
+
+/* ================= REPORT A MISTAKE (notes) ================= */
+function mountByline(panel, n){
+  const el = panel.querySelector(".byline"); if(!el) return;
+  el.querySelector("#report").onclick = ()=>{
+    el.insertAdjacentHTML("afterend", `<div class="report" id="report-box"><label for="rep-t" class="ob-field"><span>What looks wrong?</span></label>
+      <textarea id="rep-t" rows="3" placeholder="For example: 2.2 says 1 mm = 100 µm but it should be 1000"></textarea>
+      <div class="row"><button class="btn" id="rep-send">Send report</button><button class="btn quiet" id="rep-x">Cancel</button></div></div>`);
+    el.querySelector("#report").disabled = true;
+    document.getElementById("rep-x").onclick = ()=>{ document.getElementById("report-box").remove(); el.querySelector("#report").disabled = false; };
+    document.getElementById("rep-send").onclick = ()=>{
+      const t = document.getElementById("rep-t").value.trim(); if(!t){ toast("Write what looks wrong first"); return; }
+      S.reports = S.reports || []; S.reports.push({topic:n, text:t, date:Date.now()}); save();
+      document.getElementById("report-box").innerHTML = `<p class="hand-note">Thank you. Your report is saved and will reach our editors once accounts launch.</p>`;
+    };
+  };
 }
 
 route = fromHash();
