@@ -8,7 +8,7 @@ Run every command from the repository folder, for example `python -m algo_lab ch
 
 | Step | What | Status |
 | --- | --- | --- |
-| 1 | Data loader (the Data Bot) | Built, tested, waiting for your approval |
+| 1 | Data loader (the Data Bot) | Built, tested, and run on real data on your computer. Waiting for your approval |
 | 2 | Regime model (HMM) with a forward only filter | Next |
 | 3 | The 8 against 8 voting teams | Not started |
 | 4 | Backtest with costs, exits and cooldowns | Not started |
@@ -49,7 +49,7 @@ About QNT:
 * Crypto trades every day, with no market close, so its bars and its clock rules differ from stocks. The config already knows this.
 * A coin has no Form 4 or 13F filings, so the filing tools can say nothing about it. For QNT the lab will use price and volume only.
 * It is thinner and wilder than the big names, so paper trades on it should assume higher costs and bigger gaps. The default numbers in the briefing were written with stocks in mind and will need their own values for QNT in Step 3.
-* I believe Yahoo lists it as `QNT-USD`, but the build environment could not reach Yahoo to check. Your first real fetch will tell us. If the name is wrong, the report says so and nothing is invented.
+* Yahoo does list it as `QNT-USD`. The first real fetch returned 2,976 daily bars from 2018-08-10. Its first years are thin and noisy, and the Data Bot flagged 8 one day moves bigger than 40 percent there (see "The first real run" below).
 
 ## Quick start
 
@@ -70,7 +70,11 @@ About QNT:
    ```
    python -m algo_lab health
    ```
-5. Practice offline with made up bars:
+5. Look at every big one day move in one asset, with what the next bar did:
+   ```
+   python -m algo_lab moves QNT
+   ```
+6. Practice offline with made up bars:
    ```
    python -m algo_lab demo
    ```
@@ -85,7 +89,7 @@ Real bars are saved in `WareHouse/algo_lab/data/`. Made up bars go to `WareHouse
 4. Stops on **stale** data: if the newest finished bar is older than 4 days for US assets (a weekend plus a holiday) or 2 days for crypto.
 5. Stops if fewer than 400 bars are left, because the 200 bar average and the regime model need history.
 6. Stops if more than 5 percent of the rows had to be removed, because a source that broken is not trusted.
-7. Warns about gaps in the history, one day moves bigger than 40 percent (a real crash or a data error), and bars with zero volume.
+7. Warns about gaps in the history, one day moves bigger than 40 percent (a real crash or a data error), and bars with zero volume. For each big move it also looks at the next bar. If the next bar took the price back at least halfway, that is the usual sign of one bad bar, and the report says so. `python -m algo_lab moves SYMBOL` lists them all.
 8. Stops everything if any one asset is in STOP, as the briefing says.
 9. Never saves bad data over good data, and checks saved data again every time it is loaded.
 10. States the interval and the data lag in every report.
@@ -108,12 +112,21 @@ The table shows each asset's number of bars, the first and last bar dates, the a
 * **WARN:** usable with care, and the lines under the table say why.
 * **STOP:** do not use it. The whole lab stops until it is fixed.
 
+## The first real run
+
+On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 assets downloaded.
+
+* SPY, QQQ, AAPL, MSFT, NVDA and JPM: 2,514 bars each, from 2016-10-03 to 2026-10-02, all OK.
+* QNT: 2,976 bars from 2018-08-10 to 2026-10-02, with no missing days, but WARN. Eight one day moves were bigger than 40 percent. The first two were a 46.8 percent fall on 2018-10-23 followed by a 69.7 percent rise the next day. Together they leave the price about 10 percent lower, so a crash that undoes itself in a day looks more like one bad bar from QNT's thin early trading than a real event.
+* Open decision: whether QNT should start later, so a few bad early bars do not distort the regime model. This waits for the full list from `python -m algo_lab moves QNT`, and for one date to be checked by eye on a chart.
+
 ## What was tested, and what was not
 
-* 95 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, saved files, failures, the report, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
-* 13 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, and keeping unfinished bars. Every one made a test fail.
-* A real `fetch` was run where Yahoo is blocked. It stopped cleanly, said why, saved no data and invented none.
-* **Not tested:** a successful download from the real Yahoo Finance, because the build environment cannot reach it. The call was checked against the installed yfinance library's parameter names, but the first real run on your computer is the real test. Paste the report if anything looks odd.
+* 104 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
+* 18 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, and misjudging a bad bar. Every one made a test fail.
+* A `fetch` run where Yahoo is blocked stopped cleanly, said why, saved no data and invented none.
+* The real run above shows the success path works: the yfinance call, the Yahoo column layout, the time zones and the saved files.
+* **Not tested for real:** Yahoo slowing a free user down or going offline in the middle of a run. The code treats both as a STOP, and the tests cover that with a stand in.
 * The made up bars come from a generator with three hidden regimes (bear, neutral, bull), so Step 2 can check whether the regime model finds them.
 
 ## Files

@@ -8,7 +8,7 @@ import yaml
 
 from algo_lab import cli
 from algo_lab import data as D
-from algo_lab.config import DEFAULT_CONFIG_PATH
+from algo_lab.config import DEFAULT_CONFIG_PATH, load_config
 from algo_lab.synthetic import make_series
 
 LAB_FOLDER = Path(__file__).resolve().parent.parent / "algo_lab"
@@ -107,6 +107,32 @@ def test_fetch_then_health(capsys, config_file, tmp_path, offline):
     no_dashes(out)
     code, out, _ = run(capsys, "health", "SPY", "QNT", "--config", str(config_file))
     assert code == 0 and "OVERALL: OK" in out and "QQQ" not in out
+
+
+def test_moves_needs_saved_data_and_a_known_symbol(capsys, config_file):
+    code, _, err = run(capsys, "moves", "SPY", "--config", str(config_file))
+    assert code == 2 and "No saved data for SPY" in err
+    code, _, err = run(capsys, "moves", "XYZ", "--config", str(config_file))
+    assert code == 2 and "Unknown symbol XYZ" in err
+
+
+def test_moves_after_a_fetch_says_none(capsys, config_file, offline):
+    run(capsys, "fetch", "SPY", "--config", str(config_file))
+    code, out, _ = run(capsys, "moves", "SPY", "--config", str(config_file))
+    assert code == 0 and "None. No bar moved that much in one day." in out
+
+
+def test_moves_lists_a_bad_bar(capsys, config_file):
+    cfg = load_config(config_file)
+    end = datetime.now(timezone.utc).date() - timedelta(days=1)
+    frame = make_series(500, "us", end, seed=2)[0]
+    cols = ["open", "high", "low", "close"]
+    frame.loc[frame.index[300:], cols] *= 0.9
+    frame.loc[frame.index[300], cols] *= 0.53 / 0.9
+    D.save_cache(cfg.data.folder, cfg.asset("SPY"), frame, "yahoo", True, datetime.now(timezone.utc))
+    code, out, _ = run(capsys, "moves", "SPY", "--config", str(config_file))
+    assert code == 0 and "a bad bar (undone)" in out and "the bounce back from the line above" in out
+    no_dashes(out)
 
 
 def test_a_failed_fetch_stops_and_invents_nothing(monkeypatch, capsys, config_file, tmp_path):

@@ -3,6 +3,7 @@
     python -m algo_lab check             are the libraries, the config and the folders ready?
     python -m algo_lab fetch [SYMBOLS]   download daily bars from Yahoo Finance (free) and check them
     python -m algo_lab health [SYMBOLS]  check the saved bars again, because saved data goes stale
+    python -m algo_lab moves SYMBOL      list every big one day move in the saved bars and what happened next
     python -m algo_lab demo              write MADE UP bars to a separate folder, to try things offline
 """
 
@@ -19,7 +20,7 @@ from typing import List, Optional
 
 from .config import DEFAULT_CONFIG_PATH, ConfigError, load_config
 from .data import (STOP, AssetHealth, DataError, download_yahoo, fetch_all, load_asset, overall_status, pick_assets,
-                   render_report, write_summary)
+                   render_moves, render_report, write_summary)
 from .synthetic import write_demo
 
 # import name, pip name, what it is for, needed right now
@@ -121,6 +122,14 @@ def cmd_health(args) -> int:
     return 2 if overall_status(results) == STOP else 0
 
 
+def cmd_moves(args) -> int:
+    cfg = load(args)
+    asset = cfg.asset(args.symbol)
+    frame, _ = load_asset(cfg, asset, datetime.now(timezone.utc))
+    print(render_moves(asset.symbol, frame, cfg.data.extreme_move_pct))
+    return 0
+
+
 def cmd_demo(args) -> int:
     cfg = load(args)
     now = datetime.now(timezone.utc)
@@ -144,6 +153,9 @@ def build_parser() -> argparse.ArgumentParser:
         p = sub.add_parser(name, parents=[common], help=text)
         p.add_argument("symbols", nargs="*", help="only these symbols (default: all in the config)")
         p.set_defaults(func=func)
+    moves = sub.add_parser("moves", parents=[common], help="list every big one day move in the saved bars")
+    moves.add_argument("symbol", help="for example QNT")
+    moves.set_defaults(func=cmd_moves)
     sub.add_parser("demo", parents=[common], help="write made up bars for offline practice").set_defaults(func=cmd_demo)
     return parser
 

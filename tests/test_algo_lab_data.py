@@ -274,13 +274,74 @@ def test_a_week_long_hole_in_us_data_is_a_gap(cfg):
     assert health.status == D.WARN and "(7 days apart)" in health.warnings[0]
 
 
+PRICE_COLUMNS = ["open", "high", "low", "close"]
+
+
+def spike(frame, down=0.53, back=0.9):
+    """One bad bar: a day far too low, then back near the old level, like a data glitch."""
+    out = frame.copy()
+    out.loc[out.index[300:], PRICE_COLUMNS] *= back
+    out.loc[out.index[300], PRICE_COLUMNS] *= down / back
+    return out
+
+
 def test_a_huge_one_day_move_is_flagged(cfg):
     base = us_frame()
-    base.loc[base.index[300:], ["open", "high", "low", "close"]] *= 1.7
+    base.loc[base.index[300:], PRICE_COLUMNS] *= 1.7
     jump = (base["close"].iloc[300] / base["close"].iloc[299] - 1) * 100
     _, health = prepared(cfg, base)
     assert health.status == D.WARN
     assert f"{base.index[300].date()} rose {jump:.1f} percent" in health.warnings[0]
+    assert "1 one day move bigger than 40 percent, 0 undone the next day" in health.warnings[0]
+
+
+def test_a_spike_that_reverses_is_called_a_bad_bar(cfg):
+    base = spike(us_frame())
+    moves = D.find_extreme_moves(base, 40)
+    assert [m.day for m in moves] == [base.index[300].date(), base.index[301].date()]
+    assert moves[0].change_pct < -40 and moves[0].next_change_pct > 40
+    assert moves[0].undone_next_day is True and moves[1].undone_next_day is False
+    _, health = prepared(cfg, base)
+    text = health.warnings[0]
+    assert "2 one day moves bigger than 40 percent, 1 undone the next day" in text
+    assert "fell" in text and "then rose" in text and "python -m algo_lab moves SPY" in text
+
+
+def test_a_crash_that_stays_is_not_called_undone():
+    base = us_frame()
+    base.loc[base.index[300:], PRICE_COLUMNS] *= 0.5
+    moves = D.find_extreme_moves(base, 40)
+    assert len(moves) == 1 and moves[0].undone_next_day is False
+
+
+def test_a_move_on_the_last_bar_has_no_next_day():
+    base = us_frame()
+    base.loc[base.index[-1], PRICE_COLUMNS] *= 0.5
+    move = D.find_extreme_moves(base, 40)[-1]
+    assert move.next_change_pct is None and move.undone_next_day is False
+    assert "then" not in D.describe_move(move)
+
+
+def test_the_moves_table_lists_each_move_with_a_hint():
+    base = spike(us_frame())
+    text = D.render_moves("SPY", base, 40)
+    lines = text.splitlines()
+    assert lines[0] == "MOVES BIGGER THAN 40 PERCENT FOR SPY (500 saved bars)"
+    assert str(base.index[300].date()) in lines[2] and "a bad bar (undone)" in lines[2]
+    assert str(base.index[301].date()) in lines[3] and "the bounce back from the line above" in lines[3]
+    assert "hint, not proof" in text
+    assert_no_dashes(text)
+
+
+def test_a_crash_that_stays_is_listed_as_possibly_real():
+    base = us_frame()
+    base.loc[base.index[300:], PRICE_COLUMNS] *= 0.5
+    lines = D.render_moves("SPY", base, 40).splitlines()
+    assert str(base.index[300].date()) in lines[2] and "possibly real (it stayed)" in lines[2]
+
+
+def test_the_moves_table_says_so_when_nothing_moved():
+    assert "None." in D.render_moves("SPY", us_frame(), 40)
 
 
 def test_zero_volume_bars_are_flagged(cfg):

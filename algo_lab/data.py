@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import os
 import time as clock
 from collections import Counter
@@ -194,11 +195,48 @@ def find_gaps(frame: pd.DataFrame, max_gap_days: int) -> List[Tuple[date, date, 
     return gaps
 
 
-def find_extreme_moves(frame: pd.DataFrame, limit_pct: float) -> List[Tuple[date, float]]:
-    """Close to close moves bigger than the limit, in percent (a rise is positive)."""
-    change = (frame["close"] / frame["close"].shift(1) - 1.0) * 100.0
-    big = change[change.abs() > limit_pct]
-    return [(stamp.date(), float(value)) for stamp, value in big.items()]
+@dataclass(frozen=True)
+class Move:
+    """A close to close move bigger than the limit, with what the next bar did."""
+
+    day: date
+    before: float  # the close before the move
+    close: float
+    change_pct: float  # a rise is positive
+    next_change_pct: Optional[float]  # the next bar's move, or None when this is the last bar
+
+    @property
+    def undone_next_day(self) -> bool:
+        """The next bar took the price back at least halfway. That is the usual sign of one bad bar."""
+        if self.next_change_pct is None:
+            return False
+        after = self.close * (1.0 + self.next_change_pct / 100.0)
+        if after <= 0:
+            return False
+        return abs(math.log(after / self.before)) <= 0.5 * abs(math.log(self.close / self.before))
+
+
+def move_words(change_pct: float) -> str:
+    return f"{'rose' if change_pct > 0 else 'fell'} {abs(change_pct):.1f} percent"
+
+
+def describe_move(move: Move) -> str:
+    text = f"{move.day.isoformat()} {move_words(move.change_pct)}"
+    if move.next_change_pct is not None:
+        text += f", then {move_words(move.next_change_pct)} the next day"
+    return text
+
+
+def find_extreme_moves(frame: pd.DataFrame, limit_pct: float) -> List[Move]:
+    """Close to close moves bigger than the limit, each with the move of the bar after it."""
+    close = frame["close"]
+    change = ((close / close.shift(1) - 1.0) * 100.0).to_numpy()
+    moves = []
+    for i in np.flatnonzero(np.abs(change) > limit_pct):
+        following = float(change[i + 1]) if i + 1 < len(change) else None
+        moves.append(Move(frame.index[i].date(), float(close.iloc[i - 1]), float(close.iloc[i]),
+                          float(change[i]), following))
+    return moves
 
 
 def evaluate(asset: Asset, frame: pd.DataFrame, now: datetime, cfg: DataConfig, source: str,
@@ -238,10 +276,12 @@ def evaluate(asset: Asset, frame: pd.DataFrame, now: datetime, cfg: DataConfig, 
         health.warnings.append(f"{plural(len(gaps), 'gap')} in the history: {shown}{more}.")
     moves = find_extreme_moves(frame, cfg.extreme_move_pct)
     if moves:
-        shown = "; ".join(f"{d.isoformat()} {'rose' if v > 0 else 'fell'} {abs(v):.1f} percent" for d, v in moves[:3])
+        undone = sum(1 for m in moves if m.undone_next_day)
+        shown = "; ".join(describe_move(m) for m in moves[:3])
         more = f" and {len(moves) - 3} more" if len(moves) > 3 else ""
-        health.warnings.append(f"{plural(len(moves), 'one day move')} bigger than {cfg.extreme_move_pct:g} percent: "
-                               f"{shown}{more}. Real or a data error? Check before trusting it.")
+        health.warnings.append(f"{plural(len(moves), 'one day move')} bigger than {cfg.extreme_move_pct:g} percent, "
+                               f"{undone} undone the next day (the usual sign of one bad bar): {shown}{more}. "
+                               f"To see them all, run: python -m algo_lab moves {asset.symbol}")
     zero = int((frame["volume"] == 0).sum())
     if zero:
         health.warnings.append(f"{plural(zero, 'bar')} with zero volume.")
@@ -405,4 +445,29 @@ def render_report(results: Sequence[AssetHealth], cfg: DataConfig, now: datetime
                      "Nothing was guessed or filled in.")
     else:
         lines.append(f"OVERALL: {overall}")
+    return "\n".join(lines)
+
+
+def render_moves(symbol: str, frame: pd.DataFrame, limit_pct: float) -> str:
+    """Every big one day move in the saved bars, with what the next bar did, so a person can judge them."""
+    moves = find_extreme_moves(frame, limit_pct)
+    lines = [f"MOVES BIGGER THAN {limit_pct:g} PERCENT FOR {symbol} ({len(frame)} saved bars)"]
+    if not moves:
+        return "\n".join(lines + ["None. No bar moved that much in one day."])
+    lines.append(f"{'Date':<12}{'Before':>12}{'Close':>12}  {'Move':<20}{'Next day':<20}Looks like")
+    previous = None
+    for m in moves:
+        follow = move_words(m.next_change_pct) if m.next_change_pct is not None else "no next bar"
+        if previous is not None and previous.undone_next_day and m.before == previous.close:
+            verdict = "the bounce back from the line above"
+        elif m.undone_next_day:
+            verdict = "a bad bar (undone)"
+        else:
+            verdict = "possibly real (it stayed)"
+        lines.append(f"{m.day.isoformat():<12}{m.before:>12.4f}{m.close:>12.4f}  "
+                     f"{move_words(m.change_pct):<20}{follow:<20}{verdict}")
+        previous = m
+    lines += ["", "Undone means the next bar took the price back at least halfway. That is a hint, not proof, "
+                  "because a real crash can bounce too.",
+              "Check one date by eye on a chart before you decide what to do."]
     return "\n".join(lines)
