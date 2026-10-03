@@ -83,14 +83,15 @@ def clean_candles(candles: Iterable[Candle]) -> List[Candle]:
 
 # ---------------------------------------------------------------- CSV
 
-_TIME_KEYS = ("time", "timestamp", "date", "datetime", "open_time", "open time")
+_TIME_KEYS = ("time", "timestamp", "unix", "unix timestamp", "date", "datetime", "open_time", "open time")
 _COLUMN_NAMES = {
     "o": ("open", "o"),
     "h": ("high", "h"),
     "l": ("low", "l"),
-    "c": ("close", "c"),
-    "v": ("volume", "vol", "v"),
+    "c": ("close", "c", "price", "last"),
+    "v": ("volume", "vol", "vol.", "v"),
 }
+_DATE_FORMATS = ("%b %d, %Y", "%B %d, %Y", "%Y/%m/%d", "%Y/%m/%d %H:%M:%S", "%d-%b-%Y")
 
 
 def parse_time_cell(cell: str) -> int:
@@ -104,10 +105,43 @@ def parse_time_cell(cell: str) -> int:
         return int(number)
     except ValueError:
         pass
-    parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        for fmt in _DATE_FORMATS:
+            try:
+                parsed = datetime.strptime(text, fmt)
+                break
+            except ValueError:
+                continue
+        else:
+            raise ValueError(f"Cannot read the time '{text}'") from None
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=timezone.utc)
     return int(parsed.timestamp())
+
+
+def parse_number(cell) -> float:
+    """A price or volume as printed by common sites: commas inside the number and K, M or B endings are fine."""
+    text = str(cell).strip().replace(",", "")
+    scale = 1.0
+    if text and text[-1].upper() in "KMB":
+        scale = {"K": 1e3, "M": 1e6, "B": 1e9}[text[-1].upper()]
+        text = text[:-1]
+    return float(text) * scale
+
+
+def _header_start(lines: List[str]) -> int:
+    """Some download sites put a line of text above the header. Find the line that is really the header."""
+    for i, line in enumerate(lines[:25]):
+        cells = {c.strip().lower() for c in next(csv.reader([line], delimiter=_delimiter(line)), [])}
+        if cells & set(_TIME_KEYS) and cells & set(_COLUMN_NAMES["o"]) and cells & set(_COLUMN_NAMES["c"]):
+            return i
+    return 0
+
+
+def _delimiter(header: str) -> str:
+    return max((",", ";", "\t"), key=header.count)
 
 
 def infer_interval(candles: List[Candle]) -> int:
@@ -120,30 +154,38 @@ def infer_interval(candles: List[Candle]) -> int:
 
 def load_csv(path: str | Path, label: Optional[str] = None, interval_s: Optional[int] = None) -> Dataset:
     path = Path(path)
-    with path.open(newline="", encoding="utf-8-sig") as handle:
-        reader = csv.DictReader(handle)
-        if not reader.fieldnames:
-            raise ValueError(f"{path} has no header row")
-        names = {name.strip().lower(): name for name in reader.fieldnames}
-        time_col = next((names[k] for k in _TIME_KEYS if k in names), None)
-        if time_col is None:
-            raise ValueError("The CSV needs a time column named time, timestamp, date, or datetime")
-        cols = {}
-        for key, options in _COLUMN_NAMES.items():
-            found = next((names[o] for o in options if o in names), None)
-            if found is None and key != "v":
-                raise ValueError(f"The CSV needs a column for {options[0]}")
-            cols[key] = found
-        rows = []
-        for row in reader:
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    lines = lines[_header_start(lines):]
+    if not lines:
+        raise ValueError(f"{path} has no header row")
+    reader = csv.DictReader(lines, delimiter=_delimiter(lines[0]))
+    if not reader.fieldnames:
+        raise ValueError(f"{path} has no header row")
+    names = {name.strip().lower(): name for name in reader.fieldnames if name}
+    time_col = next((names[k] for k in _TIME_KEYS if k in names), None)
+    if time_col is None:
+        raise ValueError("The CSV needs a time column named time, timestamp, date, or datetime")
+    cols = {}
+    for key, options in _COLUMN_NAMES.items():
+        found = next((names[o] for o in options if o in names), None)
+        if found is None and key == "v":
+            found = next((original for lowered, original in names.items() if lowered.startswith("vol")), None)
+        if found is None and key != "v":
+            raise ValueError(f"The CSV needs a column for {options[0]}")
+        cols[key] = found
+    rows = []
+    for row in reader:
+        try:
             try:
-                volume = float(row[cols["v"]]) if cols["v"] and row[cols["v"]] not in ("", None) else 0.0
-                rows.append(Candle(
-                    parse_time_cell(row[time_col]), float(row[cols["o"]]), float(row[cols["h"]]),
-                    float(row[cols["l"]]), float(row[cols["c"]]), volume,
-                ))
-            except (ValueError, TypeError, KeyError):
-                continue
+                volume = parse_number(row[cols["v"]]) if cols["v"] else 0.0
+            except (ValueError, TypeError):
+                volume = 0.0  # a missing or odd volume never costs a whole candle
+            rows.append(Candle(
+                parse_time_cell(row[time_col]), parse_number(row[cols["o"]]), parse_number(row[cols["h"]]),
+                parse_number(row[cols["l"]]), parse_number(row[cols["c"]]), volume,
+            ))
+        except (ValueError, TypeError, KeyError, AttributeError):
+            continue
     candles = clean_candles(rows)
     if len(candles) < 50:
         raise ValueError(f"Only {len(candles)} usable candles found in {path}")

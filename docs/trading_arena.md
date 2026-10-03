@@ -46,7 +46,7 @@ A bull and a bear with the same stake always have opposite results, so the game 
    ```
    python -m trading_arena fetch --pair btcusd
    ```
-   This downloads daily candles from a public exchange feed (no key needed) into `WareHouse/arena/data/`. Other choices are `--source coinbase` or `--source binance`. If your network blocks those sites, use your own file instead: a CSV with a header and the columns time, open, high, low, close, volume. Time can be a unix timestamp or a date.
+   This downloads daily candles from a public exchange feed (no key needed) into `WareHouse/arena/data/`. Other choices are `--source coinbase` or `--source binance`. If your network blocks those sites, use your own file instead: a CSV with a header and the columns time, open, high, low, close, volume. Time can be a unix timestamp or a date. The loader also copes with common download layouts: a line of text above the header (as CryptoDataDownload files have), commas inside numbers, month name dates, semicolon separators, volumes ending in K or M, and newest first order. Add `--tv-symbol BITSTAMP:BTCUSD` (or whichever exchange the file came from) so the replay page can tell you what to open on TradingView.
 3. **Run it for free with mock analysts** to see the whole flow on real candles:
    ```
    python -m trading_arena run --csv WareHouse/arena/data/btcusd_1d.csv --agents mock --scenarios 30
@@ -108,7 +108,7 @@ Notes:
 
 ## What was tested, and what was not
 
-* The code has 139 automated tests (`python -m pytest tests/test_trading_arena_core.py tests/test_trading_arena_scoring.py tests/test_trading_arena_report_cli.py`). They cover the indicators, the settlement rules (gaps, same candle touches, slippage, timeouts), the exchange parsers with fake responses, bet parsing, the runner, every scoring formula, the learning loop, the reports and the command line. The tests use mock analysts, made up prices and stand in model clients, so they need no network and no key.
+* The code has 144 automated tests (`python -m pytest tests/test_trading_arena_core.py tests/test_trading_arena_scoring.py tests/test_trading_arena_report_cli.py`). They cover the indicators, the settlement rules (gaps, same candle touches, slippage, timeouts), the exchange parsers with fake responses, bet parsing, the runner, every scoring formula, the learning loop, the reports and the command line. The tests use mock analysts, made up prices and stand in model clients, so they need no network and no key.
 * The replay page was checked in a real browser at desktop and phone sizes, in light and dark mode, including hostile text in a model's answer.
 * **Not tested here:** a download from a real exchange (the build environment blocked those sites) and a run with a real language model. Expect to tune after your first real run, and read the first report with a mentor.
 * The mock analysts have no skill on purpose. A test checks that they do not look skilled, which guards the scoring against flattering noise.

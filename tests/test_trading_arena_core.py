@@ -234,6 +234,62 @@ def test_csv_round_trip_and_flexible_headers(tmp_path):
     assert len(tv.candles) == 56 and tv.interval_s == 86400
 
 
+def dated_rows(fmt, start=(2021, 1, 1), n=60):
+    from datetime import datetime, timedelta
+
+    day0 = datetime(*start)
+    return [(day0 + timedelta(days=i)).strftime(fmt) for i in range(n)]
+
+
+def test_csv_with_a_website_line_above_the_header_and_newest_first(tmp_path):
+    """The layout used by CryptoDataDownload: a link on line one, unix times, two volume columns."""
+    days = dated_rows("%Y-%m-%d 00:00:00")
+    lines = ["https://www.CryptoDataDownload.com", "unix,date,symbol,open,high,low,close,Volume BTC,Volume USD"]
+    for i, day in reversed(list(enumerate(days))):
+        t = (1609459200 + i * 86400) * 1000  # milliseconds
+        lines.append(f"{t},{day},BTC/USD,{100 + i},{103 + i},{98 + i},{101 + i},{10 + i},{999999}")
+    path = tmp_path / "Bitstamp_BTCUSD_d.csv"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    ds = D.load_csv(path)
+    assert len(ds.candles) == 60 and ds.interval_s == 86400
+    assert ds.candles[0].t == 1609459200 and ds.candles[0].o == 100 and ds.candles[0].v == 10  # BTC volume, oldest first
+    assert [c.t for c in ds.candles] == sorted(c.t for c in ds.candles)
+
+
+def test_csv_with_commas_in_numbers_and_k_endings(tmp_path):
+    """The layout used by Investing.com: quoted numbers, a Price column, month name dates, newest first."""
+    days = dated_rows("%b %d, %Y")
+    lines = ['"Date","Price","Open","High","Low","Vol.","Change %"']
+    for i, day in reversed(list(enumerate(days))):
+        lines.append(f'"{day}","{48000 + i:,}.5","{47000 + i:,}","{49000 + i:,}.1","{46500 + i:,}","1.23K","2.1%"')
+    path = tmp_path / "inv.csv"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    ds = D.load_csv(path)
+    assert len(ds.candles) == 60 and ds.interval_s == 86400
+    first = ds.candles[0]
+    assert (first.c, first.o, first.h, first.l, first.v) == (48000.5, 47000.0, 49000.1, 46500.0, 1230.0)
+    assert D.fmt_time(first.t, 86400) == "2021-01-01"
+
+
+def test_csv_with_semicolons_and_an_odd_volume_column(tmp_path):
+    days = dated_rows("%Y-%m-%d")
+    lines = ["Timestamp;Open;High;Low;Close;Volume_(BTC);Volume_(Currency)"]
+    lines += [f"{d};{10 + i};{12 + i};{9 + i};{11 + i};{5 + i};-" for i, d in enumerate(days)]
+    path = tmp_path / "eu.csv"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    ds = D.load_csv(path)
+    assert len(ds.candles) == 60 and ds.candles[3].v == 8
+
+
+def test_a_bad_volume_never_costs_the_candle(tmp_path):
+    days = dated_rows("%Y-%m-%d")
+    lines = ["time,open,high,low,close,volume"] + [f"{d},10,12,9,11,{'-' if i % 2 else 5}" for i, d in enumerate(days)]
+    path = tmp_path / "v.csv"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    ds = D.load_csv(path)
+    assert len(ds.candles) == 60 and ds.candles[1].v == 0.0 and ds.candles[2].v == 5.0
+
+
 def test_csv_errors_are_clear(tmp_path):
     bad = tmp_path / "bad.csv"
     bad.write_text("a,b\n1,2\n")
@@ -246,6 +302,18 @@ def test_time_cell_parsing():
     assert D.parse_time_cell("1700000000000") == 1700000000
     assert D.parse_time_cell("2024-01-01") == 1704067200
     assert D.parse_time_cell("2024-01-01T00:00:00Z") == 1704067200
+    assert D.parse_time_cell("Jan 1, 2024") == D.parse_time_cell("January 01, 2024") == D.parse_time_cell("2024/01/01") == 1704067200
+    assert D.parse_time_cell("01-Jan-2024") == 1704067200
+    with pytest.raises(ValueError, match="Cannot read the time"):
+        D.parse_time_cell("last tuesday")
+
+
+def test_number_parsing():
+    assert D.parse_number("1,234.5") == 1234.5 and D.parse_number(" 7 ") == 7.0
+    assert D.parse_number("1.5K") == 1500.0 and D.parse_number("2m") == 2e6 and D.parse_number("3B") == 3e9
+    for bad in ("", "-", "abc", "K"):
+        with pytest.raises(ValueError):
+            D.parse_number(bad)
 
 
 def test_exchange_parsers_with_documented_shapes():
