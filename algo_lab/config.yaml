@@ -1,0 +1,50 @@
+# Algo Trading Lab settings.
+# Every number here is a DEFAULT. Change it here, never inside the code.
+# PAPER TRADING ONLY: nothing in this lab places a real order, and it needs no API key and no paid service.
+
+# The asset universe. Add or remove entries freely.
+#   symbol  short name used in reports and file names
+#   kind    stock, etf or crypto
+#   sector  my own simple grouping, used later to cap how much sits in one group
+#   yahoo   the name Yahoo Finance uses, only needed when it differs from symbol
+assets:
+  - symbol: SPY
+    kind: etf
+    sector: Index funds
+  - symbol: QQQ
+    kind: etf
+    sector: Index funds
+  - symbol: AAPL
+    kind: stock
+    sector: Technology
+  - symbol: MSFT
+    kind: stock
+    sector: Technology
+  - symbol: NVDA
+    kind: stock
+    sector: Technology
+  - symbol: JPM
+    kind: stock
+    sector: Financials
+  - symbol: QNT
+    kind: crypto
+    sector: Crypto
+    yahoo: QNT-USD
+
+data:
+  interval: 1d                 # daily bars. Only 1d works so far.
+  history_years: 10            # how much history to ask for (a younger coin simply has fewer years)
+  adjusted: true               # prices adjusted for stock splits and dividends (stocks and ETFs)
+  min_bars: 400                # fewer bars than this and the Data Bot stops (the 200 bar average and the HMM need history)
+  confirm_delay_minutes: 30    # a bar only counts this many minutes after its session ends
+  stale_after_days:            # a newest finished bar older than this means STOP
+    us: 4                      # US stocks and ETFs: covers a weekend plus one holiday
+    crypto: 2                  # crypto trades every day
+  max_gap_days:                # a hole in the history bigger than this is flagged
+    us: 5
+    crypto: 1
+  extreme_move_pct: 40         # a one day move bigger than this is flagged, it may be a data error
+  ohlc_tolerance_pct: 0.05     # rounding slack when checking that high and low contain open and close
+  bad_rows_stop_pct: 5         # if more than this share of rows had to be removed, the data is not trusted
+  folder: WareHouse/algo_lab/data        # real downloaded data
+  demo_folder: WareHouse/algo_lab/demo   # made up data lives here and is never mixed with real data
