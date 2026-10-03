@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Trading Arena Replay</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f4f6f8; --card: #ffffff; --ink: #14181f; --muted: #566170; --line: #d8dde4;
+  --accent: #0f766e; --accentInk: #ffffff; --accentSoft: #d9f2ee;
+  --up: #15803d; --down: #b91c1c; --upBg: #dcfce7; --downBg: #fee2e2; --warn: #92400e; --warnBg: #fef3c7;
+  --zoneUp: rgba(21,128,61,0.10); --zoneDown: rgba(185,28,28,0.10); --future: rgba(86,97,112,0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1116; --card: #171c24; --ink: #e8ecf2; --muted: #9aa5b4; --line: #2a313c;
+    --accent: #2dd4bf; --accentInk: #062b27; --accentSoft: #123a37;
+    --up: #4ade80; --down: #f87171; --upBg: #123220; --downBg: #3b1616; --warn: #fbbf24; --warnBg: #3a2e0f;
+    --zoneUp: rgba(74,222,128,0.12); --zoneDown: rgba(248,113,113,0.12); --future: rgba(154,165,180,0.07);
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 18px 16px 60px; }
+h1 { font-size: 1.5rem; margin: 0 0 2px; }
+h2 { font-size: 1.1rem; margin: 0; }
+h3 { font-size: 1rem; margin: 0 0 8px; }
+.sub { color: var(--muted); margin: 0 0 14px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 16px; align-items: start; }
+.layout > nav, .layout > main { min-width: 0; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+#list { display: flex; flex-direction: column; gap: 6px; max-height: 80vh; overflow-y: auto; padding-right: 2px; }
+#list button { text-align: left; display: flex; justify-content: space-between; gap: 6px; align-items: center; }
+button, select {
+  font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 12px; min-height: 40px; cursor: pointer;
+}
+button.primary { background: var(--accent); color: var(--accentInk); border-color: var(--accent); font-weight: 600; }
+button[aria-current="true"] { border-color: var(--accent); background: var(--accentSoft); }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; background: var(--accentSoft); color: var(--accent); }
+.pill.up { background: var(--upBg); color: var(--up); }
+.pill.down { background: var(--downBg); color: var(--down); }
+.meta { color: var(--muted); font-size: 0.9rem; margin: 4px 0 8px; }
+svg#chart { width: 100%; height: auto; display: block; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.controls label { display: flex; gap: 6px; align-items: center; font-size: 0.9rem; color: var(--muted); }
+#clock { color: var(--muted); font-size: 0.9rem; margin-left: auto; }
+#banner { margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--accentSoft); min-height: 44px; }
+#banner.up { background: var(--upBg); color: var(--up); }
+#banner.down { background: var(--downBg); color: var(--down); }
+#banner.flat { background: var(--warnBg); color: var(--warn); }
+.teams { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.team h3 { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.team h3 .score { font-weight: 600; }
+.bet { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; font-size: 0.9rem; }
+.bet .top { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-weight: 600; }
+.bet .case { color: var(--muted); margin: 4px 0 0; overflow-wrap: anywhere; }
+.bet .result { margin-top: 4px; font-weight: 600; }
+.bet.right { border-color: var(--up); }
+.bet.wrong { border-color: var(--down); }
+.up { color: var(--up); } .down { color: var(--down); }
+.tv ol { margin: 6px 0 0; padding-left: 1.3em; }
+.tv li { margin: 4px 0; }
+.note { color: var(--muted); font-size: 0.88rem; margin-top: 8px; }
+details summary { cursor: pointer; font-weight: 600; }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  #list { flex-direction: row; max-height: none; overflow-x: auto; overflow-y: hidden; padding-bottom: 6px; }
+  #list button { flex: none; }
+  .teams { grid-template-columns: 1fr; }
+  #clock { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Trading Arena replay</h1>
+    <p class="sub" id="sub"></p>
+  </header>
+  <div class="layout">
+    <nav aria-label="Scenarios"><div id="list"></div></nav>
+    <main>
+      <section class="card">
+        <div class="row"><h2 id="title"></h2><span class="pill" id="pill"></span></div>
+        <div class="meta" id="meta"></div>
+        <svg id="chart" viewBox="0 0 900 420" role="img" aria-label="Candlestick chart that reveals the future one candle at a time"></svg>
+        <div class="controls">
+          <button type="button" id="reset" aria-keyshortcuts="R">Reset</button>
+          <button type="button" id="back" aria-keyshortcuts="ArrowLeft">Step back</button>
+          <button type="button" id="play" class="primary" aria-keyshortcuts="Space">Play</button>
+          <button type="button" id="step" aria-keyshortcuts="ArrowRight">Step</button>
+          <label>Speed
+            <select id="speed"><option value="1">1x</option><option value="2" selected>2x</option><option value="5">5x</option><option value="10">10x</option><option value="30">30x</option></select>
+          </label>
+          <label><input type="checkbox" id="pauseOnResult" checked> Pause at the result</label>
+          <span id="clock"></span>
+        </div>
+        <div id="banner" role="status" aria-live="polite"></div>
+      </section>
+      <section class="teams" aria-label="Bets">
+        <div class="card team"><h3>Bulls bet the target comes first <span class="score" id="bullScore"></span></h3><div id="bulls"></div></div>
+        <div class="card team"><h3>Bears bet it does not <span class="score" id="bearScore"></span></h3><div id="bears"></div></div>
+      </section>
+      <section class="card"><details><summary>Reference bots (simple rules to beat)</summary><div id="refs" style="margin-top:8px"></div></details></section>
+      <section class="card tv" id="tv"></section>
+      <section class="card" id="overall"></section>
+    </main>
+  </div>
+</div>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  'use strict';
+  var DATA = JSON.parse(document.getElementById('data').textContent);
+  var S = DATA.scenarios;
+  var cur = 0, shown = 0, timer = null, played = {};
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function date(t) {
+    var d = new Date(t * 1000);
+    var s = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+    if (DATA.meta.intraday) s += ' ' + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' }) + ' UTC';
+    return s;
+  }
+  function money(x) { return (x >= 0 ? 'plus ' : 'minus ') + Math.abs(x).toFixed(2); }
+  function px(x) { return x >= 1000 ? x.toFixed(0) : x >= 10 ? x.toFixed(2) : x.toFixed(4); }
+  function pct(x) { return Math.round(x * 100) + ' percent'; }
+  function resolved(sc) { return shown > sc.outcome.k; }
+
+  function renderList() {
+    $('list').innerHTML = S.map(function (sc, i) {
+      var tag = played[i] ? '<span class="pill ' + (sc.outcome.result === 'WIN' ? 'up' : sc.outcome.result === 'LOSS' ? 'down' : '') + '">' + sc.outcome.result + '</span>' : '<span class="pill">new</span>';
+      return '<button type="button" data-i="' + i + '"' + (i === cur ? ' aria-current="true"' : '') + '><span>#' + sc.id + ' ' + esc(date(sc.decision_t)) + '</span>' + tag + '</button>';
+    }).join('');
+  }
+
+  function draw() {
+    var sc = S[cur], W = 900, H = 420, L = 8, R = 96, T = 14, B = 22;
+    var vis = sc.window.concat(sc.future.slice(0, shown));
+    var slots = sc.window.length + sc.future.length;
+    var cw = (W - L - R) / slots;
+    var lo = Infinity, hi = -Infinity;
+    vis.forEach(function (c) { lo = Math.min(lo, c[3]); hi = Math.max(hi, c[2]); });
+    [sc.setup.stop, sc.setup.target, sc.setup.ref].forEach(function (p) { lo = Math.min(lo, p); hi = Math.max(hi, p); });
+    var pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+    function x(i) { return L + (i + 0.5) * cw; }
+    function y(p) { return T + (hi - p) / (hi - lo) * (H - T - B); }
+    var out = [];
+    var fx = L + sc.window.length * cw;
+    out.push('<rect x="' + fx + '" y="' + T + '" width="' + (W - R - fx) + '" height="' + (H - T - B) + '" fill="var(--future)"/>');
+    out.push('<rect x="' + fx + '" y="' + y(sc.setup.target) + '" width="' + (W - R - fx) + '" height="' + (y(sc.setup.ref) - y(sc.setup.target)) + '" fill="var(--zoneUp)"/>');
+    out.push('<rect x="' + fx + '" y="' + y(sc.setup.ref) + '" width="' + (W - R - fx) + '" height="' + (y(sc.setup.stop) - y(sc.setup.ref)) + '" fill="var(--zoneDown)"/>');
+    var levels = [['TARGET', sc.setup.target, 'var(--up)'], ['STOP', sc.setup.stop, 'var(--down)'], ['CLOSE', sc.setup.ref, 'var(--muted)']];
+    for (var g = 0; g <= 4; g++) {
+      var gp = lo + (hi - lo) * g / 4;
+      out.push('<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(gp) + '" y2="' + y(gp) + '" stroke="var(--line)" stroke-width="1"/>');
+      var clash = levels.some(function (l) { return Math.abs(y(l[1]) - y(gp)) < 16; });
+      if (!clash) out.push('<text x="' + (W - R + 6) + '" y="' + (y(gp) + 4) + '" font-size="11" fill="var(--muted)">' + px(gp) + '</text>');
+    }
+    levels.forEach(function (l) {
+      out.push('<line x1="' + fx + '" x2="' + (W - R) + '" y1="' + y(l[1]) + '" y2="' + y(l[1]) + '" stroke="' + l[2] + '" stroke-width="1.5" stroke-dasharray="6 4"/>');
+      out.push('<text x="' + (W - R + 6) + '" y="' + (y(l[1]) + 4) + '" font-size="11" font-weight="700" fill="' + l[2] + '">' + l[0] + ' ' + px(l[1]) + '</text>');
+    });
+    out.push('<line x1="' + fx + '" x2="' + fx + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--muted)" stroke-dasharray="3 3"/>');
+    out.push('<text x="' + (fx - 6) + '" y="' + (H - 6) + '" font-size="11" text-anchor="end" fill="var(--muted)">now</text>');
+    out.push('<text x="' + (fx + 6) + '" y="' + (H - 6) + '" font-size="11" fill="var(--muted)">hidden future</text>');
+    var cutoff = sc.window.length + sc.outcome.k;
+    vis.forEach(function (c, i) {
+      var up = c[4] >= c[1], col = up ? 'var(--up)' : 'var(--down)';
+      var dim = i > cutoff ? ' opacity="0.4"' : '';
+      var top = y(Math.max(c[1], c[4])), bot = y(Math.min(c[1], c[4]));
+      out.push('<g' + dim + '><line x1="' + x(i) + '" x2="' + x(i) + '" y1="' + y(c[2]) + '" y2="' + y(c[3]) + '" stroke="' + col + '" stroke-width="1.2"/>' +
+        '<rect x="' + (x(i) - cw * 0.34) + '" y="' + top + '" width="' + (cw * 0.68) + '" height="' + Math.max(1.5, bot - top) + '" fill="' + col + '"/></g>');
+    });
+    if (resolved(sc)) {
+      var xi = x(sc.window.length + sc.outcome.k), yi = y(sc.outcome.exit);
+      var label = sc.outcome.result === 'WIN' ? 'TARGET HIT' : sc.outcome.result === 'LOSS' ? 'STOP HIT' : 'TIME UP';
+      out.push('<circle cx="' + xi + '" cy="' + yi + '" r="7" fill="none" stroke="var(--ink)" stroke-width="2"/>');
+      out.push('<text x="' + (xi - 10) + '" y="' + (yi - 12) + '" font-size="12" font-weight="700" text-anchor="end" fill="var(--ink)">' + label + '</text>');
+    }
+    $('chart').innerHTML = out.join('');
+  }
+
+  function betCard(b, done, rr) {
+    var cls = 'bet', res = 'Waiting for the result';
+    if (done) {
+      var right = b.payoff > 0;
+      cls += right ? ' right' : ' wrong';
+      res = '<span class="' + (right ? 'up' : 'down') + '">' + (b.valid ? money(b.payoff) + (right ? ', right' : ', wrong') : 'No bet placed, minus 1.00') + '</span>';
+    }
+    if (!b.valid) return '<div class="' + cls + '"><div class="top"><span>' + esc(b.name) + '</span><span>no bet</span></div><div class="result">' + res + '</div></div>';
+    return '<div class="' + cls + '"><div class="top"><span>' + esc(b.name) + '</span><span>' + pct(b.p) + ', stake ' + b.stake.toFixed(1) + '</span></div>' +
+      '<div class="case">' + esc(b.case) + (b.risk ? ' Risk: ' + esc(b.risk) : '') + '</div><div class="result">' + res + '</div></div>';
+  }
+
+  function renderBets() {
+    var sc = S[cur], done = resolved(sc);
+    var bulls = sc.bets.filter(function (b) { return b.side === 'bull'; });
+    var bears = sc.bets.filter(function (b) { return b.side === 'bear'; });
+    $('bulls').innerHTML = bulls.map(function (b) { return betCard(b, done, sc.setup.rr); }).join('');
+    $('bears').innerHTML = bears.map(function (b) { return betCard(b, done, sc.setup.rr); }).join('');
+    function total(list) { return list.reduce(function (a, b) { return a + b.payoff; }, 0); }
+    $('bullScore').textContent = done ? money(total(bulls)) : '';
+    $('bearScore').textContent = done ? money(total(bears)) : '';
+    $('refs').innerHTML = sc.refs.map(function (b) {
+      var line = esc(b.name) + ': ' + pct(b.p) + ' that the target comes first, bets ' + b.side;
+      return '<div class="bet"><div class="top"><span>' + line + '</span></div><div class="result">' +
+        (done ? '<span class="' + (b.payoff > 0 ? 'up' : 'down') + '">' + money(b.payoff) + '</span>' : 'Waiting for the result') + '</div></div>';
+    }).join('');
+  }
+
+  function renderBanner() {
+    var sc = S[cur], o = sc.outcome, el = $('banner');
+    el.className = '';
+    if (shown === 0) { el.textContent = 'The bets are in. Press play and each step reveals one more candle.'; return; }
+    if (!resolved(sc)) { el.textContent = 'Candle ' + shown + ' of ' + sc.setup.horizon + '. Nothing has been decided yet.'; return; }
+    var head = o.result === 'WIN' ? 'TARGET HIT after ' + (o.k + 1) + (o.k === 0 ? ' candle. Bulls win.' : ' candles. Bulls win.')
+      : o.result === 'LOSS' ? 'STOP HIT after ' + (o.k + 1) + (o.k === 0 ? ' candle. Bears win.' : ' candles. Bears win.')
+      : 'TIME UP after ' + sc.setup.horizon + ' candles. The target was not touched. Bears win.';
+    el.className = o.result === 'WIN' ? 'up' : o.result === 'LOSS' ? 'down' : 'flat';
+    el.textContent = head + ' The trade made ' + money(o.r_gross) + ' R before fees and ' + money(o.r_net) + ' R after fees.';
+  }
+
+  function renderTv() {
+    var sc = S[cur], m = DATA.meta;
+    var sym = m.tv_symbol ? m.tv_symbol : 'the same coin and exchange as your data';
+    if (m.synthetic) {
+      $('tv').innerHTML = '<h3>Check it yourself on TradingView</h3><p class="note">These prices are made up, so there is nothing to check on TradingView. Run the arena with real candles to use it.</p>';
+      return;
+    }
+    $('tv').innerHTML = '<h3>Check it yourself on TradingView</h3><ol>' +
+      '<li>Open the chart for <strong>' + esc(sym) + '</strong> on the <strong>' + esc(m.interval) + '</strong> timeframe.</li>' +
+      '<li>Click <strong>Replay</strong> in the top toolbar, choose <strong>Select bar</strong>, and click the candle dated <strong>' + esc(date(sc.decision_t)) + '</strong>.</li>' +
+      '<li>Press play and watch the next ' + sc.setup.horizon + ' candles. The entry is the open of the next candle, the stop is ' + px(sc.setup.stop) + ', and the target is ' + px(sc.setup.target) + '.</li>' +
+      '<li>Compare with the result here: <strong>' + esc(sc.outcome.result) + '</strong> after ' + (sc.outcome.k + 1) + ' candles.</li></ol>' +
+      '<p class="note">TradingView reportedly allows Replay on the free plan only for daily and longer candles. Its candles can differ a little from ours. Use it by eye only. Its terms do not allow copying its data into tools like this lab.</p>';
+  }
+
+  function renderMeta() {
+    var sc = S[cur], s = sc.setup;
+    $('title').textContent = 'Scenario ' + sc.id + ' of ' + S.length + ', decided on ' + date(sc.decision_t);
+    $('meta').textContent = 'Long setup. Stop ' + px(s.stop) + ', target ' + px(s.target) + ', reward to risk ' + s.rr.toFixed(1) + ' to 1, horizon ' + s.horizon + ' candles. The analysts saw the candles to the left of the line called now, scaled and without dates.';
+    var p = $('pill');
+    if (played[cur]) { p.textContent = sc.outcome.result; p.className = 'pill ' + (sc.outcome.result === 'WIN' ? 'up' : sc.outcome.result === 'LOSS' ? 'down' : ''); }
+    else { p.textContent = 'result hidden'; p.className = 'pill'; }
+    $('clock').textContent = 'Candle ' + shown + ' of ' + s.horizon;
+  }
+
+  function render() {
+    if (resolved(S[cur])) played[cur] = true;
+    renderMeta(); draw(); renderBanner(); renderBets(); renderList();
+  }
+
+  function stop() { if (timer) { clearInterval(timer); timer = null; } $('play').textContent = 'Play'; }
+  function step() {
+    var sc = S[cur];
+    if (shown >= sc.future.length) { stop(); return; }
+    shown++;
+    render();
+    if (shown === sc.outcome.k + 1 && $('pauseOnResult').checked) stop();
+    if (shown >= sc.future.length) stop();
+  }
+  function play() {
+    if (timer) { stop(); return; }
+    if (shown >= S[cur].future.length) shown = 0;
+    $('play').textContent = 'Pause';
+    timer = setInterval(step, Math.max(40, 700 / Number($('speed').value)));
+    step();
+  }
+  function select(i) { stop(); cur = i; shown = 0; render(); renderTv(); }
+
+  $('list').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-i]');
+    if (b) select(Number(b.getAttribute('data-i')));
+  });
+  $('play').addEventListener('click', play);
+  $('step').addEventListener('click', function () { stop(); step(); });
+  $('back').addEventListener('click', function () { stop(); if (shown > 0) { shown--; render(); } });
+  $('reset').addEventListener('click', function () { stop(); shown = 0; render(); });
+  $('speed').addEventListener('change', function () { if (timer) { stop(); play(); } });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.target.closest && ev.target.closest('select, input')) return;
+    if (ev.key === ' ' && ev.target === document.body) { ev.preventDefault(); play(); }
+    else if (ev.key === 'ArrowRight') { stop(); step(); }
+    else if (ev.key === 'ArrowLeft') { stop(); if (shown > 0) { shown--; render(); } }
+    else if (ev.key === 'r' || ev.key === 'R') { stop(); shown = 0; render(); }
+  });
+
+  var m = DATA.meta, sm = DATA.summary;
+  var lbl = m.label;
+  if (lbl.toLowerCase().indexOf(m.interval.toLowerCase()) < 0) lbl += ', ' + m.interval + ' candles';
+  $('sub').textContent = lbl + ', ' + S.length + ' scenarios. Play money only. Model: ' + m.model + (m.offline ? ' (offline demo with no skill)' : '') + '.';
+  $('overall').innerHTML = '<h3>Over all ' + S.length + ' scenarios</h3><p>' + esc(sm.verdict) + '</p>' +
+    '<p>Bulls ended ' + esc(money(sm.bull_pnl)) + ' points and bears ended ' + esc(money(sm.bear_pnl)) + ' points. The setup hit its target in ' +
+    esc(pct(sm.observed_win_rate)) + ' of scenarios. Fair odds say ' + esc(pct(sm.fair_odds_win_rate)) + ', and break even after costs is ' + esc(pct(sm.breakeven_after_costs)) + '.</p>' +
+    '<p class="note">A bull and a bear with the same stake always have opposite payoffs. The full numbers are in report.md.</p>';
+  render(); renderTv();
+})();
+</script>
+</body>
+</html>
