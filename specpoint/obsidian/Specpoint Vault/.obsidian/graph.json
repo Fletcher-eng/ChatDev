@@ -1,0 +1,65 @@
+{
+  "collapse-filter": false,
+  "search": "-path:Templates -path:graphify-out -file:CLAUDE",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:\"Biology/Key terms\"",
+      "color": {
+        "a": 1,
+        "rgb": 16762624
+      }
+    },
+    {
+      "query": "path:\"Biology/Notes\"",
+      "color": {
+        "a": 1,
+        "rgb": 3429104
+      }
+    },
+    {
+      "query": "path:\"Biology/Topics\"",
+      "color": {
+        "a": 1,
+        "rgb": 708483
+      }
+    },
+    {
+      "query": "path:\"Biology/Flashcards\" OR path:\"Biology/Practice\"",
+      "color": {
+        "a": 1,
+        "rgb": 9425919
+      }
+    },
+    {
+      "query": "path:Subjects",
+      "color": {
+        "a": 1,
+        "rgb": 15879710
+      }
+    },
+    {
+      "query": "path:\"My study\" OR path:\"My flashcards\"",
+      "color": {
+        "a": 1,
+        "rgb": 16752324
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1.2,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.5,
+  "repelStrength": 12,
+  "linkStrength": 1,
+  "linkDistance": 220,
+  "scale": 1,
+  "close": false
+}

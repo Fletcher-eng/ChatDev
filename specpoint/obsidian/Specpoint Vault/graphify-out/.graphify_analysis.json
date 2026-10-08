@@ -1,0 +1,244 @@
+{
+  "communities": {
+    "0": [
+      "biology_flashcards_biology_3_flashcards",
+      "biology_key_terms_active_transport",
+      "biology_key_terms_cell_membrane",
+      "biology_key_terms_concentration_gradient",
+      "biology_key_terms_diffusion",
+      "biology_key_terms_kinetic_energy",
+      "biology_key_terms_mitochondria",
+      "biology_key_terms_protein_carriers",
+      "biology_key_terms_respiration",
+      "biology_key_terms_root_hair_cell",
+      "biology_key_terms_surface_area",
+      "biology_notes_biology_3_1_diffusion",
+      "biology_notes_biology_3_3_active_transport",
+      "biology_practice_biology_3_exam_questions",
+      "biology_topics_biology_11_gas_exchange_in_humans",
+      "biology_topics_biology_12_respiration",
+      "biology_topics_biology_3_movement_into_and_out_of_cells"
+    ],
+    "1": [
+      "biology_key_terms_cytoplasm",
+      "biology_key_terms_ribosomes",
+      "biology_topics_biology_13_excretion_in_humans",
+      "biology_topics_biology_14_coordination_and_response",
+      "biology_topics_biology_15_drugs",
+      "biology_topics_biology_16_reproduction",
+      "biology_topics_biology_17_inheritance",
+      "biology_topics_biology_18_variation_and_selection",
+      "biology_topics_biology_19_organisms_and_their_environment",
+      "biology_topics_biology_20_human_influences_on_ecosystems",
+      "biology_topics_biology_4_biological_molecules",
+      "biology_topics_biology_5_enzymes",
+      "subjects_biology"
+    ],
+    "2": [
+      "biology_key_terms_cell_wall",
+      "biology_key_terms_flaccid",
+      "biology_key_terms_large_permanent_vacuole",
+      "biology_key_terms_osmosis",
+      "biology_key_terms_partially_permeable_membrane",
+      "biology_key_terms_percentage_change",
+      "biology_key_terms_plasmolysis",
+      "biology_key_terms_turgid",
+      "biology_key_terms_turgor_pressure",
+      "biology_key_terms_water_potential",
+      "biology_notes_biology_3_2_osmosis",
+      "biology_topics_biology_8_transport_in_plants"
+    ],
+    "3": [
+      "my_study_exam_dates",
+      "my_study_mistake_book",
+      "my_study_past_papers_tracker",
+      "subjects_chemistry",
+      "subjects_design_and_technology",
+      "subjects_economics",
+      "subjects_english_language",
+      "subjects_english_literature",
+      "subjects_global_perspectives",
+      "subjects_mathematics",
+      "subjects_physics",
+      "subjects_spanish"
+    ],
+    "4": [
+      "biology_key_terms_animal_cell",
+      "biology_key_terms_chloroplasts",
+      "biology_key_terms_nucleus",
+      "biology_key_terms_palisade_mesophyll_cell",
+      "biology_key_terms_photosynthesis",
+      "biology_key_terms_plant_cell",
+      "biology_topics_biology_6_plant_nutrition",
+      "biology_topics_biology_7_human_nutrition"
+    ],
+    "5": [
+      "biology_key_terms_cellulose",
+      "biology_key_terms_neurone",
+      "biology_key_terms_organ",
+      "biology_key_terms_organ_system",
+      "biology_key_terms_specialised_cell",
+      "biology_key_terms_sperm_and_egg_cells",
+      "biology_key_terms_tissue",
+      "biology_notes_biology_2_1_cell_structure"
+    ],
+    "6": [
+      "biology_flashcards_biology_2_flashcards",
+      "biology_key_terms_magnification",
+      "biology_key_terms_micrometre",
+      "biology_notes_biology_2_2_size_of_specimens",
+      "biology_practice_biology_2_exam_questions",
+      "biology_topics_biology_2_organisation_of_the_organism"
+    ],
+    "7": [
+      "biology_key_terms_bacterial_cell",
+      "biology_key_terms_circular_dna",
+      "biology_key_terms_plasmids",
+      "biology_topics_biology_1_characteristics_and_classification_of_living_organisms",
+      "biology_topics_biology_21_biotechnology_and_genetic_engineering"
+    ],
+    "8": [
+      "biology_key_terms_ciliated_cell",
+      "biology_key_terms_red_blood_cell",
+      "biology_topics_biology_10_diseases_and_immunity",
+      "biology_topics_biology_9_transport_in_animals"
+    ]
+  },
+  "cohesion": {
+    "0": 0.38235294117647056,
+    "1": 0.28205128205128205,
+    "2": 0.4393939393939394,
+    "3": 0.4090909090909091,
+    "4": 0.42857142857142855,
+    "5": 0.42857142857142855,
+    "6": 0.6666666666666666,
+    "7": 0.7,
+    "8": 0.5
+  },
+  "gods": [
+    {
+      "id": "biology_topics_biology_2_organisation_of_the_organism",
+      "label": "Biology 2 Organisation of the organism",
+      "degree": 47
+    },
+    {
+      "id": "biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "Biology 3 Movement into and out of cells",
+      "degree": 34
+    },
+    {
+      "id": "subjects_biology",
+      "label": "Biology",
+      "degree": 33
+    },
+    {
+      "id": "biology_notes_biology_2_1_cell_structure",
+      "label": "Biology 2.1 Cell structure",
+      "degree": 30
+    },
+    {
+      "id": "biology_notes_biology_3_2_osmosis",
+      "label": "Biology 3.2 Osmosis",
+      "degree": 18
+    },
+    {
+      "id": "biology_key_terms_osmosis",
+      "label": "Osmosis",
+      "degree": 15
+    },
+    {
+      "id": "biology_key_terms_cell_membrane",
+      "label": "Cell membrane",
+      "degree": 14
+    },
+    {
+      "id": "biology_notes_biology_3_3_active_transport",
+      "label": "Biology 3.3 Active transport",
+      "degree": 13
+    },
+    {
+      "id": "biology_topics_biology_8_transport_in_plants",
+      "label": "Biology 8 Transport in plants",
+      "degree": 13
+    },
+    {
+      "id": "biology_key_terms_diffusion",
+      "label": "Diffusion",
+      "degree": 13
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Biology 2.1 Cell structure",
+      "target": "Biology",
+      "source_files": [
+        "Biology/Notes/Biology 2.1 Cell structure.md",
+        "Subjects/Biology.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Biology 2.2 Size of specimens",
+      "target": "Biology",
+      "source_files": [
+        "Biology/Notes/Biology 2.2 Size of specimens.md",
+        "Subjects/Biology.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Biology 3.1 Diffusion",
+      "target": "Biology",
+      "source_files": [
+        "Biology/Notes/Biology 3.1 Diffusion.md",
+        "Subjects/Biology.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Biology 3.2 Osmosis",
+      "target": "Biology",
+      "source_files": [
+        "Biology/Notes/Biology 3.2 Osmosis.md",
+        "Subjects/Biology.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Biology 3.3 Active transport",
+      "target": "Biology",
+      "source_files": [
+        "Biology/Notes/Biology 3.3 Active transport.md",
+        "Subjects/Biology.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Biology` connect `Biology map, molecules and later topics` to `Diffusion, respiration and active transport`, `Osmosis and water in cells`, `Your subjects and study pages`, `Cell types and nutrition`, `Specialised cells and organisation`, `Size of specimens and magnification`, `Bacteria, DNA and biotechnology`, `Cells for transport and defence`?",
+      "why": "High betweenness centrality (0.316) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Biology 2 Organisation of the organism` connect `Size of specimens and magnification` to `Diffusion, respiration and active transport`, `Biology map, molecules and later topics`, `Osmosis and water in cells`, `Cell types and nutrition`, `Specialised cells and organisation`, `Bacteria, DNA and biotechnology`, `Cells for transport and defence`?",
+      "why": "High betweenness centrality (0.306) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Biology 3 Movement into and out of cells` connect `Diffusion, respiration and active transport` to `Biology map, molecules and later topics`, `Osmosis and water in cells`, `Cell types and nutrition`, `Size of specimens and magnification`, `Cells for transport and defence`?",
+      "why": "High betweenness centrality (0.164) - this node is a cross-community bridge."
+    }
+  ]
+}

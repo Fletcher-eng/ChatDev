@@ -1542,6 +1542,29 @@ function drawNav(){
 }
 let PAPER_TIMER = null;
 
+/* ================= EXPORT TO OBSIDIAN ================= */
+let DL;
+async function getDL(){ if(DL === undefined){ try{ DL = (window.claude && window.claude.use) ? await window.claude.use("downloads") : null; }catch(e){ DL = null; } } return DL; }
+function showExport(root){ getDL().then(dl=>{ if(dl) root.querySelectorAll(".obs-btn").forEach(b=>b.hidden = false); }); }
+const today = () => new Date().toLocaleDateString("en-CA");
+const fileSafe = t => (t.replace(/[\\/:*?"<>|#^\[\]]/g,"").replace(/\s+/g," ").trim() || "Specpoint export").slice(0,80);
+const oneLine = t => String(t).replace(/\s*\n\s*/g," ").replace(/::/g,": ").trim();
+async function saveMd(filename, text){
+  const dl = await getDL(); if(!dl) return;
+  try{ await dl.save({filename, data:text}); toast("Saved. <b>Drop it into your vault.</b>"); }
+  catch(e){ const c = e && e.code; if(c==="declined") return; toast(c==="rate_limited" ? "One moment, then try again" : "Saving is not available here"); }
+}
+function deckMarkdown(d){
+  const tag = d.name.toLowerCase().replace(/[^a-z0-9]+/g,"").slice(0,30) || "mydeck";
+  return `---\ntype: flashcards\nsource: Specpoint\nexported: ${today()}\n---\n# ${oneLine(d.name)}\n\n#flashcards/${tag}\n\n` +
+    d.cards.filter(c=>c.f.trim() && c.b.trim()).map(c=>`${oneLine(c.f)}::${oneLine(c.b)}`).join("\n\n") + `\n\nExported from Specpoint. Keep it in My flashcards.\n`;
+}
+function mistakesMarkdown(){
+  const list = Object.values(S.mistakes||{}).sort((a,b)=>b.date-a.date);
+  return `---\ntype: mistakes\nsource: Specpoint\nexported: ${today()}\n---\n# Specpoint mistakes ${today()}\n\n${list.length} question${list.length===1?"":"s"} to fix. Add them to [[Mistake book]] or redo them here.\n\n` +
+    list.map((m,i)=>`## ${i+1}. ${oneLine(m.src)}\n**${oneLine(m.q)}**\n\nMissed ${m.count} time${m.count===1?"":"s"}.\n\n> [!success]- Answer\n> ${oneLine(m.num!==undefined ? m.num+" "+m.unit : m.a)}${m.t?`\n> ${oneLine(m.t)}`:""}\n`).join("\n");
+}
+
 /* ================= MISTAKE BOOK ================= */
 function mistakeKey(q){ let h = 0; for(const ch of q.q) h = (h*31 + ch.charCodeAt(0))|0; return "m"+(h>>>0).toString(36); }
 function logMistake(q, src, where){
@@ -1554,7 +1577,8 @@ function renderMistakes(){
   setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Mistake book"}]);
   const list = Object.entries(S.mistakes||{}).sort((a,b)=>b[1].date-a[1].date);
   app.innerHTML = `<div class="pagehead"><h1 class="ph">Mistake book</h1>
-    <p>Every question you get wrong on Specpoint lands here automatically. Get it right once and it is cleared. ${list.length?`<b>${list.length} to fix</b>`:""}</p></div>
+    <p>Every question you get wrong on Specpoint lands here automatically. Get it right once and it is cleared. ${list.length?`<b>${list.length} to fix</b>`:""}</p>
+    ${list.length?`<div class="row"><button class="btn quiet obs-btn" id="exp-mistakes" hidden>Export to Obsidian</button></div>`:""}</div>
     ${list.length ? `<ol class="mlist">${list.map(([k,m])=>`<li class="mitem" data-m="${k}">
       <div class="m-top"><span class="m-src">${esc(m.src)}</span><span class="m-times">${m.count>1?`Missed ${m.count} times`:"Missed once"}</span></div>
       <p class="qt">${esc(m.q)}</p>
@@ -1562,6 +1586,7 @@ function renderMistakes(){
     </li>`).join("")}</ol>`
     : `<div class="empty"><p class="hand-note">Nothing here yet. That is a good thing.</p><p>When you get a quick check, boss fight, starter quiz or multiple choice paper question wrong, it will appear here so you can fix it.</p></div>`}`;
   app.querySelectorAll("[data-where]").forEach(b=>b.onclick=()=>go(S.mistakes[b.dataset.where].where));
+  const em = document.getElementById("exp-mistakes"); if(em){ em.onclick = ()=>saveMd(`Specpoint mistakes ${today()}.md`, mistakesMarkdown()); showExport(app); }
   app.querySelectorAll("[data-redo]").forEach(b=>b.onclick=()=>{
     const k = b.dataset.redo, m = S.mistakes[k], body = app.querySelector(`[data-m="${k}"] .m-body`);
     const done = ok=>{
@@ -1604,7 +1629,7 @@ function renderDecks(){
     ${S.decks.length ? `<ul class="decks">${S.decks.map(d=>{ const due = dueCards(d).length; return `<li class="deck-tile" style="--c:${d.color}">
       <div class="dt-name">${esc(d.name)}</div>
       <div class="dt-meta">${d.cards.length} card${d.cards.length===1?"":"s"} · <b>${due} due</b></div>
-      <div class="row"><button class="btn" data-study="${d.id}" ${d.cards.length?"":"disabled"}>Study</button><button class="btn quiet" data-edit="${d.id}">Edit</button></div></li>`; }).join("")}</ul>`
+      <div class="row"><button class="btn" data-study="${d.id}" ${d.cards.length?"":"disabled"}>Study</button><button class="btn quiet" data-edit="${d.id}">Edit</button><button class="btn quiet obs-btn" data-export="${d.id}" ${d.cards.length?"":"disabled"} hidden>Export to Obsidian</button></div></li>`; }).join("")}</ul>`
       : `<div class="empty"><p class="hand-note">No decks yet.</p><p>Start a new deck, or copy one of the topic decks below and make it your own.</p></div>`}
     <h2 class="h2" style="margin-top:36px">Topic decks</h2>
     <ul class="decks">${Object.entries(TOPICS).map(([n,T])=>`<li class="deck-tile" style="--c:${COVERS.bio}">
@@ -1614,6 +1639,8 @@ function renderDecks(){
   document.getElementById("new-deck").onclick = ()=>{ const d = {id:newId(), name:"My new deck", color:DECK_COLOURS[S.decks.length % DECK_COLOURS.length], front:"q", cards:[]}; S.decks.unshift(d); save(); go({view:"deck", id:d.id}); };
   app.querySelectorAll("[data-study]").forEach(b=>b.onclick=()=>go({view:"study", id:b.dataset.study}));
   app.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>go({view:"deck", id:b.dataset.edit}));
+  app.querySelectorAll("[data-export]").forEach(b=>b.onclick=()=>{ const d = findDeck(b.dataset.export); saveMd(`${fileSafe(d.name)}.md`, deckMarkdown(d)); });
+  showExport(app);
   app.querySelectorAll("[data-topic]").forEach(b=>b.onclick=()=>go({view:"topic", topic:+b.dataset.topic, tab:"cards"}));
   app.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{
     const n = +b.dataset.copy, T = TOPICS[n];

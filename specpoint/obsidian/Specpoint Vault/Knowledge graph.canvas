@@ -1,0 +1,2061 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Diffusion, respiration and active transport",
+      "x": 0,
+      "y": 0,
+      "width": 1100,
+      "height": 520,
+      "color": "1"
+    },
+    {
+      "id": "n_biology_key_terms_active_transport",
+      "type": "file",
+      "file": "Biology/Key terms/Active transport.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "type": "file",
+      "file": "Biology/Topics/Biology 11 Gas exchange in humans.md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_12_respiration",
+      "type": "file",
+      "file": "Biology/Topics/Biology 12 Respiration.md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_practice_biology_3_exam_questions",
+      "type": "file",
+      "file": "Biology/Practice/Biology 3 Exam questions.md",
+      "x": 620,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_flashcards_biology_3_flashcards",
+      "type": "file",
+      "file": "Biology/Flashcards/Biology 3 Flashcards.md",
+      "x": 820,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "type": "file",
+      "file": "Biology/Topics/Biology 3 Movement into and out of cells.md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_notes_biology_3_1_diffusion",
+      "type": "file",
+      "file": "Biology/Notes/Biology 3.1 Diffusion.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_notes_biology_3_3_active_transport",
+      "type": "file",
+      "file": "Biology/Notes/Biology 3.3 Active transport.md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_cell_membrane",
+      "type": "file",
+      "file": "Biology/Key terms/Cell membrane.md",
+      "x": 620,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_concentration_gradient",
+      "type": "file",
+      "file": "Biology/Key terms/Concentration gradient.md",
+      "x": 820,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_diffusion",
+      "type": "file",
+      "file": "Biology/Key terms/Diffusion.md",
+      "x": 20,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_kinetic_energy",
+      "type": "file",
+      "file": "Biology/Key terms/Kinetic energy.md",
+      "x": 220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_mitochondria",
+      "type": "file",
+      "file": "Biology/Key terms/Mitochondria.md",
+      "x": 420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_protein_carriers",
+      "type": "file",
+      "file": "Biology/Key terms/Protein carriers.md",
+      "x": 620,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_respiration",
+      "type": "file",
+      "file": "Biology/Key terms/Respiration.md",
+      "x": 820,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_root_hair_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Root hair cell.md",
+      "x": 20,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_surface_area",
+      "type": "file",
+      "file": "Biology/Key terms/Surface area.md",
+      "x": 220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Biology map, molecules and later topics",
+      "x": 1180,
+      "y": 0,
+      "width": 880,
+      "height": 520,
+      "color": "2"
+    },
+    {
+      "id": "n_subjects_biology",
+      "type": "file",
+      "file": "Subjects/Biology.md",
+      "x": 1200,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_13_excretion_in_humans",
+      "type": "file",
+      "file": "Biology/Topics/Biology 13 Excretion in humans.md",
+      "x": 1400,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_14_coordination_and_response",
+      "type": "file",
+      "file": "Biology/Topics/Biology 14 Coordination and response.md",
+      "x": 1600,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_15_drugs",
+      "type": "file",
+      "file": "Biology/Topics/Biology 15 Drugs.md",
+      "x": 1800,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_16_reproduction",
+      "type": "file",
+      "file": "Biology/Topics/Biology 16 Reproduction.md",
+      "x": 1200,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_17_inheritance",
+      "type": "file",
+      "file": "Biology/Topics/Biology 17 Inheritance.md",
+      "x": 1400,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_18_variation_and_selection",
+      "type": "file",
+      "file": "Biology/Topics/Biology 18 Variation and selection.md",
+      "x": 1600,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_19_organisms_and_their_environment",
+      "type": "file",
+      "file": "Biology/Topics/Biology 19 Organisms and their environment.md",
+      "x": 1800,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_20_human_influences_on_ecosystems",
+      "type": "file",
+      "file": "Biology/Topics/Biology 20 Human influences on ecosystems.md",
+      "x": 1200,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_4_biological_molecules",
+      "type": "file",
+      "file": "Biology/Topics/Biology 4 Biological molecules.md",
+      "x": 1400,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_5_enzymes",
+      "type": "file",
+      "file": "Biology/Topics/Biology 5 Enzymes.md",
+      "x": 1600,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_cytoplasm",
+      "type": "file",
+      "file": "Biology/Key terms/Cytoplasm.md",
+      "x": 1800,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_ribosomes",
+      "type": "file",
+      "file": "Biology/Key terms/Ribosomes.md",
+      "x": 1200,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Osmosis and water in cells",
+      "x": 2140,
+      "y": 0,
+      "width": 880,
+      "height": 420,
+      "color": "3"
+    },
+    {
+      "id": "n_biology_notes_biology_3_2_osmosis",
+      "type": "file",
+      "file": "Biology/Notes/Biology 3.2 Osmosis.md",
+      "x": 2160,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_8_transport_in_plants",
+      "type": "file",
+      "file": "Biology/Topics/Biology 8 Transport in plants.md",
+      "x": 2360,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_cell_wall",
+      "type": "file",
+      "file": "Biology/Key terms/Cell wall.md",
+      "x": 2560,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_flaccid",
+      "type": "file",
+      "file": "Biology/Key terms/Flaccid.md",
+      "x": 2760,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_large_permanent_vacuole",
+      "type": "file",
+      "file": "Biology/Key terms/Large permanent vacuole.md",
+      "x": 2160,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_osmosis",
+      "type": "file",
+      "file": "Biology/Key terms/Osmosis.md",
+      "x": 2360,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_partially_permeable_membrane",
+      "type": "file",
+      "file": "Biology/Key terms/Partially permeable membrane.md",
+      "x": 2560,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_percentage_change",
+      "type": "file",
+      "file": "Biology/Key terms/Percentage change.md",
+      "x": 2760,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_plasmolysis",
+      "type": "file",
+      "file": "Biology/Key terms/Plasmolysis.md",
+      "x": 2160,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_turgid",
+      "type": "file",
+      "file": "Biology/Key terms/Turgid.md",
+      "x": 2360,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_turgor_pressure",
+      "type": "file",
+      "file": "Biology/Key terms/Turgor pressure.md",
+      "x": 2560,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_water_potential",
+      "type": "file",
+      "file": "Biology/Key terms/Water potential.md",
+      "x": 2760,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "Your subjects and study pages",
+      "x": 0,
+      "y": 600,
+      "width": 880,
+      "height": 420,
+      "color": "4"
+    },
+    {
+      "id": "n_subjects_chemistry",
+      "type": "file",
+      "file": "Subjects/Chemistry.md",
+      "x": 20,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_design_and_technology",
+      "type": "file",
+      "file": "Subjects/Design and Technology.md",
+      "x": 220,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_economics",
+      "type": "file",
+      "file": "Subjects/Economics.md",
+      "x": 420,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_english_language",
+      "type": "file",
+      "file": "Subjects/English Language.md",
+      "x": 620,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_english_literature",
+      "type": "file",
+      "file": "Subjects/English Literature.md",
+      "x": 20,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_my_study_exam_dates",
+      "type": "file",
+      "file": "My study/Exam dates.md",
+      "x": 220,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_global_perspectives",
+      "type": "file",
+      "file": "Subjects/Global Perspectives.md",
+      "x": 420,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_mathematics",
+      "type": "file",
+      "file": "Subjects/Mathematics.md",
+      "x": 620,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_my_study_mistake_book",
+      "type": "file",
+      "file": "My study/Mistake book.md",
+      "x": 20,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_my_study_past_papers_tracker",
+      "type": "file",
+      "file": "My study/Past papers tracker.md",
+      "x": 220,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_physics",
+      "type": "file",
+      "file": "Subjects/Physics.md",
+      "x": 420,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_subjects_spanish",
+      "type": "file",
+      "file": "Subjects/Spanish.md",
+      "x": 620,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Cell types and nutrition",
+      "x": 1180,
+      "y": 600,
+      "width": 660,
+      "height": 420,
+      "color": "5"
+    },
+    {
+      "id": "n_biology_key_terms_animal_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Animal cell.md",
+      "x": 1200,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_6_plant_nutrition",
+      "type": "file",
+      "file": "Biology/Topics/Biology 6 Plant nutrition.md",
+      "x": 1400,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_7_human_nutrition",
+      "type": "file",
+      "file": "Biology/Topics/Biology 7 Human nutrition.md",
+      "x": 1600,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_chloroplasts",
+      "type": "file",
+      "file": "Biology/Key terms/Chloroplasts.md",
+      "x": 1200,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_nucleus",
+      "type": "file",
+      "file": "Biology/Key terms/Nucleus.md",
+      "x": 1400,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_palisade_mesophyll_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Palisade mesophyll cell.md",
+      "x": 1600,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_photosynthesis",
+      "type": "file",
+      "file": "Biology/Key terms/Photosynthesis.md",
+      "x": 1200,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_plant_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Plant cell.md",
+      "x": 1400,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "Specialised cells and organisation",
+      "x": 2140,
+      "y": 600,
+      "width": 660,
+      "height": 420,
+      "color": "6"
+    },
+    {
+      "id": "n_biology_notes_biology_2_1_cell_structure",
+      "type": "file",
+      "file": "Biology/Notes/Biology 2.1 Cell structure.md",
+      "x": 2160,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_cellulose",
+      "type": "file",
+      "file": "Biology/Key terms/Cellulose.md",
+      "x": 2360,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_neurone",
+      "type": "file",
+      "file": "Biology/Key terms/Neurone.md",
+      "x": 2560,
+      "y": 680,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_organ",
+      "type": "file",
+      "file": "Biology/Key terms/Organ.md",
+      "x": 2160,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_organ_system",
+      "type": "file",
+      "file": "Biology/Key terms/Organ system.md",
+      "x": 2360,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_specialised_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Specialised cell.md",
+      "x": 2560,
+      "y": 760,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_sperm_and_egg_cells",
+      "type": "file",
+      "file": "Biology/Key terms/Sperm and egg cells.md",
+      "x": 2160,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_tissue",
+      "type": "file",
+      "file": "Biology/Key terms/Tissue.md",
+      "x": 2360,
+      "y": 840,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "Size of specimens and magnification",
+      "x": 0,
+      "y": 1100,
+      "width": 660,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_biology_practice_biology_2_exam_questions",
+      "type": "file",
+      "file": "Biology/Practice/Biology 2 Exam questions.md",
+      "x": 20,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_flashcards_biology_2_flashcards",
+      "type": "file",
+      "file": "Biology/Flashcards/Biology 2 Flashcards.md",
+      "x": 220,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "type": "file",
+      "file": "Biology/Topics/Biology 2 Organisation of the organism.md",
+      "x": 420,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_notes_biology_2_2_size_of_specimens",
+      "type": "file",
+      "file": "Biology/Notes/Biology 2.2 Size of specimens.md",
+      "x": 20,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_magnification",
+      "type": "file",
+      "file": "Biology/Key terms/Magnification.md",
+      "x": 220,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_micrometre",
+      "type": "file",
+      "file": "Biology/Key terms/Micrometre.md",
+      "x": 420,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g7",
+      "type": "group",
+      "label": "Bacteria, DNA and biotechnology",
+      "x": 1180,
+      "y": 1100,
+      "width": 660,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_biology_key_terms_bacterial_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Bacterial cell.md",
+      "x": 1200,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_1_characteristics_and_classification_of_living_organisms",
+      "type": "file",
+      "file": "Biology/Topics/Biology 1 Characteristics and classification of living organisms.md",
+      "x": 1400,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_21_biotechnology_and_genetic_engineering",
+      "type": "file",
+      "file": "Biology/Topics/Biology 21 Biotechnology and genetic engineering.md",
+      "x": 1600,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_circular_dna",
+      "type": "file",
+      "file": "Biology/Key terms/Circular DNA.md",
+      "x": 1200,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_plasmids",
+      "type": "file",
+      "file": "Biology/Key terms/Plasmids.md",
+      "x": 1400,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g8",
+      "type": "group",
+      "label": "Cells for transport and defence",
+      "x": 2140,
+      "y": 1100,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_biology_topics_biology_10_diseases_and_immunity",
+      "type": "file",
+      "file": "Biology/Topics/Biology 10 Diseases and immunity.md",
+      "x": 2160,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_topics_biology_9_transport_in_animals",
+      "type": "file",
+      "file": "Biology/Topics/Biology 9 Transport in animals.md",
+      "x": 2360,
+      "y": 1180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_ciliated_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Ciliated cell.md",
+      "x": 2160,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_biology_key_terms_red_blood_cell",
+      "type": "file",
+      "file": "Biology/Key terms/Red blood cell.md",
+      "x": 2360,
+      "y": 1260,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_flashcards_biology_2_flashcards",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_flashcards_biology_2_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_animal_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_animal_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_bacterial_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_bacterial_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_cell_membrane",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_cell_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_cell_wall",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_cell_wall",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_cellulose",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_cellulose",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_chloroplasts",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_chloroplasts",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_ciliated_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_ciliated_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_circular_dna",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_circular_dna",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_cytoplasm",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_cytoplasm",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_large_permanent_vacuole",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_large_permanent_vacuole",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_mitochondria",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_mitochondria",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_neurone",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_neurone",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_nucleus",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_nucleus",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_organ",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_organ",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_organ_system",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_organ_system",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_palisade_mesophyll_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_palisade_mesophyll_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_photosynthesis",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_photosynthesis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_plant_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_plant_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_plasmids",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_plasmids",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_red_blood_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_red_blood_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_respiration",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_ribosomes",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_ribosomes",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_root_hair_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_root_hair_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_specialised_cell",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_specialised_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_sperm_and_egg_cells",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_sperm_and_egg_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_key_terms_tissue",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_key_terms_tissue",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_practice_biology_2_exam_questions",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_practice_biology_2_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_biology_topics_biology_2_organisation_of_the_organism",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_1_cell_structure_subjects_biology",
+      "fromNode": "n_biology_notes_biology_2_1_cell_structure",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_2_size_of_specimens_biology_flashcards_biology_2_flashcards",
+      "fromNode": "n_biology_notes_biology_2_2_size_of_specimens",
+      "toNode": "n_biology_flashcards_biology_2_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_2_size_of_specimens_biology_key_terms_magnification",
+      "fromNode": "n_biology_notes_biology_2_2_size_of_specimens",
+      "toNode": "n_biology_key_terms_magnification",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_2_size_of_specimens_biology_key_terms_micrometre",
+      "fromNode": "n_biology_notes_biology_2_2_size_of_specimens",
+      "toNode": "n_biology_key_terms_micrometre",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_2_size_of_specimens_biology_practice_biology_2_exam_questions",
+      "fromNode": "n_biology_notes_biology_2_2_size_of_specimens",
+      "toNode": "n_biology_practice_biology_2_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_2_size_of_specimens_biology_topics_biology_2_organisation_of_the_organism",
+      "fromNode": "n_biology_notes_biology_2_2_size_of_specimens",
+      "toNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_2_2_size_of_specimens_subjects_biology",
+      "fromNode": "n_biology_notes_biology_2_2_size_of_specimens",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_flashcards_biology_3_flashcards",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_flashcards_biology_3_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_key_terms_cell_membrane",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_key_terms_cell_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_key_terms_concentration_gradient",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_key_terms_concentration_gradient",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_key_terms_diffusion",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_key_terms_diffusion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_key_terms_kinetic_energy",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_key_terms_kinetic_energy",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_key_terms_surface_area",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_key_terms_surface_area",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_practice_biology_3_exam_questions",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_practice_biology_3_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_1_diffusion_subjects_biology",
+      "fromNode": "n_biology_notes_biology_3_1_diffusion",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_flashcards_biology_3_flashcards",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_flashcards_biology_3_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_cell_membrane",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_cell_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_cell_wall",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_cell_wall",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_diffusion",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_diffusion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_flaccid",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_flaccid",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_large_permanent_vacuole",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_large_permanent_vacuole",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_osmosis",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_osmosis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_partially_permeable_membrane",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_partially_permeable_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_percentage_change",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_percentage_change",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_plasmolysis",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_plasmolysis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_red_blood_cell",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_red_blood_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_root_hair_cell",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_root_hair_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_turgid",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_turgid",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_turgor_pressure",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_turgor_pressure",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_key_terms_water_potential",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_key_terms_water_potential",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_practice_biology_3_exam_questions",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_practice_biology_3_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_2_osmosis_subjects_biology",
+      "fromNode": "n_biology_notes_biology_3_2_osmosis",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_flashcards_biology_3_flashcards",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_flashcards_biology_3_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_active_transport",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_active_transport",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_cell_membrane",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_cell_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_concentration_gradient",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_concentration_gradient",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_diffusion",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_diffusion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_mitochondria",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_mitochondria",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_osmosis",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_osmosis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_protein_carriers",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_protein_carriers",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_respiration",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_key_terms_root_hair_cell",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_key_terms_root_hair_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_practice_biology_3_exam_questions",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_practice_biology_3_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_notes_biology_3_3_active_transport_subjects_biology",
+      "fromNode": "n_biology_notes_biology_3_3_active_transport",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_flashcards_biology_2_flashcards_biology_topics_biology_2_organisation_of_the_organism",
+      "fromNode": "n_biology_flashcards_biology_2_flashcards",
+      "toNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_subjects_biology_biology_flashcards_biology_2_flashcards",
+      "fromNode": "n_subjects_biology",
+      "toNode": "n_biology_flashcards_biology_2_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_flashcards_biology_3_flashcards_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "fromNode": "n_biology_flashcards_biology_3_flashcards",
+      "toNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_subjects_biology_biology_flashcards_biology_3_flashcards",
+      "fromNode": "n_subjects_biology",
+      "toNode": "n_biology_flashcards_biology_3_flashcards",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_practice_biology_2_exam_questions_biology_topics_biology_2_organisation_of_the_organism",
+      "fromNode": "n_biology_practice_biology_2_exam_questions",
+      "toNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_practice_biology_2_exam_questions_my_study_mistake_book",
+      "fromNode": "n_biology_practice_biology_2_exam_questions",
+      "toNode": "n_my_study_mistake_book",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_subjects_biology_biology_practice_biology_2_exam_questions",
+      "fromNode": "n_subjects_biology",
+      "toNode": "n_biology_practice_biology_2_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_practice_biology_3_exam_questions_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "fromNode": "n_biology_practice_biology_3_exam_questions",
+      "toNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_practice_biology_3_exam_questions_my_study_mistake_book",
+      "fromNode": "n_biology_practice_biology_3_exam_questions",
+      "toNode": "n_my_study_mistake_book",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_subjects_biology_biology_practice_biology_3_exam_questions",
+      "fromNode": "n_subjects_biology",
+      "toNode": "n_biology_practice_biology_3_exam_questions",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_1_characteristics_and_classification_of_living_organisms_biology_key_terms_bacterial_cell",
+      "fromNode": "n_biology_topics_biology_1_characteristics_and_classification_of_living_organisms",
+      "toNode": "n_biology_key_terms_bacterial_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_1_characteristics_and_classification_of_living_organisms_biology_topics_biology_2_organisation_of_the_organism",
+      "fromNode": "n_biology_topics_biology_1_characteristics_and_classification_of_living_organisms",
+      "toNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_1_characteristics_and_classification_of_living_organisms_subjects_biology",
+      "fromNode": "n_biology_topics_biology_1_characteristics_and_classification_of_living_organisms",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_animal_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_animal_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_bacterial_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_bacterial_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_cell_membrane",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_cell_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_cell_wall",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_cell_wall",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_cellulose",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_cellulose",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_chloroplasts",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_chloroplasts",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_ciliated_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_ciliated_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_circular_dna",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_circular_dna",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_cytoplasm",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_cytoplasm",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_large_permanent_vacuole",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_large_permanent_vacuole",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_magnification",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_magnification",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_micrometre",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_micrometre",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_mitochondria",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_mitochondria",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_neurone",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_neurone",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_nucleus",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_nucleus",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_organ",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_organ",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_organ_system",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_organ_system",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_palisade_mesophyll_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_palisade_mesophyll_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_photosynthesis",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_photosynthesis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_plant_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_plant_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_plasmids",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_plasmids",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_red_blood_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_red_blood_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_respiration",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_ribosomes",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_ribosomes",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_root_hair_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_root_hair_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_specialised_cell",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_specialised_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_sperm_and_egg_cells",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_sperm_and_egg_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_key_terms_tissue",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_key_terms_tissue",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_10_diseases_and_immunity",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_10_diseases_and_immunity",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_11_gas_exchange_in_humans",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_12_respiration",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_12_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_14_coordination_and_response",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_14_coordination_and_response",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_16_reproduction",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_16_reproduction",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_17_inheritance",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_17_inheritance",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_21_biotechnology_and_genetic_engineering",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_21_biotechnology_and_genetic_engineering",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_4_biological_molecules",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_4_biological_molecules",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_5_enzymes",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_5_enzymes",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_6_plant_nutrition",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_6_plant_nutrition",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_8_transport_in_plants",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_8_transport_in_plants",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_biology_topics_biology_9_transport_in_animals",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_biology_topics_biology_9_transport_in_animals",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_2_organisation_of_the_organism_subjects_biology",
+      "fromNode": "n_biology_topics_biology_2_organisation_of_the_organism",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_active_transport",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_active_transport",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_cell_membrane",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_cell_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_cell_wall",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_cell_wall",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_concentration_gradient",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_concentration_gradient",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_diffusion",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_diffusion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_flaccid",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_flaccid",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_kinetic_energy",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_kinetic_energy",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_large_permanent_vacuole",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_large_permanent_vacuole",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_mitochondria",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_mitochondria",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_osmosis",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_osmosis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_partially_permeable_membrane",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_partially_permeable_membrane",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_percentage_change",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_percentage_change",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_plasmolysis",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_plasmolysis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_protein_carriers",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_protein_carriers",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_red_blood_cell",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_red_blood_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_respiration",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_root_hair_cell",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_root_hair_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_surface_area",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_surface_area",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_turgid",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_turgid",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_turgor_pressure",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_turgor_pressure",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_key_terms_water_potential",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_key_terms_water_potential",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_topics_biology_11_gas_exchange_in_humans",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_topics_biology_12_respiration",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_topics_biology_12_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_topics_biology_4_biological_molecules",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_topics_biology_4_biological_molecules",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_topics_biology_6_plant_nutrition",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_topics_biology_6_plant_nutrition",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_topics_biology_8_transport_in_plants",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_topics_biology_8_transport_in_plants",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_biology_topics_biology_9_transport_in_animals",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_biology_topics_biology_9_transport_in_animals",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_3_movement_into_and_out_of_cells_subjects_biology",
+      "fromNode": "n_biology_topics_biology_3_movement_into_and_out_of_cells",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_4_biological_molecules_biology_key_terms_cellulose",
+      "fromNode": "n_biology_topics_biology_4_biological_molecules",
+      "toNode": "n_biology_key_terms_cellulose",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_4_biological_molecules_biology_key_terms_ribosomes",
+      "fromNode": "n_biology_topics_biology_4_biological_molecules",
+      "toNode": "n_biology_key_terms_ribosomes",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_4_biological_molecules_biology_topics_biology_5_enzymes",
+      "fromNode": "n_biology_topics_biology_4_biological_molecules",
+      "toNode": "n_biology_topics_biology_5_enzymes",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_4_biological_molecules_subjects_biology",
+      "fromNode": "n_biology_topics_biology_4_biological_molecules",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_5_enzymes_biology_key_terms_cytoplasm",
+      "fromNode": "n_biology_topics_biology_5_enzymes",
+      "toNode": "n_biology_key_terms_cytoplasm",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_5_enzymes_biology_topics_biology_6_plant_nutrition",
+      "fromNode": "n_biology_topics_biology_5_enzymes",
+      "toNode": "n_biology_topics_biology_6_plant_nutrition",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_5_enzymes_subjects_biology",
+      "fromNode": "n_biology_topics_biology_5_enzymes",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_biology_key_terms_chloroplasts",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_biology_key_terms_chloroplasts",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_biology_key_terms_diffusion",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_biology_key_terms_diffusion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_biology_key_terms_palisade_mesophyll_cell",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_biology_key_terms_palisade_mesophyll_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_biology_key_terms_photosynthesis",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_biology_key_terms_photosynthesis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_biology_key_terms_plant_cell",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_biology_key_terms_plant_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_biology_topics_biology_7_human_nutrition",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_biology_topics_biology_7_human_nutrition",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_6_plant_nutrition_subjects_biology",
+      "fromNode": "n_biology_topics_biology_6_plant_nutrition",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_7_human_nutrition_biology_topics_biology_8_transport_in_plants",
+      "fromNode": "n_biology_topics_biology_7_human_nutrition",
+      "toNode": "n_biology_topics_biology_8_transport_in_plants",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_7_human_nutrition_subjects_biology",
+      "fromNode": "n_biology_topics_biology_7_human_nutrition",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_active_transport",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_active_transport",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_flaccid",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_flaccid",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_osmosis",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_osmosis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_plant_cell",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_plant_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_root_hair_cell",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_root_hair_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_turgid",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_turgid",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_turgor_pressure",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_turgor_pressure",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_key_terms_water_potential",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_key_terms_water_potential",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_biology_topics_biology_9_transport_in_animals",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_biology_topics_biology_9_transport_in_animals",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_8_transport_in_plants_subjects_biology",
+      "fromNode": "n_biology_topics_biology_8_transport_in_plants",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_9_transport_in_animals_biology_key_terms_organ_system",
+      "fromNode": "n_biology_topics_biology_9_transport_in_animals",
+      "toNode": "n_biology_key_terms_organ_system",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_9_transport_in_animals_biology_key_terms_red_blood_cell",
+      "fromNode": "n_biology_topics_biology_9_transport_in_animals",
+      "toNode": "n_biology_key_terms_red_blood_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_9_transport_in_animals_biology_topics_biology_10_diseases_and_immunity",
+      "fromNode": "n_biology_topics_biology_9_transport_in_animals",
+      "toNode": "n_biology_topics_biology_10_diseases_and_immunity",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_9_transport_in_animals_subjects_biology",
+      "fromNode": "n_biology_topics_biology_9_transport_in_animals",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_10_diseases_and_immunity_biology_key_terms_bacterial_cell",
+      "fromNode": "n_biology_topics_biology_10_diseases_and_immunity",
+      "toNode": "n_biology_key_terms_bacterial_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_10_diseases_and_immunity_biology_key_terms_ciliated_cell",
+      "fromNode": "n_biology_topics_biology_10_diseases_and_immunity",
+      "toNode": "n_biology_key_terms_ciliated_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_10_diseases_and_immunity_biology_topics_biology_11_gas_exchange_in_humans",
+      "fromNode": "n_biology_topics_biology_10_diseases_and_immunity",
+      "toNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_10_diseases_and_immunity_subjects_biology",
+      "fromNode": "n_biology_topics_biology_10_diseases_and_immunity",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_11_gas_exchange_in_humans_biology_key_terms_ciliated_cell",
+      "fromNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "toNode": "n_biology_key_terms_ciliated_cell",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_11_gas_exchange_in_humans_biology_key_terms_diffusion",
+      "fromNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "toNode": "n_biology_key_terms_diffusion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_11_gas_exchange_in_humans_biology_key_terms_surface_area",
+      "fromNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "toNode": "n_biology_key_terms_surface_area",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_11_gas_exchange_in_humans_biology_topics_biology_12_respiration",
+      "fromNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "toNode": "n_biology_topics_biology_12_respiration",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_11_gas_exchange_in_humans_subjects_biology",
+      "fromNode": "n_biology_topics_biology_11_gas_exchange_in_humans",
+      "toNode": "n_subjects_biology",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_12_respiration_biology_key_terms_mitochondria",
+      "fromNode": "n_biology_topics_biology_12_respiration",
+      "toNode": "n_biology_key_terms_mitochondria",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_biology_topics_biology_12_respiration_biology_key_terms_respiration",
+      "fromNode": "n_biology_topics_biology_12_respiration",
+      "toNode": "n_biology_key_terms_respiration",
+      "label": "references [EXTRACTED]"
+    }
+  ]
+}
