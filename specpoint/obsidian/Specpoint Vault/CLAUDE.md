@@ -6,11 +6,13 @@ This is the Specpoint study vault of an IGCSE student (Year 10, Cambridge and Ed
 
 - `Home.md`: start page.
 - `Subjects/`: one hub note per subject with syllabus codes. The student fills in `board` and `tier`.
-- `Biology/Topics/`: one note per 0610 syllabus topic (1 to 21). `status` says whether Specpoint notes exist.
-- `Biology/Notes/`: full notes per subtopic, like `Biology 3.2 Osmosis`.
-- `Biology/Key terms/`: one note per key idea with its definition and links. These are the hubs of the graph.
-- `Biology/Flashcards/`: cards as `question::answer` lines (Spaced Repetition plugin format).
-- `Biology/Practice/`: exam style questions with mark schemes inside folded `[!check]` callouts.
+- One folder per subject with Specpoint notes: `Biology/` (0610) and `Global Perspectives/` (0457). Inside each:
+  - `Topics/`: one note per topic or unit. `status` says whether Specpoint notes exist.
+  - `Notes/`: full notes per section, like `Biology 3.2 Osmosis` or `GP 1.1 SEEEL paragraphs`.
+  - `Key terms/`: one note per key idea with its definition and links. These are the hubs of the graph.
+  - `Flashcards/`: cards as `question::answer` lines (Spaced Repetition plugin format).
+  - `Practice/`: exam style questions with mark schemes inside folded `[!check]` callouts.
+  - `Memorise/` (GP): acronyms like SEEEL (Statement, Evidence, Explain, Evaluate, Link), PEEL, CRAAP and PESTLE, with self tests.
 - `My study/` and `My flashcards/`: the student's own pages.
 - `graphify-out/`: Graphify knowledge graph (`graph.json`, `GRAPH_REPORT.md`, `graph.html`).
 

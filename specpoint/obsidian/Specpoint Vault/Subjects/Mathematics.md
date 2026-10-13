@@ -17,11 +17,13 @@ Cambridge IGCSE 0580 · Pearson Edexcel International GCSE 4MA1
 
 Specpoint notes for Mathematics are on the way. Make a note for each topic as you go with the Topic note template, and link it here like `[[Mathematics 1 Topic name]]`.
 
-## Ideas shared with Biology
+## Ideas shared with other subjects
 
-- [[Magnification]]: the same ratio and rearranging skills
-- [[Surface area]]: calculating area and surface area to volume ratio
-- [[Percentage change]]: percentage change calculations
+- [[Magnification]] (Biology): the same ratio and rearranging skills
+- [[Surface area]] (Biology): calculating area and surface area to volume ratio
+- [[Percentage change]] (Biology): percentage change calculations
+- [[Quantitative data]] (Global Perspectives): statistics, averages and percentages
+- [[Sample]] (Global Perspectives): sampling in statistics
 
 ## Past papers and mistakes
 

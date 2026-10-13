@@ -59,14 +59,18 @@ def label_for(members):
 # label_for so the names stay sensible after rebuilds.
 RULES = [
     ("Mistake book", "Your subjects and study pages"),
-    ("Osmosis", "Osmosis and water in cells"),
-    ("Diffusion", "Diffusion, respiration and active transport"),
+    ("SEEEL", "GP: arguments, sources and SEEEL"),
+    ("Perspective", "GP: issues and perspectives"),
+    ("Primary research", "GP: research and the six skills"),
+    ("Osmosis", "Diffusion, osmosis and active transport"),
+    ("Diffusion", "Diffusion and active transport"),
     ("Bacterial cell", "Bacteria, DNA and biotechnology"),
-    ("Red blood cell", "Cells for transport and defence"),
-    ("Photosynthesis", "Cell types and nutrition"),
     ("Specialised cell", "Specialised cells and organisation"),
-    ("Magnification", "Size of specimens and magnification"),
-    ("Ribosomes", "Biology map, molecules and later topics"),
+    ("Red blood cell", "Cells for transport and defence"),
+    ("Photosynthesis", "Chloroplasts and photosynthesis"),
+    ("Magnification", "Cell parts and magnification"),
+    ("Ribosomes", "Ribosomes, cytoplasm and molecules"),
+    ("Biology", "Biology map and later topics"),
 ]
 
 

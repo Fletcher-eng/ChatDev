@@ -17,11 +17,11 @@ Cambridge IGCSE 0620 · Pearson Edexcel International GCSE 4CH1
 
 Specpoint notes for Chemistry are on the way. Make a note for each topic as you go with the Topic note template, and link it here like `[[Chemistry 1 Topic name]]`.
 
-## Ideas shared with Biology
+## Ideas shared with other subjects
 
-- [[Diffusion]]: particles spreading out in states of matter
-- [[Kinetic energy]]: particle theory and temperature
-- [[Percentage change]]: percentage yield and composition
+- [[Diffusion]] (Biology): particles spreading out in states of matter
+- [[Kinetic energy]] (Biology): particle theory and temperature
+- [[Percentage change]] (Biology): percentage yield and composition
 
 ## Past papers and mistakes
 

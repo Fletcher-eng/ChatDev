@@ -566,6 +566,37 @@ button{cursor:pointer}
 .r-snip{color:var(--ink2);font-size:15px}
 mark{background:var(--kt);color:inherit;padding:0 1px}
 
+/* memorise */
+.mem{display:flex;flex-direction:column;gap:18px;max-width:760px}
+.mem-sets{align-self:flex-start;max-width:100%}
+.mem-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;border-top:3px solid var(--rule);padding-top:12px}
+.mem-title{margin:0;font-stretch:68%;font-weight:900;text-transform:uppercase;font-size:clamp(40px,8vw,64px);line-height:.9}
+.mem-what{margin:4px 0 0;color:var(--ink2);font-weight:600}
+.mem-what .hand{font-family:var(--hand);font-weight:700;color:var(--pen);font-size:19px}
+.mem-modes{flex:0 1 420px}
+.mem-acr{margin:0;display:flex;gap:6px;flex-wrap:wrap}
+.mem-acr span{font-stretch:68%;font-weight:900;font-size:clamp(56px,14vw,104px);line-height:.85;color:var(--ink)}
+.mem-list{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--rule)}
+.mem-row{display:grid;grid-template-columns:60px minmax(0,1fr);gap:14px;align-items:center;padding:10px 0;border-bottom:1.5px solid var(--rule)}
+.mem-row > span:last-child{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mem-letter{width:56px;height:56px;display:grid;place-items:center;background:var(--c);color:#1A2360;font-weight:900;font-stretch:68%;font-size:34px;border:2.5px solid #1A2360}
+.mem-word{font-weight:900;font-stretch:68%;text-transform:uppercase;font-size:30px;line-height:1}
+.mem-mean{color:var(--ink2);font-size:16px}
+.mem-in{border:0;border-bottom:3px solid var(--ink);background:transparent;font-size:24px;font-weight:700;min-height:48px;padding:6px 2px;width:100%}
+.mem-in:focus{outline:none;background:var(--kt)}
+.mem-row.ok .mem-in{border-bottom-color:var(--good);color:var(--good)}
+.mem-row.bad .mem-in{border-bottom-color:var(--red);color:var(--red);text-decoration:line-through}
+.mem-row.ok .mem-letter{box-shadow:0 0 0 3px var(--good)}
+.mem-row.bad .mem-letter{box-shadow:0 0 0 3px var(--red)}
+.mem-q{margin:0;font-size:18px}
+.ord-slots{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ord-slot{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;align-items:center}
+.ord-empty{border:2px dashed var(--ink3);min-height:56px;display:flex;align-items:center;padding:8px 12px;color:var(--ink3);font-weight:700}
+.ord-placed{border:2px solid var(--ink);background:var(--paper);text-align:left;padding:10px 12px;min-height:56px;font-size:16px;font-weight:600}
+.ord-slot.ok .ord-placed{border-color:var(--good);background:var(--good-soft)}
+.ord-slot.bad .ord-placed{border-color:var(--red);background:var(--red-soft)}
+.ord-pool{display:flex;flex-direction:column;gap:8px;border-top:2px dashed var(--rule);padding-top:12px}
+.ord-pool .opt::before{content:"+"}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.confetti{display:none}}
 </style>
 
@@ -587,7 +618,7 @@ const SUBJECTS = [
   {id:"lit",  name:"Literature in English", code:"0475"},
   {id:"dt",   name:"Design and Technology", code:"0445"},
   {id:"econ", name:"Economics", code:"0455"},
-  {id:"gp",   name:"Global Perspectives", code:"0457"},
+  {id:"gp",   name:"Global Perspectives", code:"0457", live:true},
   {id:"spa",  name:"Spanish", code:"0530"}
 ];
 
@@ -803,6 +834,327 @@ const TOPICS = {
 
 const COVERS = {bio:"#0ACF83", chem:"#FF7262", phys:"#1ABCFE", math:"#F24E1E", eng:"#FFC700", lit:"#FF9EC4", dt:"#C9C5BA", econ:"#3DD6C4", gp:"#8FD3FF", spa:"#FFB443"};
 
+
+/* ---------- Global Perspectives 0457 ---------- */
+const GP_LIST = ["Writing arguments","Sources and evidence","Issues and perspectives","Research and assessment"];
+
+const GP_TOPICS = {
+  1: {
+    subs: [
+      {ref:"1.1", title:"SEEEL paragraphs", check:{q:"Which part of a SEEEL paragraph judges how strong the evidence is?",a:"Evaluate",w:["Explain","Evidence","Link"],t:"Explain says how the evidence supports your point. Evaluate judges how strong or reliable it is."}, html:`
+<p>In Global Perspectives you are marked on how well you build an argument, not on how many facts you know. <span class="kt">SEEEL</span> gives every paragraph the same strong shape, so the examiner can see each skill.</p>
+
+<div class="flow" aria-label="Statement, then Evidence, then Explain, then Evaluate, then Link"><span>Statement</span><i>→</i><span>Evidence</span><i>→</i><span>Explain</span><i>→</i><span>Evaluate</span><i>→</i><span>Link</span></div>
+
+<div class="tbl"><table>
+<thead><tr><th>Letter</th><th>Stands for</th><th>What you write</th><th>Sentence starter</th></tr></thead>
+<tbody>
+<tr><td class="c"><b>S</b></td><td>Statement</td><td>One clear point that answers the question.</td><td>"One reason why … is that …"</td></tr>
+<tr><td class="c"><b>E</b></td><td>Evidence</td><td>A fact, statistic, example or quote that backs it up. Say where it comes from.</td><td>"According to …"</td></tr>
+<tr><td class="c"><b>E</b></td><td>Explain</td><td>How the evidence proves your point.</td><td>"This shows that … because …"</td></tr>
+<tr><td class="c"><b>E</b></td><td>Evaluate</td><td>How strong the evidence is, or what another perspective would say.</td><td>"However, this evidence may be limited because …"</td></tr>
+<tr><td class="c"><b>L</b></td><td>Link</td><td>Bring it back to the question or your overall argument.</td><td>"Therefore …"</td></tr>
+</tbody></table></div>
+
+<div class="work">
+<div class="q">Example SEEEL paragraph</div>
+<p style="margin:0 0 8px"><b>Question:</b> Should governments ban single use plastic bags?</p>
+<ol>
+<li><b>Statement:</b> One reason governments should ban single use plastic bags is that they harm wildlife in the oceans.</li>
+<li><b>Evidence:</b> The United Nations Environment Programme reports that plastic pollution is a serious threat to marine animals, which can swallow it or get tangled in it.</li>
+<li><b>Explain:</b> This shows that plastic bags are not just untidy. They damage ecosystems that many communities rely on for food and jobs.</li>
+<li><b>Evaluate:</b> However, the report covers all plastic waste, not only bags, so a ban on bags alone may have a smaller effect than people expect.</li>
+<li><b>Link:</b> Therefore, a ban is a useful first step, but it works best alongside wider action on plastic.</li>
+</ol>
+</div>
+
+<div class="box tip"><b>Examiner tip</b><strong>Evaluate</strong> is the E most students skip, and it is what lifts an answer into the top marks. Always ask yourself how far you can trust your evidence.</div>
+<div class="box trap"><b>Common mistake</b>Repeating the evidence in different words and calling it an explanation. <strong>Explain</strong> must say <em>how</em> or <em>why</em> the evidence proves your point.</div>
+<p>Some teachers use <span class="kt">PEEL</span> (Point, Evidence, Explain, Link). SEEEL is the same idea with an extra E for Evaluate. If your teacher uses different words, edit your flashcards to match.</p>`},
+      {ref:"1.2", title:"Phrases to learn", check:{q:"\"On the other hand, some people argue that …\" is a phrase for…",a:"Bringing in another perspective",w:["Giving evidence","Linking back to the question","Making your first point"],t:"It introduces a different point of view, which is part of evaluating an argument."}, html:`
+<p>Strong answers use the same small set of phrases again and again. Learn two from each group really well rather than all of them badly.</p>
+
+<div class="tbl"><table>
+<thead><tr><th>Job</th><th>Phrases</th></tr></thead>
+<tbody>
+<tr><td>Making a point</td><td>"One reason why …" · "The main argument for … is …" · "A key cause of … is …"</td></tr>
+<tr><td>Using evidence</td><td>"According to …" · "For example, …" · "Research by … found that …"</td></tr>
+<tr><td>Explaining</td><td>"This shows that …" · "This means that …" · "As a result, …"</td></tr>
+<tr><td>Evaluating</td><td>"However, …" · "This source may be biased because …" · "This evidence is limited because …"</td></tr>
+<tr><td>Other perspectives</td><td>"On the other hand, …" · "From a national perspective, …" · "Some people argue that …"</td></tr>
+<tr><td>Linking and concluding</td><td>"Therefore, …" · "Overall, …" · "This suggests that …"</td></tr>
+</tbody></table></div>
+
+<h3>Arguments and conclusions</h3>
+<ul>
+<li>An <span class="kt">argument</span> is a set of reasons that lead to a conclusion.</li>
+<li>A <span class="kt">counter argument</span> is a reason against your view. Mentioning it, then answering it, makes your own argument stronger.</li>
+<li>A <span class="kt">conclusion</span> is the judgement you reach at the end. It should follow from your reasons, not appear from nowhere.</li>
+</ul>
+<div class="box tip"><b>Examiner tip</b>When a question asks for your view, give a clear judgement in the conclusion. Sitting on the fence loses marks unless you explain exactly why the answer depends on something.</div>`}
+    ],
+    memorise:[
+      {name:"SEEEL", what:"How to build a paragraph", items:[["S","Statement","Make one clear point"],["E","Evidence","Back it up with a source"],["E","Explain","Say how it proves your point",["explanation"]],["E","Evaluate","Judge how strong it is",["evaluation"]],["L","Link","Back to the question",["linking"]]],
+       order:{q:"Should governments ban single use plastic bags?", parts:["One reason governments should ban single use plastic bags is that they harm wildlife in the oceans.","The United Nations Environment Programme reports that plastic pollution is a serious threat to marine animals.","This shows that plastic bags damage ecosystems that many communities rely on for food and jobs.","However, the report covers all plastic waste, not only bags, so a ban on bags alone may have a smaller effect.","Therefore, a ban is a useful first step, but it works best alongside wider action on plastic."]}},
+      {name:"PEEL", what:"The shorter version some teachers use", items:[["P","Point","Your main idea"],["E","Evidence","Back it up"],["E","Explain","Say how it proves your point",["explanation"]],["L","Link","Back to the question",["linking"]]]}
+    ],
+    cards:[
+      ["What does SEEEL stand for?","Statement, Evidence, Explain, Evaluate, Link."],
+      ["What goes in the Statement?","One clear point that answers the question."],
+      ["What is the difference between Explain and Evaluate?","Explain says how the evidence proves your point. Evaluate judges how strong or reliable the evidence is, or brings in another perspective."],
+      ["Sentence starter for Evidence","\"According to …\" or \"For example, …\""],
+      ["Sentence starter for Explain","\"This shows that … because …\""],
+      ["Sentence starter for Evaluate","\"However, this evidence may be limited because …\""],
+      ["Sentence starter for Link","\"Therefore, …\" or \"Overall, this suggests that …\""],
+      ["What is a counter argument?","A reason against your view. Answering it makes your own argument stronger."],
+      ["What is a conclusion?","The judgement you reach at the end, which follows from your reasons."],
+      ["What is PEEL?","Point, Evidence, Explain, Link. SEEEL adds Evaluate."]
+    ],
+    exam:[
+      {id:"gp1q1",ref:"1.1",marks:6,q:"Write one SEEEL paragraph to answer this question: Should mobile phones be banned in schools?",ms:["A clear statement that answers the question","Relevant evidence, such as a fact, example or statistic","Says where the evidence comes from","Explains how the evidence supports the statement","Evaluates the evidence or considers another perspective","Links back to the question"],note:"1 mark for each part, maximum 6"},
+      {id:"gp1q2",ref:"1.1",marks:2,q:"Explain the difference between explaining evidence and evaluating evidence.",ms:["Explaining shows how the evidence supports the point","Evaluating judges how strong or reliable the evidence is, or considers its limits"]},
+      {id:"gp1q3",ref:"1.2",marks:2,q:"What is a counter argument, and why does including one make an argument stronger?",ms:["A reason or argument against your view","Answering it shows you have considered other views, so your conclusion is better supported"]}
+    ],
+    boss:{name:"The Waffler", color:"#8FD3FF", dark:"#2E6E91", shape:"cell", qs:[
+      {q:"What does the L in SEEEL stand for?",a:"Link",w:["List","Logic","Learn"],t:"Link brings the paragraph back to the question."},
+      {q:"Which part of SEEEL comes straight after the Statement?",a:"Evidence",w:["Explain","Evaluate","Link"],t:"Statement, Evidence, Explain, Evaluate, Link."},
+      {q:"\"This shows that … because …\" starts which part?",a:"Explain",w:["Evidence","Evaluate","Statement"],t:"Explain says how the evidence proves your point."},
+      {q:"\"However, this evidence may be limited because …\" starts which part?",a:"Evaluate",w:["Explain","Link","Evidence"],t:"Evaluate judges how strong the evidence is."},
+      {q:"PEEL is missing which part of SEEEL?",a:"Evaluate",w:["Evidence","Explain","Link"],t:"PEEL is Point, Evidence, Explain, Link."},
+      {q:"What makes an argument stronger?",a:"Answering a counter argument",w:["Ignoring other views","Repeating your point","Using longer words"],t:"Showing why the other side is weaker makes your conclusion more convincing."},
+      {q:"Where does your final judgement go?",a:"The conclusion",w:["The statement","The evidence","The title"],t:"The conclusion is the judgement you reach from your reasons."},
+      {q:"Which is the best Statement for \"Should homework be banned?\"",a:"One reason homework should be banned is that it causes stress.",w:["Homework is a thing schools give.","Research found students do 5 hours a week.","Therefore homework is complicated."],t:"A Statement makes one clear point that answers the question."}
+    ]}
+  },
+  2: {
+    subs: [
+      {ref:"2.1", title:"Judging sources", check:{q:"A website that sells electric cars says electric cars are the best way to cut pollution. What is the main problem?",a:"It has a vested interest",w:["It is too old","It uses statistics","It is a primary source"],t:"The site gains if you believe it, so it may leave out drawbacks."}, html:`
+<p>In GP you must decide how far you can trust each source. Two words matter most.</p>
+<ul>
+<li><span class="kt">Credibility</span>: whether the <em>author or source</em> is believable. Think about who made it and why.</li>
+<li><span class="kt">Reliability</span>: whether the <em>information</em> can be trusted. Think about the evidence it uses and whether other sources agree.</li>
+</ul>
+
+<h3>What to check</h3>
+<div class="tbl"><table>
+<thead><tr><th>Factor</th><th>Question to ask</th><th>More trustworthy if…</th></tr></thead>
+<tbody>
+<tr><td><span class="kt">Expertise</span></td><td>Is the author qualified to write about this?</td><td>They are a scientist, researcher or professional in the field</td></tr>
+<tr><td><span class="kt">Vested interest</span></td><td>Does the author gain if people believe this?</td><td>They have nothing to gain or sell</td></tr>
+<tr><td><span class="kt">Bias</span></td><td>Does it only show one side?</td><td>It presents more than one view fairly</td></tr>
+<tr><td>Evidence</td><td>Does it back up its claims?</td><td>It gives data, examples and references</td></tr>
+<tr><td>Date</td><td>Is it up to date?</td><td>It is recent, or the facts have not changed</td></tr>
+<tr><td>Purpose</td><td>Is it trying to inform, persuade or sell?</td><td>It aims to inform</td></tr>
+<tr><td>Publisher</td><td>Where was it published?</td><td>A respected organisation, journal or news outlet</td></tr>
+</tbody></table></div>
+
+<p>Many schools teach the <span class="kt">CRAAP test</span> as a quick checklist: <b>C</b>urrency (how up to date), <b>R</b>elevance (does it answer your question), <b>A</b>uthority (who wrote it), <b>A</b>ccuracy (is it backed by evidence), <b>P</b>urpose (why it was written).</p>
+
+<div class="box tip"><b>Examiner tip</b>Always give a specific reason. "The author is a climate scientist at a university, so they have expertise" scores. "It looks reliable" does not.</div>
+<div class="box trap"><b>Common mistake</b>Saying a source is unreliable just because it is on the internet or ends in .com. Judge the author, evidence and purpose instead.</div>`},
+      {ref:"2.2", title:"Claims, facts and opinions", check:{q:"\"Governments should tax sugary drinks\" is…",a:"A value judgement",w:["A fact","A prediction","A statistic"],t:"The word should shows a judgement about what is right."}, html:`
+<p>Arguments are built from <span class="kt">claims</span>. Your job is to spot what kind of claim each one is and how well it is supported.</p>
+<div class="tbl"><table>
+<thead><tr><th>Type</th><th>Meaning</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><span class="kt">Fact</span></td><td>Can be checked and proved true or false</td><td>"Plastic takes hundreds of years to break down."</td></tr>
+<tr><td><span class="kt">Opinion</span></td><td>A personal belief or view</td><td>"Plastic bags are annoying."</td></tr>
+<tr><td><span class="kt">Value judgement</span></td><td>An opinion about what is good, bad, right or wrong</td><td>"It is wrong to use plastic when alternatives exist."</td></tr>
+<tr><td><span class="kt">Prediction</span></td><td>A claim about what will or may happen</td><td>"Plastic waste in the oceans will keep increasing unless we act."</td></tr>
+</tbody></table></div>
+<ul>
+<li><span class="kt">Evidence</span> is the information used to support a claim, such as data, examples or expert views.</li>
+<li><span class="kt">Reasoning</span> is how the evidence is linked to the conclusion. Good reasoning is logical and does not jump to conclusions.</li>
+</ul>
+<div class="box tip"><b>Examiner tip</b>Words like <strong>should</strong>, <strong>must</strong>, <strong>fair</strong>, <strong>wrong</strong>, <strong>best</strong> usually signal a value judgement. Words like <strong>will</strong> and <strong>by 2050</strong> signal a prediction.</div>`}
+    ],
+    memorise:[
+      {name:"CRAAP", what:"Checking a source", items:[["C","Currency","How up to date it is"],["R","Relevance","Does it answer your question"],["A","Authority","Who wrote it",["author"]],["A","Accuracy","Is it backed by evidence",["accurate"]],["P","Purpose","Why it was written"]]},
+      {name:"Types of claim", what:"Fact, Opinion, Value judgement, Prediction", items:[["F","Fact","Can be proved"],["O","Opinion","A personal view"],["V","Value judgement","Good, bad, right or wrong",["value judgment"]],["P","Prediction","What will happen"]]}
+    ],
+    cards:[
+      ["What is credibility?","Whether the author or source is believable, based on who made it and why."],
+      ["What is reliability?","Whether the information can be trusted, based on its evidence and whether other sources agree."],
+      ["What is a vested interest?","When the author gains something if people believe them, such as money or support."],
+      ["What is bias?","Showing only one side of an issue, or favouring one view unfairly."],
+      ["What does CRAAP stand for?","Currency, Relevance, Authority, Accuracy, Purpose."],
+      ["What is a value judgement?","An opinion about whether something is good, bad, right or wrong. Look for words like should and must."],
+      ["What is a fact?","A claim that can be checked and proved true or false."],
+      ["What is a prediction?","A claim about what will or may happen in the future."],
+      ["What is reasoning?","How evidence is linked to a conclusion."],
+      ["Give a good reason a source is credible","The author has expertise, for example they are a scientist working in that field."]
+    ],
+    exam:[
+      {id:"gp2q1",ref:"2.1",marks:2,q:"Identify two factors that affect the credibility of a source.",ms:["Expertise of the author","Vested interest","Bias","Reputation of the publisher","Use of evidence or references","How recent it is"],note:"Any two, maximum 2 marks"},
+      {id:"gp2q2",ref:"2.1",marks:2,q:"A website selling electric cars claims they are the best way to reduce air pollution. Explain one reason why this claim may not be reliable.",ms:["The website has a vested interest because it wants to sell cars","So it may exaggerate the benefits or leave out the drawbacks"]},
+      {id:"gp2q3",ref:"2.2",marks:2,q:"\"Governments should tax sugary drinks.\" Is this a fact, an opinion, a value judgement or a prediction? Explain your answer.",ms:["Value judgement","It uses the word should, giving a view about what is right to do"]}
+    ],
+    boss:{name:"Captain Clickbait", color:"#FFB443", dark:"#9A5B00", shape:"hydra", qs:[
+      {q:"What does the C in CRAAP stand for?",a:"Currency",w:["Credibility","Claim","Content"],t:"Currency means how up to date the source is."},
+      {q:"A source written by a company about its own product has a…",a:"Vested interest",w:["Prediction","Value judgement","Primary source"],t:"The company gains if you believe it."},
+      {q:"Which of these is a fact?",a:"Water boils at 100°C at sea level.",w:["Cities are nicer than villages.","Everyone should recycle.","Electric cars will replace all petrol cars."],t:"A fact can be checked and proved."},
+      {q:"Which word most often signals a value judgement?",a:"Should",w:["Is","Measured","Recorded"],t:"Should, must and fair show a view about what is right."},
+      {q:"Which makes a source more credible?",a:"The author is an expert in the field",w:["It has lots of adverts","It is very long","It only gives one side"],t:"Expertise raises credibility."},
+      {q:"\"By 2050 most cars will be electric\" is a…",a:"Prediction",w:["Fact","Value judgement","Statistic"],t:"It is a claim about the future."},
+      {q:"Showing only one side of an issue is called…",a:"Bias",w:["Evidence","Reasoning","Currency"],t:"A biased source favours one view unfairly."},
+      {q:"How evidence is linked to a conclusion is called…",a:"Reasoning",w:["Currency","Bias","A claim"],t:"Good reasoning is logical and does not jump to conclusions."}
+    ]}
+  },
+  3: {
+    subs: [
+      {ref:"3.1", title:"Perspectives", check:{q:"\"Climate change is making droughts more common in many regions\" is a view at which level?",a:"Global",w:["Personal","Local","National"],t:"It describes the whole world, so it is a global perspective."}, html:`
+<p>An <span class="kt">issue</span> is a problem or question that people disagree about or that needs action. A <span class="kt">perspective</span> is a point of view on an issue, shaped by things like where someone lives, their job, their culture and their values, and supported by reasoning.</p>
+
+<h3>Levels of perspective</h3>
+<p>GP asks you to look at an issue at different scales. Here is the issue of water shortages:</p>
+<div class="tbl"><table>
+<thead><tr><th>Level</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><span class="kt">Personal perspective</span></td><td>"My family has to take shorter showers."</td></tr>
+<tr><td><span class="kt">Local perspective</span></td><td>"Our town has banned using hosepipes in summer."</td></tr>
+<tr><td><span class="kt">National perspective</span></td><td>"The government is building plants to turn sea water into drinking water."</td></tr>
+<tr><td><span class="kt">Global perspective</span></td><td>"Climate change is making droughts more common in many regions."</td></tr>
+</tbody></table></div>
+<p>A <span class="kt">stakeholder</span> is any person or group affected by an issue or involved in it. Different stakeholders often hold different perspectives.</p>
+<div class="box tip"><b>Examiner tip</b>When you compare perspectives, say <strong>why</strong> each group holds its view. "Farmers support the dam because it gives them water for crops" is far stronger than "farmers like the dam".</div>`},
+      {ref:"3.2", title:"Causes, consequences and solutions", check:{q:"A possible way to tackle an issue is called a…",a:"Course of action",w:["Consequence","Cause","Perspective"],t:"A course of action is a proposed solution."}, html:`
+<div class="flow" aria-label="Causes lead to an issue, which has consequences, which a course of action tries to fix"><span>Causes</span><i>→</i><span>Issue</span><i>→</i><span>Consequences</span><i>→</i><span>Course of action</span></div>
+<ul>
+<li>A <span class="kt">cause</span> is a reason why an issue happens.</li>
+<li>A <span class="kt">consequence</span> is a result or effect of an issue.</li>
+<li>A <span class="kt">course of action</span> is a possible way to tackle the issue.</li>
+</ul>
+
+<h3>Finding causes and consequences: PESTLE</h3>
+<p>Many teachers use <span class="kt">PESTLE</span> to make sure you think widely: <b>P</b>olitical, <b>E</b>conomic, <b>S</b>ocial, <b>T</b>echnological, <b>L</b>egal, <b>E</b>nvironmental. For example, a consequence of plastic pollution could be economic (fewer tourists) or environmental (harm to sea life).</p>
+
+<h3>Judging a course of action</h3>
+<div class="tbl"><table>
+<thead><tr><th>Ask</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td>Will it work?</td><td>Does it tackle the cause, or just the symptoms?</td></tr>
+<tr><td>How much will it cost?</td><td>Can people or governments afford it?</td></tr>
+<tr><td>Who gains and who loses?</td><td>Different stakeholders are affected differently.</td></tr>
+<tr><td>How long will it take?</td><td>Some fixes are quick, others take years.</td></tr>
+<tr><td>Any side effects?</td><td>A solution can cause new problems.</td></tr>
+</tbody></table></div>
+<div class="box trap"><b>Common mistake</b>Suggesting a course of action without explaining <strong>how</strong> it would solve the issue. Always link the solution to a cause.</div>`}
+    ],
+    memorise:[
+      {name:"PESTLE", what:"Ways to find causes and consequences", items:[["P","Political","Governments and laws being made"],["E","Economic","Money, jobs and trade"],["S","Social","People, health and communities"],["T","Technological","New inventions and tools",["technology"]],["L","Legal","Laws that already exist"],["E","Environmental","Nature and the planet",["environment"]]]},
+      {name:"Levels of perspective", what:"From smallest to largest", items:[["P","Personal","You and your family"],["L","Local","Your town or community"],["N","National","Your whole country"],["G","Global","The whole world"]]}
+    ],
+    cards:[
+      ["What is an issue?","A problem or question that people disagree about or that needs action."],
+      ["What is a perspective?","A point of view on an issue, shaped by things like location, job, culture and values, and supported by reasoning."],
+      ["Name the four levels of perspective","Personal, local, national, global."],
+      ["What is a stakeholder?","A person or group affected by an issue or involved in it."],
+      ["What is a cause?","A reason why an issue happens."],
+      ["What is a consequence?","A result or effect of an issue."],
+      ["What is a course of action?","A possible way to tackle an issue."],
+      ["What does PESTLE stand for?","Political, Economic, Social, Technological, Legal, Environmental."],
+      ["Five questions to judge a course of action","Will it work? Cost? Who gains and who loses? How long? Any side effects?"]
+    ],
+    exam:[
+      {id:"gp3q1",ref:"3.1",marks:4,q:"Explain why two different stakeholders might have different perspectives on building a new airport near a town.",ms:["Identifies one stakeholder and their view, for example a local business supports it","Gives a reason, for example more customers, jobs or trade","Identifies a second stakeholder with a different view, for example nearby residents oppose it","Gives a reason, for example noise or air pollution"]},
+      {id:"gp3q2",ref:"3.2",marks:3,q:"Suggest one course of action to reduce plastic waste and explain how it would help.",ms:["A realistic course of action, for example a charge on plastic bags","Explains how it reduces the problem, for example people reuse bags","Considers a limitation or who it affects"]},
+      {id:"gp3q3",ref:"3.2",marks:2,q:"Explain one economic consequence of water shortages for a local community.",ms:["Identifies an economic consequence, for example crops fail or water prices rise","Explains the effect on people, for example farmers lose income"]}
+    ],
+    boss:{name:"Fence Sitter", color:"#3DD6C4", dark:"#147A6E", shape:"cell", qs:[
+      {q:"Which is a global perspective?",a:"Rising sea levels threaten coastal cities worldwide.",w:["My street floods every winter.","Our town built a new sea wall.","The government raised flood defence spending."],t:"Global means the whole world."},
+      {q:"A person or group affected by an issue is a…",a:"Stakeholder",w:["Perspective","Consequence","Source"],t:"Stakeholders can hold different perspectives."},
+      {q:"Which two PESTLE factors start with E?",a:"Economic and Environmental",w:["Ethical and Economic","Environmental and Educational","Energy and Economic"],t:"Political, Economic, Social, Technological, Legal, Environmental."},
+      {q:"Which order goes from smallest to largest scale?",a:"Personal, local, national, global",w:["Local, personal, global, national","Global, national, local, personal","National, local, personal, global"],t:"You, your town, your country, the world."},
+      {q:"A possible way to tackle an issue is a…",a:"Course of action",w:["Cause","Consequence","Claim"],t:"Always explain how it would solve the issue."},
+      {q:"\"More people drive cars\" is best described as a…",a:"Cause of air pollution",w:["Consequence of air pollution","Course of action","Perspective"],t:"It is a reason why the issue happens."},
+      {q:"\"Fewer tourists visit polluted beaches\" is which type of consequence?",a:"Economic",w:["Legal","Political","Technological"],t:"Lost tourism means lost money and jobs."}
+    ]}
+  },
+  4: {
+    subs: [
+      {ref:"4.1", title:"Research", check:{q:"A questionnaire you write and hand out yourself is…",a:"Primary research",w:["Secondary research","A course of action","A value judgement"],t:"Primary research is information you collect yourself."}, html:`
+<div class="tbl"><table>
+<thead><tr><th>Type</th><th>Meaning</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td><span class="kt">Primary research</span></td><td>Information you collect yourself</td><td>Surveys, questionnaires, interviews, observations, experiments</td></tr>
+<tr><td><span class="kt">Secondary research</span></td><td>Information someone else has already collected</td><td>Books, articles, reports, websites, documentaries</td></tr>
+<tr><td><span class="kt">Quantitative data</span></td><td>Data in numbers</td><td>"68% of students walk to school"</td></tr>
+<tr><td><span class="kt">Qualitative data</span></td><td>Data in words, views and descriptions</td><td>"I walk because the bus is unreliable"</td></tr>
+</tbody></table></div>
+<ul>
+<li>A <span class="kt">research question</span> guides what you look for. Good ones are focused and open, for example "To what extent should my school ban single use plastic?"</li>
+<li>Your <span class="kt">sample</span> is the group of people you survey. A bigger and more varied sample gives more reliable results.</li>
+<li>Avoid leading questions such as "Don't you agree plastic is terrible?" because they push people towards an answer.</li>
+</ul>
+<div class="box tip"><b>Examiner tip</b>Say what your research <strong>showed</strong> and how it shaped your view. Listing what you did without saying what you learned scores less.</div>`},
+      {ref:"4.2", title:"Skills, assessment and command words", check:{q:"Which command word asks you to judge strengths and weaknesses and reach a conclusion?",a:"Evaluate",w:["Identify","Describe","State"],t:"Evaluate means judge, then decide."}, html:`
+<h3>The six GP skills</h3>
+<p>Everything in GP tests six skills: <span class="kt">research</span>, <span class="kt">analysis</span>, <span class="kt">evaluation</span>, <span class="kt">reflection</span>, <span class="kt">collaboration</span> and <span class="kt">communication</span>. <span class="kt">Reflection</span> means thinking about what you learned, how your views changed, and what you would do differently next time.</p>
+
+<h3>How you are assessed</h3>
+<div class="tbl"><table>
+<thead><tr><th>Part</th><th>What you do</th></tr></thead>
+<tbody>
+<tr><td>Written exam</td><td>Answer questions about sources on global issues: analyse claims, judge evidence and build arguments.</td></tr>
+<tr><td>Individual Report</td><td>Research a global issue on your own and write a report that explores different perspectives and reaches a conclusion.</td></tr>
+<tr><td>Team Project</td><td>Work in a team on a project about a local issue, then reflect on your own work and the team's work.</td></tr>
+</tbody></table></div>
+<p>Exam timings, word limits and deadlines can change between years, so check the details for your year with your teacher.</p>
+
+<h3>Command words</h3>
+<div class="tbl"><table>
+<thead><tr><th>Word</th><th>What it asks you to do</th></tr></thead>
+<tbody>
+<tr><td>Identify</td><td>Name or pick out something</td></tr>
+<tr><td>Explain</td><td>Give reasons, saying how or why, with evidence</td></tr>
+<tr><td>Compare</td><td>Point out similarities and differences</td></tr>
+<tr><td>Evaluate</td><td>Judge strengths and weaknesses, then reach a conclusion</td></tr>
+<tr><td>Justify</td><td>Support your view with evidence and reasons</td></tr>
+<tr><td>Suggest</td><td>Put forward a sensible idea and back it up</td></tr>
+</tbody></table></div>`}
+    ],
+    memorise:[
+      {name:"The six skills", what:"What every part of GP tests", items:[["R","Research","Finding information"],["A","Analysis","Breaking ideas down",["analyse","analyze","analysis"]],["E","Evaluation","Judging how strong something is",["evaluate"]],["R","Reflection","Thinking about what you learned",["reflect"]],["C","Collaboration","Working in a team",["collaborate","teamwork"]],["C","Communication","Getting ideas across clearly",["communicate"]]]},
+      {name:"Research types", what:"Two pairs to know", items:[["P","Primary","You collect it yourself"],["S","Secondary","Someone else collected it"],["Q","Quantitative","Numbers",["quantitative data"]],["Q","Qualitative","Words and views",["qualitative data"]]]}
+    ],
+    cards:[
+      ["What is primary research?","Information you collect yourself, such as surveys and interviews."],
+      ["What is secondary research?","Information someone else has already collected, such as books, reports and websites."],
+      ["What is quantitative data?","Data in numbers."],
+      ["What is qualitative data?","Data in words, views and descriptions."],
+      ["What makes a good research question?","It is focused and open, for example starting with \"To what extent…\"."],
+      ["What is a sample?","The group of people you collect data from. Bigger and more varied is more reliable."],
+      ["Name the six GP skills","Research, analysis, evaluation, reflection, collaboration, communication."],
+      ["What is reflection?","Thinking about what you learned, how your views changed and what you would do differently."],
+      ["What does the command word Evaluate mean?","Judge strengths and weaknesses, then reach a conclusion."],
+      ["What does the command word Justify mean?","Support your view with evidence and reasons."],
+      ["What are the three parts of GP assessment?","The written exam, the Individual Report and the Team Project."]
+    ],
+    exam:[
+      {id:"gp4q1",ref:"4.1",marks:2,q:"Explain the difference between primary and secondary research.",ms:["Primary research is collected by you, for example a survey","Secondary research has already been collected by someone else, for example a report"]},
+      {id:"gp4q2",ref:"4.1",marks:2,q:"Give one advantage and one disadvantage of using a questionnaire for research.",ms:["Advantage: collects lots of answers quickly, or gives data that is easy to compare","Disadvantage: people may not answer honestly, answers can be short, or questions may be leading"]},
+      {id:"gp4q3",ref:"4.2",marks:2,q:"What does the command word evaluate ask you to do?",ms:["Judge strengths and weaknesses, or how good something is","Reach a conclusion or overall judgement"]}
+    ],
+    boss:{name:"The Procrastinator", color:"#FF9EC4", dark:"#A3366A", shape:"hydra", qs:[
+      {q:"A survey you write and hand out yourself is…",a:"Primary research",w:["Secondary research","A prediction","Bias"],t:"Primary means you collected it."},
+      {q:"\"68% of students walk to school\" is…",a:"Quantitative data",w:["Qualitative data","A value judgement","A course of action"],t:"It is in numbers."},
+      {q:"Which is NOT one of the six GP skills?",a:"Memorisation",w:["Reflection","Collaboration","Analysis"],t:"The six are research, analysis, evaluation, reflection, collaboration and communication."},
+      {q:"Which command word means support your view with evidence?",a:"Justify",w:["Identify","Describe","Compare"],t:"Justify means back it up."},
+      {q:"Thinking about how your views changed is called…",a:"Reflection",w:["Research","Communication","Analysis"],t:"Reflection is a key part of the Team Project."},
+      {q:"Which is the best research question?",a:"To what extent should my school ban single use plastic?",w:["Is plastic bad?","Plastic.","What year was plastic invented?"],t:"Good research questions are focused and open."},
+      {q:"Why avoid leading questions in a survey?",a:"They push people towards an answer",w:["They take too long","They are too short","They give numbers"],t:"Leading questions make your results less reliable."}
+    ]}
+  }
+};
+
+/* ---------- subject library: every live subject plugs in here ---------- */
+const LIB = {
+  bio:{id:"bio", name:"Biology", code:"0610", unit:"Topic", list:BIO_TOPICS, topics:TOPICS, syllabus:"Checked against the Cambridge 0610 syllabus",
+       blurb:"21 syllabus topics. Topics 2 and 3 are written so far, each with notes, flashcards, exam questions and a boss fight."},
+  gp:{id:"gp", name:"Global Perspectives", code:"0457", unit:"Unit", list:GP_LIST, topics:GP_TOPICS, syllabus:"Written for the Cambridge 0457 skills",
+      blurb:"Four units on the skills GP tests, each with notes, a Memorise mode for acronyms like SEEEL, flashcards, exam questions and a boss fight."}
+};
+
 /* ================= STORAGE ================= */
 let S = {revised:{}, cards:{}, exam:{}, boss:{}, last:null, xp:0, days:{}, earned:{}, examYear:2028, decks:[], mistakes:{}, papers:{}, attempt:{}};
 try{ const s = JSON.parse(localStorage.getItem("specpoint")||"null"); if(s) S = Object.assign(S, s); }catch(e){}
@@ -859,27 +1211,39 @@ const crumbs = document.getElementById("crumbs");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
 
-function topicProgress(n){
-  const t = TOPICS[n]; if(!t) return 0;
-  const parts = t.subs.length*3 + t.cards.length + t.exam.reduce((s,q)=>s+q.marks,0) + 3;
-  let got = t.subs.filter(s=>S.revised[s.ref]).length*3;
-  got += t.cards.filter((c,i)=>S.cards[`${n}-${i}`]).length;
-  got += t.exam.reduce((s,q)=>s+Math.min(q.marks, S.exam[q.id]||0),0);
-  if(S.boss[n]) got += 3;
+let CUR = "bio";
+// Progress keys: Biology keeps its original keys, other subjects are prefixed so they never collide.
+const K = (k, s=CUR) => s==="bio" ? k : `${s}:${k}`;
+function topicProgress(s, n){
+  const t = LIB[s].topics[n]; if(!t) return 0;
+  const mem = t.memorise || [];
+  const parts = t.subs.length*3 + t.cards.length + t.exam.reduce((a,q)=>a+q.marks,0) + 3 + mem.length*2;
+  let got = t.subs.filter(x=>S.revised[K(x.ref,s)]).length*3;
+  got += t.cards.filter((c,i)=>S.cards[K(`${n}-${i}`,s)]).length;
+  got += t.exam.reduce((a,q)=>a+Math.min(q.marks, S.exam[q.id]||0),0);
+  if(S.boss[K(n,s)]) got += 3;
+  got += mem.filter(m=>(S.mem||{})[K(`mem-${m.name}`,s)]===m.items.length).length*2;
   return Math.round(100*got/parts);
 }
-function subjectProgress(){ const ks = Object.keys(TOPICS); return Math.round(ks.reduce((s,k)=>s+topicProgress(+k),0)/BIO_TOPICS.length); }
+function subjectProgress(s){ const L = LIB[s]; return Math.round(Object.keys(L.topics).reduce((a,k)=>a+topicProgress(s,+k),0)/L.list.length); }
 
 function upNext(){
-  for(const n of Object.keys(TOPICS).map(Number)){
-    const T = TOPICS[n];
-    const sub = T.subs.find(s=>!S.revised[s.ref]);
-    if(sub) return {lbl:`Read ${sub.ref} ${sub.title}`, sub:`Biology, Topic ${n}`, r:{view:"topic", topic:n, tab:"notes"}};
-    const left = T.cards.filter((c,i)=>!S.cards[`${n}-${i}`]).length;
-    if(left) return {lbl:`${left} flashcards to learn`, sub:`Biology, Topic ${n}`, r:{view:"topic", topic:n, tab:"cards"}};
-    if(!S.boss[n]) return {lbl:`Beat ${T.boss.name}`, sub:`Biology, Topic ${n} boss`, r:{view:"topic", topic:n, tab:"fight"}};
+  const mine = Object.keys(LIB).filter(s=>!S.profile || S.profile.subs[s]);
+  for(const s of mine){
+    const L = LIB[s];
+    for(const n of Object.keys(L.topics).map(Number)){
+      const T = L.topics[n], where = `${L.name}, ${L.unit} ${n}`;
+      const sub = T.subs.find(x=>!S.revised[K(x.ref,s)]);
+      if(sub) return {lbl:`Read ${sub.ref} ${sub.title}`, sub:where, r:{view:"topic", s, topic:n, tab:"notes"}};
+      const mem = (T.memorise||[]).find(m=>(S.mem||{})[K(`mem-${m.name}`,s)]!==m.items.length);
+      if(mem) return {lbl:`Memorise ${mem.name}`, sub:where, r:{view:"topic", s, topic:n, tab:"memorise"}};
+      const left = T.cards.filter((c,i)=>!S.cards[K(`${n}-${i}`,s)]).length;
+      if(left) return {lbl:`${left} flashcards to learn`, sub:where, r:{view:"topic", s, topic:n, tab:"cards"}};
+      if(!S.boss[K(n,s)]) return {lbl:`Beat ${T.boss.name}`, sub:`${where} boss`, r:{view:"topic", s, topic:n, tab:"fight"}};
+    }
   }
-  return {lbl:"Try the exam questions again", sub:"Biology, Topic 2", r:{view:"topic", topic:2, tab:"exam"}};
+  const s = mine[0] || "bio";
+  return {lbl:"Try the exam questions again", sub:LIB[s].name, r:{view:"topic", s, topic:+Object.keys(LIB[s].topics)[0], tab:"exam"}};
 }
 
 /* ================= ROUTER ================= */
@@ -892,13 +1256,13 @@ function go(r, push=true){
 function toHash(r){
   if(["setup","home","decks","papers","mistakes","search"].includes(r.view)) return r.view;
   if(["deck","study","paper"].includes(r.view)) return `${r.view}-${r.id}`;
-  return r.view==="subject" ? "bio" : `bio-${r.topic}-${r.tab||"notes"}`;
+  return r.view==="subject" ? (r.s||"bio") : `${r.s||"bio"}-${r.topic}-${r.tab||"notes"}`;
 }
 function fromHash(){
   const h = (location.hash||"").slice(1);
-  const m = h.match(/^bio-(\d+)-(notes|cards|exam|fight)$/);
-  if(m && TOPICS[+m[1]]) return {view:"topic", topic:+m[1], tab:m[2]};
-  if(h==="bio") return {view:"subject"};
+  const m = h.match(/^([a-z]+)-(\d+)-(notes|memorise|cards|exam|fight)$/);
+  if(m && LIB[m[1]] && LIB[m[1]].topics[+m[2]]) return {view:"topic", s:m[1], topic:+m[2], tab:m[3]};
+  if(LIB[h]) return {view:"subject", s:h};
   if(["setup","decks","papers","mistakes","search"].includes(h)) return {view:h};
   const m2 = h.match(/^(deck|study|paper)-([a-z0-9-]+)$/); if(m2) return {view:m2[1], id:m2[2]};
   return {view:"home"};
@@ -1091,7 +1455,7 @@ function runQuiz(chosen, bOf, onDone){
       <h1 class="ob-h">Your starting point</h1>
       <p class="ob-p">You got <b>${total} out of ${rows.length*2}</b>. Here is how each subject looks right now.</p>
       <ul class="base">${rows.map(r=>`<li style="--c:${COVERS[r.c.id]}"><span class="bn">${esc(subInfo(r.c.id,bOf(r.c.id)).label)}</span><span class="pips" aria-label="${r.s} of 2">${[0,1].map(k=>`<i class="${k<r.s?"on":""}"></i>`).join("")}</span><span class="bl ${lbl(r.s)[1]}">${lbl(r.s)[0]}</span></li>`).join("")}</ul>
-      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,bOf(weakest.c.id)).label)}</b>. ${weakest.c.id==="bio" ? "Its notes are ready now." : "Its notes are still being written, so we will let you know when they are ready. Biology is ready now."}` : "Great start across the board. Jump into Biology, the first subject with full notes."}</div>
+      <div class="state">${weakest.s<2 ? `Start with <b>${esc(subInfo(weakest.c.id,bOf(weakest.c.id)).label)}</b>. ${LIB[weakest.c.id] ? "Its notes are ready now." : `Its notes are still being written, so we will let you know when they are ready. ${Object.values(LIB).map(L=>L.name).join(" and ")} are ready now.`}` : "Great start across the board. Jump into one of the subjects with full notes."}</div>
       <div class="row ob-nav"><button class="btn" id="ob-done">Back to my dashboard</button></div>
     </div></div>`;
     const bl = {}; chosen.forEach(c=>bl[c.id]=score[c.id]);
@@ -1136,19 +1500,19 @@ function renderHome(){
       <div><span class="lbl">Exams in</span><span class="big">${days}<small>days</small></span><small style="font-size:13px;color:var(--ink3)">May ${P.examYear}</small></div>
     </div>
   </div>
-  ${P.subs.bio ? `<div class="next"><div><small>Up next · ${esc(nx.sub)}</small><b>${esc(nx.lbl)}</b></div><button class="btn" id="go-next">Start</button></div>` : ""}
+  ${Object.keys(LIB).some(s=>P.subs[s]) ? `<div class="next"><div><small>Up next · ${esc(nx.sub)}</small><b>${esc(nx.lbl)}</b></div><button class="btn" id="go-next">Start</button></div>` : ""}
   <div class="dash">${quizPanel}${weekPanel}</div>
   <div class="h2row"><h2 class="h2">Your subjects</h2><button class="link-btn" id="edit-subs">Edit subjects</button></div>
   <ul class="shelf">${mine.map(c=>{
-    const bd = boardOfProfile(P, c.id), s = subInfo(c.id, bd), live = c.id==="bio", p = live ? subjectProgress() : 0;
+    const bd = boardOfProfile(P, c.id), s = subInfo(c.id, bd), live = !!LIB[c.id], p = live ? subjectProgress(c.id) : 0;
     const tier = P.tiers[c.id] ? `<span class="qz">${P.tiers[c.id]}</span> ` : "";
     return `<li><button class="book" data-s="${c.id}" style="--c:${COVERS[c.id]}" ${live?"":"disabled"} aria-label="${esc(s.label)} ${s.code}${live?"":", being written"}">
       <span class="label"><small>${BOARDS[bd].name}</small><span lang="en-GB">${esc(s.label)}</span></span>
       <span>${tier}${baseTag(c.id)}<span class="foot"><span class="code">${s.code}</span>${live?`<span>${p}%</span>`:`<span class="sticker">Soon</span>`}</span>
       ${live?`<span class="bar-p" style="display:block"><i style="width:${Math.max(3,p)}%"></i></span>`:""}</span>
     </button></li>`;}).join("")}</ul>
-  <p class="fine">Biology has full notes so far. Your other subjects are being written, starting with the ones students score lowest on.</p>`;
-  const bio = app.querySelector('[data-s="bio"]'); if(bio) bio.onclick = ()=>go({view:"subject"});
+  <p class="fine">${Object.values(LIB).map(L=>L.name).join(" and ")} have full notes so far. Your other subjects are being written, starting with the ones students score lowest on.</p>`;
+  app.querySelectorAll(".book:not(:disabled)").forEach(b=>b.onclick=()=>go({view:"subject", s:b.dataset.s}));
   const gn = document.getElementById("go-next"); if(gn) gn.onclick = ()=>go(nx.r);
   document.getElementById("edit-subs").onclick = ()=>{ OB = null; go({view:"setup"}); };
   const startQuiz = ()=>runQuiz(mine, bOfP, bl=>{ const first = !quizDone; P.baseline = bl; save(); go({view:"home"}); if(first) earn("starter-quiz", 15, "for the starter quiz"); });
@@ -1159,45 +1523,47 @@ function renderHome(){
 
 /* ================= SUBJECT ================= */
 function renderSubject(){
-  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Biology 0610"}]);
+  const s = route.s || "bio", L = LIB[s]; CUR = s;
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:`${L.name} ${L.code}`}]);
   app.innerHTML = `
-  <div class="band" style="--c:${COVERS.bio}"><span class="code">Cambridge IGCSE · 0610</span><h1>Biology</h1>
-  <p>21 syllabus topics. Topics 2 and 3 are written so far, each with notes, flashcards, exam questions and a boss fight.</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${subjectProgress()}%</span></div>
-  <ol class="toc">${BIO_TOPICS.map((t,i)=>{
-    const n=i+1, T=TOPICS[n];
+  <div class="band" style="--c:${COVERS[s]}"><span class="code">Cambridge IGCSE · ${L.code}</span><h1>${esc(L.name)}</h1>
+  <p>${esc(L.blurb)}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${subjectProgress(s)}%</span></div>
+  <ol class="toc">${L.list.map((t,i)=>{
+    const n=i+1, T=L.topics[n];
     const subs = T ? `<span class="subs">${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</span>` : "";
-    const p = T ? topicProgress(n) : 0;
+    const p = T ? topicProgress(s, n) : 0;
     const right = T ? `<span class="meter">${ring(p/100,30,4)}${p}%</span>` : `<span class="meter">Soon</span>`;
     return `<li><button data-t="${n}" ${T?"":"disabled"}><span class="n">${n}</span><span class="t">${esc(t)}${subs}</span>${right}</button></li>`;
   }).join("")}</ol>`;
-  app.querySelectorAll(".toc button:not(:disabled)").forEach(b=>b.onclick=()=>go({view:"topic", topic:+b.dataset.t, tab:"notes"}));
+  app.querySelectorAll(".toc button:not(:disabled)").forEach(b=>b.onclick=()=>go({view:"topic", s, topic:+b.dataset.t, tab:"notes"}));
 }
 
 /* ================= TOPIC ================= */
 function renderTopic(){
-  const n = route.topic, T = TOPICS[n], tab = route.tab||"notes";
-  S.last = n; save();
-  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:"Biology", r:{view:"subject"}},{label:`Topic ${n}`}]);
-  const tabs = [["notes","Notes",""],["cards","Flashcards",T.cards.length],["exam","Exam questions",T.exam.length],["fight","Boss fight",""]];
+  const s = route.s || "bio", L = LIB[s], n = route.topic, T = L.topics[n];
+  const tab = route.tab==="memorise" && !T.memorise ? "notes" : (route.tab||"notes");
+  CUR = s; S.last = {s, n}; save();
+  setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:L.name, r:{view:"subject", s}},{label:`${L.unit} ${n}`}]);
+  const tabs = [["notes","Notes",""]].concat(T.memorise ? [["memorise","Memorise",T.memorise.length]] : []).concat([["cards","Flashcards",T.cards.length],["exam","Exam questions",T.exam.length],["fight","Boss fight",""]]);
   app.innerHTML = `
-  <div class="band" style="--c:${COVERS.bio}"><span class="code">Biology 0610 · Topic ${n}</span><h1>${esc(BIO_TOPICS[n-1])}</h1><p>${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${n}</span></div>
+  <div class="band" style="--c:${COVERS[s]}"><span class="code">${esc(L.name)} ${L.code} · ${L.unit} ${n}</span><h1>${esc(L.list[n-1])}</h1><p>${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${n}</span></div>
   <div class="tabs" role="tablist">${tabs.map(([k,l,c])=>`<button role="tab" data-tab="${k}" aria-selected="${k===tab}">${l}${c!==""?`<span class="count">${c}</span>`:""}</button>`).join("")}</div>
   <div id="panel" role="tabpanel"></div>`;
-  app.querySelectorAll('[role="tab"]').forEach(b=>b.onclick=()=>go({view:"topic", topic:n, tab:b.dataset.tab}));
+  app.querySelectorAll('[role="tab"]').forEach(b=>b.onclick=()=>go({view:"topic", s, topic:n, tab:b.dataset.tab}));
   const panel = document.getElementById("panel");
-  ({notes:renderNotes, cards:renderCards, exam:renderExam, fight:renderFight})[tab](panel, n, T);
+  ({notes:renderNotes, memorise:renderMemorise, cards:renderCards, exam:renderExam, fight:renderFight})[tab](panel, n, T);
 }
 
 /* ---------- quick check ---------- */
-function quickCheck(el, q, key){
+function quickCheck(el, q, key, ref){
   const opts = shuffle([q.a, ...q.w]);
   el.innerHTML = `<span class="tag">Quick check</span><p class="qt">${esc(q.q)}</p><div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div><div class="qc-fb"></div>`;
   el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
     const pick = opts[+b.dataset.k], ok = pick===q.a;
     el.querySelectorAll(".opt").forEach((o,k)=>{ o.disabled = true; if(opts[k]===q.a) o.classList.add("right"); });
-    if(!ok){ b.classList.add("wrong"); const ref = key.slice(3); logMistake(q, `Biology ${ref} · Quick check`, {view:"topic", topic:parseInt(ref), tab:"notes"}); drawNav(); }
+    if(!ok){ b.classList.add("wrong"); logMistake(q, `${LIB[CUR].name} ${ref} · Quick check`, {view:"topic", s:CUR, topic:parseInt(ref), tab:"notes"}); drawNav(); }
     el.querySelector(".qc-fb").innerHTML = `<div class="fb ${ok?"":"bad"}"><span class="verdict">${ok?"Nice.":"Not quite."}</span><span>${esc(q.t)}</span>${ok?"":`<button class="link-btn" data-retry>Try again</button>`}</div>`;
-    const r = el.querySelector("[data-retry]"); if(r) r.onclick = ()=>quickCheck(el, q, key);
+    const r = el.querySelector("[data-retry]"); if(r) r.onclick = ()=>quickCheck(el, q, key, ref);
     if(ok){ const rc = b.getBoundingClientRect(); confetti(rc.left+rc.width/2, rc.top); earn(key, 5, "quick check"); }
   });
 }
@@ -1205,31 +1571,113 @@ function quickCheck(el, q, key){
 /* ---------- notes ---------- */
 function renderNotes(panel, n, T){
   panel.innerHTML = `<div class="notes-grid">
-    <aside class="side"><h2>In this topic</h2><ol>${T.subs.map(s=>`<li><a href="#s${s.ref.replace(".","_")}" data-jump="${s.ref}"><span class="tick ${S.revised[s.ref]?"on":""}" aria-hidden="true"></span>${s.ref} ${esc(s.title)}</a></li>`).join("")}</ol></aside>
-    <article class="notes"><p class="byline"><span>Written by <b>the Specpoint team</b></span><span>Checked against the Cambridge 0610 syllabus</span><span>Teacher review coming soon</span><button class="link-btn" id="report">Report a mistake</button></p>${T.subs.map(s=>`<section id="s${s.ref.replace(".","_")}">
+    <aside class="side"><h2>In this topic</h2><ol>${T.subs.map(s=>`<li><a href="#s${s.ref.replace(".","_")}" data-jump="${s.ref}"><span class="tick ${S.revised[K(s.ref)]?"on":""}" aria-hidden="true"></span>${s.ref} ${esc(s.title)}</a></li>`).join("")}</ol></aside>
+    <article class="notes"><p class="byline"><span>Written by <b>the Specpoint team</b></span><span>${esc(LIB[CUR].syllabus)}</span><span>Teacher review coming soon</span><button class="link-btn" id="report">Report a mistake</button></p>${T.subs.map(s=>`<section id="s${s.ref.replace(".","_")}">
       <h2><span class="ref">${s.ref}</span>${esc(s.title)}</h2>${s.html}
       ${s.check?`<div class="qc" data-qc="${s.ref}"></div>`:""}
-      <div class="done-row"><label class="check"><input type="checkbox" id="rev-${s.ref}" data-rev="${s.ref}" ${S.revised[s.ref]?"checked":""}> I have revised ${s.ref}</label></div>
+      <div class="done-row"><label class="check"><input type="checkbox" id="rev-${s.ref}" data-rev="${s.ref}" ${S.revised[K(s.ref)]?"checked":""}> I have revised ${s.ref}</label></div>
     </section>`).join("")}
-    <div class="row"><button class="btn" id="to-cards">Test yourself with flashcards</button><button class="btn quiet" id="to-exam">Try exam questions</button></div>
+    <div class="row"><button class="btn" id="to-cards">${T.memorise ? "Memorise it" : "Test yourself with flashcards"}</button><button class="btn quiet" id="to-exam">Try exam questions</button></div>
     </article></div>`;
   mountByline(panel, n);
   panel.querySelectorAll("[data-jump]").forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById("s"+a.dataset.jump.replace(".","_")).scrollIntoView({behavior:REDUCED?"auto":"smooth"}); });
   panel.querySelectorAll("[data-rev]").forEach(c=>c.onchange=()=>{
-    S.revised[c.dataset.rev] = c.checked; save();
+    S.revised[K(c.dataset.rev)] = c.checked; save();
     panel.querySelector(`[data-jump="${c.dataset.rev}"] .tick`).classList.toggle("on", c.checked);
-    if(c.checked) earn("rev-"+c.dataset.rev, 10, `for revising ${c.dataset.rev}`);
+    if(c.checked) earn("rev-"+K(c.dataset.rev), 10, `for revising ${c.dataset.rev}`);
   });
-  T.subs.forEach(s=>{ if(s.check) quickCheck(panel.querySelector(`[data-qc="${s.ref}"]`), s.check, "qc-"+s.ref); });
+  T.subs.forEach(s=>{ if(s.check) quickCheck(panel.querySelector(`[data-qc="${s.ref}"]`), s.check, "qc-"+K(s.ref), s.ref); });
   panel.querySelectorAll("[data-widget]").forEach(w=>WIDGETS[w.dataset.widget](w));
-  document.getElementById("to-cards").onclick = ()=>go({view:"topic", topic:n, tab:"cards"});
-  document.getElementById("to-exam").onclick = ()=>go({view:"topic", topic:n, tab:"exam"});
+  document.getElementById("to-cards").onclick = ()=>go({view:"topic", s:CUR, topic:n, tab:T.memorise ? "memorise" : "cards"});
+  document.getElementById("to-exam").onclick = ()=>go({view:"topic", s:CUR, topic:n, tab:"exam"});
   // highlighter swipes in as key terms scroll into view
   if(!REDUCED && "IntersectionObserver" in window){
     const kts = panel.querySelectorAll(".kt");
     const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const k=e.target; k.classList.add("go"); requestAnimationFrame(()=>k.classList.remove("wait")); io.unobserve(k); } }), {rootMargin:"0px 0px -12% 0px"});
     kts.forEach(k=>{ k.classList.add("wait"); io.observe(k); });
   }
+}
+
+
+/* ---------- memorise: acronyms and lists ---------- */
+const ORD = ["first","second","third","fourth","fifth","sixth"];
+const norm = t => String(t).toLowerCase().replace(/[^a-z]/g,"");
+function renderMemorise(panel, n, T){
+  const sets = T.memorise, col = COVERS[CUR];
+  let si = 0, mode = "learn", blind = false, placed = [], pool = null, checked = null;
+  const memKey = set => K(`mem-${set.name}`);
+  const askFor = (set, i) => {
+    const [L] = set.items[i], same = set.items.filter(x=>x[0]===L).length;
+    const nth = set.items.slice(0, i+1).filter(x=>x[0]===L).length;
+    return `What does the ${same>1 ? ORD[nth-1]+" " : ""}${L} in ${set.name} stand for?`;
+  };
+  const draw = ()=>{
+    const set = sets[si], best = (S.mem||{})[memKey(set)];
+    const modes = [["learn","Learn it"],["test","Test me"]].concat(set.order ? [["order","Build a paragraph"]] : []);
+    let body = "";
+    if(mode === "learn"){
+      body = `<p class="mem-acr" aria-label="${esc(set.name)}">${set.items.map(x=>`<span>${esc(x[0])}</span>`).join("")}</p>
+        <ol class="mem-list">${set.items.map(x=>`<li class="mem-row"><span class="mem-letter" style="--c:${col}">${esc(x[0])}</span><span><span class="mem-word">${esc(x[1])}</span><span class="mem-mean">${esc(x[2])}</span></span></li>`).join("")}</ol>
+        <div class="row"><button class="btn" id="mem-go">I've got it, test me</button></div>`;
+    } else if(mode === "test"){
+      body = `<label class="check"><input type="checkbox" id="mem-blind" ${blind?"checked":""}> Hard mode: hide the letters</label>
+        <form id="mem-form"><ol class="mem-list">${set.items.map((x,i)=>{
+          const st = checked ? (checked[i] ? "ok" : "bad") : "";
+          return `<li class="mem-row ${st}"><span class="mem-letter" style="--c:${col}">${blind && !checked ? i+1 : esc(x[0])}</span>
+            <span><input class="mem-in" id="mem-${i}" autocomplete="off" spellcheck="false" aria-label="${esc(askFor(set,i))}" placeholder="${blind?"Word "+(i+1):"Starts with "+esc(x[0])}" ${checked?"readonly":""}>
+            ${checked && !checked[i] ? `<span class="mem-mean">Answer: <b>${esc(x[1])}</b>. ${esc(x[2])}</span>` : ""}</span></li>`; }).join("")}</ol>
+          <div class="row">${checked ? `<button type="button" class="btn" id="mem-again">Try again</button><button type="button" class="btn quiet" id="mem-learn">Back to learning</button>` : `<button class="btn">Check my answers</button>`}</div></form>
+        ${checked ? `<div class="fb ${checked.every(Boolean)?"":"bad"}"><span class="verdict">${checked.filter(Boolean).length} out of ${set.items.length}${checked.every(Boolean)?". Perfect.":""}</span>${checked.every(Boolean)?"":"<span>Wrong ones went into your mistake book.</span>"}</div>` : ""}`;
+    } else {
+      const parts = set.order.parts;
+      if(!pool) pool = shuffle(parts.map((p,i)=>i));
+      const done = placed.length === parts.length;
+      body = `<p class="mem-q"><b>Question:</b> ${esc(set.order.q)}</p>
+        <p class="fine" style="margin:0">Tap the sentences in SEEEL order. Tap a placed sentence to send it back.</p>
+        <ol class="ord-slots">${set.items.map((x,i)=>{
+          const p = placed[i], st = checked ? (checked[i] ? "ok" : "bad") : "";
+          return `<li class="ord-slot ${st}"><span class="mem-letter" style="--c:${col}">${esc(x[0])}</span>${p!==undefined ? `<button class="ord-placed" data-back="${i}" ${checked?"disabled":""}>${esc(parts[p])}</button>` : `<span class="ord-empty">${esc(x[1])}</span>`}</li>`; }).join("")}</ol>
+        ${checked ? "" : `<div class="ord-pool">${pool.filter(i=>!placed.includes(i)).map(i=>`<button class="opt ord-opt" data-put="${i}">${esc(parts[i])}</button>`).join("")}</div>`}
+        <div class="row">${checked ? `<button class="btn" id="ord-again">Try again</button>` : `<button class="btn" id="ord-check" ${done?"":"disabled"}>Check my paragraph</button>`}</div>
+        ${checked ? `<div class="fb ${checked.every(Boolean)?"":"bad"}"><span class="verdict">${checked.every(Boolean)?"Perfect paragraph.":`${checked.filter(Boolean).length} out of ${parts.length} in the right place.`}</span>${checked.every(Boolean)?"":"<span>Red ones are in the wrong slot. Check what each part of SEEEL does, then try again.</span>"}</div>` : ""}`;
+    }
+    panel.innerHTML = `<div class="mem">
+      <div class="seg mem-sets" role="group" aria-label="What to memorise">${sets.map((x,i)=>`<button data-set="${i}" aria-pressed="${i===si}">${esc(x.name)}</button>`).join("")}</div>
+      <div class="mem-head"><div><h2 class="mem-title">${esc(set.name)}</h2><p class="mem-what">${esc(set.what)}${best!==undefined?` · <span class="hand">Best ${best}/${set.items.length}</span>`:""}</p></div>
+        <div class="seg mem-modes" role="group" aria-label="Mode">${modes.map(([k,l])=>`<button data-mode="${k}" aria-pressed="${k===mode}">${l}</button>`).join("")}</div></div>
+      ${body}</div>`;
+    panel.querySelectorAll("[data-set]").forEach(b=>b.onclick=()=>{ si = +b.dataset.set; mode = "learn"; reset(); draw(); });
+    panel.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{ mode = b.dataset.mode; reset(); draw(); });
+    const g = document.getElementById("mem-go"); if(g) g.onclick = ()=>{ mode = "test"; reset(); draw(); };
+    const bl = document.getElementById("mem-blind"); if(bl) bl.onchange = ()=>{ blind = bl.checked; reset(); draw(); };
+    const f = document.getElementById("mem-form");
+    if(f && !checked){
+      const first = document.getElementById("mem-0"); if(first) first.focus({preventScroll:true});
+      f.onsubmit = e=>{
+        e.preventDefault();
+        const answers = set.items.map((x,i)=>document.getElementById("mem-"+i).value);
+        checked = set.items.map((x,i)=>[x[1], ...(x[3]||[])].map(norm).includes(norm(answers[i])));
+        const score = checked.filter(Boolean).length;
+        S.mem = S.mem || {}; S.mem[memKey(set)] = Math.max(S.mem[memKey(set)]||0, score); save();
+        set.items.forEach((x,i)=>{ if(!checked[i]) logMistake({q:askFor(set,i), a:x[1], w:shuffle(set.items.map(y=>y[1]).filter(w=>w!==x[1])).slice(0,3), t:x[2]}, `${LIB[CUR].name} ${LIB[CUR].unit.toLowerCase()} ${n} · Memorise ${set.name}`, {view:"topic", s:CUR, topic:n, tab:"memorise"}); });
+        draw(); drawNav();
+        set.items.forEach((x,i)=>{ document.getElementById("mem-"+i).value = answers[i]; });
+        if(score === set.items.length){ confetti(innerWidth/2, innerHeight*0.4); earn(memKey(set)+(blind?"-hard":""), blind?15:10, `for learning ${set.name}`); }
+      };
+    }
+    const ag = document.getElementById("mem-again"); if(ag) ag.onclick = ()=>{ reset(); draw(); };
+    const ml = document.getElementById("mem-learn"); if(ml) ml.onclick = ()=>{ mode = "learn"; reset(); draw(); };
+    panel.querySelectorAll("[data-put]").forEach(b=>b.onclick=()=>{ placed.push(+b.dataset.put); draw(); });
+    panel.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>{ placed.splice(+b.dataset.back, 1); draw(); });
+    const oc = document.getElementById("ord-check"); if(oc) oc.onclick = ()=>{
+      checked = placed.map((p,i)=>p===i);
+      if(checked.every(Boolean)){ confetti(innerWidth/2, innerHeight*0.4); earn(K(`order-${set.name}`), 10, "for a perfect paragraph"); }
+      draw();
+    };
+    const oa = document.getElementById("ord-again"); if(oa) oa.onclick = ()=>{ reset(); pool = null; draw(); };
+  };
+  const reset = ()=>{ checked = null; placed = []; };
+  draw();
 }
 
 /* ================= WIDGETS ================= */
@@ -1354,20 +1802,20 @@ const WIDGETS = {
 
 /* ---------- flashcards ---------- */
 function renderCards(panel, n, T){
-  let queue = shuffle(T.cards.map((c,i)=>i).filter(i=>!S.cards[`${n}-${i}`]));
+  let queue = shuffle(T.cards.map((c,i)=>i).filter(i=>!S.cards[K(`${n}-${i}`)]));
   let flipped = false, anim = "";
   function draw(){
-    const known = T.cards.filter((c,i)=>S.cards[`${n}-${i}`]).length;
+    const known = T.cards.filter((c,i)=>S.cards[K(`${n}-${i}`)]).length;
     if(!queue.length){
       panel.innerHTML = `<div class="deck"><div class="card back ${anim}"><span class="side-lbl">Deck complete</span><div class="face">You know all ${T.cards.length} cards in Topic ${n}.</div><div class="hint">Come back in a few days and reset the deck. Spacing out practice is what makes it stick.</div></div>
       <div class="row"><button class="btn" id="reset">Reset deck</button><button class="btn quiet" id="exam">Try exam questions</button></div></div>`;
-      document.getElementById("reset").onclick = ()=>{ T.cards.forEach((c,i)=>delete S.cards[`${n}-${i}`]); save(); queue = shuffle(T.cards.map((c,i)=>i)); anim="slide"; draw(); };
-      document.getElementById("exam").onclick = ()=>go({view:"topic", topic:n, tab:"exam"});
+      document.getElementById("reset").onclick = ()=>{ T.cards.forEach((c,i)=>delete S.cards[K(`${n}-${i}`)]); save(); queue = shuffle(T.cards.map((c,i)=>i)); anim="slide"; draw(); };
+      document.getElementById("exam").onclick = ()=>go({view:"topic", s:CUR, topic:n, tab:"exam"});
       return;
     }
     const i = queue[0], [front, back] = T.cards[i];
     panel.innerHTML = `<div class="deck">
-      <div class="deck-meta"><span>${known} of ${T.cards.length} known</span><span class="dots" aria-hidden="true">${T.cards.map((c,k)=>`<i class="${S.cards[`${n}-${k}`]?"on":""}"></i>`).join("")}</span></div>
+      <div class="deck-meta"><span>${known} of ${T.cards.length} known</span><span class="dots" aria-hidden="true">${T.cards.map((c,k)=>`<i class="${S.cards[K(`${n}-${k}`)]?"on":""}"></i>`).join("")}</span></div>
       <button class="card ${flipped?"back":""} ${anim}" id="card" aria-live="polite">
         <span class="side-lbl">${flipped?"Answer":"Question"}</span>
         <span class="face">${esc(flipped?back:front)}</span>
@@ -1380,8 +1828,8 @@ function renderCards(panel, n, T){
     document.getElementById("card").onclick = flip;
     const f = document.getElementById("flip"); if(f) f.onclick = flip;
     const g = document.getElementById("got"); if(g) g.onclick = ()=>{
-      S.cards[`${n}-${i}`]=1; save(); queue.shift(); flipped=false; anim="slide";
-      earn(`card-${n}-${i}`, 2, "card learned");
+      S.cards[K(`${n}-${i}`)]=1; save(); queue.shift(); flipped=false; anim="slide";
+      earn(`card-${K(`${n}-${i}`)}`, 2, "card learned");
       if(!queue.length){ const rc = g.getBoundingClientRect(); confetti(rc.left+rc.width/2, rc.top); }
       draw();
     };
@@ -1434,11 +1882,11 @@ function renderFight(panel, n, T){
   const b = T.boss;
   panel.innerHTML = `<div class="fight">
     <p class="fight-intro">Every question comes from the Topic ${n} notes. Right answers deal damage, and a streak of right answers hits harder. Wrong answers cost a heart and show you the fix.</p>
-    <div class="arena"><div class="hp-row"><b>${esc(b.name)}</b><span>${S.boss[n]?"Beaten before":"Not beaten yet"}</span></div>
+    <div class="arena"><div class="hp-row"><b>${esc(b.name)}</b><span>${S.boss[K(n)]?"Beaten before":"Not beaten yet"}</span></div>
       <div class="stage"><div class="boss">${bossArt(b)}</div></div></div>
     <div class="row"><button class="btn" id="start">Start fight</button><button class="btn quiet" id="notes">Read the notes first</button></div></div>`;
   document.getElementById("start").onclick = ()=>fight(panel, n, T);
-  document.getElementById("notes").onclick = ()=>go({view:"topic", topic:n, tab:"notes"});
+  document.getElementById("notes").onclick = ()=>go({view:"topic", s:CUR, topic:n, tab:"notes"});
 }
 
 function fight(panel, n, T){
@@ -1500,7 +1948,7 @@ function fight(panel, n, T){
       const d = document.createElement("div"); d.className="dmg"; d.textContent = `${dmg} damage`; $("stage").appendChild(d); setTimeout(()=>d.remove(),1000);
       verdict = F.streak>1 ? `Streak of ${F.streak}! ${dmg} damage.` : `Hit! ${dmg} damage.`;
     } else {
-      F.streak=0; F.hearts--; F.missed.push(q); logMistake(q, `Biology topic ${n} · Boss fight`, {view:"topic", topic:n, tab:"notes"}); F.queue.push(q); boss.classList.add("lunge");
+      F.streak=0; F.hearts--; F.missed.push(q); logMistake(q, `${LIB[CUR].name} ${LIB[CUR].unit.toLowerCase()} ${n} · Boss fight`, {view:"topic", s:CUR, topic:n, tab:"notes"}); F.queue.push(q); boss.classList.add("lunge");
       verdict = `Not quite. ${b.name} hits back.`;
     }
     status();
@@ -1514,7 +1962,7 @@ function fight(panel, n, T){
     $("next").onclick = ()=> end ? result(F.hp<=0) : ask();
   }
   function result(won){
-    if(won){ S.boss[n]=true; save(); }
+    if(won){ S.boss[K(n)]=true; save(); }
     const acc = Math.round(100*F.right/Math.max(1,F.asked));
     const missed = [...new Set(F.missed)];
     panel.innerHTML = `<div class="fight">
@@ -1523,8 +1971,8 @@ function fight(panel, n, T){
       ${missed.length ? `<h2 class="h2" style="margin:8px 0 0">Go back over these</h2><ul class="eq-list" style="list-style:none;padding:0;margin:0">${missed.map(q=>`<li class="eq"><span class="qt" style="font-size:17px">${esc(q.q)}</span><span>${esc(q.t)}</span></li>`).join("")}</ul>` : `<p style="margin:0">No mistakes. Try the exam questions next to practise writing full answers.</p>`}
       <div class="row"><button class="btn" id="again">Fight again</button><button class="btn quiet" id="notes">Back to notes</button></div></div>`;
     document.getElementById("again").onclick = ()=>fight(panel, n, T);
-    document.getElementById("notes").onclick = ()=>go({view:"topic", topic:n, tab:"notes"});
-    if(won){ confetti(innerWidth/2, innerHeight*0.35); earn(`boss-${n}-${dayKey(new Date())}`, 25, `for beating ${b.name}`); }
+    document.getElementById("notes").onclick = ()=>go({view:"topic", s:CUR, topic:n, tab:"notes"});
+    if(won){ confetti(innerWidth/2, innerHeight*0.35); earn(`boss-${K(n)}-${dayKey(new Date())}`, 25, `for beating ${b.name}`); }
   }
   status(); ask();
 }
@@ -1632,19 +2080,19 @@ function renderDecks(){
       <div class="row"><button class="btn" data-study="${d.id}" ${d.cards.length?"":"disabled"}>Study</button><button class="btn quiet" data-edit="${d.id}">Edit</button><button class="btn quiet obs-btn" data-export="${d.id}" ${d.cards.length?"":"disabled"} hidden>Export to Obsidian</button></div></li>`; }).join("")}</ul>`
       : `<div class="empty"><p class="hand-note">No decks yet.</p><p>Start a new deck, or copy one of the topic decks below and make it your own.</p></div>`}
     <h2 class="h2" style="margin-top:36px">Topic decks</h2>
-    <ul class="decks">${Object.entries(TOPICS).map(([n,T])=>`<li class="deck-tile" style="--c:${COVERS.bio}">
-      <div class="dt-name">Biology topic ${n}: ${esc(BIO_TOPICS[n-1])}</div>
+    <ul class="decks">${Object.values(LIB).flatMap(L=>Object.entries(L.topics).map(([n,T])=>({L, n:+n, T}))).map(({L,n,T})=>`<li class="deck-tile" style="--c:${COVERS[L.id]}">
+      <div class="dt-name">${esc(L.name)} ${L.unit.toLowerCase()} ${n}: ${esc(L.list[n-1])}</div>
       <div class="dt-meta">${T.cards.length} cards · by the Specpoint team</div>
-      <div class="row"><button class="btn" data-topic="${n}">Study</button><button class="btn quiet" data-copy="${n}">Copy to my decks</button></div></li>`).join("")}</ul>`;
+      <div class="row"><button class="btn" data-topic="${L.id}:${n}">Study</button><button class="btn quiet" data-copy="${L.id}:${n}">Copy to my decks</button></div></li>`).join("")}</ul>`;
   document.getElementById("new-deck").onclick = ()=>{ const d = {id:newId(), name:"My new deck", color:DECK_COLOURS[S.decks.length % DECK_COLOURS.length], front:"q", cards:[]}; S.decks.unshift(d); save(); go({view:"deck", id:d.id}); };
   app.querySelectorAll("[data-study]").forEach(b=>b.onclick=()=>go({view:"study", id:b.dataset.study}));
   app.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>go({view:"deck", id:b.dataset.edit}));
   app.querySelectorAll("[data-export]").forEach(b=>b.onclick=()=>{ const d = findDeck(b.dataset.export); saveMd(`${fileSafe(d.name)}.md`, deckMarkdown(d)); });
   showExport(app);
-  app.querySelectorAll("[data-topic]").forEach(b=>b.onclick=()=>go({view:"topic", topic:+b.dataset.topic, tab:"cards"}));
+  app.querySelectorAll("[data-topic]").forEach(b=>b.onclick=()=>{ const [s, n] = b.dataset.topic.split(":"); go({view:"topic", s, topic:+n, tab:"cards"}); });
   app.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{
-    const n = +b.dataset.copy, T = TOPICS[n];
-    const d = {id:newId(), name:`Biology topic ${n} (my copy)`, color:DECK_COLOURS[S.decks.length % DECK_COLOURS.length], front:"q", cards:T.cards.map(([f,bk])=>({id:newId(), f, b:bk, box:1, due:0}))};
+    const [s, ns] = b.dataset.copy.split(":"), n = +ns, L = LIB[s], T = L.topics[n];
+    const d = {id:newId(), name:`${L.name} ${L.unit.toLowerCase()} ${n} (my copy)`, color:DECK_COLOURS[S.decks.length % DECK_COLOURS.length], front:"q", cards:T.cards.map(([f,bk])=>({id:newId(), f, b:bk, box:1, due:0}))};
     S.decks.unshift(d); save(); toast("Copied. <b>Edit it however you like.</b>"); go({view:"deck", id:d.id});
   });
 }
@@ -1670,7 +2118,7 @@ function renderDeckEdit(){
         <label>Back<textarea id="nb" rows="2" placeholder="The answer or definition"></textarea></label>
         <div class="row"><button class="btn" id="add-card">Add card</button></div></div>
       <div class="ce-import"><label for="imp" class="ob-field"><span>Add cards from a topic</span></label>
-        <div class="row"><select id="imp">${Object.keys(TOPICS).map(n=>`<option value="${n}">Biology topic ${n}: ${esc(BIO_TOPICS[n-1])}</option>`).join("")}</select><button class="btn quiet" id="imp-go">Add them</button></div></div>
+        <div class="row"><select id="imp">${Object.values(LIB).flatMap(L=>Object.entries(L.topics).map(([n,T])=>({L, n:+n, T}))).map(({L,n})=>`<option value="${L.id}:${n}">${esc(L.name)} ${L.unit.toLowerCase()} ${n}: ${esc(L.list[n-1])}</option>`).join("")}</select><button class="btn quiet" id="imp-go">Add them</button></div></div>
       <div class="row ob-nav"><button class="btn quiet danger" id="del-deck">${confirmDel?"Tap again to delete for good":"Delete deck"}</button><button class="btn" id="dk-study" ${d.cards.length?"":"disabled"}>Study this deck</button></div>
     </div>`;
     const nm = document.getElementById("dk-name");
@@ -1687,8 +2135,8 @@ function renderDeckEdit(){
       document.getElementById("nf").focus();
     };
     document.getElementById("imp-go").onclick = ()=>{
-      const n = +document.getElementById("imp").value, have = new Set(d.cards.map(c=>c.f));
-      const add = TOPICS[n].cards.filter(([f])=>!have.has(f)).map(([f,bk])=>({id:newId(), f, b:bk, box:1, due:0}));
+      const [s, n] = document.getElementById("imp").value.split(":"), have = new Set(d.cards.map(c=>c.f));
+      const add = LIB[s].topics[+n].cards.filter(([f])=>!have.has(f)).map(([f,bk])=>({id:newId(), f, b:bk, box:1, due:0}));
       d.cards.push(...add); save(); toast(add.length ? `<b>${add.length} cards</b> added` : "Those cards are already in this deck"); draw();
     };
     document.getElementById("del-deck").onclick = ()=>{
@@ -1744,15 +2192,18 @@ function renderStudy(){
 
 /* ================= PRACTICE PAPERS ================= */
 function buildPapers(){
-  const mc = [];
-  Object.entries(TOPICS).forEach(([n,T])=>{
-    T.subs.forEach(s=>{ if(s.check) mc.push({...s.check, ref:s.ref}); });
-    T.boss.qs.forEach(q=>{ if(q.num===undefined) mc.push({...q, ref:`Topic ${n}`}); });
-  });
-  const theory = [].concat(...Object.values(TOPICS).map(T=>T.exam));
+  const mcOf = s => { const L = LIB[s], mc = [];
+    Object.entries(L.topics).forEach(([n,T])=>{
+      T.subs.forEach(x=>{ if(x.check) mc.push({...x.check, ref:`${L.name} ${x.ref}`}); });
+      T.boss.qs.forEach(q=>{ if(q.num===undefined) mc.push({...q, ref:`${L.name} ${L.unit.toLowerCase()} ${n}`}); });
+    }); return mc; };
+  const theoryOf = s => [].concat(...Object.values(LIB[s].topics).map(T=>T.exam));
+  const bioMc = mcOf("bio"), bioThy = theoryOf("bio"), gpMc = mcOf("gp"), gpThy = theoryOf("gp");
   return [
-    {id:"bio-mcq-1", kind:"mcq", code:"Paper 2 style", title:"Multiple choice", sub:"Biology 0610 · Topics 2 and 3", minutes:20, qs:mc.slice(0,20), total:Math.min(20,mc.length)},
-    {id:"bio-thy-1", kind:"theory", code:"Paper 4 style", title:"Theory", sub:"Biology 0610 · Topics 2 and 3 · Extended", minutes:30, qs:theory, total:theory.reduce((t,q)=>t+q.marks,0)}
+    {id:"bio-mcq-1", s:"bio", kind:"mcq", code:"Paper 2 style", title:"Multiple choice", sub:"Biology 0610 · Topics 2 and 3", minutes:20, qs:bioMc.slice(0,20), total:Math.min(20,bioMc.length)},
+    {id:"bio-thy-1", s:"bio", kind:"theory", code:"Paper 4 style", title:"Theory", sub:"Biology 0610 · Topics 2 and 3 · Extended", minutes:30, qs:bioThy, total:bioThy.reduce((t,q)=>t+q.marks,0)},
+    {id:"gp-mcq-1", s:"gp", kind:"mcq", code:"Skills check", title:"GP quick fire", sub:"Global Perspectives 0457 · All four units", minutes:15, qs:gpMc.slice().sort((x,y)=>mistakeKey(x).localeCompare(mistakeKey(y))).slice(0,20), total:Math.min(20,gpMc.length)},
+    {id:"gp-thy-1", s:"gp", kind:"theory", code:"Written exam practice", title:"GP written", sub:"Global Perspectives 0457 · All four units", minutes:40, qs:gpThy, total:gpThy.reduce((t,q)=>t+q.marks,0)}
   ];
 }
 let PAPERS = null;
@@ -1784,7 +2235,7 @@ function renderPaper(){
   if(!A){
     app.innerHTML = `<div class="cover">
       <div class="cv-top"><span>Specpoint</span><span>${p.code}</span></div>
-      <div class="cv-title"><span class="code">Biology 0610</span><h1>${p.title}</h1><p>${p.sub}</p></div>
+      <div class="cv-title"><span class="code">${esc(LIB[p.s].name)} ${LIB[p.s].code}</span><h1>${p.title}</h1><p>${p.sub}</p></div>
       <div class="cv-fields"><div><small>Candidate name</small><span class="hand">${esc(S.profile.name)}</span></div><div><small>Time</small><span>${p.minutes} minutes</span></div><div><small>Total</small><span>${p.total} marks</span></div></div>
       <div class="cv-ins"><b>Instructions</b><ul>
         <li>Answer all questions.</li>
@@ -1830,7 +2281,7 @@ function renderPaper(){
 function markPaper(p, A){
   let score = 0;
   if(p.kind==="mcq"){
-    p.qs.forEach((q,i)=>{ if(A.ans[i]===q.a) score++; else if(!A.logged) logMistake(q, `Biology ${q.ref} · ${p.title} paper`, null); });
+    p.qs.forEach((q,i)=>{ if(A.ans[i]===q.a) score++; else if(!A.logged) logMistake(q, `${q.ref} · ${p.title} paper`, null); });
     A.logged = true; save();
   }
   const theoryScore = ()=> p.qs.reduce((t,q,i)=>t+Math.min(q.marks, Object.keys(A.ticks[i]||{}).filter(k=>A.ticks[i][k]).length),0);
@@ -1876,22 +2327,22 @@ function renderSearch(){
     const hit = t => t.toLowerCase().includes(q);
     const snip = t => { const i = t.toLowerCase().indexOf(q), a = Math.max(0,i-60); const s = (a?"…":"")+t.slice(a, i+q.length+90)+"…"; return esc(s).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"ig"), m=>`<mark>${m}</mark>`); };
     const notes = [], cards = [], qs = [];
-    Object.entries(TOPICS).forEach(([n,T])=>{
-      T.subs.forEach(s=>{ const t = strip(s.html); if(hit(s.title)||hit(t)) notes.push({n, s, t}); });
-      T.cards.forEach(([f,b])=>{ if(hit(f)||hit(b)) cards.push({src:`Biology topic ${n}`, f, b, r:{view:"topic", topic:+n, tab:"cards"}}); });
-      T.exam.forEach(e=>{ if(hit(e.q)) qs.push({n, e}); });
+    Object.values(LIB).flatMap(L=>Object.entries(L.topics).map(([n,T])=>({L, n:+n, T}))).forEach(({L,n,T})=>{
+      T.subs.forEach(s=>{ const t = strip(s.html); if(hit(s.title)||hit(t)) notes.push({L, n, s, t}); });
+      T.cards.forEach(([f,b])=>{ if(hit(f)||hit(b)) cards.push({src:`${L.name} ${L.unit.toLowerCase()} ${n}`, f, b, r:{view:"topic", s:L.id, topic:n, tab:"cards"}}); });
+      T.exam.forEach(e=>{ if(hit(e.q)) qs.push({L, n, e}); });
     });
     (S.decks||[]).forEach(d=>d.cards.forEach(c=>{ if(hit(c.f)||hit(c.b)) cards.push({src:d.name, f:c.f, b:c.b, r:{view:"deck", id:d.id}}); }));
     const total = notes.length + cards.length + qs.length;
-    out.innerHTML = !total ? `<div class="empty"><p class="hand-note">Nothing found for "${esc(inp.value)}".</p><p>Only Biology topics 2 and 3 are written so far, so try a word from those.</p></div>` : `
-      ${notes.length?`<h2 class="h2">Notes <span class="count-s">${notes.length}</span></h2><ul class="res">${notes.map((x,i)=>`<li><button data-res="n${i}"><span class="r-src">Biology ${x.s.ref}</span><b>${esc(x.s.title)}</b><span class="r-snip">${snip(hit(x.t)?x.t:x.s.title)}</span></button></li>`).join("")}</ul>`:""}
+    out.innerHTML = !total ? `<div class="empty"><p class="hand-note">Nothing found for "${esc(inp.value)}".</p><p>Only Biology topics 2 and 3 and Global Perspectives are written so far, so try a word from those.</p></div>` : `
+      ${notes.length?`<h2 class="h2">Notes <span class="count-s">${notes.length}</span></h2><ul class="res">${notes.map((x,i)=>`<li><button data-res="n${i}"><span class="r-src">${esc(x.L.name)} ${x.s.ref}</span><b>${esc(x.s.title)}</b><span class="r-snip">${snip(hit(x.t)?x.t:x.s.title)}</span></button></li>`).join("")}</ul>`:""}
       ${cards.length?`<h2 class="h2">Flashcards <span class="count-s">${cards.length}</span></h2><ul class="res">${cards.map((x,i)=>`<li><button data-res="c${i}"><span class="r-src">${esc(x.src)}</span><b>${esc(x.f)}</b><span class="r-snip">${esc(x.b)}</span></button></li>`).join("")}</ul>`:""}
-      ${qs.length?`<h2 class="h2">Exam questions <span class="count-s">${qs.length}</span></h2><ul class="res">${qs.map((x,i)=>`<li><button data-res="q${i}"><span class="r-src">Biology ${x.e.ref} · ${x.e.marks} mark${x.e.marks>1?"s":""}</span><b>${snip(x.e.q)}</b></button></li>`).join("")}</ul>`:""}`;
+      ${qs.length?`<h2 class="h2">Exam questions <span class="count-s">${qs.length}</span></h2><ul class="res">${qs.map((x,i)=>`<li><button data-res="q${i}"><span class="r-src">${esc(x.L.name)} ${x.e.ref} · ${x.e.marks} mark${x.e.marks>1?"s":""}</span><b>${snip(x.e.q)}</b></button></li>`).join("")}</ul>`:""}`;
     out.querySelectorAll("[data-res]").forEach(b=>b.onclick=()=>{
       const k = b.dataset.res, i = +k.slice(1);
-      if(k[0]==="n"){ const x = notes[i]; go({view:"topic", topic:+x.n, tab:"notes"}); setTimeout(()=>{ const el = document.getElementById("s"+x.s.ref.replace(".","_")); if(el) el.scrollIntoView(); }, 60); }
+      if(k[0]==="n"){ const x = notes[i]; go({view:"topic", s:x.L.id, topic:x.n, tab:"notes"}); setTimeout(()=>{ const el = document.getElementById("s"+x.s.ref.replace(".","_")); if(el) el.scrollIntoView(); }, 60); }
       else if(k[0]==="c") go(cards[i].r);
-      else go({view:"topic", topic:+qs[i].n, tab:"exam"});
+      else go({view:"topic", s:qs[i].L.id, topic:qs[i].n, tab:"exam"});
     });
   };
   inp.oninput = run; run(); inp.focus({preventScroll:true});

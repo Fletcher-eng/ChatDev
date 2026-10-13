@@ -1,6 +1,7 @@
 ---
 type: "practice"
 subject: "Biology"
+syllabus: "Cambridge IGCSE 0610"
 topic: 2
 tags: ["biology", "practice"]
 ---

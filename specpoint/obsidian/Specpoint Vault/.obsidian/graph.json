@@ -8,28 +8,28 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "path:\"Biology/Key terms\"",
+      "query": "path:\"Key terms\"",
       "color": {
         "a": 1,
         "rgb": 16762624
       }
     },
     {
-      "query": "path:\"Biology/Notes\"",
+      "query": "path:Notes",
       "color": {
         "a": 1,
         "rgb": 3429104
       }
     },
     {
-      "query": "path:\"Biology/Topics\"",
+      "query": "path:Topics",
       "color": {
         "a": 1,
         "rgb": 708483
       }
     },
     {
-      "query": "path:\"Biology/Flashcards\" OR path:\"Biology/Practice\"",
+      "query": "path:Flashcards OR path:Practice OR path:Memorise",
       "color": {
         "a": 1,
         "rgb": 9425919

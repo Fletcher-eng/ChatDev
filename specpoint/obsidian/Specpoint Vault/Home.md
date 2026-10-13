@@ -22,6 +22,8 @@ Everything you need for your IGCSEs, in one place, on your own computer. It work
 ## Study tools
 
 - [[Biology key terms]]
+- [[Global Perspectives key terms]]
+- [[GP 1 Memorise]] (SEEEL and PEEL)
 - [[Mistake book]]
 - [[Past papers tracker]]
 - [[Revision timetable]]
@@ -36,7 +38,7 @@ Everything you need for your IGCSEs, in one place, on your own computer. It work
 
 ## Use the graph
 
-Open the graph with **Ctrl+G** (Cmd+G on a Mac). Each dot is a note and each line is a link. Big dots are ideas that connect to lots of topics, which makes them the most important to understand. Colours: green for Biology topics, blue for notes, yellow for key terms, orange for subjects, pink for your study pages.
+Open the graph with **Ctrl+G** (Cmd+G on a Mac). Each dot is a note and each line is a link. Big dots are ideas that connect to lots of topics, which makes them the most important to understand. Colours: green for topics and units, blue for notes, yellow for key terms, light blue for flashcards, practice and memorise sheets, orange for subjects, pink for your study pages.
 
 There is also a knowledge graph built with Graphify in the `graphify-out` folder. Open `graph.html` in your browser, or read `GRAPH_REPORT.md` to see which ideas link the most topics.
 

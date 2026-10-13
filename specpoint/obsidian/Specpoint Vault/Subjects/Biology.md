@@ -47,6 +47,11 @@ Cambridge IGCSE 0610 · Pearson Edexcel International GCSE 4BI1
 - [[Biology 3 Flashcards]]
 - [[Biology 3 Exam questions]]
 
+## Ideas shared with other subjects
+
+- [[Reliability]] (Global Perspectives): results are more reliable when experiments are repeated
+- [[Primary research]] (Global Perspectives): practical investigations collect your own primary data
+
 ## Past papers and mistakes
 
 - [[Past papers tracker]]

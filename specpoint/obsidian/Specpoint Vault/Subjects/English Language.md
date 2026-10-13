@@ -17,6 +17,12 @@ Cambridge IGCSE 0500 · Pearson Edexcel International GCSE 4EA1
 
 Specpoint notes for English Language are on the way. Make a note for each topic as you go with the Topic note template, and link it here like `[[English Language 1 Topic name]]`.
 
+## Ideas shared with other subjects
+
+- [[SEEEL]] (Global Perspectives): structuring persuasive and argument paragraphs
+- [[Argument]] (Global Perspectives): argument and persuasive writing
+- [[Bias]] (Global Perspectives): spotting a writer's viewpoint and bias
+
 ## Past papers and mistakes
 
 - [[Past papers tracker]]

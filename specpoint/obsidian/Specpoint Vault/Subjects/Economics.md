@@ -17,6 +17,10 @@ Cambridge IGCSE 0455 · Pearson Edexcel International GCSE 4EC1
 
 Specpoint notes for Economics are on the way. Make a note for each topic as you go with the Topic note template, and link it here like `[[Economics 1 Topic name]]`.
 
+## Ideas shared with other subjects
+
+- [[PESTLE]] (Global Perspectives): economic and political factors behind issues
+
 ## Past papers and mistakes
 
 - [[Past papers tracker]]

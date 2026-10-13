@@ -17,10 +17,10 @@ Cambridge IGCSE 0625 · Pearson Edexcel International GCSE 4PH1
 
 Specpoint notes for Physics are on the way. Make a note for each topic as you go with the Topic note template, and link it here like `[[Physics 1 Topic name]]`.
 
-## Ideas shared with Biology
+## Ideas shared with other subjects
 
-- [[Micrometre]]: units and measurement
-- [[Kinetic energy]]: energy stores and particle motion
+- [[Micrometre]] (Biology): units and measurement
+- [[Kinetic energy]] (Biology): energy stores and particle motion
 
 ## Past papers and mistakes
 

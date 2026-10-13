@@ -1,54 +1,125 @@
 {
   "communities": {
     "0": [
+      "global_perspectives_flashcards_gp_1_flashcards",
+      "global_perspectives_flashcards_gp_2_flashcards",
+      "global_perspectives_key_terms_argument",
+      "global_perspectives_key_terms_bias",
+      "global_perspectives_key_terms_claim",
+      "global_perspectives_key_terms_conclusion",
+      "global_perspectives_key_terms_counter_argument",
+      "global_perspectives_key_terms_craap_test",
+      "global_perspectives_key_terms_credibility",
+      "global_perspectives_key_terms_evidence",
+      "global_perspectives_key_terms_expertise",
+      "global_perspectives_key_terms_fact",
+      "global_perspectives_key_terms_opinion",
+      "global_perspectives_key_terms_peel",
+      "global_perspectives_key_terms_prediction",
+      "global_perspectives_key_terms_reasoning",
+      "global_perspectives_key_terms_reliability",
+      "global_perspectives_key_terms_seeel",
+      "global_perspectives_key_terms_value_judgement",
+      "global_perspectives_key_terms_vested_interest",
+      "global_perspectives_memorise_gp_1_memorise",
+      "global_perspectives_memorise_gp_2_memorise",
+      "global_perspectives_notes_gp_1_1_seeel_paragraphs",
+      "global_perspectives_notes_gp_1_2_phrases_to_learn",
+      "global_perspectives_notes_gp_2_1_judging_sources",
+      "global_perspectives_notes_gp_2_2_claims_facts_and_opinions",
+      "global_perspectives_practice_gp_1_exam_questions",
+      "global_perspectives_practice_gp_2_exam_questions",
+      "global_perspectives_topics_gp_1_writing_arguments",
+      "global_perspectives_topics_gp_2_sources_and_evidence",
+      "subjects_global_perspectives"
+    ],
+    "1": [
       "biology_flashcards_biology_3_flashcards",
       "biology_key_terms_active_transport",
       "biology_key_terms_cell_membrane",
+      "biology_key_terms_cell_wall",
       "biology_key_terms_concentration_gradient",
       "biology_key_terms_diffusion",
+      "biology_key_terms_flaccid",
       "biology_key_terms_kinetic_energy",
+      "biology_key_terms_large_permanent_vacuole",
       "biology_key_terms_mitochondria",
+      "biology_key_terms_osmosis",
+      "biology_key_terms_partially_permeable_membrane",
+      "biology_key_terms_plant_cell",
+      "biology_key_terms_plasmolysis",
       "biology_key_terms_protein_carriers",
       "biology_key_terms_respiration",
       "biology_key_terms_root_hair_cell",
       "biology_key_terms_surface_area",
+      "biology_key_terms_turgid",
+      "biology_key_terms_turgor_pressure",
+      "biology_key_terms_water_potential",
       "biology_notes_biology_3_1_diffusion",
+      "biology_notes_biology_3_2_osmosis",
       "biology_notes_biology_3_3_active_transport",
       "biology_practice_biology_3_exam_questions",
       "biology_topics_biology_11_gas_exchange_in_humans",
       "biology_topics_biology_12_respiration",
-      "biology_topics_biology_3_movement_into_and_out_of_cells"
-    ],
-    "1": [
-      "biology_key_terms_cytoplasm",
-      "biology_key_terms_ribosomes",
-      "biology_topics_biology_13_excretion_in_humans",
-      "biology_topics_biology_14_coordination_and_response",
-      "biology_topics_biology_15_drugs",
-      "biology_topics_biology_16_reproduction",
-      "biology_topics_biology_17_inheritance",
-      "biology_topics_biology_18_variation_and_selection",
-      "biology_topics_biology_19_organisms_and_their_environment",
-      "biology_topics_biology_20_human_influences_on_ecosystems",
-      "biology_topics_biology_4_biological_molecules",
-      "biology_topics_biology_5_enzymes",
-      "subjects_biology"
-    ],
-    "2": [
-      "biology_key_terms_cell_wall",
-      "biology_key_terms_flaccid",
-      "biology_key_terms_large_permanent_vacuole",
-      "biology_key_terms_osmosis",
-      "biology_key_terms_partially_permeable_membrane",
-      "biology_key_terms_percentage_change",
-      "biology_key_terms_plasmolysis",
-      "biology_key_terms_turgid",
-      "biology_key_terms_turgor_pressure",
-      "biology_key_terms_water_potential",
-      "biology_notes_biology_3_2_osmosis",
+      "biology_topics_biology_3_movement_into_and_out_of_cells",
       "biology_topics_biology_8_transport_in_plants"
     ],
+    "2": [
+      "global_perspectives_flashcards_gp_4_flashcards",
+      "global_perspectives_key_terms_analysis",
+      "global_perspectives_key_terms_collaboration",
+      "global_perspectives_key_terms_communication",
+      "global_perspectives_key_terms_evaluation",
+      "global_perspectives_key_terms_primary_research",
+      "global_perspectives_key_terms_qualitative_data",
+      "global_perspectives_key_terms_quantitative_data",
+      "global_perspectives_key_terms_reflection",
+      "global_perspectives_key_terms_research",
+      "global_perspectives_key_terms_research_question",
+      "global_perspectives_key_terms_sample",
+      "global_perspectives_key_terms_secondary_research",
+      "global_perspectives_memorise_gp_4_memorise",
+      "global_perspectives_notes_gp_4_1_research",
+      "global_perspectives_notes_gp_4_2_skills_assessment_and_command_words",
+      "global_perspectives_practice_gp_4_exam_questions",
+      "global_perspectives_topics_gp_4_research_and_assessment"
+    ],
     "3": [
+      "global_perspectives_flashcards_gp_3_flashcards",
+      "global_perspectives_key_terms_cause",
+      "global_perspectives_key_terms_consequence",
+      "global_perspectives_key_terms_course_of_action",
+      "global_perspectives_key_terms_global_perspective",
+      "global_perspectives_key_terms_issue",
+      "global_perspectives_key_terms_local_perspective",
+      "global_perspectives_key_terms_national_perspective",
+      "global_perspectives_key_terms_personal_perspective",
+      "global_perspectives_key_terms_perspective",
+      "global_perspectives_key_terms_pestle",
+      "global_perspectives_key_terms_stakeholder",
+      "global_perspectives_memorise_gp_3_memorise",
+      "global_perspectives_notes_gp_3_1_perspectives",
+      "global_perspectives_notes_gp_3_2_causes_consequences_and_solutions",
+      "global_perspectives_practice_gp_3_exam_questions",
+      "global_perspectives_topics_gp_3_issues_and_perspectives"
+    ],
+    "4": [
+      "biology_flashcards_biology_2_flashcards",
+      "biology_key_terms_animal_cell",
+      "biology_key_terms_cellulose",
+      "biology_key_terms_cytoplasm",
+      "biology_key_terms_magnification",
+      "biology_key_terms_micrometre",
+      "biology_key_terms_nucleus",
+      "biology_key_terms_ribosomes",
+      "biology_notes_biology_2_2_size_of_specimens",
+      "biology_practice_biology_2_exam_questions",
+      "biology_topics_biology_2_organisation_of_the_organism",
+      "biology_topics_biology_4_biological_molecules",
+      "biology_topics_biology_5_enzymes"
+    ],
+    "5": [
+      "biology_key_terms_percentage_change",
       "my_study_exam_dates",
       "my_study_mistake_book",
       "my_study_past_papers_tracker",
@@ -57,63 +128,60 @@
       "subjects_economics",
       "subjects_english_language",
       "subjects_english_literature",
-      "subjects_global_perspectives",
       "subjects_mathematics",
       "subjects_physics",
       "subjects_spanish"
     ],
-    "4": [
-      "biology_key_terms_animal_cell",
-      "biology_key_terms_chloroplasts",
-      "biology_key_terms_nucleus",
-      "biology_key_terms_palisade_mesophyll_cell",
-      "biology_key_terms_photosynthesis",
-      "biology_key_terms_plant_cell",
-      "biology_topics_biology_6_plant_nutrition",
-      "biology_topics_biology_7_human_nutrition"
-    ],
-    "5": [
-      "biology_key_terms_cellulose",
+    "6": [
+      "biology_key_terms_ciliated_cell",
       "biology_key_terms_neurone",
       "biology_key_terms_organ",
       "biology_key_terms_organ_system",
+      "biology_key_terms_red_blood_cell",
       "biology_key_terms_specialised_cell",
       "biology_key_terms_sperm_and_egg_cells",
       "biology_key_terms_tissue",
-      "biology_notes_biology_2_1_cell_structure"
-    ],
-    "6": [
-      "biology_flashcards_biology_2_flashcards",
-      "biology_key_terms_magnification",
-      "biology_key_terms_micrometre",
-      "biology_notes_biology_2_2_size_of_specimens",
-      "biology_practice_biology_2_exam_questions",
-      "biology_topics_biology_2_organisation_of_the_organism"
+      "biology_notes_biology_2_1_cell_structure",
+      "biology_topics_biology_10_diseases_and_immunity",
+      "biology_topics_biology_9_transport_in_animals"
     ],
     "7": [
+      "biology_topics_biology_13_excretion_in_humans",
+      "biology_topics_biology_14_coordination_and_response",
+      "biology_topics_biology_15_drugs",
+      "biology_topics_biology_16_reproduction",
+      "biology_topics_biology_17_inheritance",
+      "biology_topics_biology_18_variation_and_selection",
+      "biology_topics_biology_19_organisms_and_their_environment",
+      "biology_topics_biology_20_human_influences_on_ecosystems",
+      "subjects_biology"
+    ],
+    "8": [
       "biology_key_terms_bacterial_cell",
       "biology_key_terms_circular_dna",
       "biology_key_terms_plasmids",
       "biology_topics_biology_1_characteristics_and_classification_of_living_organisms",
       "biology_topics_biology_21_biotechnology_and_genetic_engineering"
     ],
-    "8": [
-      "biology_key_terms_ciliated_cell",
-      "biology_key_terms_red_blood_cell",
-      "biology_topics_biology_10_diseases_and_immunity",
-      "biology_topics_biology_9_transport_in_animals"
+    "9": [
+      "biology_key_terms_chloroplasts",
+      "biology_key_terms_palisade_mesophyll_cell",
+      "biology_key_terms_photosynthesis",
+      "biology_topics_biology_6_plant_nutrition",
+      "biology_topics_biology_7_human_nutrition"
     ]
   },
   "cohesion": {
-    "0": 0.38235294117647056,
-    "1": 0.28205128205128205,
-    "2": 0.4393939393939394,
-    "3": 0.4090909090909091,
-    "4": 0.42857142857142855,
-    "5": 0.42857142857142855,
-    "6": 0.6666666666666666,
-    "7": 0.7,
-    "8": 0.5
+    "0": 0.210752688172043,
+    "1": 0.26108374384236455,
+    "2": 0.30718954248366015,
+    "3": 0.38235294117647056,
+    "4": 0.32051282051282054,
+    "5": 0.3939393939393939,
+    "6": 0.34545454545454546,
+    "7": 0.4166666666666667,
+    "8": 0.7,
+    "9": 0.7
   },
   "gods": [
     {
@@ -122,14 +190,14 @@
       "degree": 47
     },
     {
+      "id": "subjects_biology",
+      "label": "Biology",
+      "degree": 35
+    },
+    {
       "id": "biology_topics_biology_3_movement_into_and_out_of_cells",
       "label": "Biology 3 Movement into and out of cells",
       "degree": 34
-    },
-    {
-      "id": "subjects_biology",
-      "label": "Biology",
-      "degree": 33
     },
     {
       "id": "biology_notes_biology_2_1_cell_structure",
@@ -137,34 +205,34 @@
       "degree": 30
     },
     {
+      "id": "subjects_global_perspectives",
+      "label": "Global Perspectives",
+      "degree": 27
+    },
+    {
+      "id": "global_perspectives_topics_gp_2_sources_and_evidence",
+      "label": "GP 2 Sources and evidence",
+      "degree": 21
+    },
+    {
+      "id": "global_perspectives_topics_gp_3_issues_and_perspectives",
+      "label": "GP 3 Issues and perspectives",
+      "degree": 19
+    },
+    {
+      "id": "global_perspectives_topics_gp_4_research_and_assessment",
+      "label": "GP 4 Research and assessment",
+      "degree": 19
+    },
+    {
       "id": "biology_notes_biology_3_2_osmosis",
       "label": "Biology 3.2 Osmosis",
       "degree": 18
     },
     {
-      "id": "biology_key_terms_osmosis",
-      "label": "Osmosis",
-      "degree": 15
-    },
-    {
-      "id": "biology_key_terms_cell_membrane",
-      "label": "Cell membrane",
-      "degree": 14
-    },
-    {
-      "id": "biology_notes_biology_3_3_active_transport",
-      "label": "Biology 3.3 Active transport",
-      "degree": 13
-    },
-    {
-      "id": "biology_topics_biology_8_transport_in_plants",
-      "label": "Biology 8 Transport in plants",
-      "degree": 13
-    },
-    {
-      "id": "biology_key_terms_diffusion",
-      "label": "Diffusion",
-      "degree": 13
+      "id": "my_study_mistake_book",
+      "label": "Mistake book",
+      "degree": 16
     }
   ],
   "surprises": [
@@ -227,18 +295,18 @@
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `Biology` connect `Biology map, molecules and later topics` to `Diffusion, respiration and active transport`, `Osmosis and water in cells`, `Your subjects and study pages`, `Cell types and nutrition`, `Specialised cells and organisation`, `Size of specimens and magnification`, `Bacteria, DNA and biotechnology`, `Cells for transport and defence`?",
-      "why": "High betweenness centrality (0.316) - this node is a cross-community bridge."
+      "question": "Why does `Biology` connect `Biology map and later topics` to `GP: arguments, sources and SEEEL`, `Diffusion, osmosis and active transport`, `GP: research and the six skills`, `Cell parts and magnification`, `Your subjects and study pages`, `Specialised cells and organisation`, `Bacteria, DNA and biotechnology`, `Chloroplasts and photosynthesis`?",
+      "why": "High betweenness centrality (0.445) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `Biology 2 Organisation of the organism` connect `Size of specimens and magnification` to `Diffusion, respiration and active transport`, `Biology map, molecules and later topics`, `Osmosis and water in cells`, `Cell types and nutrition`, `Specialised cells and organisation`, `Bacteria, DNA and biotechnology`, `Cells for transport and defence`?",
-      "why": "High betweenness centrality (0.306) - this node is a cross-community bridge."
+      "question": "Why does `Global Perspectives` connect `GP: arguments, sources and SEEEL` to `GP: research and the six skills`, `GP: issues and perspectives`, `Your subjects and study pages`?",
+      "why": "High betweenness centrality (0.236) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `Biology 3 Movement into and out of cells` connect `Diffusion, respiration and active transport` to `Biology map, molecules and later topics`, `Osmosis and water in cells`, `Cell types and nutrition`, `Size of specimens and magnification`, `Cells for transport and defence`?",
-      "why": "High betweenness centrality (0.164) - this node is a cross-community bridge."
+      "question": "Why does `Mistake book` connect `Your subjects and study pages` to `GP: arguments, sources and SEEEL`, `Diffusion, osmosis and active transport`, `GP: research and the six skills`, `GP: issues and perspectives`, `Cell parts and magnification`, `Biology map and later topics`?",
+      "why": "High betweenness centrality (0.172) - this node is a cross-community bridge."
     }
   ]
 }
