@@ -159,6 +159,12 @@ button{cursor:pointer}
 .band h1{font-size:clamp(44px,9vw,92px);line-height:.88;margin:8px 0 12px;text-wrap:balance;max-width:14ch;position:relative;overflow-wrap:anywhere}
 .band p{margin:0;max-width:56ch;font-weight:600;position:relative}
 .band .num{position:absolute;right:12px;bottom:-24px;font-size:200px;line-height:1;color:#1A2360;opacity:.14;pointer-events:none}
+.band-img{position:absolute;top:0;right:0;height:100%;width:min(64%,600px);object-fit:cover;opacity:.34;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 50%);mask-image:linear-gradient(to right,transparent,#000 50%)}
+.band.has-photo{padding-bottom:34px}
+.band-credit{position:absolute;right:10px;bottom:6px;font-size:13px;font-weight:700;opacity:.8;z-index:1;max-width:70%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.band-credit a{color:inherit}
+@media (max-width:560px){.band-img{width:100%;opacity:.2;-webkit-mask-image:linear-gradient(to bottom left,#000 20%,transparent 85%);mask-image:linear-gradient(to bottom left,#000 20%,transparent 85%)}}
 .shapes{position:absolute;right:18px;top:16px;display:flex;gap:8px;pointer-events:none}
 .shapes i{width:34px;height:34px;border:3px solid #1A2360;display:block}
 .shapes i:nth-child(1){border-radius:50%;background:#fff}
@@ -328,6 +334,15 @@ button{cursor:pointer}
 .eq-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .eq-top .code{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
 .eq .qt{font-size:18px;line-height:1.5;font-weight:600}
+.eq-q{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.eq-q .qt{flex:1 1 300px}
+.qfig{margin:0;flex:0 1 260px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.qfig img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border:2.5px solid var(--rule);background:var(--accent-soft)}
+.qfig figcaption{font-size:14px;line-height:1.4;color:var(--ink2)}
+.qfig figcaption b{color:var(--ink)}
+.qfig .cr{display:block;font-size:13px;color:var(--ink3);margin-top:2px}
+.qfig .cr a{color:inherit}
+.pq .qfig{max-width:380px;flex:none}
 .marks{font-size:22px;white-space:nowrap}
 .eq textarea{width:100%;min-height:106px;border:0;padding:4px 2px;background:transparent;resize:vertical;font-family:var(--hand);font-size:20px;line-height:35px;color:var(--pen);
   background-image:radial-gradient(circle,var(--ink3) 1px,transparent 1.4px);background-size:7px 35px;background-position:0 30px;background-repeat:repeat}
@@ -835,6 +850,10 @@ const TOPICS = {
 const COVERS = {bio:"#0ACF83", chem:"#FF7262", phys:"#1ABCFE", math:"#F24E1E", eng:"#FFC700", lit:"#FF9EC4", dt:"#C9C5BA", econ:"#3DD6C4", gp:"#8FD3FF", spa:"#FFB443"};
 
 
+/* PHOTOS:START  written by specpoint/photos/fetch_photos.py apply, do not edit by hand */
+const PHOTOS = {};
+/* PHOTOS:END */
+
 /* ---------- Global Perspectives 0457 ---------- */
 const GP_LIST = ["Writing arguments","Sources and evidence","Issues and perspectives","Research and assessment"];
 
@@ -1206,6 +1225,9 @@ function ring(frac, size=34, stroke=5, col="var(--accent)"){
 }
 
 /* ================= HELPERS ================= */
+const credit = p => `${esc(p.credit)} · ${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.license)}</a>` : esc(p.license)}`;
+const bandPhoto = k => { const p = PHOTOS[k]; return p ? `<img class="band-img" src="${esc(p.src)}" alt="" aria-hidden="true"><span class="band-credit">${credit(p)}</span>` : ""; };
+const figure = (k, fig) => { const p = PHOTOS[k]; return p ? `<figure class="qfig"><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy"><figcaption>${fig ? `<b>Fig. ${fig}</b> ` : ""}${esc(p.caption)}<span class="cr">${credit(p)}</span></figcaption></figure>` : ""; };
 const app = document.getElementById("app");
 const crumbs = document.getElementById("crumbs");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1526,7 +1548,7 @@ function renderSubject(){
   const s = route.s || "bio", L = LIB[s]; CUR = s;
   setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:`${L.name} ${L.code}`}]);
   app.innerHTML = `
-  <div class="band" style="--c:${COVERS[s]}"><span class="code">Cambridge IGCSE · ${L.code}</span><h1>${esc(L.name)}</h1>
+  <div class="band ${PHOTOS[s]?"has-photo":""}" style="--c:${COVERS[s]}">${bandPhoto(s)}<span class="code">Cambridge IGCSE · ${L.code}</span><h1>${esc(L.name)}</h1>
   <p>${esc(L.blurb)}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${subjectProgress(s)}%</span></div>
   <ol class="toc">${L.list.map((t,i)=>{
     const n=i+1, T=L.topics[n];
@@ -1546,7 +1568,7 @@ function renderTopic(){
   setCrumbs([{label:"Dashboard", r:{view:"home"}},{label:L.name, r:{view:"subject", s}},{label:`${L.unit} ${n}`}]);
   const tabs = [["notes","Notes",""]].concat(T.memorise ? [["memorise","Memorise",T.memorise.length]] : []).concat([["cards","Flashcards",T.cards.length],["exam","Exam questions",T.exam.length],["fight","Boss fight",""]]);
   app.innerHTML = `
-  <div class="band" style="--c:${COVERS[s]}"><span class="code">${esc(L.name)} ${L.code} · ${L.unit} ${n}</span><h1>${esc(L.list[n-1])}</h1><p>${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${n}</span></div>
+  <div class="band ${PHOTOS[`${s}-${n}`]?"has-photo":""}" style="--c:${COVERS[s]}">${bandPhoto(`${s}-${n}`)}<span class="code">${esc(L.name)} ${L.code} · ${L.unit} ${n}</span><h1>${esc(L.list[n-1])}</h1><p>${T.subs.map(s=>`${s.ref} ${esc(s.title)}`).join(" · ")}</p><span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span><span class="num" aria-hidden="true">${n}</span></div>
   <div class="tabs" role="tablist">${tabs.map(([k,l,c])=>`<button role="tab" data-tab="${k}" aria-selected="${k===tab}">${l}${c!==""?`<span class="count">${c}</span>`:""}</button>`).join("")}</div>
   <div id="panel" role="tabpanel"></div>`;
   app.querySelectorAll('[role="tab"]').forEach(b=>b.onclick=()=>go({view:"topic", s, topic:n, tab:b.dataset.tab}));
@@ -1847,7 +1869,7 @@ function renderExam(panel, n, T){
   <div class="eq-list">${T.exam.map((q,k)=>`
     <div class="eq" data-q="${q.id}">
       <div class="eq-top"><span class="code">Question ${k+1} · ${q.ref}${q.sup?" · Supplement":""}</span><span class="marks" aria-label="${q.marks} mark${q.marks>1?"s":""}">[${q.marks}]</span></div>
-      <div class="qt">${esc(q.q)}</div>
+      <div class="eq-q"><div class="qt">${esc(q.q)}</div>${figure(q.id)}</div>
       <label for="ans-${q.id}" style="font-size:14px;font-weight:600;color:var(--ink2)">Your answer</label>
       <textarea id="ans-${q.id}" placeholder="Write it like you would in the exam"></textarea>
       <div class="row"><button class="btn quiet" data-show="${q.id}">Show mark scheme</button></div>
@@ -2252,7 +2274,7 @@ function renderPaper(){
   app.innerHTML = `<div class="timerbar" id="tbar"><span class="tb-title">${p.title}</span><span class="tb-time" id="ttime"></span><button class="btn" id="finish">Finish paper</button></div>
     <ol class="paper-qs">${p.qs.map((q,i)=>`<li class="pq">
       <div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">[${p.kind==="mcq"?1:q.marks}]</span></div>
-      <p class="qt">${esc(q.q)}</p>
+      <p class="qt">${esc(q.q)}</p>${p.kind==="mcq" ? "" : figure(q.id, `${i+1}.1`)}
       ${p.kind==="mcq"
         ? `<div class="opts">${A.order[i].map((o,j)=>`<button class="opt ${A.ans[i]===o?"picked":""}" data-q="${i}" data-o="${j}" aria-pressed="${A.ans[i]===o}">${esc(o)}</button>`).join("")}</div>`
         : `<textarea class="pq-ans" data-q="${i}" aria-label="Answer to question ${i+1}" placeholder="Write your answer here">${esc(A.ans[i]||"")}</textarea>`}
@@ -2293,7 +2315,7 @@ function markPaper(p, A){
     <ol class="paper-qs">${p.qs.map((q,i)=>{
       if(p.kind==="mcq"){ const ok = A.ans[i]===q.a; return `<li class="pq ${ok?"pq-ok":"pq-bad"}"><div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">${ok?"✓":"✗"}</span></div><p class="qt">${esc(q.q)}</p>
         <p>${A.ans[i]?`You chose <b>${esc(A.ans[i])}</b>.`:"You left this blank."} ${ok?"":`The answer is <b>${esc(q.a)}</b>.`}</p>${ok?"":`<p class="pq-tip">${esc(q.t||"")}</p>`}</li>`; }
-      return `<li class="pq"><div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">[${q.marks}]</span></div><p class="qt">${esc(q.q)}</p>
+      return `<li class="pq"><div class="pq-top"><span class="pq-n">${i+1}</span><span class="marks">[${q.marks}]</span></div><p class="qt">${esc(q.q)}</p>${figure(q.id, `${i+1}.1`)}
         <div class="your"><small>Your answer</small><span class="hand">${A.ans[i]?esc(A.ans[i]):"Left blank"}</span></div>
         <div class="ms"><b>Mark scheme</b>${q.ms.map((m,j)=>`<label><input type="checkbox" id="pm-${i}-${j}" data-i="${i}" data-j="${j}" ${(A.ticks[i]||{})[j]?"checked":""}> <span>${esc(m)}</span></label>`).join("")}${q.note?`<span class="note">${esc(q.note)}</span>`:""}</div></li>`;
     }).join("")}</ol>

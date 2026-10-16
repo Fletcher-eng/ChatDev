@@ -17,15 +17,26 @@ function loadSite(){
   const html = fs.readFileSync(SITE, "utf8");
   const js = html.slice(html.indexOf("<script>") + 8, html.lastIndexOf("</script>"));
   const content = js.slice(js.indexOf("/* ================= CONTENT"), js.indexOf("/* ================= STORAGE"));
-  return vm.runInNewContext(content + ";({BIO_TOPICS, TOPICS, GP_LIST, GP_TOPICS})", {});
+  return vm.runInNewContext(content + ";({BIO_TOPICS, TOPICS, GP_LIST, GP_TOPICS, PHOTOS})", {});
 }
-const { BIO_TOPICS, TOPICS, GP_LIST, GP_TOPICS } = loadSite();
+const { BIO_TOPICS, TOPICS, GP_LIST, GP_TOPICS, PHOTOS } = loadSite();
+
+/* ---------- photos: copied into Attachments and embedded, with credits ---------- */
+const PHOTO_DIR = path.join(HERE, "..", "photos");
+function photoMd(key, width){
+  const p = PHOTOS[key]; if(!p) return "";
+  const from = path.join(PHOTO_DIR, p.src), name = path.basename(p.src);
+  if(!fs.existsSync(from)) return "";
+  fs.mkdirSync(path.join(VAULT, "Attachments"), {recursive:true});
+  fs.copyFileSync(from, path.join(VAULT, "Attachments", name));
+  return `![[${name}|${width}]]\n*${p.caption}. ${p.credit}, ${p.license}${p.link ? `, [source](${p.link})` : ""}*\n\n`;
+}
 
 /* ---------- subjects the website has notes for ---------- */
 const SITE_SUBJECTS = [
-  {name:"Biology", short:"Biology", folder:"Biology", tag:"biology", code:"0610", unit:"Topic", list:BIO_TOPICS, topics:TOPICS, concepts:CONCEPTS,
+  {name:"Biology", site:"bio", short:"Biology", folder:"Biology", tag:"biology", code:"0610", unit:"Topic", list:BIO_TOPICS, topics:TOPICS, concepts:CONCEPTS,
    syllabus:"checked against the Cambridge 0610 syllabus", keyIndexNote:"Terms marked **S** are Supplement (Extended) content."},
-  {name:"Global Perspectives", short:"GP", folder:"Global Perspectives", tag:"gp", code:"0457", unit:"Unit", list:GP_LIST, topics:GP_TOPICS, concepts:GP_CONCEPTS,
+  {name:"Global Perspectives", site:"gp", short:"GP", folder:"Global Perspectives", tag:"gp", code:"0457", unit:"Unit", list:GP_LIST, topics:GP_TOPICS, concepts:GP_CONCEPTS,
    syllabus:"based on the Cambridge 0457 skills", keyIndexNote:"Learn these words exactly. Examiners reward the right terms."}
 ];
 const SUBJ = Object.fromEntries(SITE_SUBJECTS.map(S=>[S.name, S]));
@@ -46,7 +57,7 @@ const topicOfRef = ref => parseInt(ref);
 
 /* ---------- files and the link graph ---------- */
 const NOTES = new Map(); // title -> {rel, type, links:Set}
-const linksIn = body => new Set([...body.replace(/`[^`\n]*`/g,"").matchAll(/\[\[([^\]|\\#]+)/g)].map(m=>m[1].trim()));
+const linksIn = body => new Set([...body.replace(/`[^`\n]*`/g,"").replace(/!\[\[[^\]]*\]\]/g,"").matchAll(/\[\[([^\]|\\#]+)/g)].map(m=>m[1].trim()));
 function note(rel, title, type, body){
   NOTES.set(title, {rel, type, links:linksIn(body)});
   const file = path.join(VAULT, rel);
@@ -212,7 +223,7 @@ function buildSubject(S){
     let body = fm({type:"practice", ...fmBase, topic:n, tags:tags("practice")});
     body += `# ${S.unit} ${n} exam questions\n\nFor ${L(topicTitle(S,n))}. Write your answer under each question, then open the mark scheme and tick the points you made. These are original Specpoint questions in the Cambridge style, not official past paper questions.\n\n## Written questions\n\n`;
     T.exam.forEach((q,i)=>{
-      body += `### Question ${i+1} · ${q.ref}${q.sup?" · Supplement":""} · [${q.marks} mark${q.marks>1?"s":""}]\n${q.q}\n\n**My answer:**\n\n\n> [!check]- Mark scheme\n${q.ms.map(m=>`> - [ ] ${m}`).join("\n")}${q.note?`\n>\n> *${q.note}*`:""}\n\n`;
+      body += `### Question ${i+1} · ${q.ref}${q.sup?" · Supplement":""} · [${q.marks} mark${q.marks>1?"s":""}]\n${q.q}\n\n${photoMd(q.id, 320)}**My answer:**\n\n\n> [!check]- Mark scheme\n${q.ms.map(m=>`> - [ ] ${m}`).join("\n")}${q.note?`\n>\n> *${q.note}*`:""}\n\n`;
     });
     const mcs = T.boss.qs.filter(q=>q.num===undefined), nums = T.boss.qs.filter(q=>q.num!==undefined);
     body += `## Multiple choice\n\n` + mcs.map((q,i)=>mcBlock(q, i, `MC ${i+1}`)).join("\n") + "\n";
@@ -226,6 +237,7 @@ function buildSubject(S){
     const T = S.topics[n], here = conceptsInTopic(n), lead = conceptsLeadingTo(n).filter(c=>!here.includes(c));
     let body = fm({type:"topic", ...fmBase, topic:n, status: T ? "written" : "not written yet", tags:tags("topic")});
     body += `# ${S.unit} ${n}: ${S.list[n-1]}\n\nPart of ${L(S.name)} · Cambridge IGCSE ${S.code}${n>1?` · Previous: ${L(topicTitle(S,n-1))}`:""}${n<S.list.length?` · Next: ${L(topicTitle(S,n+1))}`:""}\n\n`;
+    body += photoMd(`${S.site}-${n}`, 520);
     if(T){
       body += `## Notes\n\n${T.subs.map(s=>`- ${L(subTitle(S,s))}`).join("\n")}\n\n## Practise\n\n${T.memorise?`- ${L(memoriseTitle(S,n))} (${T.memorise.map(m=>m.name).join(", ")})\n`:""}- ${L(cardsTitle(S,n))} (${T.cards.length} cards)\n- ${L(practiceTitle(S,n))} (${T.exam.length} written questions, ${T.boss.qs.length} quick questions)\n\n`;
       body += `## Key terms\n\n${here.map(c=>L(c.name)).join(" · ")}\n\n`;
@@ -274,6 +286,7 @@ for(const s of SUBJECTS){
   let body = fm({type:"subject", cambridge:s.cie, edexcel:s.edx || "not offered", board:"", tier:"", tags:["subject"]});
   body += `# ${s.name}\n\nCambridge IGCSE ${s.cie}${s.edx?` · Pearson Edexcel International GCSE ${s.edx}`:" · Cambridge only"}\n\n> [!tip] Fill in your board\n> Set **board** and **tier** in the properties at the top of this note, so you always know which syllabus to follow.\n\n`;
   if(S){
+    body += photoMd(S.site, 520);
     const written = Object.keys(S.topics).map(Number);
     body += `## ${S.unit}s\n\n${S.list.map((t,i)=>`${i+1}. ${L(topicTitle(S,i+1))}${S.topics[i+1]?" ✓":""}`).join("\n")}\n\n✓ means Specpoint notes are written.\n\n`;
     body += `## Study tools\n\n- ${L(indexTitle(S))}\n${written.map(n=>`${S.topics[n].memorise?`- ${L(memoriseTitle(S,n))}\n`:""}- ${L(cardsTitle(S,n))}\n- ${L(practiceTitle(S,n))}`).join("\n")}\n\n`;
