@@ -125,5 +125,32 @@
     "license": "Public domain",
     "link": "https://www.flickr.com/photos/115357548@N08/54424735654",
     "source": "Visitor Use Survey"
+  },
+  "t2q1": {
+    "src": "photos/img/t2q1.jpg",
+    "alt": "Stained human cheek cells seen under a light microscope",
+    "caption": "Human cheek cells, stained so the nucleus shows up. No cell wall, no chloroplasts, no large vacuole",
+    "credit": "Photo: MaximilianParadiz",
+    "license": "CC BY 2.0",
+    "link": "https://www.flickr.com/photos/36074605@N05/54540598926",
+    "source": "Epithelial mouth cheek cells"
+  },
+  "t2q3": {
+    "src": "photos/img/t2q3.jpg",
+    "alt": "A root hair growing out from the outer layer of a root, seen under a microscope",
+    "caption": "A root hair growing out from a root's epidermis, seen under a microscope",
+    "credit": "Photo: bccoer",
+    "license": "CC0",
+    "link": "https://www.flickr.com/photos/146824358@N03/36045152715",
+    "source": "Monocot Root: Epidermal Root Hair in Lilium"
+  },
+  "gp3q2": {
+    "src": "photos/img/gp3q2.jpg",
+    "alt": "Bottle tops and small pieces of plastic mixed into seaweed on a beach",
+    "caption": "Bottle tops and broken plastic washed up with seaweed on a beach",
+    "credit": "Photo: Kevin Krejci",
+    "license": "CC BY 2.0",
+    "link": "https://www.flickr.com/photos/48889057888@N01/4408273247",
+    "source": "Plastic Ocean"
   }
 }

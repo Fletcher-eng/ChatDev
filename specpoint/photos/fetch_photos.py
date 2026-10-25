@@ -96,7 +96,7 @@ def commons(query):
 
 def openverse(query):
     """Openverse indexes openly licensed photos from Flickr, museums and photographers' sites."""
-    params = {"q": query, "license": "by,by-sa,cc0,pdm", "category": "photograph", "mature": "false", "page_size": 12,
+    params = {"q": query, "license": "by,by-sa,cc0,pdm", "mature": "false", "page_size": 12,
               "excluded_source": "wikimedia"}  # Commons photos come through the Commons search instead
     data = json.loads(get(OPENVERSE + "?" + urllib.parse.urlencode(params)))
     for r in data.get("results", []):

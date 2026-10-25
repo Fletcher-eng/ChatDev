@@ -8,8 +8,8 @@
   {"key": "gp-3", "use": "band", "query": "drought cracked soil", "alt": "Dry, cracked ground during a drought"},
   {"key": "gp-4", "use": "band", "query": "library bookshelves", "alt": "Shelves of books in a library"},
 
-  {"key": "t2q1", "use": "question", "query": "cheek cells microscope", "alt": "Human cheek cells stained blue under a microscope"},
-  {"key": "t2q3", "use": "question", "query": "root hairs", "alt": "Root hairs on a young seedling"},
+  {"key": "t2q1", "use": "question", "query": "cheek cells microscope", "query_openverse": "Epithelial mouth cheek cells", "alt": "Stained human cheek cells seen under a light microscope"},
+  {"key": "t2q3", "use": "question", "query": "root hairs", "query_openverse": "Epidermal Root Hair", "alt": "A root hair growing out from the outer layer of a root, seen under a microscope"},
   {"key": "t2q5", "use": "question", "query": "onion epidermis cells light microscope", "alt": "Onion skin cells seen under a light microscope"},
   {"key": "t2q6", "use": "question", "query": "Mitochondria mammalian lung TEM", "alt": "A mitochondrion seen with an electron microscope"},
   {"key": "t3q3", "use": "question", "query": "plasmolysis", "alt": "Plant cells with the membrane pulled away from the cell wall"},
@@ -17,7 +17,7 @@
   {"key": "gp1q1", "use": "question", "query": "smartphone on desk", "query_openverse": "Iphone Smartphone", "alt": "A smartphone lying on a desk"},
   {"key": "gp2q2", "use": "question", "query": "electric car charging station", "query_openverse": "electric car charging", "alt": "An electric car being charged"},
   {"key": "gp3q1", "use": "question", "query": "airport runway aerial view", "query_openverse": "airport aerial", "alt": "An airport seen from the air"},
-  {"key": "gp3q2", "use": "question", "query": "plastic pollution beach", "query_openverse": "littered beach", "alt": "Plastic rubbish washed up on a beach"},
+  {"key": "gp3q2", "use": "question", "query": "plastic pollution beach", "query_openverse": "beach plastic pollution", "alt": "Bottle tops and small pieces of plastic mixed into seaweed on a beach"},
   {"key": "gp3q3", "use": "question", "query": "reservoir low water drought", "query_openverse": "lake mead drought", "alt": "A reservoir with a pale band on the cliffs showing how far the water has dropped"},
   {"key": "gp4q2", "use": "question", "query": "questionnaire survey form paper", "query_openverse": "visitor use survey", "alt": "Park staff stopping cars on a desert road to carry out a visitor survey"}
 ]
