@@ -10,6 +10,9 @@ tags: ["gp", "topic"]
 
 Part of [[Global Perspectives]] · Cambridge IGCSE 0457 · Previous: [[GP 2 Sources and evidence]] · Next: [[GP 4 Research and assessment]]
 
+![[gp-3.jpg|520]]
+*Ground cracked by drought. Photo: o_andras, CC BY-SA 4.0, [source](https://commons.wikimedia.org/wiki/File:Cracked_dry_soil_Aceredo.jpg)*
+
 ## Notes
 
 - [[GP 3.1 Perspectives]]

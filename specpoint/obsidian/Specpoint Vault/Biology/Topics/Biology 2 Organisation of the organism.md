@@ -10,6 +10,9 @@ tags: ["biology", "topic"]
 
 Part of [[Biology]] · Cambridge IGCSE 0610 · Previous: [[Biology 1 Characteristics and classification of living organisms]] · Next: [[Biology 3 Movement into and out of cells]]
 
+![[bio-2.jpg|520]]
+*A European tree frog: one organism built from organ systems, organs, tissues and cells. Photo: hedera.baltica, CC BY-SA 2.0, [source](https://www.flickr.com/photos/125741467@N05/52276189823)*
+
 ## Notes
 
 - [[Biology 2.1 Cell structure]]

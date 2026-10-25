@@ -30,6 +30,9 @@ Identify two factors that affect the credibility of a source.
 ### Question 2 · 2.1 · [2 marks]
 A website selling electric cars claims they are the best way to reduce air pollution. Explain one reason why this claim may not be reliable.
 
+![[gp2q2.jpg|320]]
+*An electric car being charged. Photo: Ivan Radic, CC BY 2.0, [source](https://www.flickr.com/photos/26344495@N05/50981261653)*
+
 **My answer:**
 
 

@@ -10,6 +10,9 @@ tags: ["gp", "topic"]
 
 Part of [[Global Perspectives]] · Cambridge IGCSE 0457 · Previous: [[GP 1 Writing arguments]] · Next: [[GP 3 Issues and perspectives]]
 
+![[gp-2.jpg|520]]
+*A stack of newspapers in a library archive. Photo: African Studies Centre Leiden, CC BY-SA 4.0, [source](https://commons.wikimedia.org/wiki/File:ASC_Leiden_-_Library_-_South_African_newspaper_stack_of_Die_Burger_-_2012.jpg)*
+
 ## Notes
 
 - [[GP 2.1 Judging sources]]

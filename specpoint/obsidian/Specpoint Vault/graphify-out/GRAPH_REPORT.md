@@ -1,7 +1,7 @@
-# Graph Report - Specpoint Vault  (2026-10-13)
+# Graph Report - Specpoint Vault  (2026-10-25)
 
 ## Corpus Check
-- Corpus is ~25,515 words - fits in a single context window. You may not need a graph.
+- Corpus is ~25,894 words - fits in a single context window. You may not need a graph.
 
 ## Summary
 - 150 nodes · 556 edges · 10 communities

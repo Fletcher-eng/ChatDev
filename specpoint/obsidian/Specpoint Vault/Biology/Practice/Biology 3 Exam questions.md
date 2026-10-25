@@ -38,6 +38,9 @@ State two changes that would increase the rate of diffusion of oxygen into a cel
 ### Question 3 · 3.2 · Supplement · [3 marks]
 A plant cell is placed in a concentrated salt solution. Describe and explain what happens to the cell.
 
+![[t3q3.jpg|320]]
+*Elodea leaf cells in a concentrated solution. The green contents have shrunk away from the cell walls. Photo: fickleandfreckled, CC BY 2.0, [source](https://www.flickr.com/photos/51770637@N06/7980692858)*
+
 **My answer:**
 
 
@@ -52,6 +55,9 @@ A plant cell is placed in a concentrated salt solution. Describe and explain wha
 
 ### Question 4 · 3.2 · [2 marks]
 A potato cylinder has a mass of 2.50 g. After 30 minutes in a sucrose solution its mass is 2.20 g. Calculate the percentage change in mass.
+
+![[t3q4.jpg|320]]
+*Potatoes, the tissue used in the classic osmosis practical. Photo via rawpixel, CC0, [source](https://www.rawpixel.com/image/5920748/photo-image-public-domain-plant-fruit)*
 
 **My answer:**
 

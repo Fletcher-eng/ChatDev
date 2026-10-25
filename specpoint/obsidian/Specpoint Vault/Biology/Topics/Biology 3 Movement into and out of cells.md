@@ -10,6 +10,9 @@ tags: ["biology", "topic"]
 
 Part of [[Biology]] · Cambridge IGCSE 0610 · Previous: [[Biology 2 Organisation of the organism]] · Next: [[Biology 4 Biological molecules]]
 
+![[bio-3.jpg|520]]
+*Ink spreading through water by diffusion. Photo: árticotropical, CC BY 2.0, [source](https://www.flickr.com/photos/8581973@N02/1860810198)*
+
 ## Notes
 
 - [[Biology 3.1 Diffusion]]

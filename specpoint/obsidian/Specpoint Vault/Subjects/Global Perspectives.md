@@ -13,6 +13,9 @@ Cambridge IGCSE 0457 · Cambridge only
 > [!tip] Fill in your board
 > Set **board** and **tier** in the properties at the top of this note, so you always know which syllabus to follow.
 
+![[gp.jpg|520]]
+*The Earth photographed by the Apollo 17 crew in 1972. Photo: NASA, Apollo 17 crew, Public domain, [source](https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg)*
+
 ## Units
 
 1. [[GP 1 Writing arguments]] ✓

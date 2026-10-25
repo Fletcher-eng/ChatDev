@@ -14,6 +14,9 @@ For [[GP 1 Writing arguments]]. Write your answer under each question, then open
 ### Question 1 · 1.1 · [6 marks]
 Write one SEEEL paragraph to answer this question: Should mobile phones be banned in schools?
 
+![[gp1q1.jpg|320]]
+*A smartphone on a desk. Photo: Negative Space, CC0, [source](https://stocksnap.io/photo/iphone-smartphone-AQZQ7RGC7R)*
+
 **My answer:**
 
 

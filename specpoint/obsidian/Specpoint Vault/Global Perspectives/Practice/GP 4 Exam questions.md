@@ -24,6 +24,9 @@ Explain the difference between primary and secondary research.
 ### Question 2 · 4.1 · [2 marks]
 Give one advantage and one disadvantage of using a questionnaire for research.
 
+![[gp4q2.jpg|320]]
+*Park staff stopping cars to ask visitors survey questions at Joshua Tree National Park. Photo: Joshua Tree National Park, Public domain, [source](https://www.flickr.com/photos/115357548@N08/54424735654)*
+
 **My answer:**
 
 

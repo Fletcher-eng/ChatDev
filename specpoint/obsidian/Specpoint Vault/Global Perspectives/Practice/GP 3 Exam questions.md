@@ -14,6 +14,9 @@ For [[GP 3 Issues and perspectives]]. Write your answer under each question, the
 ### Question 1 · 3.1 · [4 marks]
 Explain why two different stakeholders might have different perspectives on building a new airport near a town.
 
+![[gp3q1.jpg|320]]
+*Dothan Regional Airport in the USA, with the town and farmland right next to the runways. Photo: formulanone, CC BY-SA 2.0, [source](https://www.flickr.com/photos/30552029@N00/54545505588)*
+
 **My answer:**
 
 
@@ -26,6 +29,9 @@ Explain why two different stakeholders might have different perspectives on buil
 ### Question 2 · 3.2 · [3 marks]
 Suggest one course of action to reduce plastic waste and explain how it would help.
 
+![[gp3q2.jpg|320]]
+*Bottle tops and broken plastic washed up with seaweed on a beach. Photo: Kevin Krejci, CC BY 2.0, [source](https://www.flickr.com/photos/48889057888@N01/4408273247)*
+
 **My answer:**
 
 
@@ -36,6 +42,9 @@ Suggest one course of action to reduce plastic waste and explain how it would he
 
 ### Question 3 · 3.2 · [2 marks]
 Explain one economic consequence of water shortages for a local community.
+
+![[gp3q3.jpg|320]]
+*Lake Powell, a reservoir in the USA. The pale band on the cliffs shows how far the water level has dropped. Photo: Bernard Spragg, Public domain, [source](https://www.flickr.com/photos/88123769@N02/55458735898)*
 
 **My answer:**
 

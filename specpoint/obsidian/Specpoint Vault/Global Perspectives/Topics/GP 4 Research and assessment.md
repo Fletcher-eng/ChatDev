@@ -10,6 +10,9 @@ tags: ["gp", "topic"]
 
 Part of [[Global Perspectives]] · Cambridge IGCSE 0457 · Previous: [[GP 3 Issues and perspectives]]
 
+![[gp-4.jpg|520]]
+*Rows of bookshelves in a university library. Photo: Geonuch, CC BY-SA 4.0, [source](https://commons.wikimedia.org/wiki/File:Bookshelves_in_Faculty_of_Arts_Library,_Chulalongkorn_University.jpg)*
+
 ## Notes
 
 - [[GP 4.1 Research]]

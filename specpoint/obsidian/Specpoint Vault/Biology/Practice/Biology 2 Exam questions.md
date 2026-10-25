@@ -14,6 +14,9 @@ For [[Biology 2 Organisation of the organism]]. Write your answer under each que
 ### Question 1 · 2.1 · [3 marks]
 State three structures found in a palisade mesophyll cell that are not found in a human cheek cell.
 
+![[t2q1.jpg|320]]
+*Human cheek cells, stained so the nucleus shows up. No cell wall, no chloroplasts, no large vacuole. Photo: MaximilianParadiz, CC BY 2.0, [source](https://www.flickr.com/photos/36074605@N05/54540598926)*
+
 **My answer:**
 
 
@@ -34,6 +37,9 @@ Describe the function of the cell membrane and the function of ribosomes.
 
 ### Question 3 · 2.1 · [2 marks]
 Explain how a root hair cell is adapted for its function.
+
+![[t2q3.jpg|320]]
+*A root hair growing out from a root's epidermis, seen under a microscope. Photo: bccoer, CC0, [source](https://www.flickr.com/photos/146824358@N03/36045152715)*
 
 **My answer:**
 
@@ -57,6 +63,9 @@ Define the term tissue.
 ### Question 5 · 2.2 · [2 marks]
 A student draws a cell. The drawing is 36 mm long. The actual cell is 0.09 mm long. Calculate the magnification of the drawing. Show your working.
 
+![[t2q5.jpg|320]]
+*Onion skin cells seen through the eyepiece of a light microscope, like the cell the student drew. Photo: Kateryna Kot, CC BY-SA 4.0, [source](https://commons.wikimedia.org/wiki/File:Onion_cells_under_the_light_microscope.jpg)*
+
 **My answer:**
 
 
@@ -66,6 +75,9 @@ A student draws a cell. The drawing is 36 mm long. The actual cell is 0.09 mm lo
 
 ### Question 6 · 2.2 · Supplement · [3 marks]
 An image of a mitochondrion is 12 mm long at a magnification of ×8000. Calculate its actual length in µm. Show your working.
+
+![[t2q6.jpg|320]]
+*A mitochondrion seen with an electron microscope, showing its folded inner membrane. Photo: Louisa Howard, Public domain, [source](https://commons.wikimedia.org/wiki/File:Mitochondria_-_TEM.jpg)*
 
 **My answer:**
 

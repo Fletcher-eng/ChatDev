@@ -13,6 +13,9 @@ Cambridge IGCSE 0610 · Pearson Edexcel International GCSE 4BI1
 > [!tip] Fill in your board
 > Set **board** and **tier** in the properties at the top of this note, so you always know which syllabus to follow.
 
+![[bio.jpg|520]]
+*A light microscope, showing the objective lenses above the stage. Photo: Nico10310, CC BY-SA 3.0, [source](https://commons.wikimedia.org/wiki/File:Microscope_optique.JPG)*
+
 ## Topics
 
 1. [[Biology 1 Characteristics and classification of living organisms]]
