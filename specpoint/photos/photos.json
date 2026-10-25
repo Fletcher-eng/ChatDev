@@ -17,5 +17,32 @@
     "link": "https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg",
     "source": "File:The Earth seen from Apollo 17.jpg",
     "blend": "screen"
+  },
+  "gp-1": {
+    "src": "img/gp-1.jpg",
+    "alt": "A debating chamber",
+    "caption": "The United Nations General Assembly Hall in New York, where countries debate global issues",
+    "credit": "Photo: Basil D Soufi",
+    "license": "CC BY-SA 3.0",
+    "link": "https://commons.wikimedia.org/wiki/File:United_Nations_General_Assembly_Hall_(3).jpg",
+    "source": "File:United Nations General Assembly Hall (3).jpg"
+  },
+  "gp-2": {
+    "src": "img/gp-2.jpg",
+    "alt": "A pile of newspapers",
+    "caption": "A stack of newspapers in a library archive",
+    "credit": "Photo: African Studies Centre Leiden",
+    "license": "CC BY-SA 4.0",
+    "link": "https://commons.wikimedia.org/wiki/File:ASC_Leiden_-_Library_-_South_African_newspaper_stack_of_Die_Burger_-_2012.jpg",
+    "source": "File:ASC Leiden - Library - South African newspaper stack of Die Burger - 2012.jpg"
+  },
+  "gp-3": {
+    "src": "img/gp-3.jpg",
+    "alt": "Dry, cracked ground during a drought",
+    "caption": "Ground cracked by drought",
+    "credit": "Photo: o_andras",
+    "license": "CC BY-SA 4.0",
+    "link": "https://commons.wikimedia.org/wiki/File:Cracked_dry_soil_Aceredo.jpg",
+    "source": "File:Cracked dry soil Aceredo.jpg"
   }
 }
