@@ -31,7 +31,8 @@ SITE = HERE.parent / "index.html"
 API = "https://commons.wikimedia.org/w/api.php"
 UA = "SpecpointStudy/1.0 (free IGCSE revision site; github.com/Fletcher-eng/ChatDev)"
 FREE = re.compile(r"^(public domain|pd\b|pd-|cc0|cc by(-sa)? \d(\.\d)?)", re.I)
-WIDTH = 1200
+# Wikimedia only serves its standard thumbnail widths without throttling: https://w.wiki/GHai
+WIDTH = 1280
 
 CTX = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE") or None)
 
@@ -135,6 +136,8 @@ if __name__ == "__main__":
             if not args or s["key"] in args:
                 try:
                     search(s["key"], s["query"])
+                except urllib.error.HTTPError as err:
+                    raise SystemExit(f"Wikimedia Commons refused the request ({err}). Wait a few minutes and search the remaining slots again.")
                 except OSError as err:
                     raise SystemExit(f"Could not reach Wikimedia Commons ({err}). Allow commons.wikimedia.org and upload.wikimedia.org.")
     elif cmd == "pick":
