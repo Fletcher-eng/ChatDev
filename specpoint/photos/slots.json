@@ -1,7 +1,7 @@
 [
   {"key": "bio", "use": "band", "query": "light microscope", "alt": "A light microscope"},
   {"key": "bio-2", "use": "band", "query": "Hyla arborea tree frog", "query_openverse": "tree frog", "alt": "A European tree frog sitting on a leaf"},
-  {"key": "bio-3", "use": "band", "query": "Tradescantia plasmolysis", "alt": "Plant cells after losing water by osmosis"},
+  {"key": "bio-3", "use": "band", "query": "Tradescantia plasmolysis", "query_openverse": "ink in water", "alt": "Ink spreading out through water"},
   {"key": "gp", "use": "band", "query": "Blue Marble Earth NASA", "alt": "The Earth seen from space"},
   {"key": "gp-1", "use": "band", "query": "United Nations General Assembly hall", "alt": "A debating chamber"},
   {"key": "gp-2", "use": "band", "query": "stack of newspapers", "alt": "A pile of newspapers"},
@@ -12,7 +12,7 @@
   {"key": "t2q3", "use": "question", "query": "root hairs", "query_openverse": "Epidermal Root Hair", "alt": "A root hair growing out from the outer layer of a root, seen under a microscope"},
   {"key": "t2q5", "use": "question", "query": "onion epidermis cells light microscope", "alt": "Onion skin cells seen under a light microscope"},
   {"key": "t2q6", "use": "question", "query": "Mitochondria mammalian lung TEM", "alt": "A mitochondrion seen with an electron microscope"},
-  {"key": "t3q3", "use": "question", "query": "plasmolysis", "alt": "Plant cells with the membrane pulled away from the cell wall"},
+  {"key": "t3q3", "use": "question", "query": "plasmolysis", "query_openverse": "Elodea hypertonic solution", "alt": "Elodea leaf cells with their green contents shrunk away from the cell walls"},
   {"key": "t3q4", "use": "question", "query": "potato tubers", "query_openverse": "raw potatoes", "alt": "Potatoes"},
   {"key": "gp1q1", "use": "question", "query": "smartphone on desk", "query_openverse": "Iphone Smartphone", "alt": "A smartphone lying on a desk"},
   {"key": "gp2q2", "use": "question", "query": "electric car charging station", "query_openverse": "electric car charging", "alt": "An electric car being charged"},

@@ -152,5 +152,23 @@
     "license": "CC BY 2.0",
     "link": "https://www.flickr.com/photos/48889057888@N01/4408273247",
     "source": "Plastic Ocean"
+  },
+  "bio-3": {
+    "src": "photos/img/bio-3.jpg",
+    "alt": "Ink spreading out through water",
+    "caption": "Ink spreading through water by diffusion",
+    "credit": "Photo: árticotropical",
+    "license": "CC BY 2.0",
+    "link": "https://www.flickr.com/photos/8581973@N02/1860810198",
+    "source": "Ink in water"
+  },
+  "t3q3": {
+    "src": "photos/img/t3q3.jpg",
+    "alt": "Elodea leaf cells with their green contents shrunk away from the cell walls",
+    "caption": "Elodea leaf cells in a concentrated solution. The green contents have shrunk away from the cell walls",
+    "credit": "Photo: fickleandfreckled",
+    "license": "CC BY 2.0",
+    "link": "https://www.flickr.com/photos/51770637@N06/7980692858",
+    "source": "ELODEA IN HYPERTONIC SOLUTION"
   }
 }
