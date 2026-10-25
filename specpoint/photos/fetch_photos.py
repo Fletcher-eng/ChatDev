@@ -16,6 +16,8 @@ import re
 import shutil
 import ssl
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -34,10 +36,26 @@ WIDTH = 1200
 CTX = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE") or None)
 
 
-def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, context=CTX, timeout=60) as r:
-        return r.read()
+LAST = [0.0]
+
+
+def get(url, tries=6):
+    """Polite fetch: one request every 1.5 s, and wait as long as Wikimedia asks on 429."""
+    for attempt in range(tries):
+        wait = 1.5 - (time.time() - LAST[0])
+        if wait > 0:
+            time.sleep(wait)
+        LAST[0] = time.time()
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Encoding": "identity"})
+        try:
+            with urllib.request.urlopen(req, context=CTX, timeout=60) as r:
+                return r.read()
+        except urllib.error.HTTPError as err:
+            if err.code != 429 or attempt == tries - 1:
+                raise
+            pause = min(int(err.headers.get("Retry-After") or 30), 120) + 2
+            print(f"   Wikimedia asked us to slow down, waiting {pause}s", flush=True)
+            time.sleep(pause)
 
 
 def plain(text):
