@@ -7,5 +7,15 @@
     "license": "CC BY-SA 3.0",
     "link": "https://commons.wikimedia.org/wiki/File:Microscope_optique.JPG",
     "source": "File:Microscope optique.JPG"
+  },
+  "gp": {
+    "src": "img/gp.jpg",
+    "alt": "The Earth seen from space",
+    "caption": "The Earth photographed by the Apollo 17 crew in 1972",
+    "credit": "Photo: NASA, Apollo 17 crew",
+    "license": "Public domain",
+    "link": "https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg",
+    "source": "File:The Earth seen from Apollo 17.jpg",
+    "blend": "screen"
   }
 }

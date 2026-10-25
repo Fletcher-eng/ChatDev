@@ -161,6 +161,7 @@ button{cursor:pointer}
 .band .num{position:absolute;right:12px;bottom:-24px;font-size:200px;line-height:1;color:#1A2360;opacity:.14;pointer-events:none}
 .band-img{position:absolute;top:0;right:0;height:100%;width:min(64%,600px);object-fit:cover;opacity:.34;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply;pointer-events:none;
   -webkit-mask-image:linear-gradient(to right,transparent,#000 50%);mask-image:linear-gradient(to right,transparent,#000 50%)}
+.band-img.screen{mix-blend-mode:screen;opacity:.42}
 .band.has-photo{padding-bottom:34px}
 .band-credit{position:absolute;right:10px;bottom:6px;font-size:13px;font-weight:700;opacity:.8;z-index:1;max-width:70%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .band-credit a{color:inherit}
@@ -1226,7 +1227,7 @@ function ring(frac, size=34, stroke=5, col="var(--accent)"){
 
 /* ================= HELPERS ================= */
 const credit = p => `${esc(p.credit)} · ${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.license)}</a>` : esc(p.license)}`;
-const bandPhoto = k => { const p = PHOTOS[k]; return p ? `<img class="band-img" src="${esc(p.src)}" alt="" aria-hidden="true"><span class="band-credit">${credit(p)}</span>` : ""; };
+const bandPhoto = k => { const p = PHOTOS[k]; return p ? `<img class="band-img ${p.blend==="screen"?"screen":""}" src="${esc(p.src)}" alt="" aria-hidden="true"><span class="band-credit">${credit(p)}</span>` : ""; };
 const figure = (k, fig) => { const p = PHOTOS[k]; return p ? `<figure class="qfig"><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy"><figcaption>${fig ? `<b>Fig. ${fig}</b> ` : ""}${esc(p.caption)}<span class="cr">${credit(p)}</span></figcaption></figure>` : ""; };
 const app = document.getElementById("app");
 const crumbs = document.getElementById("crumbs");
