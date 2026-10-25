@@ -126,13 +126,13 @@ def save_image(data, stem):
     return f"{stem.name}{ext}"
 
 
-def search(key, query, source="commons", limit=4):
+def search(key, query, source="commons", min_width=800, limit=4):
     out = CAND / key
     shutil.rmtree(out, ignore_errors=True)
     out.mkdir(parents=True)
     kept = []
     for c in (openverse if source == "openverse" else commons)(query):
-        if not FREE.match(c["license"]) or (c["size"][0] or 0) < 800:
+        if not FREE.match(c["license"]) or (c["size"][0] or 0) < min_width:
             continue
         n = len(kept) + 1
         try:
@@ -156,6 +156,10 @@ def pick(key, n, caption=None):
     for old in IMG.glob(f"{key}.*"):
         old.unlink()
     shutil.copy(CAND / key / c["file"], IMG / f"{key}{ext}")
+    if slot["use"] == "question" and shutil.which("convert"):
+        # Question photos show about 250px wide, so 800px stays sharp on any screen.
+        subprocess.run(["convert", str(IMG / f"{key}{ext}"), "-resize", "800x800>", "-strip", "-quality", "80",
+                        str(IMG / f"{key}{ext}")], check=True)
     photos = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
     artist = re.sub(r"\s+", " ", c["artist"])[:60]
     by = f"Photo: {artist}" if artist != "Unknown" else f"Photo {c['credit']}" if c["credit"].startswith("via ") else "Photo: unknown author"
@@ -186,7 +190,8 @@ if __name__ == "__main__":
         for s in SLOTS:
             if not keys or s["key"] in keys:
                 try:
-                    search(s["key"], s.get("query_" + source, s["query"]), source)
+                    # Bands stretch across the page; question photos show small, so they can be smaller.
+                    search(s["key"], s.get("query_" + source, s["query"]), source, 800 if s["use"] == "band" else 600)
                 except urllib.error.HTTPError as err:
                     raise SystemExit(f"Wikimedia Commons refused the request ({err}). Wait a few minutes and search the remaining slots again.")
                 except OSError as err:
