@@ -1,6 +1,6 @@
 [
   {"key": "bio", "use": "band", "query": "light microscope", "alt": "A light microscope"},
-  {"key": "bio-2", "use": "band", "query": "Hyla arborea tree frog", "alt": "A European tree frog sitting on a leaf"},
+  {"key": "bio-2", "use": "band", "query": "Hyla arborea tree frog", "query_openverse": "tree frog", "alt": "A European tree frog sitting on a leaf"},
   {"key": "bio-3", "use": "band", "query": "Tradescantia plasmolysis", "alt": "Plant cells after losing water by osmosis"},
   {"key": "gp", "use": "band", "query": "Blue Marble Earth NASA", "alt": "The Earth seen from space"},
   {"key": "gp-1", "use": "band", "query": "United Nations General Assembly hall", "alt": "A debating chamber"},
@@ -13,11 +13,11 @@
   {"key": "t2q5", "use": "question", "query": "onion epidermis cells light microscope", "alt": "Onion skin cells seen under a light microscope"},
   {"key": "t2q6", "use": "question", "query": "Mitochondria mammalian lung TEM", "alt": "A mitochondrion seen with an electron microscope"},
   {"key": "t3q3", "use": "question", "query": "plasmolysis", "alt": "Plant cells with the membrane pulled away from the cell wall"},
-  {"key": "t3q4", "use": "question", "query": "potato tubers", "alt": "Potatoes"},
-  {"key": "gp1q1", "use": "question", "query": "smartphone on desk", "alt": "A smartphone lying on a desk"},
-  {"key": "gp2q2", "use": "question", "query": "electric car charging station", "alt": "An electric car being charged"},
-  {"key": "gp3q1", "use": "question", "query": "airport runway aerial view", "alt": "An airport seen from the air"},
-  {"key": "gp3q2", "use": "question", "query": "plastic pollution beach", "alt": "Plastic rubbish washed up on a beach"},
-  {"key": "gp3q3", "use": "question", "query": "reservoir low water drought", "alt": "A reservoir with very low water"},
-  {"key": "gp4q2", "use": "question", "query": "questionnaire survey form paper", "alt": "A paper questionnaire"}
+  {"key": "t3q4", "use": "question", "query": "potato tubers", "query_openverse": "raw potatoes", "alt": "Potatoes"},
+  {"key": "gp1q1", "use": "question", "query": "smartphone on desk", "query_openverse": "Iphone Smartphone", "alt": "A smartphone lying on a desk"},
+  {"key": "gp2q2", "use": "question", "query": "electric car charging station", "query_openverse": "electric car charging", "alt": "An electric car being charged"},
+  {"key": "gp3q1", "use": "question", "query": "airport runway aerial view", "query_openverse": "airport aerial", "alt": "An airport seen from the air"},
+  {"key": "gp3q2", "use": "question", "query": "plastic pollution beach", "query_openverse": "littered beach", "alt": "Plastic rubbish washed up on a beach"},
+  {"key": "gp3q3", "use": "question", "query": "reservoir low water drought", "query_openverse": "lake mead drought", "alt": "A reservoir with a pale band on the cliffs showing how far the water has dropped"},
+  {"key": "gp4q2", "use": "question", "query": "questionnaire survey form paper", "query_openverse": "visitor use survey", "alt": "Park staff stopping cars on a desert road to carry out a visitor survey"}
 ]
