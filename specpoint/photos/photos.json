@@ -1,6 +1,6 @@
 {
   "bio": {
-    "src": "img/bio.jpg",
+    "src": "photos/img/bio.jpg",
     "alt": "A light microscope",
     "caption": "A light microscope, showing the objective lenses above the stage",
     "credit": "Photo: Nico10310",
@@ -9,7 +9,7 @@
     "source": "File:Microscope optique.JPG"
   },
   "gp": {
-    "src": "img/gp.jpg",
+    "src": "photos/img/gp.jpg",
     "alt": "The Earth seen from space",
     "caption": "The Earth photographed by the Apollo 17 crew in 1972",
     "credit": "Photo: NASA, Apollo 17 crew",
@@ -19,7 +19,7 @@
     "blend": "screen"
   },
   "gp-1": {
-    "src": "img/gp-1.jpg",
+    "src": "photos/img/gp-1.jpg",
     "alt": "A debating chamber",
     "caption": "The United Nations General Assembly Hall in New York, where countries debate global issues",
     "credit": "Photo: Basil D Soufi",
@@ -28,7 +28,7 @@
     "source": "File:United Nations General Assembly Hall (3).jpg"
   },
   "gp-2": {
-    "src": "img/gp-2.jpg",
+    "src": "photos/img/gp-2.jpg",
     "alt": "A pile of newspapers",
     "caption": "A stack of newspapers in a library archive",
     "credit": "Photo: African Studies Centre Leiden",
@@ -37,7 +37,7 @@
     "source": "File:ASC Leiden - Library - South African newspaper stack of Die Burger - 2012.jpg"
   },
   "gp-3": {
-    "src": "img/gp-3.jpg",
+    "src": "photos/img/gp-3.jpg",
     "alt": "Dry, cracked ground during a drought",
     "caption": "Ground cracked by drought",
     "credit": "Photo: o_andras",
@@ -46,7 +46,7 @@
     "source": "File:Cracked dry soil Aceredo.jpg"
   },
   "gp-4": {
-    "src": "img/gp-4.jpg",
+    "src": "photos/img/gp-4.jpg",
     "alt": "Shelves of books in a library",
     "caption": "Rows of bookshelves in a university library",
     "credit": "Photo: Geonuch",
@@ -55,7 +55,7 @@
     "source": "File:Bookshelves in Faculty of Arts Library, Chulalongkorn University.jpg"
   },
   "t2q5": {
-    "src": "img/t2q5.jpg",
+    "src": "photos/img/t2q5.jpg",
     "alt": "Onion skin cells seen under a light microscope",
     "caption": "Onion skin cells seen through the eyepiece of a light microscope, like the cell the student drew",
     "credit": "Photo: Kateryna Kot",

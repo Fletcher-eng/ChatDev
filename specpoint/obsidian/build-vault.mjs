@@ -22,7 +22,7 @@ function loadSite(){
 const { BIO_TOPICS, TOPICS, GP_LIST, GP_TOPICS, PHOTOS } = loadSite();
 
 /* ---------- photos: copied into Attachments and embedded, with credits ---------- */
-const PHOTO_DIR = path.join(HERE, "..", "photos");
+const PHOTO_DIR = path.join(HERE, "..");  // photo src paths are relative to index.html
 function photoMd(key, width){
   const p = PHOTOS[key]; if(!p) return "";
   const from = path.join(PHOTO_DIR, p.src), name = path.basename(p.src);

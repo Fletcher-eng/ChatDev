@@ -111,7 +111,7 @@ def pick(key, n, caption=None):
     photos = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
     artist = re.sub(r"\s+", " ", c["artist"])[:60]
     photos[key] = {
-        "src": f"img/{key}{ext}", "alt": slot["alt"], "caption": caption or slot["alt"],
+        "src": f"photos/img/{key}{ext}", "alt": slot["alt"], "caption": caption or slot["alt"],
         "credit": f"Photo: {artist}", "license": c["license"], "link": c["link"], "source": c["title"],
     }
     MANIFEST.write_text(json.dumps(photos, indent=2, ensure_ascii=False), encoding="utf-8")
