@@ -171,9 +171,9 @@ def test_unknown_symbol_and_bad_config_are_friendly(capsys, config_file, tmp_pat
 
 
 def test_no_em_or_en_dashes_anywhere_in_the_lab():
-    files = [p for p in LAB_FOLDER.rglob("*") if p.suffix in {".py", ".yaml", ".txt"}]
-    if DOCS_FILE.exists():
-        files.append(DOCS_FILE)
+    files = [p for p in LAB_FOLDER.rglob("*") if p.suffix in {".py", ".yaml", ".txt", ".html"}]
+    files += [p for p in (DOCS_FILE, DOCS_FILE.with_name("investopedia_contest.md"),
+                          LAB_FOLDER.parent / "practice" / "calls.json") if p.exists()]
     assert files
     for path in files:
         text = path.read_text(encoding="utf-8")

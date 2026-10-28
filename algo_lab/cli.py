@@ -5,6 +5,7 @@
     python -m algo_lab health [SYMBOLS]  check the saved bars again, because saved data goes stale
     python -m algo_lab moves SYMBOL      list every big one day move in the saved bars and what happened next
     python -m algo_lab look SYMBOLS      a quick check of any ticker: price, volume, wild moves, how much history
+    python -m algo_lab board             draw the practice trades on real price charts (a page you open in a browser)
     python -m algo_lab demo              write MADE UP bars to a separate folder, to try things offline
 """
 
@@ -22,6 +23,7 @@ from typing import List, Optional
 from .config import DEFAULT_CONFIG_PATH, ConfigError, load_config
 from .data import (STOP, AssetHealth, DataError, download_yahoo, fetch_all, load_asset, overall_status, pick_assets,
                    render_moves, render_report, write_summary)
+from .board import CALLS_PATH, OUT_PATH, write_board
 from .look import FOOTER, look_up, render_look
 from .synthetic import write_demo
 
@@ -145,6 +147,15 @@ def cmd_look(args) -> int:
     return 2 if any(look.problem for look in looks) else 0
 
 
+def cmd_board(args) -> int:
+    cfg = load(args)
+    now = datetime.now(timezone.utc)
+    print("Building the trade board from real prices (Yahoo Finance, free, no key).")
+    out = write_board(cfg, Path(args.calls), Path(args.out), now, downloader=download_yahoo, pause=PAUSE_SECONDS)
+    print(f"Saved {out}. Open that file in a browser.")
+    return 0
+
+
 def cmd_demo(args) -> int:
     cfg = load(args)
     now = datetime.now(timezone.utc)
@@ -174,6 +185,10 @@ def build_parser() -> argparse.ArgumentParser:
     look = sub.add_parser("look", parents=[common], help="a quick check of any ticker")
     look.add_argument("symbols", nargs="+", help="for example NEXR AIOK")
     look.set_defaults(func=cmd_look)
+    board = sub.add_parser("board", parents=[common], help="draw the practice trades on real price charts")
+    board.add_argument("--calls", default=str(CALLS_PATH), help="the practice file (default: %(default)s)")
+    board.add_argument("--out", default=str(OUT_PATH), help="where to save the page (default: %(default)s)")
+    board.set_defaults(func=cmd_board)
     sub.add_parser("demo", parents=[common], help="write made up bars for offline practice").set_defaults(func=cmd_demo)
     return parser
 

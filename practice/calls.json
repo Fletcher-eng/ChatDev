@@ -1,0 +1,64 @@
+{
+  "account": 100000,
+  "risk_pct": 1,
+  "position_cap_pct": 25,
+  "invested_cap_pct": 60,
+  "max_positions": 3,
+  "written": "2026-10-28",
+  "from_close": "2026-10-27",
+  "chart_bars": 110,
+  "watch_bars": 60,
+  "calls": [
+    {
+      "id": 1,
+      "symbol": "JPM",
+      "name": "JPMorgan Chase",
+      "action": "Buy at market at the open",
+      "shares": 74,
+      "ref_close": 335.79,
+      "atr14": 6.04,
+      "stop_gap": 12.07,
+      "optional": false,
+      "odds": "30 to 40 percent",
+      "reason": "Above its 200 bar average by 5.0 percent, 2.1 percent under its 50 bar average, 7.9 percent under its one year high, and about $2.4 billion trades on an average day."
+    },
+    {
+      "id": 2,
+      "symbol": "QQQ",
+      "name": "Nasdaq 100 fund",
+      "action": "Buy at market at the open",
+      "shares": 34,
+      "ref_close": 721.25,
+      "atr14": 11.43,
+      "stop_gap": 22.86,
+      "optional": false,
+      "odds": "30 to 40 percent",
+      "reason": "Above its 200 bar average by 6.5 percent, 0.5 percent under its 50 bar average, 5.5 percent under its one year high, and about $26.7 billion trades on an average day."
+    },
+    {
+      "id": 3,
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "action": "Buy at market at the open",
+      "shares": 19,
+      "ref_close": 531.33,
+      "atr14": 10.95,
+      "stop_gap": 21.89,
+      "optional": true,
+      "odds": "30 to 40 percent",
+      "reason": "Above its 200 bar average by 21.9 percent, 4.2 percent above its 50 bar average, 3.6 percent under its one year high. Smaller on purpose so all three stay under the 60 percent invested limit."
+    }
+  ],
+  "watch": [
+    {
+      "symbol": "NEXR",
+      "name": "Nexera Technologies",
+      "why": "A penny stock in free fall. Cheap and falling is a trap, not a bargain, and a stop can be jumped over."
+    },
+    {
+      "symbol": "AIOK",
+      "name": "AI OKTO Corp.",
+      "why": "Listed on 9 Oct. Its first close was $8.70, it slid to about $4, then jumped 183 percent in one day. Only a few days of history, so nothing can be measured."
+    }
+  ]
+}

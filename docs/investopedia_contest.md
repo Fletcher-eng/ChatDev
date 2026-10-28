@@ -86,6 +86,6 @@ Buy about 19 shares at market at the open (about $10,100). Stop at the fill pric
 ## Tickers considered (real data through 2026-10-27)
 
 * **NEXR** (Nexera Technologies): $0.55. Down 69 percent in 20 trading days and 98 percent below its 200 bar average. Five moves bigger than 20 percent in the last 60 bars. Its one year high shows $569.80, which is reverse splits showing through. Cheap and falling, not a bargain. Watch only.
-* **AIOK** (AI OKTO Corp.): $13.42. It started trading on 2026-10-09 near $3.90, rose 172 percent in the last 5 bars and 183 percent in one day (2026-10-23). It has 13 bars of history and 6 moves bigger than 20 percent. A stop can be jumped over, so a loss could be bigger than planned. Watch only.
+* **AIOK** (AI OKTO Corp.): $13.42. It started trading on 2026-10-09 and closed that first day at $8.70. It slid to about $4 over the next week, then jumped 183 percent in one day (2026-10-23) and ended at $13.42. It has 13 bars of history and 6 moves bigger than 20 percent. A stop can be jumped over, so a loss could be bigger than planned. Watch only. An earlier version of this page said it started near $3.90. That was its lowest price, not its first.
 
 Both fail the warning sign checks in `python -m algo_lab look`.

@@ -114,27 +114,36 @@ def look_at(symbol: str, frame: pd.DataFrame, now: datetime, cfg: LookConfig) ->
     return look
 
 
+def load_bars(cfg: Config, symbol: str, now: datetime, downloader: Downloader):
+    """Download, clean and finish-check the daily bars for one ticker.
+
+    Returns the bars, the removed rows and the unfinished days. Raises DataError when the download fails.
+    """
+    start = (now - timedelta(days=int(cfg.look.history_years * 365.25))).date()
+    try:
+        raw = downloader(symbol, start, cfg.data.adjusted)
+    except DataError:
+        raise
+    except Exception as error:  # the outside world failed in a way the downloader did not expect
+        raise DataError(f"Could not download {symbol}: {short_error(error)}") from error
+    frame = normalize_frame(raw)
+    frame, removed = clean_bars(frame, cfg.data.ohlc_tolerance_pct)
+    market = "crypto" if symbol.endswith("-USD") else "us"
+    frame, unfinished = drop_unfinished(frame, market, now, cfg.data.confirm_delay_minutes)
+    return frame, removed, unfinished
+
+
 def look_symbol(cfg: Config, raw_symbol: str, now: datetime, downloader: Downloader) -> Look:
     symbol = raw_symbol.strip().upper()
     if not SYMBOL_RE.match(symbol):
         return Look(symbol=raw_symbol.strip(),
                     problem="That does not look like a ticker. Use letters and digits, like AAPL or BRK-B.")
-    start = (now - timedelta(days=int(cfg.look.history_years * 365.25))).date()
     try:
-        try:
-            raw = downloader(symbol, start, cfg.data.adjusted)
-        except DataError:
-            raise
-        except Exception as error:  # the outside world failed in a way the downloader did not expect
-            raise DataError(f"Could not download {symbol}: {short_error(error)}") from error
-        frame = normalize_frame(raw)
+        frame, removed, unfinished = load_bars(cfg, symbol, now, downloader)
     except SetupError:
         raise
     except DataError as error:
         return Look(symbol=symbol, problem=str(error))
-    frame, removed = clean_bars(frame, cfg.data.ohlc_tolerance_pct)
-    market = "crypto" if symbol.endswith("-USD") else "us"
-    frame, unfinished = drop_unfinished(frame, market, now, cfg.data.confirm_delay_minutes)
     look = look_at(symbol, frame, now, cfg.look)
     if removed:
         look.notes.append(f"Removed {plural(len(removed), 'broken row')} from the download.")

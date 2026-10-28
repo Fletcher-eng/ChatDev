@@ -84,7 +84,11 @@ About QNT:
    ```
    python -m algo_lab look NEXR AIOK
    ```
-7. Practice offline with made up bars:
+7. Draw the practice trades on real price charts. It reads `practice/calls.json`, fetches the prices and writes one page you open in a browser, with the entry, stop and target on each chart, the risk meters and the watch only list:
+   ```
+   python -m algo_lab board
+   ```
+8. Practice offline with made up bars:
    ```
    python -m algo_lab demo
    ```
@@ -133,8 +137,9 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 
 ## What was tested, and what was not
 
-* 132 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
-* 28 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, misjudging a bad bar, and flipping a warning sign. Every one made a test fail.
+* 150 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py tests/test_algo_lab_board.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
+* 35 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, misjudging a bad bar, flipping a warning sign, and letting text into the board page unescaped. Every one made a test fail.
+* The board page's own script was run in a headless browser at five widths in light and dark, with a stand in for the saved fills store. There was no sideways scrolling, no clipped or overlapping chart labels, and the hover tooltip, keyboard reading, fill preview, save, clear, limit warning and optional trade switch all worked.
 * The quick look (`look`) was run against the real Yahoo on 2026-10-28 for eight tickers (NEXR, AIOK, SPY, QQQ, AAPL, MSFT, NVDA, JPM) and gave sensible numbers. A clean install with only `requirements.txt` was also tried in a fresh environment and worked.
 * **Not yet tested on a Mac.** The commands are the same, but a Mac needs `python3`, so the Mac steps above were written from how Python behaves there, not run on one.
 * A `fetch` run where Yahoo is blocked stopped cleanly, said why, saved no data and invented none.
@@ -148,6 +153,8 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 * `algo_lab/config.py`: reads and checks the settings, with plain error messages.
 * `algo_lab/data.py`: download, cleaning, confirmed bars, health checks, saved files, report.
 * `algo_lab/look.py`: the quick look at any ticker, with its warning signs (PENNY, THIN, NEW, WILD, ZERO).
+* `algo_lab/board.py` and `algo_lab/board_template.html`: the trade board. The builder checks the practice file, fetches real bars and puts them into the page. The page draws the charts itself and keeps fills in the artifact's saved store when it is published.
+* `practice/calls.json`: the record of practice calls. Shares, ATR and stop gap are fixed on the day a call is written. Only the charts refresh.
 * `algo_lab/synthetic.py`: made up bars for tests and the demo.
 * `algo_lab/cli.py`: the commands `check`, `fetch`, `health` and `demo`.
 * `algo_lab/requirements.txt`: the free libraries.
