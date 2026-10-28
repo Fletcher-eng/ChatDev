@@ -74,7 +74,11 @@ About QNT:
    ```
    python -m algo_lab moves QNT
    ```
-6. Practice offline with made up bars:
+6. Take a quick look at any ticker before trading it. It shows the price, how many dollars trade on an average day, wild moves, zero volume days and how much history exists, with warning signs named in plain words:
+   ```
+   python -m algo_lab look NEXR AIOK
+   ```
+7. Practice offline with made up bars:
    ```
    python -m algo_lab demo
    ```
@@ -122,8 +126,9 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 
 ## What was tested, and what was not
 
-* 104 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
-* 18 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, and misjudging a bad bar. Every one made a test fail.
+* 129 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
+* 28 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, misjudging a bad bar, and flipping a warning sign. Every one made a test fail.
+* The quick look (`look`) has not yet been run against the real Yahoo. It uses the same download code that worked in the first real run.
 * A `fetch` run where Yahoo is blocked stopped cleanly, said why, saved no data and invented none.
 * The real run above shows the success path works: the yfinance call, the Yahoo column layout, the time zones and the saved files.
 * **Not tested for real:** Yahoo slowing a free user down or going offline in the middle of a run. The code treats both as a STOP, and the tests cover that with a stand in.
@@ -134,6 +139,7 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 * `algo_lab/config.yaml`: every number and the asset list.
 * `algo_lab/config.py`: reads and checks the settings, with plain error messages.
 * `algo_lab/data.py`: download, cleaning, confirmed bars, health checks, saved files, report.
+* `algo_lab/look.py`: the quick look at any ticker, with its warning signs (PENNY, THIN, NEW, WILD, ZERO).
 * `algo_lab/synthetic.py`: made up bars for tests and the demo.
 * `algo_lab/cli.py`: the commands `check`, `fetch`, `health` and `demo`.
 * `algo_lab/requirements.txt`: the free libraries.

@@ -4,6 +4,7 @@
     python -m algo_lab fetch [SYMBOLS]   download daily bars from Yahoo Finance (free) and check them
     python -m algo_lab health [SYMBOLS]  check the saved bars again, because saved data goes stale
     python -m algo_lab moves SYMBOL      list every big one day move in the saved bars and what happened next
+    python -m algo_lab look SYMBOLS      a quick check of any ticker: price, volume, wild moves, how much history
     python -m algo_lab demo              write MADE UP bars to a separate folder, to try things offline
 """
 
@@ -21,6 +22,7 @@ from typing import List, Optional
 from .config import DEFAULT_CONFIG_PATH, ConfigError, load_config
 from .data import (STOP, AssetHealth, DataError, download_yahoo, fetch_all, load_asset, overall_status, pick_assets,
                    render_moves, render_report, write_summary)
+from .look import FOOTER, look_up, render_look
 from .synthetic import write_demo
 
 # import name, pip name, what it is for, needed right now
@@ -130,6 +132,18 @@ def cmd_moves(args) -> int:
     return 0
 
 
+def cmd_look(args) -> int:
+    cfg = load(args)
+    now = datetime.now(timezone.utc)
+    print("Looking the tickers up on Yahoo Finance (free, no key).")
+    looks = look_up(cfg, args.symbols, now, downloader=download_yahoo, pause=PAUSE_SECONDS)
+    print()
+    print("\n\n".join(render_look(look, cfg.look) for look in looks))
+    print()
+    print(FOOTER)
+    return 2 if any(look.problem for look in looks) else 0
+
+
 def cmd_demo(args) -> int:
     cfg = load(args)
     now = datetime.now(timezone.utc)
@@ -156,6 +170,9 @@ def build_parser() -> argparse.ArgumentParser:
     moves = sub.add_parser("moves", parents=[common], help="list every big one day move in the saved bars")
     moves.add_argument("symbol", help="for example QNT")
     moves.set_defaults(func=cmd_moves)
+    look = sub.add_parser("look", parents=[common], help="a quick check of any ticker")
+    look.add_argument("symbols", nargs="+", help="for example NEXR AIOK")
+    look.set_defaults(func=cmd_look)
     sub.add_parser("demo", parents=[common], help="write made up bars for offline practice").set_defaults(func=cmd_demo)
     return parser
 

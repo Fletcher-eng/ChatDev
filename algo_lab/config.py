@@ -49,9 +49,22 @@ class DataConfig:
 
 
 @dataclass(frozen=True)
+class LookConfig:
+    history_years: float
+    range_bars: int
+    volume_bars: int
+    move_bars: int
+    penny_price: float
+    thin_dollar_volume: float
+    new_listing_bars: int
+    wild_move_pct: float
+
+
+@dataclass(frozen=True)
 class Config:
     assets: Tuple[Asset, ...]
     data: DataConfig
+    look: LookConfig
 
     def asset(self, symbol: str) -> Asset:
         wanted = symbol.strip().upper()
@@ -143,6 +156,21 @@ def _data(section: Any) -> DataConfig:
     )
 
 
+def _look(section: Any) -> LookConfig:
+    if not isinstance(section, dict):
+        raise ConfigError("look: this section is missing.")
+    return LookConfig(
+        history_years=_number(section, "history_years", "look", 1, 30),
+        range_bars=int(_number(section, "range_bars", "look", 20, 5000, integer=True)),
+        volume_bars=int(_number(section, "volume_bars", "look", 5, 500, integer=True)),
+        move_bars=int(_number(section, "move_bars", "look", 10, 1000, integer=True)),
+        penny_price=_number(section, "penny_price", "look", 0.01, 10000),
+        thin_dollar_volume=_number(section, "thin_dollar_volume", "look", 0, 1000000000000),
+        new_listing_bars=int(_number(section, "new_listing_bars", "look", 20, 5000, integer=True)),
+        wild_move_pct=_number(section, "wild_move_pct", "look", 1, 500),
+    )
+
+
 def load_config(path: Optional[Path] = None) -> Config:
     path = Path(path) if path else DEFAULT_CONFIG_PATH
     try:
@@ -155,4 +183,4 @@ def load_config(path: Optional[Path] = None) -> Config:
         raise ConfigError(f"The config file {path} is not valid YAML: {error}") from error
     if not isinstance(raw, dict):
         raise ConfigError(f"The config file {path} must have the sections assets and data.")
-    return Config(assets=_assets(raw.get("assets")), data=_data(raw.get("data")))
+    return Config(assets=_assets(raw.get("assets")), data=_data(raw.get("data")), look=_look(raw.get("look")))

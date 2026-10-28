@@ -48,3 +48,13 @@ data:
   bad_rows_stop_pct: 5         # if more than this share of rows had to be removed, the data is not trusted
   folder: WareHouse/algo_lab/data        # real downloaded data
   demo_folder: WareHouse/algo_lab/demo   # made up data lives here and is never mixed with real data
+
+look:                          # the quick check for any ticker: python -m algo_lab look SYMBOL
+  history_years: 2             # how much history to ask for
+  range_bars: 252              # the low to high range looks back this many bars (about one year)
+  volume_bars: 20              # average dollars traded per day over this many bars
+  move_bars: 60                # big moves and zero volume days are counted over this many bars
+  penny_price: 5               # a last close under this many dollars is flagged PENNY
+  thin_dollar_volume: 5000000  # under this many dollars traded on an average day is flagged THIN
+  new_listing_bars: 200        # fewer finished bars than this is flagged NEW
+  wild_move_pct: 20            # a one day move bigger than this is flagged WILD

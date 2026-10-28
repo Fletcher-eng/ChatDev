@@ -39,6 +39,12 @@ def test_default_numbers_come_from_the_file():
     assert data.folder != data.demo_folder
 
 
+def test_look_numbers_come_from_the_file():
+    look = load_config().look
+    assert (look.history_years, look.range_bars, look.volume_bars, look.move_bars) == (2, 252, 20, 60)
+    assert (look.penny_price, look.thin_dollar_volume, look.new_listing_bars, look.wild_move_pct) == (5, 5000000, 200, 20)
+
+
 def test_symbols_are_upper_cased(tmp_path):
     raw = raw_config()
     raw["assets"][0]["symbol"] = "spy"
@@ -59,6 +65,11 @@ def test_symbols_are_upper_cased(tmp_path):
     (lambda r: r["data"].update(min_bars=400.5), "whole number"),
     (lambda r: r["data"]["stale_after_days"].pop("crypto"), "exactly two entries"),
     (lambda r: r["data"].update(demo_folder=r["data"]["folder"]), "must differ"),
+    (lambda r: r.pop("look"), "look: this section is missing"),
+    (lambda r: r["look"].update(penny_price=0), "penny_price must be between"),
+    (lambda r: r["look"].update(new_listing_bars=10), "new_listing_bars must be between"),
+    (lambda r: r["look"].update(move_bars=5.5), "whole number"),
+    (lambda r: r["look"].update(wild_move_pct="big"), "wild_move_pct must be a number"),
 ])
 def test_bad_settings_are_explained(tmp_path, edit, expected):
     raw = raw_config()

@@ -70,7 +70,7 @@ def overall_status(results: Sequence[AssetHealth]) -> str:
     return WARN if any(r.status == WARN for r in results) else OK
 
 
-def _short(error: Exception, limit: int = 160) -> str:
+def short_error(error: Exception, limit: int = 160) -> str:
     text = " ".join(str(error).split()) or type(error).__name__
     return text if len(text) <= limit else text[: limit - 3] + "..."
 
@@ -101,7 +101,7 @@ def download_yahoo(yahoo_symbol: str, start: date, adjusted: bool) -> pd.DataFra
         raw = yf.Ticker(yahoo_symbol).history(start=start.isoformat(), interval="1d", auto_adjust=adjusted,
                                               actions=False, raise_errors=True)
     except Exception as error:  # yfinance raises many kinds of errors: no network, rate limit, unknown ticker
-        raise DataError(f"Yahoo Finance did not return {yahoo_symbol}: {_short(error)}") from error
+        raise DataError(f"Yahoo Finance did not return {yahoo_symbol}: {short_error(error)}") from error
     if raw is None or len(raw) == 0:
         raise DataError(f"Yahoo Finance returned no rows for {yahoo_symbol}.")
     return raw
@@ -122,7 +122,7 @@ def normalize_frame(raw: pd.DataFrame) -> pd.DataFrame:
     try:
         index = pd.DatetimeIndex(frame.index)
     except (TypeError, ValueError) as error:
-        raise DataError(f"The dates could not be read: {_short(error)}") from error
+        raise DataError(f"The dates could not be read: {short_error(error)}") from error
     if index.tz is not None:
         index = index.tz_localize(None)  # keeps the exchange's own calendar date
     frame.index = index.normalize()
@@ -337,7 +337,7 @@ def load_asset(cfg: Config, asset: Asset, now: Optional[datetime] = None,
         frame = pd.read_csv(csv_path, index_col="date", parse_dates=["date"])
         made_at = datetime.fromisoformat(meta["downloaded_at_utc"])
     except (OSError, ValueError, KeyError, TypeError) as error:
-        raise DataError(f"The saved file for {asset.symbol} could not be read ({_short(error)}). "
+        raise DataError(f"The saved file for {asset.symbol} could not be read ({short_error(error)}). "
                         "Fetch it again.") from error
     if (meta.get("source") == SYNTHETIC) != demo:
         what = "real" if demo else "made up"
@@ -371,13 +371,13 @@ def fetch_one(cfg: Config, asset: Asset, now: datetime, downloader: Downloader) 
     except DataError:
         raise
     except Exception as error:  # the outside world failed in a way the downloader did not expect
-        raise DataError(f"Could not download {asset.symbol}: {_short(error)}") from error
+        raise DataError(f"Could not download {asset.symbol}: {short_error(error)}") from error
     frame, health = prepare(raw, asset, cfg, now, YAHOO)
     if health.status != STOP:  # bad data is reported and never saved over good data
         try:
             save_cache(cfg.data.folder, asset, frame, YAHOO, cfg.data.adjusted, now)
         except OSError as error:
-            raise DataError(f"Could not save {asset.symbol}: {_short(error)}") from error
+            raise DataError(f"Could not save {asset.symbol}: {short_error(error)}") from error
     return health
 
 
