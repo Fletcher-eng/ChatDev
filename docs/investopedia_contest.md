@@ -79,6 +79,10 @@ Buy at market at the open. The rule used was a placeholder to practice the proce
 
 Together: 49 percent invested, two of the three position slots, about 1.7 percent of the account at risk. The honest odds that a target is hit before its stop are about 30 to 40 percent each, and break even is 33 percent, so one or both losing is normal. If a fill lands far from the close above, the numbers are redone.
 
+### Optional call 3 (MSFT), only if a third position is wanted
+
+Buy about 19 shares at market at the open (about $10,100). Stop at the fill price minus $21.89, target at the fill price plus $43.78, about $416 at risk. It is smaller than the other two so the account stays under the 60 percent invested cap: 59 percent invested and about 2.1 percent of the account at risk across all three.
+
 ## Tickers considered (real data through 2026-10-27)
 
 * **NEXR** (Nexera Technologies): $0.55. Down 69 percent in 20 trading days and 98 percent below its 200 bar average. Five moves bigger than 20 percent in the last 60 bars. Its one year high shows $569.80, which is reverse splits showing through. Cheap and falling, not a bargain. Watch only.
