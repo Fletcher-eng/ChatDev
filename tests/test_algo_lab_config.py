@@ -42,6 +42,7 @@ def test_default_numbers_come_from_the_file():
 def test_look_numbers_come_from_the_file():
     look = load_config().look
     assert (look.history_years, look.range_bars, look.volume_bars, look.move_bars) == (2, 252, 20, 60)
+    assert (look.fast_bars, look.slow_bars) == (50, 200)
     assert (look.penny_price, look.thin_dollar_volume, look.new_listing_bars, look.wild_move_pct) == (5, 5000000, 200, 20)
 
 
@@ -67,6 +68,7 @@ def test_symbols_are_upper_cased(tmp_path):
     (lambda r: r["data"].update(demo_folder=r["data"]["folder"]), "must differ"),
     (lambda r: r.pop("look"), "look: this section is missing"),
     (lambda r: r["look"].update(penny_price=0), "penny_price must be between"),
+    (lambda r: r["look"].update(fast_bars=300), "fast_bars must be smaller than slow_bars"),
     (lambda r: r["look"].update(new_listing_bars=10), "new_listing_bars must be between"),
     (lambda r: r["look"].update(move_bars=5.5), "whole number"),
     (lambda r: r["look"].update(wild_move_pct="big"), "wild_move_pct must be a number"),

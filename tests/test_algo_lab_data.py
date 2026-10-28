@@ -4,6 +4,7 @@ import json
 import shutil
 import sys
 import types
+import warnings
 from dataclasses import replace
 from datetime import date, datetime, timedelta, timezone
 
@@ -525,6 +526,20 @@ def test_yahoo_adapter_turns_every_failure_into_a_plain_data_error(fake_yfinance
     fake_yfinance.frame = fake_yfinance.frame.iloc[0:0]
     with pytest.raises(D.DataError, match="returned no rows for QNT-USD"):
         D.download_yahoo("QNT-USD", date(2020, 1, 1), True)
+
+
+def test_yfinance_internal_warnings_are_not_shown(fake_yfinance, monkeypatch):
+    original = fake_yfinance.history
+
+    def noisy(self, **kwargs):
+        warnings.warn("pandas is changing something inside yfinance", DeprecationWarning)
+        return original(self, **kwargs)
+
+    monkeypatch.setattr(fake_yfinance, "history", noisy)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        assert len(D.download_yahoo("SPY", date(2020, 1, 1), True)) == 20
+    assert caught == []
 
 
 def test_a_missing_yfinance_library_is_a_setup_error(monkeypatch):

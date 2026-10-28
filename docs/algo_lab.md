@@ -53,9 +53,15 @@ About QNT:
 
 ## Quick start
 
-1. Install the free libraries:
+1. Install the free libraries the lab needs right now. The ones for later steps are in `algo_lab/requirements_later.txt`:
    ```
    pip install -r algo_lab/requirements.txt
+   ```
+   On a Mac the command is `python3`, not `python`, and a private environment avoids permission errors. Run these in the repository folder, and use `.venv/bin/python` in place of `python` in every command below:
+   ```
+   python3 -m venv .venv
+   .venv/bin/pip install -r algo_lab/requirements.txt
+   .venv/bin/python -m algo_lab check
    ```
 2. Check that the computer is ready. It prints only "ok", "MISSING" or "later" next to each library, never a secret:
    ```
@@ -74,7 +80,7 @@ About QNT:
    ```
    python -m algo_lab moves QNT
    ```
-6. Take a quick look at any ticker before trading it. It shows the price, how many dollars trade on an average day, wild moves, zero volume days and how much history exists, with warning signs named in plain words:
+6. Take a quick look at any ticker before trading it. It shows the price, the trend against its 50 and 200 bar averages, how many dollars trade on an average day, wild moves, zero volume days and how much history exists, with warning signs named in plain words:
    ```
    python -m algo_lab look NEXR AIOK
    ```
@@ -122,13 +128,15 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 
 * SPY, QQQ, AAPL, MSFT, NVDA and JPM: 2,514 bars each, from 2016-10-03 to 2026-10-02, all OK.
 * QNT: 2,976 bars from 2018-08-10 to 2026-10-02, with no missing days, but WARN. Eight one day moves were bigger than 40 percent. The first two were a 46.8 percent fall on 2018-10-23 followed by a 69.7 percent rise the next day. Together they leave the price about 10 percent lower, so a crash that undoes itself in a day looks more like one bad bar from QNT's thin early trading than a real event.
-* Open decision: whether QNT should start later, so a few bad early bars do not distort the regime model. This waits for the full list from `python -m algo_lab moves QNT`, and for one date to be checked by eye on a chart.
+* The full list, from a second real run on 2026-10-28 (3,001 bars): 2018-10-23 fell 46.8 percent and the next day rose 69.7 percent, which is the one clear bad bar. 2019-02-08, 2019-05-23 and 2021-09-05 rose 40 to 47 percent and stayed. 2020-03-12 fell 47.1 percent, the day of the March 2020 crash. 2026-09-26 and 2026-09-27 rose 54.9 and 86.8 percent, nearly tripling the price in two days. The reason is not known here, so check the news before trusting any QNT signal.
+* Recommendation, waiting for a yes: start QNT's history on 2019-01-01 to cut the one bad bar, and keep everything else as downloaded.
 
 ## What was tested, and what was not
 
-* 129 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
+* 132 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
 * 28 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, misjudging a bad bar, and flipping a warning sign. Every one made a test fail.
-* The quick look (`look`) has not yet been run against the real Yahoo. It uses the same download code that worked in the first real run.
+* The quick look (`look`) was run against the real Yahoo on 2026-10-28 for eight tickers (NEXR, AIOK, SPY, QQQ, AAPL, MSFT, NVDA, JPM) and gave sensible numbers. A clean install with only `requirements.txt` was also tried in a fresh environment and worked.
+* **Not yet tested on a Mac.** The commands are the same, but a Mac needs `python3`, so the Mac steps above were written from how Python behaves there, not run on one.
 * A `fetch` run where Yahoo is blocked stopped cleanly, said why, saved no data and invented none.
 * The real run above shows the success path works: the yfinance call, the Yahoo column layout, the time zones and the saved files.
 * **Not tested for real:** Yahoo slowing a free user down or going offline in the middle of a run. The code treats both as a STOP, and the tests cover that with a stand in.

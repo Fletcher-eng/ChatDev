@@ -52,6 +52,8 @@ class DataConfig:
 class LookConfig:
     history_years: float
     range_bars: int
+    fast_bars: int
+    slow_bars: int
     volume_bars: int
     move_bars: int
     penny_price: float
@@ -159,9 +161,15 @@ def _data(section: Any) -> DataConfig:
 def _look(section: Any) -> LookConfig:
     if not isinstance(section, dict):
         raise ConfigError("look: this section is missing.")
+    fast = int(_number(section, "fast_bars", "look", 5, 500, integer=True))
+    slow = int(_number(section, "slow_bars", "look", 20, 2000, integer=True))
+    if fast >= slow:
+        raise ConfigError("look: fast_bars must be smaller than slow_bars.")
     return LookConfig(
         history_years=_number(section, "history_years", "look", 1, 30),
         range_bars=int(_number(section, "range_bars", "look", 20, 5000, integer=True)),
+        fast_bars=fast,
+        slow_bars=slow,
         volume_bars=int(_number(section, "volume_bars", "look", 5, 500, integer=True)),
         move_bars=int(_number(section, "move_bars", "look", 10, 1000, integer=True)),
         penny_price=_number(section, "penny_price", "look", 0.01, 10000),

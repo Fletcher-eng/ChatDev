@@ -1,0 +1,6 @@
+# Needed from Step 2 (the regime model) and Step 5 (the terminal). Install these when we get there.
+# Install with: pip install -r algo_lab/requirements_later.txt
+hmmlearn>=0.3
+scikit-learn>=1.3
+streamlit>=1.30
+plotly>=5.18

@@ -34,6 +34,9 @@ class Look:
     low: Optional[float] = None
     high: Optional[float] = None
     range_bars_used: int = 0
+    from_high: Optional[float] = None  # percent from the range high, zero or negative
+    vs_fast: Optional[float] = None  # percent above (positive) or below the short average
+    vs_slow: Optional[float] = None
     dollar_volume: Optional[float] = None  # average dollars traded per day
     volume_bars_used: int = 0
     zero_volume_days: int = 0
@@ -62,6 +65,13 @@ def percent_over(close: pd.Series, bars: int) -> Optional[float]:
     return float((close.iloc[-1] / close.iloc[-1 - bars] - 1.0) * 100.0)
 
 
+def percent_vs_average(close: pd.Series, bars: int) -> Optional[float]:
+    """How far the last close sits above (positive) or below the simple average of the last `bars` closes."""
+    if len(close) < bars:
+        return None
+    return float((close.iloc[-1] / close.tail(bars).mean() - 1.0) * 100.0)
+
+
 def look_at(symbol: str, frame: pd.DataFrame, now: datetime, cfg: LookConfig) -> Look:
     """Measure one asset from cleaned, finished daily bars."""
     look = Look(symbol=symbol, bars=len(frame))
@@ -76,6 +86,8 @@ def look_at(symbol: str, frame: pd.DataFrame, now: datetime, cfg: LookConfig) ->
     look.change_5, look.change_20 = percent_over(close, 5), percent_over(close, 20)
     year = frame.tail(cfg.range_bars)
     look.low, look.high, look.range_bars_used = float(year["low"].min()), float(year["high"].max()), len(year)
+    look.from_high = (look.last_close / look.high - 1.0) * 100.0
+    look.vs_fast, look.vs_slow = percent_vs_average(close, cfg.fast_bars), percent_vs_average(close, cfg.slow_bars)
     recent = frame.tail(cfg.volume_bars)
     look.dollar_volume, look.volume_bars_used = float((recent["close"] * recent["volume"]).mean()), len(recent)
     window = frame.tail(cfg.move_bars + 1)
@@ -157,7 +169,16 @@ def render_look(look: Look, cfg: LookConfig) -> str:
                if value is not None]
     if changes:
         lines.append("  Change: " + "; ".join(changes))
-    lines.append(f"  Range over the last {look.range_bars_used} bars: low {price(look.low)}, high {price(look.high)}")
+    trend = []
+    for bars, value in ((cfg.fast_bars, look.vs_fast), (cfg.slow_bars, look.vs_slow)):
+        if value is None:
+            trend.append(f"no {bars} bar average yet (only {look.bars} bars)")
+        else:
+            trend.append(f"{abs(value):.1f} percent {'above' if value >= 0 else 'below'} its {bars} bar average")
+    lines.append("  Trend: it is " + "; ".join(trend))
+    gap = "at the high" if look.from_high > -0.05 else f"{abs(look.from_high):.1f} percent below the high"
+    lines.append(f"  Range over the last {look.range_bars_used} bars: low {price(look.low)}, "
+                 f"high {price(look.high)}, now {gap}")
     lines.append(f"  Traded per day (average of the last {look.volume_bars_used} bars): {dollars(look.dollar_volume)}")
     window = min(cfg.move_bars, look.bars)
     lines.append(f"  Days with zero volume (last {window} bars): {look.zero_volume_days}")

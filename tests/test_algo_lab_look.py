@@ -52,6 +52,9 @@ def test_a_liquid_stock_has_no_warning_signs():
     assert look.low == pytest.approx(base["low"].tail(252).min())
     assert look.high == pytest.approx(base["high"].tail(252).max())
     assert look.range_bars_used == 252 and look.volume_bars_used == 20
+    assert look.vs_fast == pytest.approx((close.iloc[-1] / close.tail(50).mean() - 1) * 100)
+    assert look.vs_slow == pytest.approx((close.iloc[-1] / close.tail(200).mean() - 1) * 100)
+    assert look.from_high == pytest.approx((close.iloc[-1] / look.high - 1) * 100) and look.from_high <= 0
     expected = (base["close"] * base["volume"]).tail(20).mean()
     assert look.dollar_volume == pytest.approx(expected)
 
@@ -77,6 +80,28 @@ def test_a_new_listing_is_flagged_and_short_windows_are_skipped():
     assert look.change_5 is not None and look.change_20 is None
     text = render_look(look, settings())
     assert "5 bars" in text and "20 bars" not in text
+    assert look.vs_fast is None and look.vs_slow is None
+    assert "no 50 bar average yet (only 14 bars)" in text and "no 200 bar average yet (only 14 bars)" in text
+
+
+def flat(last):
+    """Every bar at 100 dollars, then one last bar at `last`."""
+    base = frame()
+    base[PRICE_COLUMNS] = 100.0
+    base.loc[base.index[-1], PRICE_COLUMNS] = last
+    return base
+
+
+def test_the_trend_line_says_above_or_below_and_how_far():
+    up = render_look(look_at("UP", flat(130.0), NOW, settings()), settings())
+    fast = (130 / ((49 * 100 + 130) / 50) - 1) * 100
+    slow = (130 / ((199 * 100 + 130) / 200) - 1) * 100
+    assert f"Trend: it is {fast:.1f} percent above its 50 bar average; {slow:.1f} percent above its 200 bar average" in up
+    assert "now at the high" in up
+    down = render_look(look_at("DOWN", flat(70.0), NOW, settings()), settings())
+    assert "percent below its 50 bar average" in down and "percent below its 200 bar average" in down
+    assert "now 30.0 percent below the high" in down
+    assert_no_dashes(up + down)
 
 
 def test_a_wild_recent_move_is_flagged_but_an_old_one_is_not():

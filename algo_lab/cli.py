@@ -78,7 +78,8 @@ def cmd_check(args) -> int:
             print(f"  MISSING  {pip_name} (needed for {purpose})")
         else:
             print(f"  later    {pip_name} (needed for {purpose})")
-    print("Install everything with: pip install -r algo_lab/requirements.txt")
+    print("Install what is needed now with: pip install -r algo_lab/requirements.txt")
+    print("Later steps need: pip install -r algo_lab/requirements_later.txt")
     cfg = load(args)
     print(f"Config: ok, {len(cfg.assets)} assets: " + ", ".join(a.symbol for a in cfg.assets))
     folder = cfg.data.folder

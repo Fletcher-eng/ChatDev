@@ -1,6 +1,6 @@
 # Investopedia contest plan (paper money, school and friends)
 
-A school trading competition on Investopedia's stock simulator, played against friends. It is play money, so it fits the academy's paper trading rules. This page keeps the contest rules, the draft plan and the open questions in one place.
+A school trading competition on Investopedia's stock simulator, played against friends. It is play money, so it fits the academy's paper trading rules. This page keeps the contest rules, the draft plan, the practice record and the open questions in one place.
 
 ## The game's rules (pasted on 2026-10-28)
 
@@ -18,7 +18,7 @@ A school trading competition on Investopedia's stock simulator, played against f
 | Commission, daily volume cap, minimum price, diversification, cash interest | All disabled |
 | Margin interest | 0.08 percent (does not matter, margin is off) |
 
-**Still unknown:** the end date, and whether the winner is picked by total account value or percent return.
+The game has not started yet. **Still unknown:** the start and end dates, and whether the winner is picked by total account value or percent return.
 
 ## What the rules mean
 
@@ -31,11 +31,12 @@ A school trading competition on Investopedia's stock simulator, played against f
 ## Draft rules for us (not approved yet)
 
 1. Long only. No shorting, and no stocks under 5 dollars unless you decide otherwise, in writing, before the contest.
-2. Risk 1 percent of the account per trade (about $1,000), never more than 2 percent. Shares equal the risk dollars divided by the gap between entry and stop. Example: buy at 50 with a stop at 46. The gap is 4, so 1,000 divided by 4 is 250 shares, which costs $12,500.
-3. At most 3 open positions, 25 percent of the account in one stock, 60 percent invested.
-4. Entry, stop, target and reason go in the journal before the click.
-5. Down 5 percent from the peak: half size. Down 10 percent: no new trades. Down 15 percent: stop and review.
-6. Benchmark: SPY bought and held from the start date.
+2. Risk 1 percent of the account per trade (about $1,000), never more than 2 percent. Shares equal the risk dollars divided by the gap between entry and stop.
+3. The stop sits 2 ATR below the entry. ATR(14) is the typical daily swing of the stock over the last 14 days. The target is twice the stop distance (a 2 to 1 reward to risk).
+4. At most 3 open positions, 25 percent of the account in one stock, 60 percent invested.
+5. Entry, stop, target and reason go in the journal before the click.
+6. Down 5 percent from the peak: half size. Down 10 percent: no new trades. Down 15 percent: stop and review.
+7. Benchmark: SPY bought and held from the start date.
 
 XP follows the academy table: for process, never for rank.
 
@@ -50,19 +51,37 @@ XP follows the academy table: for process, never for rank.
 * **Morning, 2 minutes:** check fills, set stops, log the journal row.
 * **Weekly:** compare with SPY and review the three best and three worst trades by process.
 
-## Practice first
+## Practice first (the app's practice portfolio)
 
-Before anything is trusted, the calls are practiced in shadow mode:
+The game has not started, and the app has a practice mode. Before anything is trusted, the calls are practiced there:
 
-1. Each evening, Claude writes 1 to 3 calls in the chat before the open: ticker, buy or skip, stop, target, size, reason, and a confidence range.
-2. They are not traded automatically. Anyone who wants to follow one does it by hand, under the rules above.
-3. After 30 calls they are scored against simply holding SPY. If they are no better, the answer is no better.
+1. **Day 0.** Reset the practice portfolio to $100,000 once, and write down SPY's price when the first order fills. That is the benchmark.
+2. **Claude decides, you click.** Each evening Claude writes 1 to 3 calls: ticker, buy or skip, stop, target, size, reason, and a confidence range. You enter them by hand and log each one in the journal before the click.
+3. **After 30 calls**, or when the game starts, compare the practice portfolio with simply holding SPY. If the calls are no better, the answer is no better.
+4. A reset after Day 0 counts as a failure on the scoreboard.
+5. Check that the practice portfolio has the same settings as the contest (no margin, no options, the same delay). Note any difference.
 
-Claude cannot see live prices from its cloud session, so the numbers come from `python -m algo_lab look` on your computer, pasted into the chat.
+Claude's cloud session could reach Yahoo on 2026-10-28, so it can run `python -m algo_lab look` itself. That can change, so the same command also works on your own computer.
 
-## Tickers under consideration
+### Practice calls 1 and 2 (written 2026-10-28 before the open, from the close of 2026-10-27)
 
-* **NEXR** (Nexera Technologies): a Nasdaq penny stock with a very large fall and a history that looks like reverse splits. Under the 5 dollar rule.
-* **AIOK** (AI OKTO Corp.): a shipping company that started trading on Nasdaq on 2026-10-09, so it has only a few weeks of history. Nothing can be measured yet.
+Buy at market at the open. The rule used was a placeholder to practice the process, not a tested edge: above the 200 bar average, within 5 percent of the 50 bar average, at least 3 percent under the one year high, very liquid. Four names passed (QQQ, MSFT, NVDA, JPM). JPM and QQQ were picked so the two are different bets.
 
-Both are watch only until `look` shows what they really do.
+| | JPM | QQQ |
+| --- | --- | --- |
+| Close on 2026-10-27 | $335.79 | $721.25 |
+| ATR(14), the typical daily swing | $6.04 | $11.43 |
+| Shares (the smaller of the 1 percent risk size and the 25 percent cap) | 74 | 34 |
+| Stop | fill price minus $12.07 | fill price minus $22.86 |
+| Target (2 to 1) | fill price plus $24.14 | fill price plus $45.72 |
+| Money at risk | about $890 | about $780 |
+| Position | about $24,800 | about $24,500 |
+
+Together: 49 percent invested, two of the three position slots, about 1.7 percent of the account at risk. The honest odds that a target is hit before its stop are about 30 to 40 percent each, and break even is 33 percent, so one or both losing is normal. If a fill lands far from the close above, the numbers are redone.
+
+## Tickers considered (real data through 2026-10-27)
+
+* **NEXR** (Nexera Technologies): $0.55. Down 69 percent in 20 trading days and 98 percent below its 200 bar average. Five moves bigger than 20 percent in the last 60 bars. Its one year high shows $569.80, which is reverse splits showing through. Cheap and falling, not a bargain. Watch only.
+* **AIOK** (AI OKTO Corp.): $13.42. It started trading on 2026-10-09 near $3.90, rose 172 percent in the last 5 bars and 183 percent in one day (2026-10-23). It has 13 bars of history and 6 moves bigger than 20 percent. A stop can be jumped over, so a loss could be bigger than planned. Watch only.
+
+Both fail the warning sign checks in `python -m algo_lab look`.

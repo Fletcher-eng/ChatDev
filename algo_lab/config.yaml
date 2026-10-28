@@ -52,6 +52,8 @@ data:
 look:                          # the quick check for any ticker: python -m algo_lab look SYMBOL
   history_years: 2             # how much history to ask for
   range_bars: 252              # the low to high range looks back this many bars (about one year)
+  fast_bars: 50                # the short average used for the trend line (a simple average of closes)
+  slow_bars: 200               # the long average used for the trend line
   volume_bars: 20              # average dollars traded per day over this many bars
   move_bars: 60                # big moves and zero volume days are counted over this many bars
   penny_price: 5               # a last close under this many dollars is flagged PENNY

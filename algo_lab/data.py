@@ -12,6 +12,7 @@ import logging
 import math
 import os
 import time as clock
+import warnings
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta, timezone
@@ -98,8 +99,10 @@ def download_yahoo(yahoo_symbol: str, start: date, adjusted: bool) -> pd.DataFra
         raise SetupError("The yfinance library is not installed. Run: pip install yfinance") from error
     logging.getLogger("yfinance").setLevel(logging.CRITICAL)  # failures are reported below in plain words
     try:
-        raw = yf.Ticker(yahoo_symbol).history(start=start.isoformat(), interval="1d", auto_adjust=adjusted,
-                                              actions=False, raise_errors=True)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")  # yfinance's own code triggers pandas notices that mean nothing to us
+            raw = yf.Ticker(yahoo_symbol).history(start=start.isoformat(), interval="1d", auto_adjust=adjusted,
+                                                  actions=False, raise_errors=True)
     except Exception as error:  # yfinance raises many kinds of errors: no network, rate limit, unknown ticker
         raise DataError(f"Yahoo Finance did not return {yahoo_symbol}: {short_error(error)}") from error
     if raw is None or len(raw) == 0:

@@ -71,6 +71,7 @@ def test_check_flags_a_missing_library(monkeypatch, capsys, config_file):
     code, out, _ = run(capsys, "check", "--config", str(config_file))
     assert code == 2 and "MISSING  yfinance (needed for downloading prices)" in out
     assert "pip install -r algo_lab/requirements.txt" in out
+    assert "Later steps need: pip install -r algo_lab/requirements_later.txt" in out
 
 
 def test_a_library_needed_only_later_is_not_a_failure(monkeypatch, capsys, config_file):
