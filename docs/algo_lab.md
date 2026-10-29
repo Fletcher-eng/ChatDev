@@ -143,6 +143,7 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 * The quick look (`look`) was run against the real Yahoo on 2026-10-28 for eight tickers (NEXR, AIOK, SPY, QQQ, AAPL, MSFT, NVDA, JPM) and gave sensible numbers. A clean install with only `requirements.txt` was also tried in a fresh environment and worked.
 * **Not yet tested on a Mac.** The commands are the same, but a Mac needs `python3`, so the Mac steps above were written from how Python behaves there, not run on one.
 * A `fetch` run where Yahoo is blocked stopped cleanly, said why, saved no data and invented none.
+* Seen for real on 2026-10-28 at 8 pm New York time: Yahoo returned that day's daily row with a blank close, although a similar request eight minutes earlier had a close. The reason is not known here. The bot dropped the row as a broken one and invented nothing, so the newest bar was the day before, and the Trade Board chart ended a day early.
 * The real run above shows the success path works: the yfinance call, the Yahoo column layout, the time zones and the saved files.
 * **Not tested for real:** Yahoo slowing a free user down or going offline in the middle of a run. The code treats both as a STOP, and the tests cover that with a stand in.
 * The made up bars come from a generator with three hidden regimes (bear, neutral, bull), so Step 2 can check whether the regime model finds them.

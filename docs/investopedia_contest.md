@@ -18,7 +18,7 @@ A school trading competition on Investopedia's stock simulator, played against f
 | Commission, daily volume cap, minimum price, diversification, cash interest | All disabled |
 | Margin interest | 0.08 percent (does not matter, margin is off) |
 
-The game has not started yet. **Still unknown:** the start and end dates, and whether the winner is picked by total account value or percent return.
+The game is called **Nexus Stock Exchange 4** and had 209 players. Its own Game Rules page, read on 2026-10-28 by Claude in Chrome on the user's PC, shows the dates **2026-10-26 to 2027-01-31**, so it has already started and late entry is on. Every setting in the table matched the page, which also shows a margin interest of 0.08 percent. Quick Sell only says 15 minutes with no explanation, so what it means is still a guess (probably a minimum holding time after buying). **Still unknown:** how the winner is picked (total account value or percent return). The page gives no ranking rule.
 
 ## What the rules mean
 
@@ -42,7 +42,7 @@ XP follows the academy table: for process, never for rank.
 
 ## Who clicks
 
-**You, by hand.** Nothing in this repository logs into Investopedia, stores a password or places an order. There is no official Investopedia API, and the unofficial tools need your password and might break the contest's rules. The lab prepares the thinking. You decide and click.
+**You decide and you approve every order.** Nothing in this repository logs into Investopedia, stores a password or places an order. There is no official Investopedia API, and the unofficial tools need your password and might break the contest's rules. The lab prepares the thinking. On Day 0 the clicking was done in your own Chrome, already signed in by you, by Claude in Chrome running in a Claude Code window on your PC. It filled each form, showed the preview, and submitted only after you typed yes (you submitted JPM yourself). You can always click by hand instead. This cloud chat is not allowed to message that window, so you paste what I write into it.
 
 ## Daily routine
 
@@ -51,15 +51,15 @@ XP follows the academy table: for process, never for rank.
 * **Morning, 2 minutes:** check fills, set stops, log the journal row.
 * **Weekly:** compare with SPY and review the three best and three worst trades by process.
 
-## Practice first (the app's practice portfolio)
+## Practice calls, played in the contest portfolio
 
-The game has not started, and the app has a practice mode. Before anything is trusted, the calls are practiced there:
+The plan was to practice in the app's practice portfolio first. On 2026-10-28 it turned out the game had started on 2026-10-26, and the user chose to place calls 1 and 2 straight into the contest portfolio. So every call now counts in the contest, and everyone can see the holdings. The process is unchanged:
 
-1. **Day 0.** Reset the practice portfolio to $100,000 once, and write down SPY's price when the first order fills. That is the benchmark.
+1. **Day 0 (2026-10-28).** No reset was needed, because the contest portfolio was still at $100,000. The benchmark is SPY at $770.80, its price at 10:25 am New York time when both orders were in.
 2. **Claude decides, you click.** Each evening Claude writes 1 to 3 calls: ticker, buy or skip, stop, target, size, reason, and a confidence range. You enter them by hand and log each one in the journal before the click.
-3. **After 30 calls**, or when the game starts, compare the practice portfolio with simply holding SPY. If the calls are no better, the answer is no better.
+3. **After 30 calls**, compare the portfolio with simply holding SPY. If the calls are no better, the answer is no better.
 4. A reset after Day 0 counts as a failure on the scoreboard.
-5. Check that the practice portfolio has the same settings as the contest (no margin, no options, the same delay). Note any difference.
+5. The contest settings were checked against the game's own rules page on 2026-10-28 (see the table above). Nothing differed.
 
 Claude's cloud session could reach Yahoo on 2026-10-28, so it can run `python -m algo_lab look` itself. That can change, so the same command also works on your own computer.
 
@@ -82,6 +82,34 @@ Together: 49 percent invested, two of the three position slots, about 1.7 percen
 ### Optional call 3 (MSFT), only if a third position is wanted
 
 Buy about 19 shares at market at the open (about $10,100). Stop at the fill price minus $21.89, target at the fill price plus $43.78, about $416 at risk. It is smaller than the other two so the account stays under the 60 percent invested cap: 59 percent invested and about 2.1 percent of the account at risk across all three.
+
+### Day 0 record (2026-10-28)
+
+Both calls went into **Nexus Stock Exchange 4**, the school contest. Each order was previewed and approved by the user before it was submitted.
+
+| | JPM | QQQ |
+| --- | --- | --- |
+| Order placed (New York time) | 10:21 am | 10:24 am |
+| Preview price | $335.66 | $721.67 |
+| Fill price | $337.66 | $721.64 |
+| Shares | 74 | 34 |
+| Cost | $24,986.84 | $24,535.76 |
+| Stop (fill minus the gap) | $325.59 | $698.78 |
+| Target (fill plus twice the gap) | $361.80 | $767.36 |
+| Money at risk at the stop | $893.18 | $777.24 |
+| Money gained at the target | $1,786.36 | $1,554.48 |
+| Close on 2026-10-28 | $339.30 | $725.61 |
+| Gain at that close | $121.36 | $134.98 |
+
+Cash $50,477.40, invested $49,522.60 (49.5 percent), money at risk at both stops $1,670.42 (1.67 percent), account value at the 2026-10-28 close $100,256.34. SPY closed that day at $772.31. SPY stayed between $770.23 and $770.90 from 10:25 to 11:00 am, so the exact fill time (the app shows only the date) moves the benchmark by less than 0.1 percent.
+
+What Day 0 taught:
+
+* A market order cannot be cancelled once it is submitted. The page says so.
+* Fills took up to about 30 minutes. Both had filled by 10:53 am.
+* JPM filled $2.00 (0.6 percent) above its preview price, because the simulator's quotes run 20 minutes late. Both fills stayed inside the 1.5 percent check.
+* The first helper brief said practice only, and the helper stopped because the selected portfolio was the public default game (Investopedia Trading Game, about 3.1 million players). The user then picked the school game from the list. Every brief should name the portfolio.
+* Stops are not placed yet. Whether this game offers a Stop order type is not confirmed.
 
 ## Tickers considered (real data through 2026-10-27)
 
