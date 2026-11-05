@@ -46,4 +46,4 @@ Use this page to start a fresh chat that only covers the Investopedia contest. I
 
 ## The bigger build (paused)
 
-The Algo Trading Lab is paper only. Step 1, the Data Bot, is built and waits for the user's approval. Next: regime model (HMM), 8 against 8 voting teams, backtest with costs, regime terminal, then Filing Bot (SEC EDGAR), Risk Bot, Skeptic and Coach. See `docs/algo_lab.md`.
+The Algo Trading Lab is paper only. Step 1, the Data Bot, and Step 2, the regime model (`python -m algo_lab regime SPY`), are built. Step 2 waits for the user's approval. Next: 8 against 8 voting teams, backtest with costs, regime terminal, then Filing Bot (SEC EDGAR), Risk Bot, Skeptic and Coach. See `docs/algo_lab.md`.

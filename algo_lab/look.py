@@ -114,12 +114,13 @@ def look_at(symbol: str, frame: pd.DataFrame, now: datetime, cfg: LookConfig) ->
     return look
 
 
-def load_bars(cfg: Config, symbol: str, now: datetime, downloader: Downloader):
+def load_bars(cfg: Config, symbol: str, now: datetime, downloader: Downloader, years: Optional[float] = None):
     """Download, clean and finish-check the daily bars for one ticker.
 
     Returns the bars, the removed rows and the unfinished days. Raises DataError when the download fails.
+    `years` overrides how far back to go (the regime model needs more than the quick look does).
     """
-    start = (now - timedelta(days=int(cfg.look.history_years * 365.25))).date()
+    start = (now - timedelta(days=int((years or cfg.look.history_years) * 365.25))).date()
     try:
         raw = downloader(symbol, start, cfg.data.adjusted)
     except DataError:

@@ -5,6 +5,7 @@
     python -m algo_lab health [SYMBOLS]  check the saved bars again, because saved data goes stale
     python -m algo_lab moves SYMBOL      list every big one day move in the saved bars and what happened next
     python -m algo_lab look SYMBOLS      a quick check of any ticker: price, volume, wild moves, how much history
+    python -m algo_lab regime SYMBOLS    which mood each market is in now: bear, neutral or bull (Step 2, not tested for profit)
     python -m algo_lab board             draw the practice trades on real price charts (a page you open in a browser)
     python -m algo_lab demo              write MADE UP bars to a separate folder, to try things offline
 """
@@ -16,6 +17,7 @@ import importlib.metadata
 import importlib.util
 import platform
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
@@ -24,7 +26,9 @@ from .config import DEFAULT_CONFIG_PATH, ConfigError, load_config
 from .data import (STOP, AssetHealth, DataError, download_yahoo, fetch_all, load_asset, overall_status, pick_assets,
                    render_moves, render_report, write_summary)
 from .board import CALLS_PATH, OUT_PATH, write_board
-from .look import FOOTER, look_up, render_look
+from .look import FOOTER, load_bars, look_up, render_look
+from .regime import FOOTER as REGIME_FOOTER
+from .regime import render_regime, walk_forward
 from .synthetic import write_demo
 
 # import name, pip name, what it is for, needed right now
@@ -147,6 +151,28 @@ def cmd_look(args) -> int:
     return 2 if any(look.problem for look in looks) else 0
 
 
+def cmd_regime(args) -> int:
+    cfg = load(args)
+    now = datetime.now(timezone.utc)
+    print("Reading the market mood for each ticker. Prices come from Yahoo Finance (free, no key).")
+    blocks, failed = [], False
+    for number, raw_symbol in enumerate(args.symbols):
+        if number and PAUSE_SECONDS:
+            time.sleep(PAUSE_SECONDS)
+        symbol = raw_symbol.strip().upper()
+        try:
+            frame, _, _ = load_bars(cfg, symbol, now, download_yahoo, years=cfg.data.history_years)
+            blocks.append(render_regime(walk_forward(frame, symbol, min_train=args.min_train)))
+        except DataError as error:
+            failed = True
+            blocks.append(f"{symbol}: no answer. {error}")
+    print()
+    print("\n\n".join(blocks))
+    print()
+    print(REGIME_FOOTER)
+    return 2 if failed else 0
+
+
 def cmd_board(args) -> int:
     cfg = load(args)
     now = datetime.now(timezone.utc)
@@ -185,6 +211,10 @@ def build_parser() -> argparse.ArgumentParser:
     look = sub.add_parser("look", parents=[common], help="a quick check of any ticker")
     look.add_argument("symbols", nargs="+", help="for example NEXR AIOK")
     look.set_defaults(func=cmd_look)
+    regime = sub.add_parser("regime", parents=[common], help="which mood each market is in: bear, neutral or bull")
+    regime.add_argument("symbols", nargs="+", help="for example SPY QQQ NVDA")
+    regime.add_argument("--min-train", type=int, default=500, help="days the model learns from first (default: %(default)s)")
+    regime.set_defaults(func=cmd_regime)
     board = sub.add_parser("board", parents=[common], help="draw the practice trades on real price charts")
     board.add_argument("--calls", default=str(CALLS_PATH), help="the practice file (default: %(default)s)")
     board.add_argument("--out", default=str(OUT_PATH), help="where to save the page (default: %(default)s)")

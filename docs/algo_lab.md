@@ -8,8 +8,8 @@ Run every command from the repository folder, for example `python -m algo_lab ch
 
 | Step | What | Status |
 | --- | --- | --- |
-| 1 | Data loader (the Data Bot) | Built, tested, and run on real data on your computer. Waiting for your approval |
-| 2 | Regime model (HMM) with a forward only filter | Next |
+| 1 | Data loader (the Data Bot) | Built, tested, and run on real data on your computer. Treated as approved on 2026-11-05, when you said to go on with the bots |
+| 2 | Regime model (HMM) with a forward only filter | Built, tested, and run on real prices. Waiting for your approval |
 | 3 | The 8 against 8 voting teams | Not started |
 | 4 | Backtest with costs, exits and cooldowns | Not started |
 | 5 | Regime terminal (Streamlit and Plotly) | Not started |
@@ -88,7 +88,11 @@ About QNT:
    ```
    python -m algo_lab board
    ```
-8. Practice offline with made up bars:
+8. Read the market mood. For each ticker it says whether the market is in a bear, neutral or bull regime (or "unseen"), how sure it is, and what each regime looks like. It needs the Step 2 libraries first (`pip install -r algo_lab/requirements_later.txt`):
+   ```
+   python -m algo_lab regime SPY QQQ NVDA
+   ```
+9. Practice offline with made up bars:
    ```
    python -m algo_lab demo
    ```
@@ -135,10 +139,29 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 * The full list, from a second real run on 2026-10-28 (3,001 bars): 2018-10-23 fell 46.8 percent and the next day rose 69.7 percent, which is the one clear bad bar. 2019-02-08, 2019-05-23 and 2021-09-05 rose 40 to 47 percent and stayed. 2020-03-12 fell 47.1 percent, the day of the March 2020 crash. 2026-09-26 and 2026-09-27 rose 54.9 and 86.8 percent, nearly tripling the price in two days. The reason is not known here, so check the news before trusting any QNT signal.
 * Recommendation, waiting for a yes: start QNT's history on 2019-01-01 to cut the one bad bar, and keep everything else as downloaded.
 
+## The regime model (Step 2)
+
+A Hidden Markov Model (HMM) is a model that assumes the market is always in one of a few hidden moods, and that each mood has its own typical daily move and its own typical size of swing. It learns the moods from the prices, then says how likely each mood is today. Here there are three: **bear**, **neutral** and **bull**. They are named by return per unit of wildness, so "bear" always means the stormy, losing mood and "bull" the calm, rising one.
+
+How it stays honest:
+
+* **Forward only.** The chance for a day uses that day and earlier days, never later ones. The usual "best path" (Viterbi) and the smoothed answer peek at the future, so they are not used.
+* **Walk forward.** The model learns from the first 500 days, then refits every 63 days on the days before that point only, and labels the days after it.
+* **"Unseen".** A Gaussian HMM trained on calm years has no idea what a crash looks like, and it hands extreme days to whichever mood has the widest spread. Before this check existed, the Covid crash was 59 percent "bull" in the real SPY test. Now a day that is less likely than the least ordinary half percent of the training days is labelled "unseen", and the report says to treat it as a storm: smaller sizes, no new trades. The Covid crash is now 83 percent unseen.
+* **Two inputs, both from past days:** the average daily return of the last 5 days and the size of the daily moves of the last 10 days. Single day inputs made the label flip about 90 times a year on made up data. These flip about 14 times a year.
+
+What the checks showed (so you know the limits):
+
+* On made up bars with a known hidden path, it picked the right regime 53 to 64 percent of the days (guessing gives 33 percent), found the stormy regime 71 to 84 percent of the time, and flipped 12 to 17 times a year (the truth is about 7). It separates "calm and rising" from "flat" poorly, because on those made up bars they differ only a little.
+* On real SPY (about 10 years, labelled from late 2016): the 2021 calm was 52 percent bull and 2 percent bear, the Feb to Mar 2020 crash was bear on its first big down day and then unseen, and the 2022 bear market was only 36 percent bear and 64 percent neutral. So it is slow to call a grinding decline.
+* The label reads the last one to two weeks, not the last month. NVDA was labelled bull on 4 Nov after a bounce, although it was 15 percent down over 20 days.
+* The result also depends a little on random starting points. With 2 starts instead of 3 or more, one made up series flipped 44 times a year instead of 15, so the default is 5 starts.
+* **Nothing here is tested for profit.** A regime is a description. Whether it helps a strategy is Step 4.
+
 ## What was tested, and what was not
 
-* 150 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py tests/test_algo_lab_board.py`), run on both pandas 2.3 and pandas 3.0. They cover the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
-* 35 deliberate breakages were tried, such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, misjudging a bad bar, flipping a warning sign, and letting text into the board page unescaped. Every one made a test fail.
+* 167 automated tests (`python -m pytest tests/test_algo_lab_config.py tests/test_algo_lab_data.py tests/test_algo_lab_cli.py tests/test_algo_lab_look.py tests/test_algo_lab_board.py tests/test_algo_lab_regime.py`), run on pandas 3.1 (the first 150 also on pandas 2.3). They cover the regime model (no looking ahead, a cut off future changes nothing in the past, the names keep their meaning, unseen crashes, the report), the settings file, every cleaning rule, summer and winter close times, unfinished bars, stale and gap rules, the bad bar check, saved files, failures, the report, the quick look and its warning signs, and the commands. They use made up bars and a stand in for Yahoo, so they need no network.
+* 40 deliberate breakages were tried (5 of them on the regime model, such as fitting on the whole history, peeking at tomorrow and skipping the history check), such as ignoring stale data, saving bad data, mixing made up and real data, keeping unfinished bars, misjudging a bad bar, flipping a warning sign, and letting text into the board page unescaped. Every one made a test fail.
 * The board page's own script was run in a headless browser at five widths in light and dark, with a stand in for the saved fills store. There was no sideways scrolling, no clipped or overlapping chart labels, and the hover tooltip, keyboard reading, fill preview, save, clear, limit warning and optional trade switch all worked.
 * The quick look (`look`) was run against the real Yahoo on 2026-10-28 for eight tickers (NEXR, AIOK, SPY, QQQ, AAPL, MSFT, NVDA, JPM) and gave sensible numbers. A clean install with only `requirements.txt` was also tried in a fresh environment and worked.
 * **Not yet tested on a Mac.** The commands are the same, but a Mac needs `python3`, so the Mac steps above were written from how Python behaves there, not run on one.
@@ -153,9 +176,10 @@ On 2026-10-03 the first real `fetch` ran on your computer (Windows). All 7 asset
 * `algo_lab/config.yaml`: every number and the asset list.
 * `algo_lab/config.py`: reads and checks the settings, with plain error messages.
 * `algo_lab/data.py`: download, cleaning, confirmed bars, health checks, saved files, report.
+* `algo_lab/regime.py`: the regime model (fit, forward filter, walk forward, the unseen check, the report).
 * `algo_lab/look.py`: the quick look at any ticker, with its warning signs (PENNY, THIN, NEW, WILD, ZERO).
 * `algo_lab/board.py` and `algo_lab/board_template.html`: the trade board. The builder checks the practice file, fetches real bars and puts them into the page. The page draws the charts itself and keeps fills in the artifact's saved store when it is published.
 * `practice/calls.json`: the record of practice calls. Shares, ATR and stop gap are fixed on the day a call is written. Only the charts refresh.
 * `algo_lab/synthetic.py`: made up bars for tests and the demo.
-* `algo_lab/cli.py`: the commands `check`, `fetch`, `health` and `demo`.
+* `algo_lab/cli.py`: the commands `check`, `fetch`, `health`, `moves`, `look`, `regime`, `board` and `demo`.
 * `algo_lab/requirements.txt`: the free libraries.
